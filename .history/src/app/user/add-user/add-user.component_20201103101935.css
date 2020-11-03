@@ -1,0 +1,25 @@
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: green !important;
+   } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: green !important;;
+  }
+
+  button.red, button.red:hover{
+    background: red;
+    border: red;
+    }
+    button.green, button.green:hover{
+       background: green;
+       border: green;
+    }
+    button.pink,button.pink:hover{
+       background: pink;
+       border: pink;
+    }
+   .mybtn{
+      padding: 5px;
+    }

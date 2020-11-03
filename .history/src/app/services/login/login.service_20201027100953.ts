@@ -1,0 +1,47 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserAuthentification } from 'app/model/UserAuthentification.model';
+import { JwtHelper } from 'angular2-jwt';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginService {
+
+  apiUrl = 'http://localhost:9090';
+
+  private jwtToken = null;
+
+  private roles: Array<any> = [];
+
+  username: string;
+
+  constructor(private httpClient: HttpClient) { }
+
+  login( userAuthentification: UserAuthentification) {
+    return this.httpClient.post(this.apiUrl + '/login', userAuthentification, {observe: 'response'});
+  }
+
+  saveToken(jwt: string) {
+    this.jwtToken = jwt;
+    localStorage.setItem('token', jwt);
+    const jwtHelper = new jwtHelper();
+    this.roles = jwtHelper.decodeToken(this.jwtToken).roles;
+  }
+
+  loadToken() {
+    this.jwtToken = localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.clear();
+    this.initParams();
+  }
+
+  initParams() {
+    this.jwtToken = undefined;
+    this.username = undefined;
+    this.roles = undefined;
+    location.reload(); 
+  }
+}

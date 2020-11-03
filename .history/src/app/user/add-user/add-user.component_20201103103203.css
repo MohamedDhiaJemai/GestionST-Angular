@@ -1,0 +1,30 @@
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: green !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: green !important;
+}
+
+.ui-picklist-button-add{
+    background-image: url(images/addButton.png);
+    background-repeat:no-repeat !important;
+    background-position: 0 0 !important;
+    }
+    .ui-picklist-button-add-all{
+    background-image: url(images/addAllButton.png);
+    background-repeat:no-repeat !important;
+    background-position: 0 0 !important;
+    }
+    .ui-picklist-button-remove-all{
+    background-image: url(images/removeButton.jpg);
+    background-repeat:no-repeat !important;
+    background-position: 0 0 !important;
+    }
+    .ui-picklist-button-remove{
+    background-image: url(images/removeAllButton.jpg);
+    background-repeat:no-repeat !important;
+    background-position: 0 0 !important;
+    }

@@ -1,0 +1,40 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Listes Des Roles</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+
+
+                    <div class="card-body">
+
+                        <p-dataView [value]="cars">
+                            <ng-template let-car pTemplate="listItem">
+                                <div>
+                                    {{car.id}}
+                                </div>
+                            </ng-template>
+                            <ng-template let-car pTemplate="gridItem">
+                                <div class="p-col-12 p-md-3">
+                                    {{car.year}}
+                                </div>
+                            </ng-template>
+                        </p-dataView>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

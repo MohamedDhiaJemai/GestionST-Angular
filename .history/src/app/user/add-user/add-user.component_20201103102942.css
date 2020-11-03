@@ -1,0 +1,18 @@
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: green !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: green !important;
+}
+
+.ui-picklist-button {
+  color: green;
+  background-color: green;
+}
+.ui-picklist-button-add {
+    color: green;
+    background-color: green;
+}

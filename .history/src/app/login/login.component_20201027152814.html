@@ -1,0 +1,42 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <h1 class="h1" >Stade Tunisien</h1>
+
+            <form #f="ngForm" (ngSubmit)="onLogin(f.value, template)">
+                <div class="form-content" >
+                    <div class="form-group">
+                        <input type="text" name="username" ngModel class="form-control input-underline input-lg" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" ngModel class="form-control input-underline input-lg" placeholder="Password">
+                    </div>
+                </div>
+                <center><button type="submit" class="btn rounded-btn" >Log in</button></center>
+
+
+                <ng-template #template>
+
+                  <div class="modal-header">
+                    <h5 class="modal-title">Problème d'authentification </h5>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)= "modalRef.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                
+                  <div class="modal-body">
+                    <p> Veillez verifier votre Login et/ou Votre Password : </p>
+                  </div>
+                
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Close</button>
+                  </div>
+                
+                </ng-template>
+                &nbsp;
+            </form>
+        </div>
+    </div>
+</div>
+
+
