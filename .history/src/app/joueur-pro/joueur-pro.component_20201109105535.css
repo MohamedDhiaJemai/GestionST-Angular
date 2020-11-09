@@ -1,0 +1,7 @@
+.ui-dataview-list p {
+    display: block;
+}
+
+.ui-dataview-grid p {
+    display: none;
+}

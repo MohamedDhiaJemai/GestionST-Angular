@@ -1,0 +1,102 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Listes Des Joueurs Professionnels</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="card-body">
+
+                        <div class="card">
+
+                            <p-dataView #dv [value]="joueurPros" [paginator]="true" [rows]="9" filterBy="name"
+                                [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+
+                                <ng-template pTemplate="header">
+                                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+                                        <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey"
+                                            placeholder="Sort By Price" (onChange)="onSortChange($event)"
+                                            styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                                        <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                                            <i class="pi pi-search"></i>
+                                            <input type="search" pInputText placeholder="Search by Name"
+                                                (input)="dv.filter($event.target.value)">
+                                        </span>
+                                        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                                    </div>
+                                </ng-template>
+
+
+                                <ng-template let-joueurPro pTemplate="listItem">
+                                    {{joueurPro.nom}}
+                                    <div class="p-col-12">
+                                        <div class="joueurPro-list-item">
+                                            <img [src]="'assets/images/' + joueurPro.image" [alt]="joueurPro.nom" />
+                                            <div class="joueurPro-list-detail">
+                                                <div class="joueurPro-name">{{joueurPro.prenom}}</div>
+                                                <div class="joueurPro-description">{{joueurPro.prenom}}</div>
+                                                <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                                                <i class="pi pi-tag joueurPro-category-icon"></i><span
+                                                    class="joueurPro-category">{{joueurPro.categorie.designation}}</span>
+                                            </div>
+                                            <div class="joueurPro-list-action">
+                                                <span class="joueurPro-price">${{joueurPro.dateNaissance}}</span>
+                                                <!-- <p-button icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+                                                <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+                                                -->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-joueurPro pTemplate="gridItem">
+                                    <div class="p-col-12 p-md-4">
+                                        <div class="joueurPro-grid-item card">
+                                            <div class="joueurPro-grid-item-top">
+                                                <div>
+                                                    <i class="pi pi-tag joueurPro-category-icon"></i>
+                                                    <span
+                                                        class="joueurPro-category">{{joueurPro.categorie.designation}}</span>
+                                                </div>
+                                                <span
+                                                    [class]="'product-badge status-' + joueurPro.dateInscription.toLowerCase()">
+                                                    {{joueurPro.dateInscription}}
+                                                </span>
+                                            </div>
+                                            <div class="joueurPro-grid-item-content">
+                                                <img [src]="'assets/images/' + joueurPro.image" [alt]="joueurPro.nom" />
+                                                <div class="joueurPro-name">{{joueurPro.nom}} {{joueurPro.prenom}}</div>
+                                                <div class="joueurPro-description">{{joueurPro.prenom}}</div>
+                                                <!-- <p-rating [ngModel]="joueurPro.rating" [readonly]="true" [cancel]="false">
+                                                </p-rating> -->
+                                            </div>
+                                            <div class="joueurPro-grid-item-bottom">
+                                                <span class="joueurPro-price">${{joueurPro.dateNaissance}}</span>
+                                                <!-- <p-button icon="pi pi-shopping-cart"
+                                                    [disabled]="joueurPro.inventoryStatus === 'OUTOFSTOCK'"></p-button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-dataView>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

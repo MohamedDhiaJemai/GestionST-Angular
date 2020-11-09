@@ -18,7 +18,7 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.1.0",
-    "@angular/animations": "10.1.4",
+    "@angular/animations": "^10.2.2",
     "@angular/cdk": "^10.2.6",
     "@angular/common": "10.1.4",
     "@angular/compiler": "10.1.4",
@@ -53,6 +53,7 @@
     "ngx-bootstrap": "^6.1.0",
     "perfect-scrollbar": "1.5.0",
     "popper.js": "1.16.1",
+    "primeflex": "^2.0.0",
     "primeicons": "^4.0.0",
     "primeng": "^10.0.3",
     "rxjs": "6.6.3",
