@@ -1,0 +1,138 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Update Article</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="container">
+                        <div class="card">
+                            <div class="container-fliud">
+                                <div class="wrapper row">
+                                    <div class="preview col-md-1">
+                                    </div>
+                                    <div class="preview col-md-5">
+                                        <br><br><br>
+                                        <div class="preview-pic tab-content">
+                                            <div class="tab-pane active" id="pic-1">
+                                                <img [src]="urlphotoArticle + article.id" width="100%" />
+                                            </div>
+                                            <!-- <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
+                        <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
+                        <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
+                        <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="details col-md-1">
+                                    </div>
+
+                                    <div class="details col-md-4">
+                                        <br><br><br>
+                                        <h2 class="product-title">{{ article.libelle }}</h2>
+                                        <!-- <div class="rating">
+                        <div class="stars">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                        </div>
+                        <span class="review-no">41 reviews</span>
+                      </div> -->
+
+                                        <!-- <p class="product-description">{{ article.id }}</p> -->
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price">Référence:
+                                                </h5>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput name="article" [(ngModel)]="article.id" disabled>
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price">current price:
+                                                </h5>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p-inputNumber [(ngModel)]="article.prix" [showButtons]="true"
+                                                    inputId="stacked" mode="currency" currency="TND">
+                                                </p-inputNumber>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price">Category :</h5>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p-dropdown #dd [options]="sexes" name="sexe" [(ngModel)]="article.sexe"
+                                                    placeholder="Sexe" [showClear]="true">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price">Quantity :</h5>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p-inputNumber style="width: 100%;" [(ngModel)]="article.quantite"
+                                                    [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
+                                                    spinnerMode="horizontal" [step]="0.10"
+                                                    decrementButtonClass="p-button-danger"
+                                                    incrementButtonClass="p-button-success"
+                                                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                                                    mode="currency" currency="EUR">
+                                                </p-inputNumber>
+                                            </div>
+                                        </div>
+
+                                        <br><br>
+                                        <div class="action">
+                                            <button class="add-to-cart btn btn-success" type="button"
+                                                routerLink="/update-article/{{ article.id }}">Update </button>
+                                            <button class="like btn btn-default" type="button"
+                                                routerLink="/articles">Retour</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="details col-md-1">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

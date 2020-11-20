@@ -1,0 +1,128 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Ajouter Joueur Professionnel</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Identifiant" name="identifiant"
+                                            value={{joueurPro.identifiant}} disabled>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                  
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Nom 
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurPro.nom}}
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Prenom 
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurPro.prenom}}
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    CIN 
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurPro.cin}}
+                                </div>
+                            </div>
+
+                        
+                            <br>
+  
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Licence 
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurPro.license}}
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Sexe 
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurPro.sexe}}
+                                </div>
+                            </div>
+
+                            <br>
+                            
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Date Naissance  
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurPro.dateNaissance}}
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Catégorie  
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurPro.categorie.designation}}
+                                </div>
+                            </div>
+
+                            <br><br>
+                            <button routerLink="/jouteur-professionnel" mat-raised-button type="button"
+                                class="btn btn-success pull-right" style="margin-right: 1%;">Retourner</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/images/user1.png" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">{{joueurPro.categorie.designation}}</h6>
+                        <h4 class="card-title">{{joueurPro.nom}} {{joueurPro.prenom}}</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I
+                            love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+:host ::ng-deep .p-dropdown  {
+    /* width: 14rem; */
+    width: 100%;
+}

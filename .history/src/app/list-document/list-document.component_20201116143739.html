@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header card-header-danger">List of Files</div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush"
+            *ngFor="let file of fileInfos | async">
+            <li class="list-group-item">
+                <a target="_blank" href="{{ file.url }}" >{{ file.name }}</a>
+            </li>
+        </ul>
+
+    </div>
+
+</div>

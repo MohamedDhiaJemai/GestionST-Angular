@@ -1,0 +1,18 @@
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: green !important;
+   } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: green !important;;
+  }
+
+:host ::ng-deep .p-dropdown {
+  /* width: 14rem; */
+  width: 100%;
+}
+::ng-deep .p-calendar {
+  width: 100%;
+}
+
