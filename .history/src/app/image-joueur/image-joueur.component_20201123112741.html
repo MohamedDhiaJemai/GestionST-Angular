@@ -1,0 +1,15 @@
+<div class="card-avatar">
+    <div *ngIf=" someInputImage === 0 ">
+        <a href="javascript:void(0)">
+            <img class="img" [src]="urlPhoto"/>
+        </a>
+    </div>
+
+    <div>
+        <a href="javascript:void(0)">
+            <img class="img" src="http://192.168.0.143:8443/photo/get/' + {{someInputImage}}" />
+        </a>
+    </div>
+
+</div>
+<p-messages key="photo"></p-messages>
