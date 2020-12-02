@@ -1,0 +1,28 @@
+::ng-deep .p-inputnumber-buttons-stacked .p-inputnumber-input {
+    width: 100%;
+  }
+  
+  ::ng-deep .p-inputnumber .p-inputnumber-input {
+    width: 100%;
+  }
+  .card {
+      height: 100%;
+  }
+  
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: green !important;
+   } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: green !important;;
+  }  
+
+  ::ng-deep .mat-button.btn.btn-primary,
+.mat-raised-button.btn.btn-primary,
+.mat-raised-button.btn:not([class*="mat-elevation-z"]).btn-primary,
+.btn.btn-primary {
+    background-color: #3A61A3;
+    width: 100%;
+}

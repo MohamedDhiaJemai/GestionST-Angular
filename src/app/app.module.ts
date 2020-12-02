@@ -77,6 +77,18 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ApprovisonnementArticleComponent } from './article/approvisonnement-article/approvisonnement-article.component';
 import { TabViewModule } from 'primeng/tabview';
 import { AjouterTailleComponent } from './article/ajouter-taille/ajouter-taille.component';
+import { DataviewServiceComponent } from './service-st/dataview-service/dataview-service.component';
+import { AddServiceComponent } from './service-st/add-service/add-service.component';
+import { UpdateServiceComponent } from './service-st/update-service/update-service.component';
+import { ConsulterServiceComponent } from './service-st/consulter-service/consulter-service.component';
+import { BorneComponent } from './borne/borne.component';
+import { AddBorneComponent } from './borne/add-borne/add-borne.component';
+import { ConsulterBorneComponent } from './borne/consulter-borne/consulter-borne.component';
+import { UpdateBorneComponent } from './borne/update-borne/update-borne.component';
+import { ServiceStComplementaireComponent } from './service-st-complementaire/service-st-complementaire.component';
+import { DataviewServiceComplementComponent } from './service-st-complementaire/dataview-service-complement/dataview-service-complement.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { ConsulterAchatComponent } from './transaction/consulter-achat/consulter-achat.component';
 
 
 @NgModule({
@@ -167,7 +179,19 @@ import { AjouterTailleComponent } from './article/ajouter-taille/ajouter-taille.
     ConsulterArticleComponent,
     UpdateArticleComponent,
     ApprovisonnementArticleComponent,
-    AjouterTailleComponent
+    AjouterTailleComponent,
+    DataviewServiceComponent,
+    AddServiceComponent,
+    UpdateServiceComponent,
+    ConsulterServiceComponent,
+    BorneComponent,
+    AddBorneComponent,
+    ConsulterBorneComponent,
+    UpdateBorneComponent,
+    ServiceStComplementaireComponent,
+    DataviewServiceComplementComponent,
+    TransactionComponent,
+    ConsulterAchatComponent
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

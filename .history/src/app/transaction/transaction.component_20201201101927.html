@@ -1,0 +1,142 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Transactions</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
+                                maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                                chooseLabel="Browse"></p-fileUpload>
+                            &nbsp;&nbsp;
+                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
+
+
+
+                        </ng-template>
+
+                        <ng-template pTemplate="right">
+                            <button routerLink="/add-borne" pButton pRipple icon="pi pi-plus" label="Ajouter Borne"
+                                class="p-button-success p-mr-2"></button>
+                        </ng-template>
+
+                    </p-toolbar>
+
+                    <div class="card-body">
+
+                        <p-table #dt [value]="transactions" [paginator]="true" [rows]="15"
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedTransaction"
+                            styleClass="p-datatable-customers">
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="dateTransaction">Date Transaction<p-sortIcon
+                                            field="dateTransaction">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="typeClient">Type Client<p-sortIcon field="typeClient">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="joueur">Joueur<p-sortIcon field="joueur">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="parent">Parent<p-sortIcon field="parent">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="borne">Borne<p-sortIcon field="borne">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="achat">Achat<p-sortIcon field="achat">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th style="width:4rem"></th>
+
+                                </tr>
+
+                            </ng-template>
+
+
+                            <ng-template pTemplate="body" let-transaction>
+                                <tr [pSelectableRow]="transaction">
+                                    <td>
+                                        {{transaction.dateTransaction| date:'shortDate'}},
+                                        {{transaction.dateTransaction| date:'shortTime'}}
+                                    </td>
+                                    <td>
+                                        {{transaction.typeClient}}
+                                    </td>
+                                    <td>
+                                        <div *ngIf="transaction.joueur === null">
+                                            Null
+                                        </div>
+                                        <div *ngIf="transaction.joueur != null">
+                                            {{transaction.joueur.nom}} {{transaction.joueur.prenom}}
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div *ngIf="transaction.parent === null">
+                                            ---
+                                        </div>
+                                        <div *ngIf="transaction.parent != null">
+                                            {{transaction.parent.nom}} {{transaction.parent.prenom}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{transaction.borne.reference}}
+                                    </td>
+                                    <td>
+                                        <button pButton type="button" class="p-button-outlined p-button-rounded"
+                                            label="List Des Achats" style="width: 100%;"></button>
+                                    </td>
+                                    <td>
+                                        <button pButton pRipple type="button" icon=" "
+                                            class="p-button-rounded p-button-danger" (click)="showDialogEncaissement()">
+                                            <i class="fa fa-usd" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+                                <!--  -->
+
+                                <p-dialog header="Transaction Information" [(visible)]="displayshowDialogEncaissement"
+                                    [style]="{width: '50vw'}" [baseZIndex]="10000">
+                                    <ul>
+                                        <li>
+                                            totalApresRemise : {{transaction.totalApresRemise}}
+                                        </li>
+                                        <li>
+                                            totalAvantRemise : {{transaction.totalAvantRemise}}
+                                        </li>
+                                        <li>
+                                            totalRemise : {{transaction.totalRemise}}
+                                        </li>
+                                    </ul>
+                                    <ng-template pTemplate="footer">
+                                        <p-button icon="pi pi-check" (click)="displayshowDialogEncaissement=false"
+                                            label="Ok" styleClass="p-button-text"></p-button>
+                                    </ng-template>
+                                </p-dialog>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

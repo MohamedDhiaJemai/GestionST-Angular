@@ -1,0 +1,9 @@
+::ng-deep .p-inputtext {
+    /*change color of label*/
+   width: 100%;
+} 
+
+   
+::ng-deep .p-datatable .p-datatable-tbody > tr > td{
+    text-align: center;
+}

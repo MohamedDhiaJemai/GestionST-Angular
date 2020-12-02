@@ -1,0 +1,68 @@
+<p-dataView #dv [value]="articles" [paginator]="true" [rows]="9" filterBy="nom" [sortField]="sortField"
+    [sortOrder]="sortOrder" layout="grid">
+    <ng-template pTemplate="header">
+        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+            <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Sexe"
+                (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+            <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                <i class="pi pi-search"></i>
+                <input type="search" pInputText placeholder="Search by Nom" (input)="dv.filter($event.target.value)">
+            </span>
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+    </ng-template>
+    <ng-template let-product pTemplate="listItem">
+        <div class="p-col-12">
+            <div class="product-list-item">
+                <img [src]="'http://192.168.0.143:8443/image/get/' + product.id" />
+                <div class="product-list-detail">
+                    <div class="product-name">{{product.nom}} {{product.prenom}}</div>
+                    <div class="product-description">{{product.identifiant}}</div>
+                </div>
+
+                <div class="product-list-action">
+                    <button routerLink="/consulter-article/{{ product.id }}" pButton pRipple type="button"
+                        icon="pi pi-search" class="p-button-rounded p-button-success"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+
+    <ng-template let-product pTemplate="gridItem">
+        <div class="p-col-12 p-md-4">
+            <div class="product-grid-item card">
+                <div class="product-grid-item-top">
+                    <div>
+                        <i class="pi pi-tag product-category-icon"></i>
+                        <span class="product-category">{{product.sexe}}</span>
+                    </div>
+                    <span [class]="'product-badge status-' + product.dateNaissance">
+                        <div *ngIf="product.visible === true">
+                            <button pButton pRipple type="button" icon=" " class="p-button-rounded p-button-success">
+                                <i class="fa fa-video-camera" aria-hidden="true"></i>
+                            </button>
+                            visible
+                        </div>
+                        <div *ngIf="product.visible == false">
+                            Invisible
+                        </div>
+                    </span>
+                </div>
+                <div class="product-grid-item-content">
+                    <img [src]="'http://192.168.0.143:8443/image/get/' + product.id" />
+                    <div class="product-name">{{product.libelle}} {{product.prenom}}</div>
+                    <br>
+                    <div class="product-description">Référence : {{ product.id}}</div>
+
+                </div>
+                <div class="product-grid-item-bottom">
+                    <span class="product-price">{{ product.prix }} TND</span>
+                    <button routerLink="/consulter-article/{{ product.id }}" pButton pRipple type="button"
+                        icon="pi pi-search" class="p-button-rounded p-button-success"></button>
+                    <!-- <p-button icon="pi pi-search" class="p-button-success"></p-button> -->
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>

@@ -1,0 +1,16 @@
+
+
+export class Transaction {
+    public id: number;
+    public achats: Achats;
+    public borne: Borne;
+    public dateTransaction: string;
+    public joueur: JoueurAcamedie;
+    public parent: Parent;
+    public totalApresRemise: number;
+    public totalAvantRemise: number;
+    public totalRemise: number;
+    public typeClient: string;
+
+    constructor() { }
+}

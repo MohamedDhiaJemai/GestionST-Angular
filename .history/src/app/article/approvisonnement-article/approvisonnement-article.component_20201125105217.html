@@ -1,0 +1,109 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Approvisionnement d'un article</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9">
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-success" type="button"
+                                    routerLink="/ajouter-taille/{{ article.id }}"> Ajouter
+                                    Taille</button>
+                            </div>
+                        </div>
+
+                        <div *ngIf="article.stocks?.length === 0"
+                            style="margin-bottom: 5%; margin-top: 5%; font-size: large;">
+                            <li> Y a pas de stock, Vous devez ajouter un stockage en précisant la taille et la quantité.
+                            </li>
+                        </div>
+
+                        <div class="card" *ngIf="article.stocks?.length > 0">
+                            <p-tabView>
+                                <p-tabPanel [header]="'Taille : &nbsp;&nbsp;&nbsp;&nbsp;' + item.taille"
+                                    *ngFor="let item of article.stocks; let i = index" [selected]="i == 0">
+                                    <div class="container-fliud">
+                                        <div class="wrapper row">
+                                            <div class="preview col-md-1">
+                                            </div>
+                                            <div class="preview col-md-5">
+                                                <br><br><br>
+                                                <div class="preview-pic tab-content">
+                                                    <div class="tab-pane active" id="pic-1">
+                                                        <img [src]="urlphotoArticle + article.id" width="100%" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="details col-md-1">
+                                            </div>
+                                            <div class="details col-md-4">
+                                                <br>
+                                                <br>
+                                                <h2 class="product-title">{{ article.libelle }}</h2>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h5 class="price">Référence:
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding-left: 10%;">
+                                                        <h5 class="price">{{item.id}}
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h5 class="price">Quantité :
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding-left: 10%;">
+                                                        <h5 class="price">{{item.quantite}}
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h5 class="price">Taille:
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding-left: 10%;">
+                                                        <h5 class="price">{{item.taille}}
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-11" style="margin-top: 5%;">
+                                                        <div class="action">
+                                                            <!-- <button style="margin: 5%"
+                                                                class="add-to-cart btn btn-success" type="button"
+                                                                routerLink="/update-taille/{{ article.id }}">Update</button> -->
+                                                            <button class="like btn btn-default" type="button"
+                                                                routerLink="/articles">Retour</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p-tabPanel>
+                            </p-tabView>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
