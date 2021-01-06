@@ -8,7 +8,7 @@ import { UserAuthentification } from 'app/model/UserAuthentification.model';
 })
 export class LoginService {
 
-  apiUrl = 'http://192.168.0.143:8443';
+  apiUrl = 'http://localhost:8443';
 
   private jwtToken = null;
 

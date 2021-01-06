@@ -58,7 +58,7 @@ export class UpdateServiceComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
-    this.urlphotoService = 'http://192.168.0.143:8443/image/get/' + id;
+    this.urlphotoService = 'http://localhost:8443/image/get/' + id;
     this.serviceSTService.findById(id).subscribe(
       data => {
         if (data === null) {

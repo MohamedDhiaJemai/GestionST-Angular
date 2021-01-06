@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class CategorieService {
 
-  apiUrl = 'http://192.168.0.143:8443/categorie';
+  apiUrl = 'http://localhost:8443/categorie';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

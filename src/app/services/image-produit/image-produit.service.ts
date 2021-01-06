@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ImageProduitService {
 
-  apiUrl = 'http://192.168.0.143:8443/image';
+  apiUrl = 'http://localhost:8443/image';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class BorneService {
 
-  apiUrl = 'http://192.168.0.143:8443/borne';
+  apiUrl = 'http://localhost:8443/borne';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

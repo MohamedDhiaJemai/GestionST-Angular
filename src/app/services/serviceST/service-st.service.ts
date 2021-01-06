@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class ServiceSTService {
 
-  apiUrl = 'http://192.168.0.143:8443/principal';
-  apiUrlComplement = 'http://192.168.0.143:8443/complement';
+  apiUrl = 'http://localhost:8443/principal';
+  apiUrlComplement = 'http://localhost:8443/complement';
 
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();

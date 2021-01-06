@@ -18,7 +18,7 @@ export interface FileStatus {
 })
 export class ScreensaverBorneService {
 
-  apiUrl = 'http://192.168.0.143:8443/screensaver';
+  apiUrl = 'http://localhost:8443/screensaver';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

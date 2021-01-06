@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class RoleService {
 
-  apiUrl = 'http://192.168.0.143:8443/role';
+  apiUrl = 'http://localhost:8443/role';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

@@ -22,27 +22,27 @@ export class ImageJoueurComponent implements OnChanges {
 
   ngOnChanges() {
     this.id = this.router.snapshot.params['id'];
-    this.urlPhoto = 'http://192.168.0.143:8443/photo/get/' + this.id;
-    this.urlPhoto2 = 'http://192.168.0.143:8443/photo/get/' + this.someInputImage;
+    this.urlPhoto = 'http://localhost:8443/photo/get/' + this.id;
+    this.urlPhoto2 = 'http://localhost:8443/photo/get/' + this.someInputImage;
     // if (this.someInputImage > 0) {
     //   console.log('okkk')
-    //   this.urlPhoto = 'http://192.168.0.143:8443/photo/get/' + this.someInputImage;
+    //   this.urlPhoto = 'http://localhost:8443/photo/get/' + this.someInputImage;
     // }
     // else {
     //   console.log('li bih el feyda ', this.someInputImage)
     //   this.id = this.router.snapshot.params['id'];
     //   console.log(this.id)
-    //   this.urlPhoto = 'http://192.168.0.143:8443/photo/get/' + this.id;
+    //   this.urlPhoto = 'http://localhost:8443/photo/get/' + this.id;
     //   this.someInputImage = 0;
     // }
-    // this.urlPhoto = 'http://192.168.0.143:8443/photo/get/' + this.someInputImage;
+    // this.urlPhoto = 'http://localhost:8443/photo/get/' + this.someInputImage;
     // console.log(this.someInputImage)
     // this.alt = this.someInputImage;
 
   }
   // ngOnInit() {
   //   this.id = this.router.snapshot.params['id'];
-  //   this.urlPhoto = 'http://192.168.0.143:8443/photo/get/' + this.id;
+  //   this.urlPhoto = 'http://localhost:8443/photo/get/' + this.id;
   // }
 
 }

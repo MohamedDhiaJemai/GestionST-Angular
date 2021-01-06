@@ -39,7 +39,7 @@ export class AddServiceComponent implements OnInit {
   jourEnvoi: string[] = [];
   serviceST: ServiceST = new ServiceST();
   serviceSTC: ServiceSTC = new ServiceSTC();
-  urlphotoST = 'http://192.168.0.143:8443/image/get/';
+  urlphotoST = 'http://localhost:8443/image/get/';
   sexes: SelectItem[];
   item: string;
 

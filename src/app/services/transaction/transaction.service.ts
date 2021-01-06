@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class TransactionService {
 
-  apiUrl = 'http://192.168.0.143:8443/transaction';
+  apiUrl = 'http://localhost:8443/transaction';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

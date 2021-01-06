@@ -9,7 +9,7 @@ import { Utilisateur } from 'app/model/Utilisateur.model';
 })
 export class UserService {
 
-  apiUrl = 'http://192.168.0.143:8443/utilisateur';
+  apiUrl = 'http://localhost:8443/utilisateur';
 
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();

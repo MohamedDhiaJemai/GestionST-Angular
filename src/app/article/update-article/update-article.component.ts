@@ -53,7 +53,7 @@ export class UpdateArticleComponent implements OnInit {
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
 
-    this.urlphotoArticle = 'http://192.168.0.143:8443/image/get/' + id;
+    this.urlphotoArticle = 'http://localhost:8443/image/get/' + id;
     this.articleService.findById(id).subscribe(
       data => {
         this.article = data;

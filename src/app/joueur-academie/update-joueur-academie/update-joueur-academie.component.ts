@@ -62,7 +62,7 @@ export class UpdateJoueurAcademieComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.router.snapshot.params['id'];
-    this.urlPhoto = 'http://192.168.0.143:8443/photo/get/' + this.id;
+    this.urlPhoto = 'http://localhost:8443/photo/get/' + this.id;
 
     this.parentService.getAllParent().subscribe(
       data => {

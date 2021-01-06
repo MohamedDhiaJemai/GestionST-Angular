@@ -20,7 +20,7 @@ export class ConsulterServiceComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
-    this.urlphotoServiceST = 'http://192.168.0.143:8443/image/get/' + id;
+    this.urlphotoServiceST = 'http://localhost:8443/image/get/' + id;
 
     this.serviceSTService.findById(id).subscribe(
       data => {

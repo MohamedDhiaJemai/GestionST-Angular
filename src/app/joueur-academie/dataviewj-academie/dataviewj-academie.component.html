@@ -14,7 +14,7 @@
     <ng-template let-product pTemplate="listItem">
         <div class="p-col-12">
             <div class="product-list-item">
-                <img [src]="'http://192.168.0.143:8443/photo/get/' + product.id" />
+                <img [src]="'http://localhost:8443/photo/get/' + product.id" />
                 <div class="product-list-detail">
                     <div class="product-name">{{product.nom}} {{product.prenom}}</div>
                     <div class="product-description">{{product.identifiant}}</div>
@@ -40,7 +40,7 @@
                     <span [class]="'product-badge status-' + product.dateNaissance">{{product.dateNaissance}}</span>
                 </div>
                 <div class="product-grid-item-content">
-                    <img [src]="'http://192.168.0.143:8443/photo/get/' + product.id" />
+                    <img [src]="'http://localhost:8443/photo/get/' + product.id" />
                     <div class="product-name">{{product.nom}} {{product.prenom}}</div>
                     <div class="product-description">{{ product.license}}</div>
 

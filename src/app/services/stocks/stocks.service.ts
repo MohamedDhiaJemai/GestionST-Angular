@@ -9,7 +9,7 @@ import { Stocks } from 'app/model/Stocks.model';
 })
 export class StocksService {
 
-  apiUrl = 'http://192.168.0.143:8443/stocks';
+  apiUrl = 'http://localhost:8443/stocks';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

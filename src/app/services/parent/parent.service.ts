@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ParentService {
 
-  apiUrl = 'http://192.168.0.143:8443/parent';
+  apiUrl = 'http://localhost:8443/parent';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

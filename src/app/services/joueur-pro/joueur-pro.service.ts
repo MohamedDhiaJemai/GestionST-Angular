@@ -10,7 +10,7 @@ import { JoueurPro } from 'app/model/JoueurPro.model';
 })
 export class JoueurProService {
 
-  apiUrl = 'http://192.168.0.143:8443/professionnel';
+  apiUrl = 'http://localhost:8443/professionnel';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 

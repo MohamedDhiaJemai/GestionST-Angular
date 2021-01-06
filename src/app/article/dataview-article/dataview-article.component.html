@@ -14,7 +14,7 @@
     <ng-template let-product pTemplate="listItem">
         <div class="p-col-12">
             <div class="product-list-item">
-                <img [src]="'http://192.168.0.143:8443/image/get/' + product.id" />
+                <img [src]="'http://localhost:8443/image/get/' + product.id" />
                 <div class="product-list-detail">
                     <div class="product-name">{{product.libelle}} </div>
                     <br>
@@ -61,7 +61,7 @@
                     </span>
                 </div>
                 <div class="product-grid-item-content">
-                    <img [src]="'http://192.168.0.143:8443/image/get/' + product.id" />
+                    <img [src]="'http://localhost:8443/image/get/' + product.id" />
                     <div class="product-name">{{product.libelle}} {{product.prenom}}</div>
                     <br>
                     <div class="product-description">Référence : {{ product.id}}</div>

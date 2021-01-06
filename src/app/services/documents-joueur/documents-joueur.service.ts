@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class DocumentsJoueurService {
 
-  apiUrl = 'http://192.168.0.143:8443/documents';
+  apiUrl = 'http://localhost:8443/documents';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
