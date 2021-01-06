@@ -1,0 +1,244 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Les Bornes</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
+                                maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                                chooseLabel="Browse"></p-fileUpload>
+                            &nbsp;&nbsp;
+                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
+
+
+
+                        </ng-template>
+
+                        <ng-template pTemplate="right">
+                            <button routerLink="/add-borne" pButton pRipple icon="pi pi-plus" label="Ajouter Borne"
+                                class="p-button-success p-mr-2"></button>
+                        </ng-template>
+
+                    </p-toolbar>
+
+                    <div class="card-body">
+                        <p-table #dt [value]="bornes" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedBorne"
+                            styleClass="p-datatable-customers">
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="reference">Référence<p-sortIcon field="reference">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="dateCreation">Date Creation<p-sortIcon field="dateCreation">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th>Information Hardware</th>
+                                    <th style="width:4rem">
+                                    </th>
+                                    <th style="width:4rem">
+                                    </th>
+                                    <th style="width:4rem">
+                                    </th>
+                                    <th style="width:5rem"></th>
+                                </tr>
+
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-borne>
+                                <tr [pSelectableRow]="borne">
+                                    <td>
+                                        <button pButton type="button" class="p-button-outlined p-button-rounded"
+                                            (click)="showDialogFTP()" label="{{borne.reference}}"
+                                            style="width: 100%;"></button>
+                                    </td>
+                                    <td> {{borne.dateCreation | date:'shortDate'}} ,
+                                        {{borne.dateCreation | date:'shortTime'}}</td>
+                                    <td><button pButton type="button"
+                                            class="p-button-outlined p-button-rounded p-button-success"
+                                            (click)="showDialogInformation()" label="AFFICHER"></button></td>
+                                    <td>
+                                        <button pButton pRipple type="button" icon=" "
+                                            class="p-button-rounded p-button-danger" (click)="showBasicDialog()">
+                                            <i class="fa fa-usd" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button pButton pRipple type="button" icon=" "
+                                            class="p-button-rounded p-button-warning"
+                                            (click)="showBasicDialogRouleur()">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button pButton pRipple type="button" icon=" "
+                                            class="p-button-rounded p-button-success"
+                                            (click)="showMaximizableDialog(borne.id)">
+                                            <i class="fa fa-video-camera" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+
+                                    <td style="float: center;">
+                                        <p-inputSwitch (onChange)="openModal(template, borne.id)" name="validation"
+                                            [(ngModel)]="borne.maintenance">
+                                        </p-inputSwitch>
+                                    </td>
+
+                                </tr>
+                                <ng-template #template>
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">CONFIRMATION</h5>
+                                        <button type="button" class="close pull-right" aria-label="Close"
+                                            (click)="modalRef.hide()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p>Êtes-vous sûr de vouloir Modifier l'état de la Borne. {{ borne.id }}</p>
+                                    </div>
+
+                                    <div class="modal-footer">
+
+                                        <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                            (click)="modalRef.hide()">NON</button>
+
+                                        <button mat-raised-button type="button" class="btn btn-success pull-right"
+                                            style="margin-right: 1%;" (click)="onActivationBorne(borne.id)">OUI</button>
+
+                                    </div>
+                                </ng-template>
+
+                                <p-dialog header="Borne Information" [(visible)]="displayBasicInformation"
+                                    [style]="{width: '50vw'}" [baseZIndex]="10000">
+
+                                    <ul>
+                                        <li>
+                                            seuil Ruban Min : {{borne.seuilMinRuban}}
+                                        </li>
+                                        <li>
+                                            Seuil Billets Max : {{borne.seuilMaxBillets}}
+                                        </li>
+                                        <li>
+                                            Longueur Ruban : {{borne.longueurRuban}}
+                                        </li>
+                                        <li>
+                                            Capacite Billets : {{borne.capaciteBillets}}
+                                        </li>
+                                    </ul>
+
+
+                                    <ng-template pTemplate="footer">
+                                        <p-button icon="pi pi-check" (click)="displayBasicInformation=false" label="Ok"
+                                            styleClass="p-button-text"></p-button>
+                                    </ng-template>
+                                </p-dialog>
+
+                                <p-dialog header="FTP Information" [(visible)]="displayBasicFTP"
+                                    [style]="{width: '50vw'}" [baseZIndex]="10000">
+
+                                    <ul>
+                                        <li>
+                                            Username : {{borne.ftpUsername}}
+                                        </li>
+                                        <li>
+                                            Password : {{borne.ftpPassword}}
+                                        </li>
+                                        <li>
+                                            Port : {{borne.communication}}
+                                        </li>
+                                    </ul>
+
+
+                                    <ng-template pTemplate="footer">
+                                        <p-button icon="pi pi-check" (click)="displayBasicFTP=false" label="Ok"
+                                            styleClass="p-button-text"></p-button>
+                                    </ng-template>
+                                </p-dialog>
+
+                                <p-dialog header="Compteur De Biellets" [(visible)]="displayBasic"
+                                    [style]="{width: '50vw'}" [baseZIndex]="10000">
+
+                                    <p class="text-center" style="margin-top: 5%;">La Borne contient :
+                                        {{borne.counterBillets}} TND</p>
+
+                                    <ng-template pTemplate="footer">
+                                        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok"
+                                            styleClass="p-button-text"></p-button>
+                                    </ng-template>
+                                </p-dialog>
+
+                                <p-dialog header="Compteur De Ruban" [(visible)]="displayBasicRouleur"
+                                    [style]="{width: '50vw'}" [baseZIndex]="10000">
+
+                                    <p class="text-center" style="margin-top: 5%;">Ruban disponible :
+                                        {{borne.counterBillets}}.</p>
+
+                                    <ng-template pTemplate="footer">
+                                        <p-button icon="pi pi-check" (click)="displayBasicRouleur=false" label="Ok"
+                                            styleClass="p-button-text"></p-button>
+                                    </ng-template>
+                                </p-dialog>
+
+                                <p-dialog header="Consultation de la Borne : {{borne.reference}}"
+                                    [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}"
+                                    [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+                                    <div style="text-align: center;">
+                                        <p-messages key="photo"></p-messages>
+
+                                        <div *ngIf="url === undefined">
+                                            <img [src]="getImgContent()"
+                                                onerror="testImage = false; this.style.display='none';"
+                                                style="width: 50%;" />
+                                            <div *ngIf="testImage === false">
+                                                <video [src]="urlPhoto + borne.id" style="width: 50%;" controls
+                                                    autoplay></video>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div *ngIf="url">
+                                            <img [src]="url" *ngIf="format==='image' && url" style="width: 50%;">
+                                            <br />
+                                            <video [src]="url" *ngIf="format==='video' && url" style="width: 50%;"
+                                                controls autoplay></video>
+                                        </div> -->
+                                    </div>
+                                    <br>
+                                    <span style="margin-left: 5%;">
+                                        <input type='file' (change)="onSelectFile($event)"
+                                            accept="file_extension|audio/*|video/*|image/*|media_type" />
+                                    </span>
+                                    <br>
+                                    <ng-template pTemplate="footer">
+                                        <button pButton type="button" icon="pi pi-check" (click)="upload(borne.id)"
+                                            label="Changer Screen Saver" class="p-button-outlined">
+                                        </button>
+                                        <button pButton type="button" icon="pi pi-times"
+                                            (click)="displayMaximizable=false" label="Cancel"
+                                            class="p-button-outlined"></button>
+                                    </ng-template>
+                                </p-dialog>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
