@@ -5,14 +5,14 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
-import * as $ from "jquery";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-admin-layout',
     templateUrl: './admin-layout.component.html',
     styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit, AfterViewInit {
     private _router: Subscription;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
@@ -37,14 +37,16 @@ export class AdminLayoutComponent implements OnInit {
         });
         this.router.events.subscribe((event: any) => {
             if (event instanceof NavigationStart) {
-                if (event.url != this.lastPoppedUrl)
+                if (event.url !== this.lastPoppedUrl) {
                     this.yScrollStack.push(window.scrollY);
+                }
             } else if (event instanceof NavigationEnd) {
                 if (event.url === this.lastPoppedUrl) {
                     this.lastPoppedUrl = undefined;
                     window.scrollTo(0, this.yScrollStack.pop());
-                } else
+                } else {
                     window.scrollTo(0, 0);
+                }
             }
         });
         this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
@@ -70,12 +72,12 @@ export class AdminLayoutComponent implements OnInit {
         }
 
         $('.fixed-plugin a').click(function (event) {
-            // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+            // Alex if we click on switch, stop propagation of the event,
+            // so the dropdown will not be hide, otherwise we set the  section active
             if ($(this).hasClass('switch-trigger')) {
                 if (event.stopPropagation) {
                     event.stopPropagation();
-                }
-                else if (window.event) {
+                } else if (window.event) {
                     window.event.cancelBubble = true;
                 }
             }
@@ -94,7 +96,7 @@ export class AdminLayoutComponent implements OnInit {
                 $sidebar.attr('data-color', new_color);
             }
 
-            if ($sidebar_responsive.length != 0) {
+            if ($sidebar_responsive.length !== 0) {
                 $sidebar_responsive.attr('data-color', new_color);
             }
         });
@@ -106,16 +108,16 @@ export class AdminLayoutComponent implements OnInit {
             $(this).parent('li').addClass('active');
 
 
-            var new_image = $(this).find("img").attr('src');
+            var new_image = $(this).find('img').attr('src');
 
-            if ($sidebar_img_container.length != 0) {
+            if ($sidebar_img_container.length !== 0) {
                 $sidebar_img_container.fadeOut('fast', function () {
                     $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
                     $sidebar_img_container.fadeIn('fast');
                 });
             }
 
-            if ($full_page_background.length != 0) {
+            if ($full_page_background.length !== 0) {
 
                 $full_page_background.fadeOut('fast', function () {
                     $full_page_background.css('background-image', 'url("' + new_image + '")');
@@ -123,7 +125,7 @@ export class AdminLayoutComponent implements OnInit {
                 });
             }
 
-            if ($sidebar_responsive.length != 0) {
+            if ($sidebar_responsive.length !== 0) {
                 $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
             }
         });
@@ -132,12 +134,11 @@ export class AdminLayoutComponent implements OnInit {
         this.runOnRouteChange();
     }
     isMaps(path) {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
+        let titlee = this.location.prepareExternalUrl(this.location.path());
         titlee = titlee.slice(1);
-        if (path == titlee) {
+        if (path === titlee) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }

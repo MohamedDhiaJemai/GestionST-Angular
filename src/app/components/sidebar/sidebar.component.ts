@@ -20,7 +20,6 @@ export const ROUTES: RouteInfo[] = [
   { path: '/bornes', title: 'Bornes', icon: 'multiple_stop', class: '' },
   { path: '/user-List', title: 'Utilisateurs', icon: 'person', class: '' },
   { path: '/role-list', title: 'Roles', icon: 'multiple_stop', class: '' }
-  
   // { path: '/produits', title: 'Produits', icon: 'add_shopping_cart', class: '' },
   // { path: '/upgrade', title: 'Upgrade to PRO', icon: 'unarchive', class: 'active-pro' }
   // { path: '/user-profile', title: 'User Profile', icon: 'person', class: '' },
