@@ -9,7 +9,7 @@ import { Utilisateur } from 'app/model/Utilisateur.model';
 })
 export class UserService {
 
-  apiUrl = 'http://localhost:8443/utilisateur';
+  apiUrl = 'http://127.0.0.1:8443/utilisateur';
 
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
@@ -23,7 +23,7 @@ export class UserService {
   addToken() {
     console.log('Token Expired');
       localStorage.clear();
-      location.reload();
+      // location.reload();
       this.router.navigateByUrl('/login');
   }
 

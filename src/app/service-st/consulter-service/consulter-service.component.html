@@ -34,22 +34,11 @@
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
                         <!-- <button style="margin-bottom: 20%; float: left;" class="add-to-cart btn btn-warning" type="button"
-                            routerLink="/approvisionnement-article/{{ serviceST.id }}">Approvisonnement</button> -->
+                            routerLink="/approvisionnement-article/{{ servicePrincipal.id }}">Approvisonnement</button> -->
                       </div>
                     </div>
                     <br>
-                    <h2 class="product-title">{{ serviceST.libelle }}</h2>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Référence:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceST.id}}
-                        </h5>
-                      </div>
-                    </div>
+                    <h2 class="product-title">{{ servicePrincipal.libelle }}</h2>
                     <br>
                     <div class="row">
                       <div class="col-md-6">
@@ -57,34 +46,30 @@
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceST.nbrMois}}
+                        <h5 class="price">{{servicePrincipal.nbrMois}}
                         </h5>
                       </div>
                     </div>
-                    <br>
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">current price:
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceST.prix}} &nbsp; TND
+                        <h5 class="price">{{servicePrincipal.prix}} &nbsp; TND
                         </h5>
                       </div>
                     </div>
-                    <br>
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Category:
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceST.sexe}}
+                        <h5 class="price">{{servicePrincipal.sexe}}
                         </h5>
                       </div>
                     </div>
-                    <br>
-
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Visibilité :
@@ -92,19 +77,16 @@
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
                         <h5 class="price">
-                          <p-inputSwitch name="visible" [(ngModel)]="serviceST.visible" disabled>
+                          <p-inputSwitch name="visible" [(ngModel)]="servicePrincipal.visible" disabled>
                           </p-inputSwitch>
                         </h5>
                       </div>
                     </div>
-                    <br>
-
-
                     <div class="row">
                       <div class="col-md-11" style="margin-top: 5%;">
                         <div class="action">
                           <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                            routerLink="/update-service/{{ serviceST.id }}">Update</button>
+                            routerLink="/update-service/{{ servicePrincipal.id }}">Update</button>
                           <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                         </div>
                       </div>
@@ -118,7 +100,7 @@
           <!-- -->
 
 
-          <div class="container" *ngIf="typeService === 'test'">
+          <div class="container" *ngIf="typeService === 'autre'">
             <div class="card">
               <div class="container-fliud">
                 <div class="wrapper row">
@@ -141,22 +123,11 @@
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
                         <!-- <button style="margin-bottom: 20%; float: left;" class="add-to-cart btn btn-warning" type="button"
-                            routerLink="/approvisionnement-article/{{ serviceST.id }}">Approvisonnement</button> -->
+                            routerLink="/approvisionnement-article/{{ servicePrincipal.id }}">Approvisonnement</button> -->
                       </div>
                     </div>
                     <br>
-                    <h2 class="product-title">{{ serviceSTT.libelle }}</h2>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Référence:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceSTT.id}}
-                        </h5>
-                      </div>
-                    </div>
+                    <h2 class="product-title">{{ serviceAutre.libelle }}</h2>
                     <br>
                     <div class="row">
                       <div class="col-md-6">
@@ -164,23 +135,20 @@
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceSTT.prix}} &nbsp; TND
+                        <h5 class="price">{{serviceAutre.prix}} &nbsp; TND
                         </h5>
                       </div>
                     </div>
-                    <br>
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Category:
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceSTT.sexe}}
+                        <h5 class="price">{{serviceAutre.sexe}}
                         </h5>
                       </div>
                     </div>
-                    <br>
-
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Visibilité :
@@ -188,19 +156,16 @@
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
                         <h5 class="price">
-                          <p-inputSwitch name="visible" [(ngModel)]="serviceSTT.visible" disabled>
+                          <p-inputSwitch name="visible" [(ngModel)]="serviceAutre.visible" disabled>
                           </p-inputSwitch>
                         </h5>
                       </div>
                     </div>
-                    <br>
-
-
                     <div class="row">
                       <div class="col-md-11" style="margin-top: 5%;">
                         <div class="action">
                           <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                            routerLink="/update-service/{{ serviceSTT.id }}">Update</button>
+                            routerLink="/update-service/{{ serviceAutre.id }}">Update</button>
                           <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                         </div>
                       </div>
@@ -213,7 +178,7 @@
 
           <!-- -->
 
-          
+
 
           <div class="container" *ngIf="typeService === 'complementaire'">
             <div class="card">
@@ -240,18 +205,7 @@
                       </div>
                     </div>
                     <br>
-                    <h2 class="product-title">{{ serviceSTC.libelle }}</h2>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Référence:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceSTC.id}}
-                        </h5>
-                      </div>
-                    </div>
+                    <h2 class="product-title">{{ serviceComplementaire.libelle }}</h2>
                     <br>
                     <div class="row">
                       <div class="col-md-6">
@@ -259,11 +213,11 @@
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceSTC.nbrMois}}
+                        <h5 class="price">{{serviceComplementaire.nbrMois}}
                         </h5>
                       </div>
                     </div>
-                    <br>
+           
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Jours :
@@ -271,34 +225,32 @@
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
                         <h5 class="price">
-                          {{serviceSTC.jours}}
+                          {{serviceComplementaire.jours}}
                         </h5>
                       </div>
                     </div>
-                    <br>
-                    
+
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">current price:
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceSTC.prix}} &nbsp; TND
+                        <h5 class="price">{{serviceComplementaire.prix}} &nbsp; TND
                         </h5>
                       </div>
                     </div>
-                    <br>
+
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Category:
                         </h5>
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceSTC.sexe}}
+                        <h5 class="price">{{serviceComplementaire.sexe}}
                         </h5>
                       </div>
                     </div>
-                    <br>
 
                     <div class="row">
                       <div class="col-md-6">
@@ -307,24 +259,23 @@
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
                         <h5 class="price">
-                          <p-inputSwitch name="visible" [(ngModel)]="serviceSTC.visible" disabled>
+                          <p-inputSwitch name="visible" [(ngModel)]="serviceComplementaire.visible" disabled>
                           </p-inputSwitch>
                         </h5>
                       </div>
                     </div>
-                    <br>
-
-
+        
                     <div class="row">
                       <div class="col-md-11" style="margin-top: 5%;">
                         <div class="action">
                           <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                            routerLink="/update-service/{{ serviceSTC.id }}">Update</button>
+                            routerLink="/update-service/{{ serviceComplementaire.id }}">Update</button>
                           <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                         </div>
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>

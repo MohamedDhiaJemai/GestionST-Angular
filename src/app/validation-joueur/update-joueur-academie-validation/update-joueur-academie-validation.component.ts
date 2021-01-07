@@ -27,6 +27,7 @@ export enum sexe {
 })
 export class UpdateJoueurAcademieValidationComponent implements OnInit {
 
+  noDeletion = false;
   inputValue: string;
   inputValueImage: number;
 
@@ -84,7 +85,7 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
   ngOnInit() {
     this.id = this.router.snapshot.params['id'];
 
-    this.urlPhoto = 'http://localhost:8443/photo/get/' + this.id;
+    this.urlPhoto = 'http://127.0.0.1:8443/photo/get/' + this.id;
 
     console.log(this.urlPhoto)
 
@@ -138,7 +139,7 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
 
     this.joueurAcademie.dateNaissance = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     console.log(this.joueurAcademie.validation);
-    this.joueurAcademieSubscription = this.joueurAcademieService.updatejAcademie(this.joueurAcademie.id, this.joueurAcademie).subscribe(
+    this.joueurAcademieSubscription = this.joueurAcademieService.validerjAcademie(this.joueurAcademie.id, this.joueurAcademie).subscribe(
       data => {
         if (this.url !== undefined) {
           const formData = new FormData();

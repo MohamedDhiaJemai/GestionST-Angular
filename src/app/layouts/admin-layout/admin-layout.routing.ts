@@ -39,6 +39,17 @@ import { ConsulterBorneComponent } from 'app/borne/consulter-borne/consulter-bor
 import { UpdateBorneComponent } from 'app/borne/update-borne/update-borne.component';
 import { TransactionComponent } from 'app/transaction/transaction.component';
 import { ConsulterAchatComponent } from 'app/transaction/consulter-achat/consulter-achat.component';
+import { RemiseComponent } from 'app/remise/remise.component';
+import { SearchLivraisonComponent } from 'app/livraison/search-livraison/search-livraison.component';
+import { DonationComponent } from 'app/donation/donation.component';
+import { InscriptionTestComponent } from 'app/inscription-test/inscription-test.component';
+import { ConsulterInscriptionComponent } from 'app/inscription-test/consulter-inscription/consulter-inscription.component';
+import { UpdateInscriptionComponent } from 'app/inscription-test/update-inscription/update-inscription.component';
+import { SessionTestComponent } from 'app/session-test/session-test.component';
+import { UpdateSessionTestComponent } from 'app/session-test/update-session-test/update-session-test.component';
+import { AddSessionTestComponent } from 'app/session-test/add-session-test/add-session-test.component';
+import { SearchRetourComponent } from 'app/retour-cash/search-retour/search-retour.component';
+import { GratuiteComponent } from 'app/gratuite/gratuite.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -52,7 +63,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'categorie-list', component: CategorieComponent },
     { path: 'add-categorie', component: AddCategorieComponent },
     { path: 'update-categorie/:id', component: UpdateCategorieComponent },
-    // { path: 'produits', component: ProduitComponent },
     { path: 'services', component: ServiceSTComponent },
     { path: 'articles', component: ArticleComponent },
     { path: 'add-service', component: AddServiceComponent },
@@ -75,14 +85,25 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'consulter-joueur-academie/:id', component: ConsulterJoueurAcademieComponent },
     { path: 'update-joueur-academie/:id', component: UpdateJoueurAcademieComponent },
     { path: 'validation-joueur', component: ValidationJoueurComponent },
-    { path: 'Update-Joueur-Academie-Validation/:id', component: UpdateJoueurAcademieValidationComponent },
+    { path: 'update-joueur-academie-validation/:id', component: UpdateJoueurAcademieValidationComponent },
     { path: 'bornes', component: BorneComponent },
     { path: 'transactions', component: TransactionComponent },
     { path: 'consulter-achats/:id', component: ConsulterAchatComponent },
     { path: 'consulter-borne/:id', component: ConsulterBorneComponent },
-    { path: 'Update-borne/:id', component: UpdateBorneComponent }
+    { path: 'Update-borne/:id', component: UpdateBorneComponent },
+    { path: 'remises', component: RemiseComponent },
 
-    // { path: 'table-list',     component: TableListComponent },
+    { path: 'livrer', component: SearchLivraisonComponent },
+    { path: 'donations', component: DonationComponent },
+    { path: 'inscriptions-test', component: InscriptionTestComponent },
+    { path: 'consulter-inscription/:id', component: ConsulterInscriptionComponent },
+    { path: 'update-inscription/:id', component: UpdateInscriptionComponent },
+    { path: 'sessions-test', component: SessionTestComponent },
+    { path: 'update-session/:id', component: UpdateSessionTestComponent },
+    { path: 'add-session', component: AddSessionTestComponent },
+    { path: 'retour-cash', component: SearchRetourComponent },
+    { path: 'gratuite-joueur/:id', component: GratuiteComponent }
+
     // { path: 'typography',     component: TypographyComponent },
     // { path: 'icons',          component: IconsComponent },
     // { path: 'maps',           component: MapsComponent },

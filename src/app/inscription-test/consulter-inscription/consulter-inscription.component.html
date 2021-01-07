@@ -1,0 +1,157 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Fiche inscription test</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Nom
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.nom}}
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Prenom
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.prenom}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Date Naissance
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.dateNaissance | date:'dd-MM-yyyy'}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Sexe
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.sexe}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Mobile
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.mobile}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Catégorie
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.categorie?.designation}}
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Code inscription
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.code}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Date inscription
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.dateInscription | date:'dd-MM-yyyy HH:mm:ss'}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Phase 1 test
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.phase1}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Phase 2 test
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.phase2}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Session test
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.sessionTest?.libelle}}
+                                    <br>
+                                    {{inscription.sessionTest?.categorie.designation}}
+                                    <br>
+                                    du
+                                    {{inscription.sessionTest?.debutSession | date:'dd-MM-yyyy'}}
+                                    au
+                                    {{inscription.sessionTest?.finSession | date:'dd-MM-yyyy'}}
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <button routerLink="/inscriptions-test" mat-raised-button type="button"
+                                class="btn btn-success pull-right" style="margin-right: 1%;">Retourner</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <a href="javascript:void(0)">
+                        <img class="img" [src]="urlPhoto" width="100%"> <br />
+                    </a>
+                    <div class="card-body">
+                        <br>
+                        <h4 class="card-title">{{inscription.nom}} {{inscription.prenom}}</h4>
+                        <h6 class="card-category text-gray">{{inscription.identifiant}}</h6>
+                        <br>
+                        <p class="card-description">
+                            <!-- Don't be scared of the truth because we need to restart the human foundation in truth And I
+                            love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is... -->
+                        </p>
+                        <br>
+                        <a href="javascript:void(0)" routerLink="/update-inscription/{{ inscription.id }}"
+                            class="btn btn-danger btn-round">UPDATE</a>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

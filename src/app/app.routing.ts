@@ -5,17 +5,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard]},
-  { path: '', component: AdminLayoutComponent,
-  children: [{
-    path: '',
-    loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }], canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
+  {
+    path: '', component: AdminLayoutComponent,
+    children: [{
+      path: '',
+      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+    }], canActivate: [AuthGuard]
+  },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', component: PageNotFoundComponent }
+
 
 
   // { path: 'login', component: LoginComponent },
@@ -33,7 +37,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })

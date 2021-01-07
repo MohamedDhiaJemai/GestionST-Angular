@@ -6,7 +6,7 @@
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
                             <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Update Joueur Academie</h4>
+                            <h4 class="card-title ">Validation Joueur Academie</h4>
                             <p class="card-category"> STADE TUNISIEN</p>
                         </div>
                     </div>
@@ -80,31 +80,6 @@
                                 </div>
                             </div>
                             <br>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Validation de ce joueur " disabled>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-6">
-                                    <p-inputSwitch name="validation" [(ngModel)]="joueurAcademie.validation">
-                                    </p-inputSwitch>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="openModal(template)">AJOUTER</button>
-                            <button routerLink="/joueur-acamedie" mat-raised-button type="button"
-                                class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
-                            <div class="clearfix"></div>
-                            <div class="clearfix"></div>
-
-                            <br>
-                            <br>
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -149,7 +124,7 @@
 
                                 </div>
                                 <div class="col-md-10">
-                                    <app-list-document [someInput]="inputValue">
+                                    <app-list-document [someInput]="inputValue" [noDeletion]="noDeletion">
 
                                     </app-list-document>
 
@@ -159,8 +134,15 @@
                                 </div>
                             </div>
 
-
                             <br>
+                            <br>
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                (click)="openModal(template)">AJOUTER</button>
+                            <button routerLink="/validation-joueur" mat-raised-button type="button"
+                                class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
                             <br>
 
                         </form>

@@ -28,6 +28,7 @@ export class ParentComponent implements OnInit {
         this.parents = data;
       }
     );
+    this.parentService.getUserInfo();
   }
 
   showBasicDialog(id: number) {
@@ -39,7 +40,6 @@ export class ParentComponent implements OnInit {
       }
     );
     this.displayBasic = true;
-
   }
 
 }

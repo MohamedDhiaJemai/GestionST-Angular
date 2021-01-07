@@ -17,7 +17,7 @@ export class ConsulterArticleComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
-    this.urlphotoArticle = 'http://localhost:8443/image/get/' + id;
+    this.urlphotoArticle = 'http://127.0.0.1:8443/image/get/' + id;
     this.articleService.findById(id).subscribe(
       data => {
         this.article = data;

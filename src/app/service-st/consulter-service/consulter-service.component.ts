@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ServiceST } from 'app/model/ServiceST.Model';
-import { ServiceSTC } from 'app/model/ServiceSTC.model';
-import { ServiceSTT } from 'app/model/ServiceSTT.model';
+import { ServiceAutre } from 'app/model/ServiceAutre.model';
+import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
+import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 
 @Component({
@@ -12,9 +12,9 @@ import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 })
 export class ConsulterServiceComponent implements OnInit {
 
-  serviceST: ServiceST = new ServiceST();
-  serviceSTC: ServiceSTC = new ServiceSTC();
-  serviceSTT: ServiceSTT = new ServiceSTT();
+  servicePrincipal: ServicePrincipal = new ServicePrincipal();
+  serviceComplementaire: ServiceComplementaire = new ServiceComplementaire();
+  serviceAutre: ServiceAutre = new ServiceAutre();
   urlphotoServiceST: string;
   typeService: string;
 
@@ -22,36 +22,34 @@ export class ConsulterServiceComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
-    this.urlphotoServiceST = 'http://localhost:8443/image/get/' + id;
+    this.urlphotoServiceST = 'http://127.0.0.1:8443/image/get/' + id;
 
     this.serviceSTService.findById(id).subscribe(
       data => {
         if (data === null) {
           this.serviceSTService.findByIdComplement(id).subscribe(
-            (dataComp: ServiceSTC) => {
+            (dataComp: ServiceComplementaire) => {
               if (dataComp === null) {
-                this.serviceSTService.findByIdTest(id).subscribe(
-                  (dataTest: ServiceSTT) => {
+                this.serviceSTService.findByIdAutre(id).subscribe(
+                  (dataTest: ServiceAutre) => {
                     console.log(dataTest)
-                    this.typeService = 'test';
-                    this.serviceSTT = dataTest;
+                    this.typeService = 'autre';
+                    this.serviceAutre = dataTest;
                   }
                 );
-                console.log('test')
               } else {
                 console.log(dataComp)
                 this.typeService = 'complementaire';
-                this.serviceSTC = dataComp;
+                this.serviceComplementaire = dataComp;
                 console.log('complementaire')
-                console.log(this.serviceST)
               }
             }
           );
           console.log('complementaire')
         } else {
           this.typeService = 'principal';
-          this.serviceST = data;
-          console.log(this.serviceST)
+          this.servicePrincipal = data;
+          console.log(this.servicePrincipal)
         }
       }
     );

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class PhotoService {
 
-  apiUrl = 'http://localhost:8443/photo';
+  apiUrl = 'http://127.0.0.1:8443/photo';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -21,7 +21,7 @@ export class PhotoService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

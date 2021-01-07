@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class CategorieService {
 
-  apiUrl = 'http://localhost:8443/categorie';
+  apiUrl = 'http://127.0.0.1:8443/categorie';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -22,7 +22,7 @@ export class CategorieService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

@@ -19,12 +19,12 @@
                             <button pButton pRipple label="Tous Les Services"
                                 class="p-button-outlined p-button-rounded p-mr-2"
                                 (click)="onShowService('others')"></button>
-                            <button pButton pRipple label="Principal" class="p-button-outlined p-button-rounded p-mr-2"
+                            <button pButton pRipple label="Abonnements" class="p-button-outlined p-button-rounded p-mr-2"
                                 (click)="onShowService('principal')"></button>
-                            <button pButton pRipple label="Complement" class="p-button-outlined p-button-rounded p-mr-2"
+                            <button pButton pRipple label="Entraînements spécipfiques" class="p-button-outlined p-button-rounded p-mr-2"
                                 (click)="onShowService('complementaire')"></button>
-                            <button pButton pRipple label="Test" class="p-button-outlined p-button-rounded p-mr-2"
-                                (click)="onShowService('test')"></button>
+                            <button pButton pRipple label="Autres" class="p-button-outlined p-button-rounded p-mr-2"
+                                (click)="onShowService('autre')"></button>
                         </ng-template>
 
                         <ng-template pTemplate="right">
@@ -39,7 +39,7 @@
                     <div *ngIf="typeService === 'complementaire'">
                         <app-dataview-service [someInput]="inputValue"></app-dataview-service>
                     </div>
-                    <div *ngIf="typeService === 'test'">
+                    <div *ngIf="typeService === 'autre'">
                         <app-dataview-service [someInput]="inputValue"></app-dataview-service>
                     </div>
                     <div *ngIf="typeService === 'others' ">

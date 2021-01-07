@@ -54,7 +54,7 @@ export class UpdateJoueurProComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.router.snapshot.params['id'];
-    this.urlPhoto = 'http://localhost:8443/photo/get/' + this.id;
+    this.urlPhoto = 'http://127.0.0.1:8443/photo/get/' + this.id;
     this.categorieService.getAllCategorie().subscribe(
       data => {
         this.itemsCategories = data;

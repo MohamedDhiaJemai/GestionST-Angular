@@ -1,9 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceST } from 'app/model/ServiceST.Model';
-import { ServiceSTC } from 'app/model/ServiceSTC.model';
-import { ServiceSTT } from 'app/model/ServiceSTT.model';
+import { ServiceAutre } from 'app/model/ServiceAutre.model';
+import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
+import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -26,9 +26,9 @@ export enum sexe {
 })
 export class UpdateServiceComponent implements OnInit {
 
-  serviceST: ServiceST = new ServiceST();
-  serviceSTC: ServiceSTC = new ServiceSTC();
-  serviceSTT: ServiceSTT = new ServiceSTT();
+  servicePrincipal: ServicePrincipal = new ServicePrincipal();
+  serviceComplementaire: ServiceComplementaire = new ServiceComplementaire();
+  serviceAutre: ServiceAutre = new ServiceAutre();
   typeService: string;
   urlphotoService: string;
   sexes: SelectItem[];
@@ -60,35 +60,35 @@ export class UpdateServiceComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
-    this.urlphotoService = 'http://localhost:8443/image/get/' + id;
+    this.urlphotoService = 'http://127.0.0.1:8443/image/get/' + id;
     this.serviceSTService.findById(id).subscribe(
       data => {
         if (data === null) {
           this.serviceSTService.findByIdComplement(id).subscribe(
-            (dataComp: ServiceSTC) => {
+            (dataComp: ServiceComplementaire) => {
               if (dataComp === null) {
-                this.serviceSTService.findByIdTest(id).subscribe(
-                  (dataTest: ServiceSTT) => {
-                    this.typeService = 'test';
-                    this.serviceSTT = dataTest;
-                    console.log('serviceSTT', this.serviceSTT)
+                this.serviceSTService.findByIdAutre(id).subscribe(
+                  (dataAutre: ServiceAutre) => {
+                    this.typeService = 'autre';
+                    this.serviceAutre = dataAutre;
+                    console.log('serviceAutre', this.serviceAutre)
                   });
               } else {
                 console.log('complementaire')
                 this.typeService = 'complementaire';
-                this.serviceSTC = dataComp;
-                this.serviceSTC.jours.forEach(element => {
+                this.serviceComplementaire = dataComp;
+                this.serviceComplementaire.jours.forEach(element => {
                   this.selectedJour.push(element);
                 });
-                console.log('serviceSTC', this.serviceSTC)
+                console.log('serviceComplementaire', this.serviceComplementaire)
               }
             }
           );
         } else {
           console.log('principal')
           this.typeService = 'principal';
-          this.serviceST = data;
-          console.log('serviceST', this.serviceST)
+          this.servicePrincipal = data;
+          console.log('servicePrincipal', this.servicePrincipal)
         }
       }
     );
@@ -115,20 +115,20 @@ export class UpdateServiceComponent implements OnInit {
 
   ngOnUpdateServicePrincipale(templateAnnulation: TemplateRef<any>, type) {
     console.log('SERVICE PRINCIPALE');
-    console.log(this.serviceST.id);
-    this.serviceSTSubscription = this.serviceSTService.updateService(this.serviceST.id, this.serviceST).subscribe(
+    console.log(this.servicePrincipal.id);
+    this.serviceSTSubscription = this.serviceSTService.updateService(this.servicePrincipal.id, this.servicePrincipal).subscribe(
       data => {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
           console.log('formdata', formData);
-          this.imageProduitService.upload(formData, this.serviceST.id).subscribe(
+          this.imageProduitService.upload(formData, this.servicePrincipal.id).subscribe(
             data2 => {
               console.log('ok');
             }
           );
         }
-        this.routerNav.navigate(['/consulter-service/' + this.serviceST.id]);
+        this.routerNav.navigate(['/consulter-service/' + this.servicePrincipal.id]);
       },
       err => {
         if (err.status === 500) {
@@ -143,48 +143,48 @@ export class UpdateServiceComponent implements OnInit {
 
   ngOnUpdateServiceComplementaire(templateAnnulation: TemplateRef<any>) {
     console.log('SERVICE COMPLEMENTAIRE');
-    this.serviceSTC.jours = this.selectedJour;
-    this.serviceSTSubscription = this.serviceSTService.updateServiceComplement(this.serviceSTC.id, this.serviceSTC).subscribe(
-      data => {
+    this.serviceComplementaire.jours = this.selectedJour;
+    this.serviceSTSubscription = this.serviceSTService.updateServiceComplement(this.serviceComplementaire.id, this.serviceComplementaire)
+      .subscribe(data => {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
           console.log('formdata', formData);
-          this.imageProduitService.upload(formData, this.serviceSTC.id).subscribe(
+          this.imageProduitService.upload(formData, this.serviceComplementaire.id).subscribe(
             data2 => {
               console.log('ok');
             }
           );
         }
-        this.routerNav.navigate(['/consulter-service/' + this.serviceSTC.id]);
+        this.routerNav.navigate(['/consulter-service/' + this.serviceComplementaire.id]);
       },
-      err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
+        err => {
+          if (err.status === 500) {
+            this.modalRef.hide();
+            this.modalRefAnnul = this.modalService.show(templateAnnulation);
+            console.log('STATUS 500');
+          }
         }
-      }
-    );
+      );
     this.modalRef.hide();
   }
 
-  ngOnUpdateServiceTest(templateAnnulation: TemplateRef<any>, type) {
-    console.log('SERVICE Test');
-    console.log(this.serviceSTT.id);
-    this.serviceSTSubscription = this.serviceSTService.updateServiceTest(this.serviceSTT.id, this.serviceSTT).subscribe(
+  ngOnUpdateServiceAutre(templateAnnulation: TemplateRef<any>, type) {
+    console.log('SERVICE Autre');
+    console.log(this.serviceAutre.id);
+    this.serviceSTSubscription = this.serviceSTService.updateServiceAutre(this.serviceAutre.id, this.serviceAutre).subscribe(
       data => {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
           console.log('formdata', formData);
-          this.imageProduitService.upload(formData, this.serviceSTT.id).subscribe(
+          this.imageProduitService.upload(formData, this.serviceAutre.id).subscribe(
             data2 => {
               console.log('ok');
             }
           );
         }
-        this.routerNav.navigate(['/consulter-service/' + this.serviceSTT.id]);
+        this.routerNav.navigate(['/consulter-service/' + this.serviceAutre.id]);
       },
       err => {
         if (err.status === 500) {

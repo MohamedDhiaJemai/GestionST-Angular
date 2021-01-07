@@ -1,12 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceST } from 'app/model/ServiceST.Model';
-import { ServiceSTC } from 'app/model/ServiceSTC.model';
-import { ServiceStComplementaireComponent } from 'app/service-st-complementaire/service-st-complementaire.component';
+import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
+import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 
 export enum sexe {
@@ -37,9 +35,9 @@ export class AddServiceComponent implements OnInit {
   jours: SelectItem[]
   selectedJour: any[];
   jourEnvoi: string[] = [];
-  serviceST: ServiceST = new ServiceST();
-  serviceSTC: ServiceSTC = new ServiceSTC();
-  urlphotoST = 'http://localhost:8443/image/get/';
+  servicePrincipal: ServicePrincipal = new ServicePrincipal();
+  serviceComplementaire: ServiceComplementaire = new ServiceComplementaire();
+  urlphotoST = 'http://127.0.0.1:8443/image/get/';
   sexes: SelectItem[];
   item: string;
 
@@ -80,12 +78,12 @@ export class AddServiceComponent implements OnInit {
   }
 
   onAddService() {
-    if (this.serviceST.visible === null) {
-      this.serviceST.visible = false;
+    if (this.servicePrincipal.visible === null) {
+      this.servicePrincipal.visible = false;
     }
 
-    this.serviceSTService.addService(this.serviceST).subscribe(
-      (data: ServiceST) => {
+    this.serviceSTService.addService(this.servicePrincipal).subscribe(
+      (data: ServicePrincipal) => {
         const formData = new FormData();
         formData.append('file', this.uploadForm.get('profile').value);
         console.log('formdata', formData);
@@ -101,21 +99,21 @@ export class AddServiceComponent implements OnInit {
   }
 
   onAddServiceComplementaire() {
-    if (this.serviceSTC.visible === null) {
-      this.serviceSTC.visible = false;
+    if (this.serviceComplementaire.visible === null) {
+      this.serviceComplementaire.visible = false;
     }
 
     this.selectedJour.forEach(element => {
       console.log(element.label);
       this.jourEnvoi.push(element.label);
     });
-    this.serviceSTC.jours = this.jourEnvoi;
-    console.log(this.serviceSTC.jours);
+    this.serviceComplementaire.jours = this.jourEnvoi;
+    console.log(this.serviceComplementaire.jours);
 
 
-    console.log(this.serviceSTC);
-    this.serviceSTService.addServiceComplement(this.serviceSTC).subscribe(
-      (data: ServiceSTC) => {
+    console.log(this.serviceComplementaire);
+    this.serviceSTService.addServiceComplement(this.serviceComplementaire).subscribe(
+      (data: ServiceComplementaire) => {
         const formData = new FormData();
         formData.append('file', this.uploadForm.get('profile').value);
         console.log('formdata', formData);

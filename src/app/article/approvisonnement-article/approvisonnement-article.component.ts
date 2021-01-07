@@ -12,7 +12,7 @@ import { ArticleService } from 'app/services/article/article.service';
 export class ApprovisonnementArticleComponent implements OnInit {
 
   article: Article = new Article();
-  urlphotoArticle = 'http://localhost:8443/image/get/';
+  urlphotoArticle = 'http://127.0.0.1:8443/image/get/';
   // stocks: Stocks = new Stocks();
 
 

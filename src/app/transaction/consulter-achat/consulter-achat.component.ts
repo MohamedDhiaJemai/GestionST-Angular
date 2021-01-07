@@ -26,7 +26,7 @@ export class ConsulterAchatComponent implements OnInit {
 
   constructor(private transactionService: TransactionService, private router: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = this.router.snapshot.params['id'];
     this.transactionService.findById(id).subscribe(
       (data: Transaction) => {
@@ -38,56 +38,47 @@ export class ConsulterAchatComponent implements OnInit {
     );
   }
 
-   downloadAsPDF() {
+  print(elementid: string) {
+
+    const printContents = document.getElementById(elementid).innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    location.reload();
+    // document.body.innerHTML = originalContents;
+  }
+
+  downloadAsPDF(elementid: string) {
     console.log('downloadAsPDF')
 
-    const node = document.getElementById('parentdiv');
-
-    let img;
-    let filename;
-    let newImage;
-
-
-    domtoimage.toPng(node, { bgcolor: '#fff' })
-
-      .then(function (dataUrl) {
-
-        img = new Image();
-        img.src = dataUrl;
-        newImage = img.src;
-
-        img.onload = function () {
-
-          const pdfWidth = img.width;
-          const pdfHeight = img.height;
-
-          // FileSaver.saveAs(dataUrl, 'my-pdfimage.png'); // Save as Image
-
-          let doc;
-
-          if (pdfWidth > pdfHeight) {
-            doc = new jsPDF('l', 'px', [pdfWidth, pdfHeight]);
-          } else {
-            doc = new jsPDF('p', 'px', [pdfWidth, pdfHeight]);
-          }
-
-
-          const width = doc.internal.pageSize.getWidth();
-          const height = doc.internal.pageSize.getHeight();
-
-
-          doc.addImage(newImage, 'PNG', 10, 10, width, height);
-          filename = 'mypdf_' + '.pdf';
-          doc.save(filename);
-
-        };
-
-
-      })
-      .catch(function (error) {
+    const node = document.getElementById(elementid);
+    let img: HTMLImageElement;
+    let filename: string;
+    let newImage: string;
+    domtoimage.toPng(node, { bgcolor: '#fff' }).then(function (dataUrl: string) {
+      img = new Image();
+      img.src = dataUrl;
+      newImage = img.src;
+      img.onload = function () {
+        const pdfWidth = img.width;
+        const pdfHeight = img.height;
+        // FileSaver.saveAs(dataUrl, 'my-pdfimage.png'); // Save as Image
+        let doc: jsPDF;
+        if (pdfWidth > pdfHeight) {
+          doc = new jsPDF('l', 'px', [pdfWidth, pdfHeight]);
+        } else {
+          doc = new jsPDF('p', 'px', [pdfWidth, pdfHeight]);
+        }
+        const width = doc.internal.pageSize.getWidth();
+        const height = doc.internal.pageSize.getHeight();
+        doc.addImage(newImage, 'PNG', 10, 10, width, height);
+        filename = 'mypdf_' + '.pdf';
+        doc.save(filename);
+      };
+    })
+      .catch(function (error: any) {
         console.log(error)
       });
-
   }
 
 }

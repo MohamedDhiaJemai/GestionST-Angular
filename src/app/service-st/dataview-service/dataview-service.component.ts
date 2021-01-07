@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ServiceST } from 'app/model/ServiceST.Model';
-import { ServiceSTT } from 'app/model/ServiceSTT.model';
+import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 import { SelectItem } from 'primeng/api';
 
@@ -14,7 +13,7 @@ export class DataviewServiceComponent implements OnInit {
 
   @Input() someInput: string;
 
-  services: ServiceST[] = [];
+  services: ServicePrincipal[] = [];
   sortOptions: SelectItem[];
 
   sortOrder: number;
@@ -27,7 +26,6 @@ export class DataviewServiceComponent implements OnInit {
     if (this.someInput === 'principal') {
       this.serviceSTService.getAllService().subscribe(
         data => {
-          console.log('principal')
           console.log(data)
           this.services = data;
         }
@@ -36,16 +34,14 @@ export class DataviewServiceComponent implements OnInit {
     } else if (this.someInput === 'complementaire') {
       this.serviceSTService.getAllServiceComplement().subscribe(
         data => {
-          console.log('complementaire')
           console.log(data)
           this.services = data;
         }
       );
 
-    } else if (this.someInput === 'test') {
-      this.serviceSTService.getAllServiceTest().subscribe(
+    } else if (this.someInput === 'autre') {
+      this.serviceSTService.getAllServiceAutre().subscribe(
         data => {
-          console.log('test')
           console.log(data)
           this.services = data;
         }
@@ -55,7 +51,7 @@ export class DataviewServiceComponent implements OnInit {
         data => {
           this.serviceSTService.getAllServiceComplement().subscribe(
             data2 => {
-              this.serviceSTService.getAllServiceTest().subscribe(
+              this.serviceSTService.getAllServiceAutre().subscribe(
                 data3 => {
                   data2.forEach(element => {
                     data.push(element)

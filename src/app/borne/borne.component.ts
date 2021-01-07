@@ -45,7 +45,7 @@ export class BorneComponent implements OnInit {
   imageToShow: any;
   isImageLoading: boolean;
 
-  urlPhoto = 'http://localhost:8443/screensaver/get/';
+  urlPhoto = 'http://127.0.0.1:8443/screensaver/get/';
 
   constructor(private borneService: BorneService, private messageService: MessageService,
     private formBuilder: FormBuilder, private screensaverService: ScreensaverBorneService,

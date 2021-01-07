@@ -8,7 +8,7 @@ import { UserAuthentification } from 'app/model/UserAuthentification.model';
 })
 export class LoginService {
 
-  apiUrl = 'http://localhost:8443';
+  apiUrl = 'http://127.0.0.1:8443';
 
   private jwtToken = null;
 
@@ -42,6 +42,6 @@ export class LoginService {
     this.jwtToken = undefined;
     this.username = undefined;
     this.roles = undefined;
-    location.reload();
+    // location.reload();
   }
 }

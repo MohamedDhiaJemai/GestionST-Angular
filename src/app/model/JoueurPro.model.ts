@@ -1,5 +1,4 @@
-import { DatePipe } from "@angular/common";
-import { Categorie } from "./Categorie.model";
+import { Categorie } from './Categorie.model';
 
 export class JoueurPro {
 

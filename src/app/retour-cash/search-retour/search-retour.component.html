@@ -1,0 +1,106 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Retour Cash</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="card-body">
+                        <form (keydown.enter)="findRetour()">
+                            <div class="row text-center">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input id="searchField" matInput placeholder="ID retour" type="text"
+                                            name="idTransaction" [(ngModel)]="idRetour" autofocus>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" (click)="findRetour()" mat-raised-button
+                                        icon="pi pi-external-link" class="btn btn-success">Chercher</button>
+                                    <button type="button" (click)="clear()" mat-raised-button icon="pi pi-external-link"
+                                        class="btn btn-danger" style="margin-right: 2%;">Réinitialiser</button>
+                                </div>
+                            </div>
+                            <br>
+                            <div *ngIf="!exist" class="row text-center">
+                                <div class="col-md-12">
+                                    Aucun retour.
+                                </div>
+                            </div>
+                            <div *ngIf="exist" class="row text-center">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            Montant à retourner
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{retourCash.montant}}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            Date création
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{retourCash.dateCreation | date:'dd-MM-yyyy HH:mm:ss'}}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            Borne
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{retourCash.borne.reference}}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            Retourner
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{retourCash.retour}}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row" *ngIf="retourCash.retour">
+                                        <div class="col-md-3">
+                                            Date retour
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{retourCash.dateRetour | date:'dd-MM-yyyy HH:mm:ss'}}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row" *ngIf="retourCash.retour">
+                                        <div class="col-md-3">
+                                            Utilisateur
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{retourCash.utilisateur.nom}} {{retourCash.utilisateur.prenom}}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button mat-raised-button *ngIf="!retourCash.retour" type="submit"
+                                        class="btn btn-danger" (click)="validerRetour(retourCash.id)">Valider
+                                        Retour</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

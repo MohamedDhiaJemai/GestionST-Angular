@@ -10,7 +10,7 @@ import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
 })
 export class JoueurAcademieService {
 
-  apiUrl = 'http://localhost:8443/academie';
+  apiUrl = 'http://127.0.0.1:8443/academie';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -22,7 +22,7 @@ export class JoueurAcademieService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 
@@ -49,6 +49,13 @@ export class JoueurAcademieService {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
     return this.httpClient.put(this.apiUrl + '/update/' + id, jAcademie,
+      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+  }
+
+  validerjAcademie(id: number, jAcademie: JoueurAcamedie) {
+    if (this.jwtToken == null) { this.loadToken(); }
+    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
+    return this.httpClient.put(this.apiUrl + '/valider/' + id, jAcademie,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 

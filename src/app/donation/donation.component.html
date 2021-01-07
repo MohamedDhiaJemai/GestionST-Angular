@@ -1,0 +1,107 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Listes Des Donations</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
+                        </ng-template>
+                    </p-toolbar>
+
+                    <div class="card-body">
+                        <p-table #dt [value]="donations" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedDonation"
+                            styleClass="p-datatable-customers">
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="dateDonation" class="text-center">Date
+                                        <p-sortIcon field="dateDonation">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="montant" class="text-center">Montant
+                                        <p-sortIcon field="montant">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nom" class="text-center">Nom
+                                        <p-sortIcon field="nom">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="prenom" class="text-center">Prenom
+                                        <p-sortIcon field="prenom">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="cin" class="text-center">CIN
+                                        <p-sortIcon field="cin">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="mobile" class="text-center">Mobile
+                                        <p-sortIcon field="mobile">
+                                        </p-sortIcon>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'dateDonation', 'contains')"
+                                            placeholder="dateDonation" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'montant', 'contains')"
+                                            placeholder="montant" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'nom', 'contains')"
+                                            placeholder="nom" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'prenom', 'contains')"
+                                            placeholder="prenom" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'cin', 'contains')"
+                                            placeholder="cin" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'mobile', 'contains')"
+                                            placeholder="mobile" class="p-column-filter">
+                                    </th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-donation>
+                                <tr [pSelectableRow]="donation">
+                                    <td>{{donation.dateDonation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                    <td>{{donation.montant}}</td>
+                                    <td>{{donation.nom}}</td>
+                                    <td>{{donation.prenom}}</td>
+                                    <td>{{donation.cin}}</td>
+                                    <td>{{donation.mobile}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

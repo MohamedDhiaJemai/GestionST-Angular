@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class TransactionService {
 
-  apiUrl = 'http://localhost:8443/transaction';
+  apiUrl = 'http://127.0.0.1:8443/transaction';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -22,7 +22,7 @@ export class TransactionService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

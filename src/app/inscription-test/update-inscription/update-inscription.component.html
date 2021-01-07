@@ -1,0 +1,144 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Update inscription test</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nom" type="text" name="nom"
+                                            [(ngModel)]="inscription.nom">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Prenom" type="text" name="prenom"
+                                            [(ngModel)]="inscription.prenom">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Sexe " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-dropdown #dd [options]="sexes" name="sexe" [(ngModel)]="inscription.sexe"
+                                        placeholder="Sexe" [showClear]="true">
+                                    </p-dropdown>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Date naissance " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="date" dateFormat="dd-mm-yy" name="date"
+                                        [yearNavigator]="true" yearRange="{{annees}}" [monthNavigator]="true">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Mobile" type="text" name="mobile"
+                                            [(ngModel)]="inscription.mobile">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br><br>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                (click)="openModal(template)">AJOUTER</button>
+                            <button routerLink="/consulter-inscription/{{inscription.id}}" mat-raised-button
+                                type="button" class="btn btn-success pull-right" style="margin-right:
+                                                    1%;">ANNULER</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="card card-profile">
+                    <a href="javascript:void(0)">
+                        <div *ngIf="url === undefined">
+                            <img class="img" [src]="urlPhoto" width="100%" />
+                        </div>
+                        <div *ngIf="url">
+                            <img class="img" [src]="url" width="100%"> <br />
+                        </div>
+                    </a>
+
+                    <div class="card-body">
+                        <h4 class="card-title">{{inscription.nom}} {{inscription.prenom}}</h4>
+                        <h6 class="card-category text-gray">{{inscription.identifiant}}</h6>
+                        <br>
+                        <p class="card-description">
+                            <!-- description -->
+                        </p>
+
+                        <p-messages key="photo"></p-messages>
+
+                        <!-- <p-fileUpload [files]="myfilePhoto" customUpload="false" 
+                            (uploadHandler)="uploadPhoto($event)" [showUploadButton]="clikedPhoto" accept="image/*">
+                        </p-fileUpload> -->
+
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
+                            <input type="file" (change)="onSelectFile($event)">
+                        </a>
+
+                    </div>
+                </div>
+
+                <br><br>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #template>
+
+    <div class="modal-header">
+        <h5 class="modal-title">CONFIRMATION</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <p>Êtes-vous sûr de vouloir modifier définitivement cette inscription.</p>
+    </div>
+
+    <div class="modal-footer">
+
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="modalRef.hide()">NON</button>
+
+        <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
+            (click)="ngOnUpdateInscription()">OUI</button>
+
+    </div>
+
+</ng-template>

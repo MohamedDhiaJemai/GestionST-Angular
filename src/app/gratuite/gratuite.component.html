@@ -1,0 +1,143 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Listes Des gratuites</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
+                        </ng-template>
+                        <ng-template pTemplate="right">
+                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+                                (click)="openNew()"></button>
+                        </ng-template>
+                    </p-toolbar>
+
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <h3>
+                                    Gratuités de <strong> {{joueur?.nom}} {{joueur?.prenom}}</strong>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <p-table #dt [value]="gratuites" [paginator]="true" [rows]="10"
+                                [showCurrentPageReport]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                [rowsPerPageOptions]="[10,25,50]" selectionMode="single" onselect=""
+                                styleClass="p-datatable-customers">
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="taux" class="text-center">Taux
+                                            <p-sortIcon field="taux">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th pSortableColumn="activation" class="text-center">Activation
+                                            <p-sortIcon field="activation">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th pSortableColumn="dateDebut" class="text-center">Date début
+                                            <p-sortIcon field="dateDebut">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th pSortableColumn="dateFin" class="text-center">Date fin
+                                            <p-sortIcon field="dateFin">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th style="width: 6rem;"></th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'taux', 'contains')"
+                                                placeholder="taux" class="p-column-filter">
+                                        </th>
+                                        <th>
+                                            <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'activation', 'contains')"
+                                                placeholder="activation" class="p-column-filter">
+                                        </th>
+                                        <th>
+                                            <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'dateDebut', 'contains')"
+                                                placeholder="dateDebut" class="p-column-filter">
+                                        </th>
+                                        <th>
+                                            <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'dateFin', 'contains')"
+                                                placeholder="dateFin" class="p-column-filter">
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+
+                                <ng-template pTemplate="body" let-gratuitee>
+                                    <tr [pSelectableRow]="gratuitee">
+                                        <td>{{gratuitee.taux}} %</td>
+                                        <td>{{gratuitee.activation}}</td>
+                                        <td>{{gratuitee.moisDebut | date:'MM-yyyy'}}</td>
+                                        <td>{{gratuitee.moisFin | date:'MM-yyyy'}}</td>
+                                        <td>
+                                            <button pButton pRipple icon="pi pi-pencil"
+                                                class="p-button-rounded p-button-success p-mr-2"
+                                                (click)="edit(gratuitee)"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog [(visible)]="gratuiteDialog" [style]="{width: '500px'}" header="Gratuité Details" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="name">Taux</label>
+                <input type="text" pInputText id="name" [(ngModel)]="gratuite.taux" required autofocus />
+            </div>
+            <div class="p-field p-col">
+                <div style="padding-left: 30px;">
+                    <label for="name">Activation</label><br>
+                    <p-inputSwitch [style]="{'margin-top': '10px'}" name="validation" [(ngModel)]="gratuite.activation">
+                    </p-inputSwitch>
+                </div>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="name">Date début</label>
+            <!-- <input type="date" [(ngModel)]="dateD"/> -->
+            <p-calendar name="dateD" view="month" dateFormat='mm/yy' [inline]="true" [(ngModel)]="dateD">
+            </p-calendar>
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="p-field">
+            <label for="name">Date Fin</label>
+            <p-calendar name="dateF" view="month" dateFormat='mm/yy' [inline]="true" [(ngModel)]="dateF">
+            </p-calendar>
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>

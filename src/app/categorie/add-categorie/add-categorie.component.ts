@@ -11,11 +11,18 @@ import { CategorieService } from 'app/services/categorie/categorie.service';
 export class AddCategorieComponent implements OnInit {
 
   categorie: Categorie = new Categorie();
-
+  annees: any[] = [];
 
   constructor(private categorieService: CategorieService, private router: Router) { }
 
   ngOnInit(): void {
+    const now = new Date();
+    const year = now.getFullYear();
+    let i: number;
+    for (i = 4; i < 45; i++) {
+      const natif = year - i;
+      this.annees.push({ label: natif.toString(), value: natif.toString() })
+    }
   }
 
   onAddCategorie() {

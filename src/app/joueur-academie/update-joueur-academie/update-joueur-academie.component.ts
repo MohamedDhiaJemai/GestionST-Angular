@@ -4,12 +4,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
 import { CategorieService } from 'app/services/categorie/categorie.service';
+import { DocumentsJoueurService } from 'app/services/documents-joueur/documents-joueur.service';
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
 import { ParentService } from 'app/services/parent/parent.service';
 import { PhotoService } from 'app/services/photo/photo.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 
 export enum sexe {
@@ -25,9 +26,15 @@ export enum sexe {
 })
 export class UpdateJoueurAcademieComponent implements OnInit {
 
+  noDeletion = false;
+  inputValue: string;
   inputValueImage: number;
 
+  myfile: any[] = [];
   myfilePhoto: any[] = [];
+
+  uploadedFiles: File[] = [];
+  uploadedFilesMessage: File[] = [];
 
   joueurAcademie: JoueurAcamedie = new JoueurAcamedie();
   sexes: SelectItem[];
@@ -47,10 +54,14 @@ export class UpdateJoueurAcademieComponent implements OnInit {
   file: File;
   uploadForm: FormGroup;
 
+  fileInfos: Observable<any>;
+  clicked = true;
+
   constructor(private joueurAcademieService: JoueurAcademieService,
     private parentService: ParentService,
     private messageService: MessageService,
     private photoService: PhotoService,
+    private docuementsJoueurService: DocumentsJoueurService,
     private formBuilder: FormBuilder,
     private router: ActivatedRoute, private datePipe: DatePipe,
     private routerNav: Router, private modalService: BsModalService) {
@@ -62,7 +73,9 @@ export class UpdateJoueurAcademieComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.router.snapshot.params['id'];
-    this.urlPhoto = 'http://localhost:8443/photo/get/' + this.id;
+    this.urlPhoto = 'http://127.0.0.1:8443/photo/get/' + this.id;
+
+    this.fileInfos = this.docuementsJoueurService.getFiles(this.id);
 
     this.parentService.getAllParent().subscribe(
       data => {
@@ -165,6 +178,47 @@ export class UpdateJoueurAcademieComponent implements OnInit {
   showViaServicePhotoEror() {
     this.messageService.clear();
     this.messageService.add({ key: 'photo', severity: 'error', summary: 'Error' });
+  }
+
+  showViaServiceWait() {
+    this.messageService.clear();
+    this.messageService.add({ severity: 'warn', summary: 'Info Message', detail: ' Upload de fichier en cours' });
+  }
+
+  showViaServiceOk(resp: string) {
+    this.messageService.clear();
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: resp });
+  }
+
+  showViaServiceEror(resp: string) {
+    this.messageService.clear();
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: resp });
+  }
+
+  upload(event) {
+    this.showViaServiceWait();
+    this.clicked = false;
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+      this.uploadedFilesMessage.push(file);
+      let formData = new FormData();
+      formData.append('file', file);
+      this.docuementsJoueurService.upload(formData, this.id).subscribe(
+        resp => {
+          this.showViaServiceOk(resp.message);
+          this.clicked = true;
+          this.inputValue = resp.message;
+        },
+        err => {
+          this.showViaServiceEror(err.error.message);
+          this.clicked = true;
+          this.uploadedFiles.pop()
+          this.uploadedFilesMessage.pop();
+        },
+      );
+    }
+    console.log('my file ', this.myfile)
+    this.myfile = [];
   }
 
 }

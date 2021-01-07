@@ -16,6 +16,8 @@ export class UpdateCategorieComponent implements OnInit {
   categorieSubscription: Subscription;
   ancienCategorie: string;
 
+  annees: any[] = [];
+
   modalRef: BsModalRef;
   modalRefAnnul: BsModalRef;
 
@@ -23,36 +25,47 @@ export class UpdateCategorieComponent implements OnInit {
     private router: ActivatedRoute,
     private routerNav: Router, private modalService: BsModalService) { }
 
-    ngOnInit() {
-      const id = this.router.snapshot.params['id'];
-      console.log('id', id);
-      this.categorieSubscription = this.categorieService.findById(id).subscribe(
-        data => {
-          this.ancienCategorie = data.designation;
-          console.log('ancienRole', this.ancienCategorie);
-          this.categorie = data;
-        });
+  ngOnInit() {
+    const now = new Date();
+    const year = now.getFullYear();
+    let i: number;
+    for (i = 4; i < 45; i++) {
+      const natif = year - i;
+      this.annees.push({ label: natif.toString(), value: natif.toString() })
     }
+    console.log(this.annees);
+    const id = this.router.snapshot.params['id'];
+    console.log('id', id);
+    this.categorieSubscription = this.categorieService.findById(id).subscribe(
+      data => {
+        this.ancienCategorie = data.designation;
+        console.log('ancienRole', this.ancienCategorie);
+        this.categorie = data;
+        console.log(this.categorie);
+        this.categorie.natifs.forEach(element => {
+        })
+      });
+  }
 
-    ngOnUpdateCategorie(templateAnnulation: TemplateRef<any>) {
-      console.log('role', this.categorie)
-      this.categorieSubscription = this.categorieService.updateCategorie(this.categorie.id, this.categorie).subscribe(
-        data => {
-          this.routerNav.navigate(['/categorie-list']);
-        },
-        err => {
-          if (err.status === 500) {
-            this.modalRef.hide();
-            this.modalRefAnnul = this.modalService.show(templateAnnulation);
-            console.log('STATUS 500');
-            // this.routerNav.navigateByUrl('/role/details/' + id);
-          }
+  ngOnUpdateCategorie(templateAnnulation: TemplateRef<any>) {
+    console.log('categorie', this.categorie)
+    this.categorieSubscription = this.categorieService.updateCategorie(this.categorie.id, this.categorie).subscribe(
+      data => {
+        this.routerNav.navigate(['/categorie-list']);
+      },
+      err => {
+        if (err.status === 500) {
+          this.modalRef.hide();
+          this.modalRefAnnul = this.modalService.show(templateAnnulation);
+          console.log('STATUS 500');
+          // this.routerNav.navigateByUrl('/role/details/' + id);
         }
-      );
-      this.modalRef.hide();
-    }
+      }
+    );
+    this.modalRef.hide();
+  }
 
-    public openModal (template: TemplateRef <any>) {
-      this.modalRef = this.modalService.show(template);
-    }
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
 }

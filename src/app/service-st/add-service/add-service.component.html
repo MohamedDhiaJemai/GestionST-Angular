@@ -71,7 +71,7 @@
                                                     <div class="col-md-6">
                                                         <mat-form-field class="example-full-width">
                                                             <input matInput placeholder="Libelle" type="text"
-                                                                name="libelle" [(ngModel)]="serviceST.libelle">
+                                                                name="libelle" [(ngModel)]="servicePrincipal.libelle">
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
@@ -84,7 +84,7 @@
                                                     <div class="col-md-6">
                                                         <mat-form-field class="example-full-width">
                                                             <input matInput type="text" name="nbrMois"
-                                                                placeholder="Nbre Mois" [(ngModel)]="serviceST.nbrMois">
+                                                                placeholder="Nbre Mois" [(ngModel)]="servicePrincipal.nbrMois">
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
@@ -95,7 +95,7 @@
                                                         </h5>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <p-inputNumber name="prix" [(ngModel)]="serviceST.prix"
+                                                        <p-inputNumber name="prix" [(ngModel)]="servicePrincipal.prix"
                                                             placeholder="0.0" [showButtons]="true" mode="currency"
                                                             currency="TND"></p-inputNumber>
                                                     </div>
@@ -110,7 +110,7 @@
 
                                                     <div class="col-md-6">
                                                         <p-dropdown #dd [options]="sexes" name="sexe"
-                                                            [(ngModel)]="serviceST.sexe" placeholder="Sexe"
+                                                            [(ngModel)]="servicePrincipal.sexe" placeholder="Sexe"
                                                             [showClear]="true">
                                                         </p-dropdown>
                                                     </div>
@@ -123,7 +123,7 @@
                                                         <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <p-inputSwitch name="visible" [(ngModel)]="serviceST.visible">
+                                                        <p-inputSwitch name="visible" [(ngModel)]="servicePrincipal.visible">
                                                         </p-inputSwitch>
                                                     </div>
                                                 </div>
@@ -208,7 +208,7 @@
                                                     <div class="col-md-6">
                                                         <mat-form-field class="example-full-width">
                                                             <input matInput placeholder="Libelle" type="text"
-                                                                name="libelle" [(ngModel)]="serviceSTC.libelle">
+                                                                name="libelle" [(ngModel)]="serviceComplementaire.libelle">
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
@@ -222,7 +222,7 @@
                                                         <mat-form-field class="example-full-width">
                                                             <input matInput type="text" name="nbrMois"
                                                                 placeholder="Nbre Mois"
-                                                                [(ngModel)]="serviceSTC.nbrMois">
+                                                                [(ngModel)]="serviceComplementaire.nbrMois">
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
@@ -233,7 +233,7 @@
                                                         </h5>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <p-inputNumber name="prix" [(ngModel)]="serviceSTC.prix"
+                                                        <p-inputNumber name="prix" [(ngModel)]="serviceComplementaire.prix"
                                                             placeholder="0.0" [showButtons]="true" mode="currency"
                                                             currency="TND"></p-inputNumber>
                                                     </div>
@@ -248,7 +248,7 @@
 
                                                     <div class="col-md-6">
                                                         <p-dropdown #dd [options]="sexes" name="sexe"
-                                                            [(ngModel)]="serviceSTC.sexe" placeholder="Sexe"
+                                                            [(ngModel)]="serviceComplementaire.sexe" placeholder="Sexe"
                                                             [showClear]="true">
                                                         </p-dropdown>
                                                     </div>
@@ -261,7 +261,7 @@
                                                         <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <p-inputSwitch name="visible" [(ngModel)]="serviceSTC.visible">
+                                                        <p-inputSwitch name="visible" [(ngModel)]="serviceComplementaire.visible">
                                                         </p-inputSwitch>
                                                     </div>
                                                 </div>

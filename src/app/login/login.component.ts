@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         if (this.jwtHelper.isTokenExpired(jwt)) {
           console.log('Token Expired');
           localStorage.clear();
-          location.reload();
+          // location.reload();
           this.router.navigateByUrl('/login');
         }
 

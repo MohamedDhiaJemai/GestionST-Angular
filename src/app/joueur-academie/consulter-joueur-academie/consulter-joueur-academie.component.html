@@ -6,7 +6,7 @@
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
                             <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Ajouter Joueur Professionnel</h4>
+                            <h4 class="card-title ">Fiche Joueur Académie</h4>
                             <p class="card-category"> STADE TUNISIEN</p>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                                     Identifiant
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.identifiant}}
+                                    {{joueurAcademie?.identifiant}}
                                 </div>
                             </div>
 
@@ -30,7 +30,7 @@
                                     Nom
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.nom}}
+                                    {{joueurAcademie?.nom}}
                                 </div>
                             </div>
 
@@ -40,7 +40,7 @@
                                     Prenom
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.prenom}}
+                                    {{joueurAcademie?.prenom}}
                                 </div>
                             </div>
 
@@ -51,7 +51,7 @@
                                     Sexe
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.sexe}}
+                                    {{joueurAcademie?.sexe}}
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@
                                     Date Naissance
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.dateNaissance}}
+                                    {{joueurAcademie?.dateNaissance}}
                                 </div>
                             </div>
                             <br>
@@ -72,7 +72,7 @@
                                     Date Inscription
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.dateInscription}}
+                                    {{joueurAcademie?.dateInscription}}
                                 </div>
                             </div>
                             <br>
@@ -81,7 +81,7 @@
                                     Validation
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.validation}}
+                                    {{joueurAcademie?.validation}}
                                 </div>
                             </div>
 
@@ -91,31 +91,72 @@
                                     Date Validation
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie.dateValidation}}
+                                    {{joueurAcademie?.dateValidation}}
                                 </div>
                             </div>
-
-                            <br>
                             <hr>
-                            <br>
-
                             <div class="row">
                                 <div class="col-md-5">
                                     Parent
                                 </div>
-                                <div class="col-md-7" *ngIf="joueurAcademie.parent == null">
-
+                                <div class="col-md-7" *ngIf="joueurAcademie?.parent == null">
                                     <ul>
                                         N'est pas encore associé à un parent.
                                     </ul>
                                 </div>
-                                <div class="col-md-7" *ngIf="joueurAcademie.parent != null">
-
+                                <div class="col-md-7" *ngIf="joueurAcademie?.parent != null">
                                     <ul>
-                                        <li>Identifiant : {{joueurAcademie.parent.identifiant}}</li>
+                                        <li>Mobile : {{joueurAcademie.parent.mobile}}</li>
                                         <li>Nom : {{joueurAcademie.parent.nom}}</li>
                                         <li>Prenom : {{joueurAcademie.parent.prenom}}</li>
                                     </ul>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Gratuité (%)
+                                </div>
+                                <div class="col-md-5" *ngIf="gratuite != null;else elseBlock">
+                                    {{gratuite.taux}} %
+                                    <br>
+                                    du {{gratuite.moisDebut | date:'MM-yyyy'}} au
+                                    {{gratuite.moisFin | date:'MM-yyyy'}}
+                                </div>
+                                <ng-template #elseBlock>
+                                    <div class="col-md-5">Aucune
+                                    </div>
+                                </ng-template>
+                                <div class="col-md-2">
+                                    <button routerLink="/gratuite-joueur/{{joueurAcademie?.id}}" mat-raised-button
+                                        type="button" class="btn btn-success pull-right"
+                                        style="margin-right: 1%;">Gérer</button>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Documents Joueur " disabled>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-1">
+
+                                </div>
+                                <div class="col-md-10">
+                                    <app-list-document [someInput]="inputValue" [noDeletion]="noDeletion">
+
+                                    </app-list-document>
+
+                                </div>
+                                <div class="col-md-1">
+
                                 </div>
                             </div>
 
@@ -135,15 +176,15 @@
                     </a>
                     <div class="card-body">
                         <br>
-                        <h4 class="card-title">{{joueurAcademie.nom}} {{joueurAcademie.prenom}}</h4>
-                        <h6 class="card-category text-gray">{{joueurAcademie.identifiant}}</h6>
+                        <h4 class="card-title">{{joueurAcademie?.nom}} {{joueurAcademie?.prenom}}</h4>
+                        <h6 class="card-category text-gray">{{joueurAcademie?.identifiant}}</h6>
                         <br>
                         <p class="card-description">
                             Don't be scared of the truth because we need to restart the human foundation in truth And I
                             love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
                         <br>
-                        <a href="javascript:void(0)" routerLink="/update-joueur-academie/{{ joueurAcademie.id }}"
+                        <a href="javascript:void(0)" routerLink="/update-joueur-academie/{{ joueurAcademie?.id }}"
                             class="btn btn-danger btn-round">UPDATE</a>
                         <br>
                     </div>

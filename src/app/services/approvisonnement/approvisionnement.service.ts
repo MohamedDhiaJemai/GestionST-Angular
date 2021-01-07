@@ -10,7 +10,7 @@ import { Stocks } from 'app/model/Stocks.model';
 })
 export class ApprovisionnementService {
 
-  apiUrl = 'http://localhost:8443/approvisionnement';
+  apiUrl = 'http://127.0.0.1:8443/approvisionnement';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -22,7 +22,7 @@ export class ApprovisionnementService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

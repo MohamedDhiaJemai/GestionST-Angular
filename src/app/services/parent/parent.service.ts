@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ParentService {
 
-  apiUrl = 'http://localhost:8443/parent';
+  apiUrl = 'http://127.0.0.1:8443/parent';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -20,9 +20,13 @@ export class ParentService {
     this.jwtToken = localStorage.getItem('token');
   }
 
+  getUserInfo() {
+    console.log(this.jwtHelper.decodeToken(this.jwtToken));
+  }
+
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 
@@ -50,6 +54,6 @@ export class ParentService {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
     return this.httpClient.get<Parent>(this.apiUrl + '/' + id,
-    {headers: new HttpHeaders({'authorization': this.jwtToken})});
+      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 }

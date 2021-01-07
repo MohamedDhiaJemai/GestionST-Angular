@@ -2,18 +2,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
-import { ServiceST } from 'app/model/ServiceST.Model';
-import { ServiceSTT } from 'app/model/ServiceSTT.model';
 import { Observable } from 'rxjs';
+import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
+import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
+import { ServiceAutre } from 'app/model/ServiceAutre.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceSTService {
 
-  apiUrl = 'http://localhost:8443/principal';
-  apiUrlComplement = 'http://localhost:8443/complement';
-  apiUrlTest = 'http://localhost:8443/test';
+  apiUrl = 'http://127.0.0.1:8443/principal';
+  apiUrlComplement = 'http://127.0.0.1:8443/complement';
+  apiUrlAutre = 'http://127.0.0.1:8443/autre';
 
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
@@ -26,7 +27,7 @@ export class ServiceSTService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 
@@ -39,18 +40,18 @@ export class ServiceSTService {
   findById(id) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<ServiceST>(this.apiUrl + '/' + id,
+    return this.httpClient.get<ServicePrincipal>(this.apiUrl + '/' + id,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  updateService(id: number, serviceSt: ServiceST) {
+  updateService(id: number, serviceSt: ServicePrincipal) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
     return this.httpClient.put(this.apiUrl + '/update/' + id, serviceSt,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  addService(serviceSt: ServiceST) {
+  addService(serviceSt: ServicePrincipal) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
     return this.httpClient.post(this.apiUrl + '/add', serviceSt,
@@ -68,50 +69,50 @@ export class ServiceSTService {
   findByIdComplement(id) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<ServiceST>(this.apiUrlComplement + '/' + id,
+    return this.httpClient.get<ServiceComplementaire>(this.apiUrlComplement + '/' + id,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  updateServiceComplement(id: number, serviceSt: ServiceST) {
+  updateServiceComplement(id: number, serviceSt: ServiceComplementaire) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
     return this.httpClient.put(this.apiUrlComplement + '/update/' + id, serviceSt,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  addServiceComplement(serviceSt: ServiceST) {
+  addServiceComplement(serviceSt: ServiceComplementaire) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
     return this.httpClient.post(this.apiUrlComplement + '/add', serviceSt,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  // SERVICE Test
+  // SERVICE autre
 
-  getAllServiceTest(): Observable<any> {
+  getAllServiceAutre(): Observable<any> {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrlTest + '/all', { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(this.apiUrlAutre + '/all', { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  findByIdTest(id) {
+  findByIdAutre(id) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<ServiceST>(this.apiUrlTest + '/' + id,
+    return this.httpClient.get<ServiceAutre>(this.apiUrlAutre + '/' + id,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  updateServiceTest(id: number, serviceSt: ServiceSTT) {
+  updateServiceAutre(id: number, serviceSt: ServiceAutre) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.put(this.apiUrlTest + '/update/' + id, serviceSt,
+    return this.httpClient.put(this.apiUrlAutre + '/update/' + id, serviceSt,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 
-  addServiceTest(serviceSt: ServiceSTT) {
+  addServiceAutre(serviceSt: ServiceAutre) {
     if (this.jwtToken == null) { this.loadToken(); }
     if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.post(this.apiUrlTest + '/add', serviceSt,
+    return this.httpClient.post(this.apiUrlAutre + '/add', serviceSt,
       { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
   }
 }

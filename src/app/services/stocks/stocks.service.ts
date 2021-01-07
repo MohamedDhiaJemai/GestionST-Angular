@@ -9,7 +9,7 @@ import { Stocks } from 'app/model/Stocks.model';
 })
 export class StocksService {
 
-  apiUrl = 'http://localhost:8443/stocks';
+  apiUrl = 'http://127.0.0.1:8443/stocks';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -21,7 +21,7 @@ export class StocksService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

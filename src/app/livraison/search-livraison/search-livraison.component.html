@@ -1,0 +1,95 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Livraison Achats</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="card-body">
+                        <form (keydown.enter)="findLivraisons()">
+                            <div class="row text-center">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="ID transaction" type="text" name="idTransaction"
+                                            [(ngModel)]="idTransaction" autofocus>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" (click)="findLivraisons()" mat-raised-button
+                                        icon="pi pi-external-link" class="btn btn-success">Chercher</button>
+                                    <button type="button" (click)="clearLivraisons()" mat-raised-button
+                                        icon="pi pi-external-link" class="btn btn-danger"
+                                        style="margin-right: 2%;">Réinitialiser</button>
+                                </div>
+                            </div>
+                            <br>
+                            <div *ngIf="!exist" class="row text-center">
+                                <div class="col-md-12">
+                                    Aucun achat.
+                                </div>
+                            </div>
+                            <div *ngIf="exist" class="row text-center">
+                                <div class="col-md-12">
+                                    <p-table #dt [value]="livraisons" [paginator]="true" [rows]="10"
+                                        [showCurrentPageReport]="true"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                        [rowsPerPageOptions]="[10,25,50]" selectionMode="single"
+                                        [(selection)]="selectedLivraison" styleClass="p-datatable-customers">
+
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th pSortableColumn="dateCreation">Date <p-sortIcon
+                                                        field="dateCreation">
+                                                    </p-sortIcon>
+                                                </th>
+                                                <th pSortableColumn="article.libelle">Article <p-sortIcon
+                                                        field="article.libelle">
+                                                    </p-sortIcon>
+                                                </th>
+                                                <th pSortableColumn="taille">Taille <p-sortIcon field="taille">
+                                                    </p-sortIcon>
+                                                </th>
+                                                <th pSortableColumn="quantite">Quantité <p-sortIcon field="quantite">
+                                                    </p-sortIcon>
+                                                </th>
+                                                <th style="width:8rem">
+                                                    <button *ngIf="tout" type="button" (click)="validerTout()" pButton
+                                                        icon="pi pi-external-link" label="Valider Tout"
+                                                        class="p-button-success"></button>
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+
+                                        <ng-template pTemplate="body" let-livraison>
+                                            <tr [pSelectableRow]="livraison">
+                                                <td>{{livraison.dateCreation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                                <td>{{livraison.article.libelle}}</td>
+                                                <td>{{livraison.taille}}</td>
+                                                <td>{{livraison.quantite}}</td>
+                                                <td>
+                                                    <button *ngIf="!livraison.validation" type="button"
+                                                        (click)="validerById(livraison.id)" pButton
+                                                        icon="pi pi-external-link" label="Valider"
+                                                        class="p-button-success"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

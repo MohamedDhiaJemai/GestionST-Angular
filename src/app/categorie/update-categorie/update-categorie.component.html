@@ -14,30 +14,37 @@
                     <div class="card-body">
                         <form>
                             <div class="row">
-                                <div class="col-md-5">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Ecrire la nouvelle Catégorie  : " disabled>
-                                    </mat-form-field>
-                                </div>
-                                <br>
                                 <br>
                                 <br>
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Ancienne Catégorie :  {{ ancienCategorie }} "
+                                        <input matInput placeholder="Ancienne désignation :  {{ ancienCategorie }} "
                                             type="text" name="designation" disabled>
                                     </mat-form-field>
                                 </div>
                                 <br>
                                 <br>
                                 <br>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="categorie.designation" matInput placeholder="Désignation"
-                                            type="text" name="designation">
+                                        <input [(ngModel)]="categorie.designation" matInput
+                                            placeholder="Nouvelle Désignation" type="text" name="designation">
                                     </mat-form-field>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Natifs" disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-multiSelect [options]="annees" name="label" [(ngModel)]="categorie.natifs"
+                                        class="multiselect-custom" [panelStyle]="{minWidth:'12em'}">
+                                    </p-multiSelect>
+                                </div>
+                            </div>
+                            <br>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
                                 (click)="openModal(template)">AJOUTER</button>
                             <button routerLink="/categorie-list" mat-raised-button type="button"
@@ -67,11 +74,10 @@
 
     <div class="modal-footer">
 
-        <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-        (click)="modalRef.hide()" >NON</button>
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="modalRef.hide()">NON</button>
 
         <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
-        (click)="ngOnUpdateCategorie()">OUI</button>
+            (click)="ngOnUpdateCategorie()">OUI</button>
 
     </div>
 

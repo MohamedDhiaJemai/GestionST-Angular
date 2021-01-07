@@ -1,0 +1,145 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Listes Des Remises</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <!--           <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
+                                maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                                chooseLabel="Browse"></p-fileUpload>
+                            &nbsp;&nbsp; -->
+                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
+
+
+
+                        </ng-template>
+
+                        <ng-template pTemplate="right">
+                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+                                (click)="openNew()"></button>
+                        </ng-template>
+                    </p-toolbar>
+
+                    <div class="card-body">
+                        <p-table #dt [value]="remises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" styleClass="p-datatable-customers">
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="nbrEnfants">Nombre d'enfants <p-sortIcon field="nbrEnfants">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="nbrMois">Nombre de mois <p-sortIcon field="nbrMois">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="taux">Taux <p-sortIcon field="taux">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="activation">Active <p-sortIcon field="activation">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th style="width:4rem"></th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <input pInputText type="text"
+                                            (input)="dt.filter($event.target.value, 'nbrEnfants', 'contains')"
+                                            placeholder="" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="text"
+                                            (input)="dt.filter($event.target.value, 'nbrMois', 'contains')"
+                                            placeholder="" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="number"
+                                            (input)="dt.filter($event.target.value, 'taux', 'contains')" placeholder=""
+                                            class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="boolean"
+                                            (input)="dt.filter($event.target.value, 'activation', 'contains')"
+                                            placeholder="" class="p-column-filter">
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-remisee>
+                                <tr [pSelectableRow]="remisee">
+                                    <td>{{remisee.nbrEnfants}}</td>
+                                    <td>{{remisee.nbrMois}}</td>
+                                    <td>{{remisee.taux}}</td>
+                                    <td>{{remisee.activation}}</td>
+                                    <td>
+                                        <div style="text-align: center;">
+                                            <button pButton pRipple icon="pi pi-pencil"
+                                                class="p-button-rounded p-button-success p-mr-2"
+                                                (click)="edit(remisee)"></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog [(visible)]="remiseDialog" [style]="{width: '500px'}" header="Détails remise" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="name">Nombre d'enfants</label>
+                <input type="text" pInputText id="nbrEnfants" [(ngModel)]="selectedRemise.nbrEnfants" required />
+                <small class="p-error" *ngIf="submitted && !selectedRemise.nbrEnfants">Champ obligatoire.</small>
+            </div>
+            <div class="p-field p-col">
+                <div style="padding-left: 30px;">
+                    <label for="name">Nombre de mois</label><br>
+                    <input type="text" pInputText id="nbrMois" [(ngModel)]="selectedRemise.nbrMois" required />
+                    <small class="p-error" *ngIf="submitted && !selectedRemise.nbrMois">Champ obligatoire.</small>
+                </div>
+            </div>
+        </div>
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="name">Taux</label>
+                <input type="text" pInputText id="taux" [(ngModel)]="selectedRemise.taux" required />
+                <small class="p-error" *ngIf="submitted && !selectedRemise.taux">Champ obligatoire.</small>
+
+            </div>
+            <div class="p-field p-col">
+                <div style="padding-left: 30px;">
+                    <label for="name">Activation</label><br>
+                    <p-inputSwitch [style]="{'margin-top': '10px'}" name="activation"
+                        [(ngModel)]="selectedRemise.activation">
+                    </p-inputSwitch>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>

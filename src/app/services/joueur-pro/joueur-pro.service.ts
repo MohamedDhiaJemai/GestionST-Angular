@@ -10,7 +10,7 @@ import { JoueurPro } from 'app/model/JoueurPro.model';
 })
 export class JoueurProService {
 
-  apiUrl = 'http://localhost:8443/professionnel';
+  apiUrl = 'http://127.0.0.1:8443/professionnel';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -22,7 +22,7 @@ export class JoueurProService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

@@ -85,11 +85,21 @@ import { BorneComponent } from './borne/borne.component';
 import { AddBorneComponent } from './borne/add-borne/add-borne.component';
 import { ConsulterBorneComponent } from './borne/consulter-borne/consulter-borne.component';
 import { UpdateBorneComponent } from './borne/update-borne/update-borne.component';
-import { ServiceStComplementaireComponent } from './service-st-complementaire/service-st-complementaire.component';
-import { DataviewServiceComplementComponent } from './service-st-complementaire/dataview-service-complement/dataview-service-complement.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { ConsulterAchatComponent } from './transaction/consulter-achat/consulter-achat.component';
-
+import { RemiseComponent } from './remise/remise.component';
+import { LivraisonsEnAttenteComponent } from './livraison/livraisons-en-attente/livraisons-en-attente.component';
+import { SearchLivraisonComponent } from './livraison/search-livraison/search-livraison.component';
+import { DonationComponent } from './donation/donation.component';
+import { InscriptionTestComponent } from './inscription-test/inscription-test.component';
+import { ConsulterInscriptionComponent } from './inscription-test/consulter-inscription/consulter-inscription.component';
+import { UpdateInscriptionComponent } from './inscription-test/update-inscription/update-inscription.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SessionTestComponent } from './session-test/session-test.component';
+import { UpdateSessionTestComponent } from './session-test/update-session-test/update-session-test.component';
+import { AddSessionTestComponent } from './session-test/add-session-test/add-session-test.component';
+import { SearchRetourComponent } from './retour-cash/search-retour/search-retour.component';
+import { GratuiteComponent } from './gratuite/gratuite.component';
 
 @NgModule({
   imports: [
@@ -100,6 +110,7 @@ import { ConsulterAchatComponent } from './transaction/consulter-achat/consulter
     HttpClientModule,
     ComponentsModule,
     RouterModule,
+    MatFormFieldModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
@@ -188,10 +199,21 @@ import { ConsulterAchatComponent } from './transaction/consulter-achat/consulter
     AddBorneComponent,
     ConsulterBorneComponent,
     UpdateBorneComponent,
-    ServiceStComplementaireComponent,
-    DataviewServiceComplementComponent,
     TransactionComponent,
-    ConsulterAchatComponent
+    ConsulterAchatComponent,
+    RemiseComponent,
+    LivraisonsEnAttenteComponent,
+    SearchLivraisonComponent,
+    DonationComponent,
+    InscriptionTestComponent,
+    ConsulterInscriptionComponent,
+    UpdateInscriptionComponent,
+    PageNotFoundComponent,
+    SessionTestComponent,
+    UpdateSessionTestComponent,
+    AddSessionTestComponent,
+    SearchRetourComponent,
+    GratuiteComponent,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

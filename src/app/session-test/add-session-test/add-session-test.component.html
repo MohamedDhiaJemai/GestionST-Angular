@@ -1,0 +1,137 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Add session test</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Libelle" type="text" name="libelle"
+                                            [(ngModel)]="session.libelle">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Catégorie " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6" style="margin-top: 1%;">
+                                    <p-dropdown [options]="categories" [(ngModel)]="session.categorie" name="categorie"
+                                        [filter]="true" [showClear]="true" optionLabel="designation"
+                                        placeholder="Select a categorie" filterPlaceholder="Search By designation">
+
+                                        <ng-template pTemplate="selectedItem">
+                                            <div class="country-item country-item-value" *ngIf="session.categorie">
+                                                <div> {{session.categorie.designation}}</div>
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template let-categorie pTemplate="item">
+                                            <div class="country-item">
+                                                <div>{{categorie.value.designation}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Début Session " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="ds" dateFormat="dd-mm-yy" name="ds">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Fin Session " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="fs" dateFormat="dd-mm-yy" name="fs">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Début inscriptions " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="di" dateFormat="dd-mm-yy" name="di">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Fin inscriptions " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="fi" dateFormat="dd-mm-yy" name="fi">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <br><br>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                (click)="openModal(template)">AJOUTER</button>
+                            <button routerLink="/sessions-test" mat-raised-button type="button"
+                                class="btn btn-success pull-right" style="margin-right:
+                                                    1%;">ANNULER</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #template>
+
+    <div class="modal-header">
+        <h5 class="modal-title">CONFIRMATION</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <p>Êtes-vous sûr de vouloir modifier définitivement cette session.</p>
+    </div>
+
+    <div class="modal-footer">
+
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="modalRef.hide()">NON</button>
+
+        <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
+            (click)="ngOnUpdateSession()">OUI</button>
+
+    </div>
+
+</ng-template>

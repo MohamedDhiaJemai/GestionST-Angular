@@ -18,7 +18,7 @@ export interface FileStatus {
 })
 export class ScreensaverBorneService {
 
-  apiUrl = 'http://localhost:8443/screensaver';
+  apiUrl = 'http://127.0.0.1:8443/screensaver';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -30,7 +30,7 @@ export class ScreensaverBorneService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

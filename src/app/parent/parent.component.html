@@ -16,18 +16,11 @@
                     <br>
                     <p-toolbar>
                         <ng-template pTemplate="left">
-                            <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                                maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
-                                chooseLabel="Browse"></p-fileUpload>
-                            &nbsp;&nbsp;
                             <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
-
-
-
                         </ng-template>
 
                         <ng-template pTemplate="right">
-                            <button routerLink="/add-parent" pButton pRipple icon="pi pi-plus" label="Ajouter Role"
+                            <button routerLink="/add-parent" pButton pRipple icon="pi pi-plus" label="Ajout Parent"
                                 class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
@@ -40,13 +33,20 @@
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="identifiant">Identifiant <p-sortIcon field="identifiant">
+                                    <th pSortableColumn="identifiant" class="text-center">Identifiant
+                                        <p-sortIcon field="identifiant">
                                         </p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="nom">Nom <p-sortIcon field="nom">
+                                    <th pSortableColumn="nom" class="text-center">Nom
+                                        <p-sortIcon field="nom">
                                         </p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="prenom">Prenom <p-sortIcon field="prenom">
+                                    <th pSortableColumn="prenom" class="text-center">Prenom
+                                        <p-sortIcon field="prenom">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="mobile" class="text-center">Mobile
+                                        <p-sortIcon field="mobile">
                                         </p-sortIcon>
                                     </th>
                                     <th style="width:8rem"></th>
@@ -54,19 +54,24 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        <input pInputText type="text"
+                                        <input pInputText type="text" style="width: 100%;"
                                             (input)="dt.filter($event.target.value, 'identifiant', 'contains')"
                                             placeholder="identifiant" class="p-column-filter">
                                     </th>
                                     <th>
-                                        <input pInputText type="text"
+                                        <input pInputText type="text" style="width: 100%;"
                                             (input)="dt.filter($event.target.value, 'nom', 'contains')"
                                             placeholder="nom" class="p-column-filter">
                                     </th>
                                     <th>
-                                        <input pInputText type="text"
+                                        <input pInputText type="text" style="width: 100%;"
                                             (input)="dt.filter($event.target.value, 'prenom', 'contains')"
                                             placeholder="prenom" class="p-column-filter">
+                                    </th>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'mobile', 'contains')"
+                                            placeholder="mobile" class="p-column-filter">
                                     </th>
                                     <th>
 
@@ -82,6 +87,7 @@
                                     <td>{{parent.identifiant}}</td>
                                     <td>{{parent.nom}}</td>
                                     <td>{{parent.prenom}}</td>
+                                    <td>{{parent.mobile}}</td>
                                     <td>
                                         <button type="button" (click)="showBasicDialog(parent.id)" pButton
                                             icon="pi pi-external-link" label="Enfant" class="p-button-success"></button>
@@ -117,7 +123,8 @@
         <div *ngFor="let enfant of listEnfant">
             <br>
             <li>
-                <a style="color: black;" routerLink="/consulter-joueur-academie/{{enfant.id}}" target="_blank"> {{enfant.nom}}
+                <a style="color: black;" routerLink="/consulter-joueur-academie/{{enfant.id}}" target="_blank">
+                    {{enfant.nom}}
                     {{enfant.prenom}}</a>
             </li>
 

@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class ListDocumentComponent implements OnChanges {
   @Input() someInput: string;
+  @Input() noDeletion: boolean;
 
   fileInfos: Observable<any>;
   id: number;

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ProduitService {
 
-  apiUrl = 'http://localhost:8443/produit';
+  apiUrl = 'http://127.0.0.1:8443/produit';
   private jwtToken = null;
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -22,7 +22,7 @@ export class ProduitService {
 
   addToken() {
     localStorage.clear();
-    location.reload();
+    // location.reload();
     this.router.navigateByUrl('/login');
   }
 

@@ -19,7 +19,15 @@ export const ROUTES: RouteInfo[] = [
   { path: '/categorie-list', title: 'Catégories', icon: 'content_paste', class: '' },
   { path: '/bornes', title: 'Bornes', icon: 'multiple_stop', class: '' },
   { path: '/user-List', title: 'Utilisateurs', icon: 'person', class: '' },
-  { path: '/role-list', title: 'Roles', icon: 'multiple_stop', class: '' }
+  { path: '/role-list', title: 'Roles', icon: 'multiple_stop', class: '' },
+  { path: '/remises', title: 'Remises', icon: 'multiple_stop', class: '' },
+  { path: '/livrer', title: 'Livrer Achats', icon: 'multiple_stop', class: '' },
+  { path: '/donations', title: 'Donations', icon: 'multiple_stop', class: '' },
+  { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'multiple_stop', class: '' },
+  { path: '/sessions-test', title: 'Sessions Test', icon: 'multiple_stop', class: '' },
+  { path: '/retour-cash', title: 'Retour Cash', icon: 'multiple_stop', class: '' }
+
+
   // { path: '/produits', title: 'Produits', icon: 'add_shopping_cart', class: '' },
   // { path: '/upgrade', title: 'Upgrade to PRO', icon: 'unarchive', class: 'active-pro' }
   // { path: '/user-profile', title: 'User Profile', icon: 'person', class: '' },
