@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceST } from 'app/model/ServiceST.Model';
 import { ServiceSTC } from 'app/model/ServiceSTC.model';
+import { ServiceSTT } from 'app/model/ServiceSTT.model';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -27,7 +28,8 @@ export class UpdateServiceComponent implements OnInit {
 
   serviceST: ServiceST = new ServiceST();
   serviceSTC: ServiceSTC = new ServiceSTC();
-  test: boolean;
+  serviceSTT: ServiceSTT = new ServiceSTT();
+  typeService: string;
   urlphotoService: string;
   sexes: SelectItem[];
   serviceSTSubscription: Subscription;
@@ -63,18 +65,28 @@ export class UpdateServiceComponent implements OnInit {
       data => {
         if (data === null) {
           this.serviceSTService.findByIdComplement(id).subscribe(
-            (datac: ServiceSTC) => {
-              console.log('complementaire')
-              this.test = true;
-              this.serviceSTC = datac;
-              this.serviceSTC.jours.forEach(element => {
-                this.selectedJour.push(element);
-              });
+            (dataComp: ServiceSTC) => {
+              if (dataComp === null) {
+                this.serviceSTService.findByIdTest(id).subscribe(
+                  (dataTest: ServiceSTT) => {
+                    this.typeService = 'test';
+                    this.serviceSTT = dataTest;
+                    console.log('serviceSTT', this.serviceSTT)
+                  });
+              } else {
+                console.log('complementaire')
+                this.typeService = 'complementaire';
+                this.serviceSTC = dataComp;
+                this.serviceSTC.jours.forEach(element => {
+                  this.selectedJour.push(element);
+                });
+                console.log('serviceSTC', this.serviceSTC)
+              }
             }
           );
         } else {
           console.log('principal')
-          this.test = false;
+          this.typeService = 'principal';
           this.serviceST = data;
           console.log('serviceST', this.serviceST)
         }
@@ -101,7 +113,7 @@ export class UpdateServiceComponent implements OnInit {
     this.uploadForm.get('profile').setValue(this.file);
   }
 
-  ngOnUpdateServicePrincipale(templateAnnulation: TemplateRef<any>, type){
+  ngOnUpdateServicePrincipale(templateAnnulation: TemplateRef<any>, type) {
     console.log('SERVICE PRINCIPALE');
     console.log(this.serviceST.id);
     this.serviceSTSubscription = this.serviceSTService.updateService(this.serviceST.id, this.serviceST).subscribe(
@@ -129,41 +141,68 @@ export class UpdateServiceComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  ngOnUpdateServiceComplementaire(templateAnnulation: TemplateRef<any>){
+  ngOnUpdateServiceComplementaire(templateAnnulation: TemplateRef<any>) {
     console.log('SERVICE COMPLEMENTAIRE');
     this.serviceSTC.jours = this.selectedJour;
-      this.serviceSTSubscription = this.serviceSTService.updateServiceComplement(this.serviceSTC.id, this.serviceSTC).subscribe(
-        data => {
-          if (this.url !== undefined) {
-            const formData = new FormData();
-            formData.append('file', this.uploadForm.get('profile').value);
-            console.log('formdata', formData);
-            this.imageProduitService.upload(formData, this.serviceSTC.id).subscribe(
-              data2 => {
-                console.log('ok');
-              }
-            );
-          }
-          this.routerNav.navigate(['/consulter-service/' + this.serviceSTC.id]);
-        },
-        err => {
-          if (err.status === 500) {
-            this.modalRef.hide();
-            this.modalRefAnnul = this.modalService.show(templateAnnulation);
-            console.log('STATUS 500');
-          }
+    this.serviceSTSubscription = this.serviceSTService.updateServiceComplement(this.serviceSTC.id, this.serviceSTC).subscribe(
+      data => {
+        if (this.url !== undefined) {
+          const formData = new FormData();
+          formData.append('file', this.uploadForm.get('profile').value);
+          console.log('formdata', formData);
+          this.imageProduitService.upload(formData, this.serviceSTC.id).subscribe(
+            data2 => {
+              console.log('ok');
+            }
+          );
         }
-      );
-      this.modalRef.hide();
+        this.routerNav.navigate(['/consulter-service/' + this.serviceSTC.id]);
+      },
+      err => {
+        if (err.status === 500) {
+          this.modalRef.hide();
+          this.modalRefAnnul = this.modalService.show(templateAnnulation);
+          console.log('STATUS 500');
+        }
+      }
+    );
+    this.modalRef.hide();
+  }
 
+  ngOnUpdateServiceTest(templateAnnulation: TemplateRef<any>, type) {
+    console.log('SERVICE Test');
+    console.log(this.serviceSTT.id);
+    this.serviceSTSubscription = this.serviceSTService.updateServiceTest(this.serviceSTT.id, this.serviceSTT).subscribe(
+      data => {
+        if (this.url !== undefined) {
+          const formData = new FormData();
+          formData.append('file', this.uploadForm.get('profile').value);
+          console.log('formdata', formData);
+          this.imageProduitService.upload(formData, this.serviceSTT.id).subscribe(
+            data2 => {
+              console.log('ok');
+            }
+          );
+        }
+        this.routerNav.navigate(['/consulter-service/' + this.serviceSTT.id]);
+      },
+      err => {
+        if (err.status === 500) {
+          this.modalRef.hide();
+          this.modalRefAnnul = this.modalService.show(templateAnnulation);
+          console.log('STATUS 500');
+        }
+      }
+    );
+    this.modalRef.hide();
   }
 
   // ngOnUpdateService(templateAnnulation: TemplateRef<any>) {
   //   console.log(this.test);
   //   if (this.test = false) {
-      
+
   //   } else if (this.test = true) {
-      
+
   //   }
   // }
 

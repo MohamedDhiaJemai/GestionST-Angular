@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceST } from 'app/model/ServiceST.Model';
+import { ServiceSTT } from 'app/model/ServiceSTT.model';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 import { SelectItem } from 'primeng/api';
 
@@ -27,6 +28,7 @@ export class DataviewServiceComponent implements OnInit {
       this.serviceSTService.getAllService().subscribe(
         data => {
           console.log('principal')
+          console.log(data)
           this.services = data;
         }
       );
@@ -34,22 +36,38 @@ export class DataviewServiceComponent implements OnInit {
     } else if (this.someInput === 'complementaire') {
       this.serviceSTService.getAllServiceComplement().subscribe(
         data => {
-          console.log('data')
+          console.log('complementaire')
+          console.log(data)
           this.services = data;
         }
       );
 
-    } else if (this.someInput === 'others') {
-
+    } else if (this.someInput === 'test') {
+      this.serviceSTService.getAllServiceTest().subscribe(
+        data => {
+          console.log('test')
+          console.log(data)
+          this.services = data;
+        }
+      );
+    } else {
       this.serviceSTService.getAllService().subscribe(
         data => {
           this.serviceSTService.getAllServiceComplement().subscribe(
             data2 => {
-              data2.forEach(element => {
-                data.push(element)
-              });
-              console.log(data)
-              this.services = data;
+              this.serviceSTService.getAllServiceTest().subscribe(
+                data3 => {
+                  data2.forEach(element => {
+                    data.push(element)
+                  });
+                  data3.forEach(element2 => {
+                    data.push(element2)
+                  });
+                  console.log('others')
+                  console.log(data)
+                  this.services = data;
+                }
+              );
             }
           );
         }

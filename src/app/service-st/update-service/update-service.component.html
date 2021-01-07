@@ -15,7 +15,7 @@
                     </div>
                     <br>
 
-                    <div class="container" *ngIf="test === false">
+                    <div class="container" *ngIf="typeService === 'principal'">
                         <div class="card">
                             <div class="container-fliud">
                                 <div class="wrapper row">
@@ -149,7 +149,131 @@
                         </div>
                     </div>
 
-                    <div class="container" *ngIf="test === true">
+
+
+                    <div class="container" *ngIf="typeService === 'test'">
+                        <div class="card">
+                            <div class="container-fliud">
+                                <div class="wrapper row">
+                                    <div class="preview col-md-1">
+                                    </div>
+                                    <div class="preview col-md-5">
+                                        <br><br><br>
+                                        <div class="preview-pic tab-content">
+                                            <div class="tab-pane active" id="pic-1">
+                                                <div *ngIf="url === undefined">
+                                                    <img [src]="urlphotoService" width="100%" />
+                                                </div>
+                                                <div *ngIf="url">
+                                                    <img [src]="url" width="100%"> <br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="details col-md-1">
+                                    </div>
+
+                                    <div class="details col-md-4">
+                                        <br>
+                                        <p-messages key="photo"></p-messages>
+                                        <h2 class="product-title">{{ serviceSTT.libelle }}</h2>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5 class="price">
+                                                    <form class="md-form">
+                                                        <div class="file-field">
+                                                            <div class="btn btn-primary btn-sm float-left">
+                                                                <span>Choose file</span>
+                                                                <br><br>
+                                                                <div style="float: left;">
+                                                                    <input type="file" (change)="onSelectFile($event)">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </h5>
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price">Référence:
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-6" style="padding-left: 10%;">
+                                                <h5 class="price">{{serviceSTT.id}}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price" style="margin-top: 5%;">current price:
+                                                </h5>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p-inputNumber name="prix" [(ngModel)]="serviceSTT.prix"
+                                                    [showButtons]="true" mode="currency" currency="TND"></p-inputNumber>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price" style="margin-top: 5%;">Category :</h5>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p-dropdown #dd [options]="sexes" name="sexe"
+                                                    [(ngModel)]="serviceSTT.sexe" placeholder="Sexe" [showClear]="true">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p-inputSwitch name="visible" [(ngModel)]="serviceSTT.visible">
+                                                </p-inputSwitch>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-11" style="margin-top: 5%;">
+                                                <div class="action">
+                                                    <button style="margin: 5%" class="add-to-cart btn btn-success"
+                                                        type="button" (click)="openModal(template)">Sauvegarder
+                                                    </button>
+                                                    <button class="like btn btn-default" type="button"
+                                                        routerLink="/consulter-service/{{serviceSTT.id}}">Retour</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="details col-md-1">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="container" *ngIf="typeService === 'complementaire'">
                         <div class="card">
                             <div class="container-fliud">
                                 <div class="wrapper row">
@@ -320,13 +444,17 @@
     <div class="modal-footer">
 
         <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="modalRef.hide()">NON</button>
-        <div *ngIf="test === false">
+        <div *ngIf="typeService === 'principal'">
             <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
                 (click)="ngOnUpdateServicePrincipale()">OUI Principal</button>
         </div>
-        <div *ngIf="test === true">
+        <div *ngIf="typeService === 'complementaire'">
             <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
                 (click)="ngOnUpdateServiceComplementaire()">OUI Complementaire</button>
+        </div>
+        <div *ngIf="typeService === 'test'">
+            <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
+                (click)="ngOnUpdateServiceTest()">OUI Test</button>
         </div>
     </div>
 

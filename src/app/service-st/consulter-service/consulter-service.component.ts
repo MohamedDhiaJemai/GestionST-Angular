@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceST } from 'app/model/ServiceST.Model';
 import { ServiceSTC } from 'app/model/ServiceSTC.model';
+import { ServiceSTT } from 'app/model/ServiceSTT.model';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 
 @Component({
@@ -13,8 +14,9 @@ export class ConsulterServiceComponent implements OnInit {
 
   serviceST: ServiceST = new ServiceST();
   serviceSTC: ServiceSTC = new ServiceSTC();
+  serviceSTT: ServiceSTT = new ServiceSTT();
   urlphotoServiceST: string;
-  test: boolean;
+  typeService: string;
 
   constructor(private router: ActivatedRoute, private serviceSTService: ServiceSTService) { }
 
@@ -26,19 +28,31 @@ export class ConsulterServiceComponent implements OnInit {
       data => {
         if (data === null) {
           this.serviceSTService.findByIdComplement(id).subscribe(
-            (datac: ServiceSTC) => {
-              console.log(datac)
-              this.test = true;
-              this.serviceSTC = datac;
+            (dataComp: ServiceSTC) => {
+              if (dataComp === null) {
+                this.serviceSTService.findByIdTest(id).subscribe(
+                  (dataTest: ServiceSTT) => {
+                    console.log(dataTest)
+                    this.typeService = 'test';
+                    this.serviceSTT = dataTest;
+                  }
+                );
+                console.log('test')
+              } else {
+                console.log(dataComp)
+                this.typeService = 'complementaire';
+                this.serviceSTC = dataComp;
+                console.log('complementaire')
+                console.log(this.serviceST)
+              }
             }
           );
           console.log('complementaire')
         } else {
-          this.test = false;
+          this.typeService = 'principal';
           this.serviceST = data;
           console.log(this.serviceST)
         }
-
       }
     );
   }
