@@ -62,7 +62,7 @@
                                                     </p-sortIcon>
                                                 </th>
                                                 <th style="width:8rem">
-                                                    <button *ngIf="tout" type="button" (click)="validerTout()" pButton
+                                                    <button *ngIf="tout" [disabled]="!edition" type="button" (click)="validerTout()" pButton
                                                         icon="pi pi-external-link" label="Valider Tout"
                                                         class="p-button-success"></button>
                                                 </th>
@@ -76,8 +76,8 @@
                                                 <td>{{livraison.taille}}</td>
                                                 <td>{{livraison.quantite}}</td>
                                                 <td>
-                                                    <button *ngIf="!livraison.validation" type="button"
-                                                        (click)="validerById(livraison.id)" pButton
+                                                    <button [disabled]="!edition" *ngIf="!livraison.validation"
+                                                        type="button" (click)="validerById(livraison.id)" pButton
                                                         icon="pi pi-external-link" label="Valider"
                                                         class="p-button-success"></button>
                                                 </td>

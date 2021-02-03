@@ -128,7 +128,8 @@
                                     </div>
                                 </ng-template>
                                 <div class="col-md-2">
-                                    <button routerLink="/gratuite-joueur/{{joueurAcademie?.id}}" mat-raised-button
+                                    <button [disabled]="!consultationGratuite"
+                                        routerLink="/gratuite-joueur/{{joueurAcademie?.id}}" mat-raised-button
                                         type="button" class="btn btn-success pull-right"
                                         style="margin-right: 1%;">Gérer</button>
                                 </div>
@@ -184,7 +185,8 @@
                             love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
                         <br>
-                        <a href="javascript:void(0)" routerLink="/update-joueur-academie/{{ joueurAcademie?.id }}"
+                        <a href="javascript:void(0)" [hidden]="!edition"
+                            routerLink="/update-joueur-academie/{{ joueurAcademie?.id }}"
                             class="btn btn-danger btn-round">UPDATE</a>
                         <br>
                     </div>

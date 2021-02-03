@@ -27,8 +27,8 @@
                         </ng-template>
 
                         <ng-template pTemplate="right">
-                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-                                (click)="openNew()"></button>
+                            <button [disabled]="!edition" pButton pRipple label="New" icon="pi pi-plus"
+                                class="p-button-success p-mr-2" (click)="openNew()"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -88,7 +88,7 @@
                                     <td>{{remisee.activation}}</td>
                                     <td>
                                         <div style="text-align: center;">
-                                            <button pButton pRipple icon="pi pi-pencil"
+                                            <button [disabled]="!edition" pButton pRipple icon="pi pi-pencil"
                                                 class="p-button-rounded p-button-success p-mr-2"
                                                 (click)="edit(remisee)"></button>
                                         </div>

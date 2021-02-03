@@ -27,13 +27,12 @@ export class ConsulterAchatComponent implements OnInit {
   constructor(private transactionService: TransactionService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(this.router.routeConfig.path)
     const id = this.router.snapshot.params['id'];
     this.transactionService.findById(id).subscribe(
       (data: Transaction) => {
         this.transaction = data;
-        console.log('transaction', data)
         this.achat = data.achats;
-        console.log('achat', this.achat)
       }
     );
   }

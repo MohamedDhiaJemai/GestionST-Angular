@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
+import { data } from 'jquery';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -16,12 +18,12 @@ export const ROUTES: RouteInfo[] = [
   { path: '/joueur-professionnel', title: 'Joueur Pro', icon: 'sports_soccer', class: '' },
   { path: '/joueur-acamedie', title: 'Joueur Academie', icon: 'sports_soccer', class: '' },
   { path: '/parents', title: 'Parents', icon: 'supervisor_account', class: '' },
-  { path: '/categorie-list', title: 'Catégories', icon: 'content_paste', class: '' },
+  { path: '/categories', title: 'Catégories', icon: 'content_paste', class: '' },
   { path: '/bornes', title: 'Bornes', icon: 'multiple_stop', class: '' },
-  { path: '/user-List', title: 'Utilisateurs', icon: 'person', class: '' },
-  { path: '/role-list', title: 'Roles', icon: 'multiple_stop', class: '' },
+  { path: '/utilisateurs', title: 'Utilisateurs', icon: 'person', class: '' },
+  { path: '/roles', title: 'Roles', icon: 'multiple_stop', class: '' },
   { path: '/remises', title: 'Remises', icon: 'multiple_stop', class: '' },
-  { path: '/livrer', title: 'Livrer Achats', icon: 'multiple_stop', class: '' },
+  { path: '/livraison', title: 'livraison Achats', icon: 'multiple_stop', class: '' },
   { path: '/donations', title: 'Donations', icon: 'multiple_stop', class: '' },
   { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'multiple_stop', class: '' },
   { path: '/sessions-test', title: 'Sessions Test', icon: 'multiple_stop', class: '' },
@@ -45,16 +47,44 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  autorisations;
+  // = JSON.parse(localStorage.getItem('autorisations'));
 
-  constructor() { }
+  constructor(private autorisationService: AutorisationService) { }
 
   ngOnInit() {
+    const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    if (roless.includes('ADMIN')) {
+      console.log('role')
+      this.menuItems.forEach(element => {
+        element.class = '';
+      });
+    } else {
+      console.log('no role')
+      this.autorisationService.findAutorisations().subscribe(dataa => {
+        this.autorisations = dataa;
+        this.menuItems.forEach(element => {
+          element.class = this.checkClass(element);
+        });
+      });
+    }
   }
+
   isMobileMenu() {
     if ($(window).width() > 991) {
       return false;
     }
     return true;
   };
+
+  checkClass(route: RouteInfo): string {
+    let ret = false;
+    this.autorisations.forEach(element => {
+      if (element.tache.metier === route.path.substr(1) && element.consultation) {
+        ret = true;
+      }
+    });
+    return ret ? '' : 'd-none';
+  }
 }

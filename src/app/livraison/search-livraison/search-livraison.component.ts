@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Livraison } from 'app/model/Livraison.model';
 import { LivraisonService } from 'app/services/livraison/livraison.service';
 
@@ -16,10 +17,14 @@ export class SearchLivraisonComponent implements OnInit {
 
   idTransaction: string;
   tout = true;
+  edition: boolean;
+  consultation: boolean;
 
-  constructor(private livraisonService: LivraisonService) { }
+  constructor(private livraisonService: LivraisonService, private router: Router) { }
 
   ngOnInit(): void {
+    this.checkAutorisations();
+
     this.exist = false;
     this.idTransaction = '';
   }
@@ -94,4 +99,26 @@ export class SearchLivraisonComponent implements OnInit {
     this.idTransaction = '';
   }
 
+
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'livraison') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
+    }
+  }
 }

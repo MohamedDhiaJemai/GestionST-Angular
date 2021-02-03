@@ -27,7 +27,7 @@ export class AddCategorieComponent implements OnInit {
 
   onAddCategorie() {
     this.categorieService.addCategorie(this.categorie).subscribe(
-      data => this.router.navigate(['categorie-list']),
+      data => this.router.navigate(['categories']),
       error => console.log(error)
       );
   }

@@ -16,19 +16,12 @@
                     <br>
                     <p-toolbar>
                         <ng-template pTemplate="left">
-                            <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                                maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
-                                chooseLabel="Browse"></p-fileUpload>
-                            &nbsp;&nbsp;
                             <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
-
-
-
                         </ng-template>
 
                         <ng-template pTemplate="right">
-                            <button routerLink="/add-role" pButton pRipple icon="pi pi-plus" label="Ajouter Role"
-                                class="p-button-success p-mr-2"></button>
+                            <button [disabled]="!edition" routerLink="/add-role" pButton pRipple icon="pi pi-plus"
+                                label="Ajouter Role" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -69,7 +62,8 @@
                                     <td>{{role.designation}}</td>
                                     <td>
                                         <div style="text-align: center;">
-                                            <button routerLink="/update-role/{{ role.id }}" pButton pRipple type="button" icon="pi pi-refresh"
+                                            <button [disabled]="!edition" routerLink="/update-role/{{ role.id }}"
+                                                pButton pRipple type="button" icon="pi pi-refresh"
                                                 class="p-button-rounded p-button-success"></button>
                                         </div>
 

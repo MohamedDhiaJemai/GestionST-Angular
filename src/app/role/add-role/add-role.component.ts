@@ -19,7 +19,7 @@ export class AddRoleComponent implements OnInit {
 
   onAddRole() {
     this.roleService.addRole(this.role).subscribe(
-      data => this.router.navigate(['role-list']),
+      data => this.router.navigate(['roles']),
       error => console.log(error)
       );
   }

@@ -20,10 +20,6 @@ export class ParentService {
     this.jwtToken = localStorage.getItem('token');
   }
 
-  getUserInfo() {
-    console.log(this.jwtHelper.decodeToken(this.jwtToken));
-  }
-
   addToken() {
     localStorage.clear();
     // location.reload();

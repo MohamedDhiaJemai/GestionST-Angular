@@ -38,7 +38,8 @@
                       <div class="col-md-6">
                       </div>
                       <div class="col-md-6" style="padding-left: 10%;">
-                        <button style="margin-bottom: 20%; float: left;" class="add-to-cart btn btn-warning" type="button"
+                        <button [disabled]="!consultationStock" style="margin-bottom: 20%; float: left;"
+                          class="add-to-cart btn btn-warning" type="button"
                           routerLink="/approvisionnement-article/{{ article.id }}">Approvisonnement</button>
                       </div>
                     </div>
@@ -89,7 +90,7 @@
                       </div>
                     </div>
                     <br>
-                     <div class="row">
+                    <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Visibilité :
                         </h5>
@@ -104,8 +105,8 @@
                       <div class="col-md-11" style="margin-top: 5%;">
                         <div class="action">
                           <button class="like btn btn-default" type="button" routerLink="/articles">Retour</button>
-                          <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                            routerLink="/update-article/{{ article.id }}">Update</button>
+                          <button [disabled]="!edition" style="margin: 5%" class="add-to-cart btn btn-success"
+                            type="button" routerLink="/update-article/{{ article.id }}">Update</button>
                         </div>
                       </div>
                     </div>

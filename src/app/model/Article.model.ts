@@ -1,4 +1,4 @@
-import { Stocks } from "./Stocks.model";
+import { Stocks } from './Stocks.model';
 
 export class Article {
 

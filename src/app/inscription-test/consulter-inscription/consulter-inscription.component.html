@@ -145,7 +145,7 @@
                             love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is... -->
                         </p>
                         <br>
-                        <a href="javascript:void(0)" routerLink="/update-inscription/{{ inscription.id }}"
+                        <a [hidden]="!edition" href="javascript:void(0)" routerLink="/update-inscription/{{ inscription.id }}"
                             class="btn btn-danger btn-round">UPDATE</a>
                         <br>
                     </div>

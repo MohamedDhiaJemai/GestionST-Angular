@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Remise } from 'app/model/remise.model';
 import { RemiseService } from 'app/services/remise/remise.service';
 
@@ -13,9 +14,13 @@ export class RemiseComponent implements OnInit {
   selectedRemise: Remise;
   remiseDialog: boolean;
   submitted: boolean;
-  constructor(private remiseService: RemiseService) { }
+  edition: boolean;
+  consultation: boolean;
+  constructor(private remiseService: RemiseService, private router: Router) { }
 
   ngOnInit(): void {
+    this.checkAutorisations();
+
     this.remiseService.getAllRemise().subscribe(
       data => {
         this.remises = data;
@@ -72,4 +77,25 @@ export class RemiseComponent implements OnInit {
     }
   }
 
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'remises') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
+    }
+  }
 }

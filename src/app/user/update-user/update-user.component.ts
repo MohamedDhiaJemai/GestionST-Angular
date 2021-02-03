@@ -49,7 +49,7 @@ export class UpdateUserComponent implements OnInit {
     this.user.roles = this.selectedRole;
     this.userSubscription = this.userService.updateUtilisateur(this.user.id, this.user).subscribe(
       data => {
-        this.routerNav.navigate(['/user-List']);
+        this.routerNav.navigate(['/utilisateurs']);
       },
       err => {
         if (err.status === 500) {

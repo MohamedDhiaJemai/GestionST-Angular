@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'app/model/Article.model';
 import { ArticleService } from 'app/services/article/article.service';
 import { SelectItem } from 'primeng/api';
@@ -17,10 +17,14 @@ export class DataviewArticleComponent implements OnInit {
   sortOrder: number;
   sortField: string;
   sortKey: string;
+  edition: boolean;
+  consultation: boolean;
 
-  constructor(private articleService: ArticleService, private router: ActivatedRoute) { }
+  constructor(private articleService: ArticleService, private router: Router) { }
 
   ngOnInit() {
+    this.checkAutorisations();
+
     this.articleService.getAllArticle().subscribe(
       data => {
         console.log(data)
@@ -44,6 +48,28 @@ export class DataviewArticleComponent implements OnInit {
     } else {
       this.sortOrder = 1;
       this.sortField = value;
+    }
+  }
+
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'articles') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
     }
   }
 

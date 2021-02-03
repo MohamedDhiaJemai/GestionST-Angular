@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DashboardService } from 'app/services/dashboard/dashboard.service';
 import * as Chartist from 'chartist';
 
@@ -9,7 +10,10 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private dashboardService: DashboardService) { }
+  edition: boolean;
+  consultation: boolean;
+
+  constructor(private dashboardService: DashboardService, private router: Router) { }
 
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
@@ -67,7 +71,10 @@ export class DashboardComponent implements OnInit {
 
     seq2 = 0;
   };
+
   ngOnInit() {
+
+    this.checkAutorisations();
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
     const dataDailySalesChart: any = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -146,6 +153,27 @@ export class DashboardComponent implements OnInit {
 
     // start animation for the Emails Subscription Chart
     this.startAnimationForBarChart(websiteViewsChart);
+  }
+
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+    const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'dashboard') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
+    }
   }
 
 }

@@ -40,11 +40,11 @@ export class AddUserComponent implements OnInit {
     this.userService.addUtilisateur(this.user).subscribe(
       data => {
 
-        this.router.navigate(['user-List'])
+        this.router.navigate(['utilisateurs'])
       },
       err => {
         if (err.status === 500) {
-          console.log('problem with username');
+          console.log(err);
         }
       }
     );

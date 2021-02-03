@@ -23,14 +23,19 @@ export class ConsulterJoueurAcademieComponent implements OnInit {
   url: true;
 
   gratuite: Gratuite;
+  edition: boolean;
+  consultation: boolean;
+  consultationGratuite: boolean;
 
   constructor(private joueurAcademieService: JoueurAcademieService,
     private gratuiteService: GratuiteService,
-    private router: ActivatedRoute,
-    private routerNav: Router) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    this.id = this.router.snapshot.params['id'];
+    this.checkAutorisations();
+
+    this.id = this.activatedRoute.snapshot.params['id'];
     this.urlPhoto = 'http://127.0.0.1:8443/photo/get/' + this.id;
 
     this.joueurAcademieService.findById(this.id).subscribe(
@@ -48,4 +53,31 @@ export class ConsulterJoueurAcademieComponent implements OnInit {
     );
   }
 
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+    const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    this.consultationGratuite = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+      this.consultationGratuite = true;
+    } else {
+      this.consultationGratuite = false;
+      autorisations.forEach(element => {
+        if (element.metier === 'joueur-acamedie') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+        if (element.metier === 'gratuite-joueur') {
+          this.consultationGratuite = element.consultation;
+        }
+      });
+    }
+  }
 }

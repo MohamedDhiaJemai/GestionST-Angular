@@ -47,33 +47,31 @@
                             <article>
                                 <h1>Recipient</h1>
                                 <address>
-                                    <div *ngIf="transaction.joueur != null">
-                                        <p>Joueur : </p><br>
+                                    <div>
+                                        <p>{{transaction?.typeClient}}</p>
+                                        <br>
+                                    </div>
+                                    <div *ngIf="transaction?.joueur">
                                         {{transaction.joueur.nom}}{{transaction.joueur.prenom}}
                                     </div>
-                                    <div *ngIf="transaction.parent != null">
-                                        <p>Parent : </p> <br>
+                                    <div *ngIf="transaction?.parent">
                                         {{transaction.parent.nom}} {{transaction.parent.prenom}}
-                                    </div>
-                                    <div *ngIf="transaction.joueur == null && transaction.parent == null">
-                                        <p>Type de Client : </p>
-                                        <br>{{transaction.typeClient}}
                                     </div>
                                 </address>
                                 <table class="meta">
                                     <tr>
                                         <th><span>Invoice #</span></th>
-                                        <td><span>{{transaction.id}}</span></td>
+                                        <td><span>{{transaction?.id}}</span></td>
                                     </tr>
                                     <tr>
                                         <th><span>Date</span></th>
                                         <td><span>
-                                                {{transaction.dateTransaction| date:'shortDate' | date : 'dd-MM-yyyy'}},
-                                                {{transaction.dateTransaction| date:'shortTime'}}</span></td>
+                                                {{transaction?.dateTransaction| date:'shortDate' | date : 'dd-MM-yyyy'}},
+                                                {{transaction?.dateTransaction| date:'shortTime'}}</span></td>
                                     </tr>
                                     <tr>
                                         <th><span>Montant</span></th>
-                                        <td><span>{{transaction.totalApresRemise}} </span><span id="prefix">
+                                        <td><span>{{transaction?.totalApresRemise}} </span><span id="prefix">
                                                 TND</span>
                                         </td>
                                     </tr>
@@ -107,8 +105,13 @@
                                                         {{a.mois}}
                                                     </div>
                                                     <ng-template #elseBlock2>
-                                                        <div>---
+                                                        <div *ngIf="a.annee != null ; else elseBlock3">
+                                                            {{a.annee}}
                                                         </div>
+                                                        <ng-template #elseBlock3>
+                                                            <div>---
+                                                            </div>
+                                                        </ng-template>
                                                     </ng-template>
 
                                                 </ng-template>
@@ -132,8 +135,8 @@
                                                 </div>
                                             </td>
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <div *ngIf="a.quantite==0">
-                                                    1
+                                                <div *ngIf="a.quantite==0 || a.quantite==null">
+                                                    ---
                                                 </div>
                                                 <div *ngIf="a.quantite>0">
                                                     {{a.quantite}}
@@ -155,18 +158,18 @@
                                 <table class="balance">
                                     <tr>
                                         <th><span>Total</span></th>
-                                        <td><span>{{transaction.totalAvantRemise}}</span><span data-prefix>
+                                        <td><span>{{transaction?.totalAvantRemise}}</span><span data-prefix>
                                                 TND</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><span>Remise</span></th>
-                                        <td><span>{{transaction.totalRemise}}</span><span data-prefix>
+                                        <td><span>{{transaction?.totalRemise}}</span><span data-prefix>
                                                 TND</span></td>
                                     </tr>
                                     <tr>
                                         <th><span>Apres Remise</span></th>
-                                        <td><span>{{transaction.totalApresRemise}}</span><span data-prefix>
+                                        <td><span>{{transaction?.totalApresRemise}}</span><span data-prefix>
                                                 TND</span>
                                         </td>
                                     </tr>
@@ -179,10 +182,11 @@
 
                                 <div>
                                     <p>Ces transaction ont été réalisés à travers la borne :
-                                        {{transaction.borne.reference}} </p>
+                                        {{transaction?.borne.reference}} </p>
                                 </div>
                             </aside>
                         </body>
+
                         </html>
 
                     </div>

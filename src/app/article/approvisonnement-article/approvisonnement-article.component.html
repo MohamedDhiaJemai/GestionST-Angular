@@ -12,7 +12,7 @@
                     </div>
                     <br>
                     <div class="container">
-                        <button style="float: right; margin-bottom: 2%;" class="btn btn-success" type="button"
+                        <button [disabled]="!edition" style="float: right; margin-bottom: 2%;" class="btn btn-success" type="button"
                             routerLink="/ajouter-taille/{{ article.id }}">
                             Ajouter Taille
                         </button>

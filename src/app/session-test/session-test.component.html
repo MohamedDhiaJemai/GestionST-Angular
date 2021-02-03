@@ -19,8 +19,8 @@
                             <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
                         </ng-template>
                         <ng-template pTemplate="right">
-                            <button routerLink="/add-session" pButton pRipple icon="pi pi-plus" label="Ajouter Session"
-                                class="p-button-success p-mr-2"></button>
+                            <button [disabled]="!edition" routerLink="/add-session" pButton pRipple icon="pi pi-plus"
+                                label="Ajouter Session" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -91,8 +91,8 @@
                                     <td>{{session.debutInscription | date:'dd-MM-yyyy'}}</td>
                                     <td>{{session.finInscription | date:'dd-MM-yyyy'}}</td>
                                     <td>
-                                        <button routerLink="/update-session/{{session.id}}" pButton pRipple
-                                            type="button" icon="pi pi-search"
+                                        <button [disabled]="!edition" routerLink="/update-session/{{session.id}}"
+                                            pButton pRipple type="button" icon="pi pi-search"
                                             class="p-button-rounded p-button-success"></button>
                                     </td>
                                 </tr>

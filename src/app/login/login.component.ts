@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
 import { UserAuthentification } from 'app/model/UserAuthentification.model';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { LoginService } from 'app/services/login/login.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -19,11 +20,13 @@ export class LoginComponent implements OnInit {
   jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private authentificationService: LoginService,
+    private autorisationService: AutorisationService,
     private router: Router,
     private modalService: BsModalService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
+    localStorage.clear();
   }
 
   onLogin(data, template: TemplateRef<any>) {
@@ -40,19 +43,23 @@ export class LoginComponent implements OnInit {
           // location.reload();
           this.router.navigateByUrl('/login');
         }
+        this.autorisationService.findAutorisations().subscribe(dataa => {
+          this.autorisationService.setAutorisations(dataa);
+        })
 
         if (jwt != null) {
           this.router.navigateByUrl('/');
-          console.log(this.router.url);
         }
+
+
         // console.log('Token decode : ', this.jwtHelper.decodeToken(jwt));
         // console.log('Token Expiration : ', this.jwtHelper.getTokenExpirationDate(jwt));
         // console.log('Is Token Expired : ', this.jwtHelper.isTokenExpired(jwt));
       },
       err => {
-          if (err.status === 403) {
-              this.modalRef = this.modalService.show(template);
-          }
+        if (err.status === 403) {
+          this.modalRef = this.modalService.show(template);
+        }
       }
     );
   }

@@ -20,8 +20,8 @@
                         </ng-template>
 
                         <ng-template pTemplate="right">
-                            <button routerLink="/add-parent" pButton pRipple icon="pi pi-plus" label="Ajout Parent"
-                                class="p-button-success p-mr-2"></button>
+                            <button [disabled]="!edition" routerLink="/add-parent" pButton pRipple icon="pi pi-plus"
+                                label="Ajout Parent" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -94,7 +94,7 @@
                                     </td>
                                     <td>
                                         <div style="text-align: center;">
-                                            <button routerLink="/update-parent/{{ parent.id }}" pButton pRipple
+                                            <button  [disabled]="!edition" routerLink="/update-parent/{{ parent.id }}" pButton pRipple
                                                 type="button" icon="pi pi-refresh"
                                                 class="p-button-rounded p-button-success"></button>
                                         </div>

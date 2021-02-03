@@ -38,7 +38,7 @@ export class UpdateRoleComponent implements OnInit {
     console.log('role', this.role)
     this.roleSubscription = this.roleService.updateRole(this.role.id, this.role).subscribe(
       data => {
-        this.routerNav.navigate(['/role-list']);
+        this.routerNav.navigate(['/roles']);
       },
       err => {
         if (err.status === 500) {

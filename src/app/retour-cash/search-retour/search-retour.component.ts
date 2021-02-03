@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RetourCash } from 'app/model/RetourCash.model';
 import { RetourCashService } from 'app/services/retour-cash/retour-cash.service';
 
@@ -10,14 +11,16 @@ import { RetourCashService } from 'app/services/retour-cash/retour-cash.service'
 export class SearchRetourComponent implements OnInit {
 
   retourCash: RetourCash;
-
   exist: boolean;
-
   idRetour: string;
+  edition: boolean;
+  consultation: boolean;
 
-  constructor(private retourCashService: RetourCashService) { }
+  constructor(private retourCashService: RetourCashService, private router: Router) { }
 
   ngOnInit(): void {
+    this.checkAutorisations();
+
     document.getElementById('searchField').focus();
     this.exist = false;
     this.idRetour = '';
@@ -55,4 +58,25 @@ export class SearchRetourComponent implements OnInit {
     this.idRetour = '';
   }
 
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'retour-cash') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
+    }
+  }
 }

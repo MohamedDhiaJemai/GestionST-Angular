@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Gratuite } from 'app/model/Gratuite.model';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
 import { GratuiteService } from 'app/services/gratuite/gratuite.service';
@@ -23,14 +23,19 @@ export class GratuiteComponent implements OnInit {
   dateF: Date;
 
   joueur: JoueurAcamedie;
+  edition: boolean;
+  consultation: boolean;
 
   constructor(private gratuiteService: GratuiteService,
     private joueurAcademieService: JoueurAcademieService,
     private datePipe: DatePipe,
-    private router: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.id = this.router.snapshot.params['id'];
+    this.checkAutorisations();
+
+    this.id = this.activatedRoute.snapshot.params['id'];
     this.gratuiteService.findByJoueur(this.id).subscribe(
       data => {
         this.gratuites = data;
@@ -97,4 +102,27 @@ export class GratuiteComponent implements OnInit {
       });
     }
   }
+
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'gratuite-joueur') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
+    }
+  }
+
 }

@@ -62,7 +62,7 @@
                                     <td>{{joueurAcademie.prenom}}</td>
                                     <td>
                                         <div style="text-align: center;">
-                                            <button
+                                            <button [disabled]="!edition"
                                                 routerLink="/update-joueur-academie-validation/{{ joueurAcademie.id }}"
                                                 pButton pRipple type="button" icon="pi pi-refresh"
                                                 class="p-button-rounded p-button-success"></button>

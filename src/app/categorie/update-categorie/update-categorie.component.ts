@@ -51,7 +51,7 @@ export class UpdateCategorieComponent implements OnInit {
     console.log('categorie', this.categorie)
     this.categorieSubscription = this.categorieService.updateCategorie(this.categorie.id, this.categorie).subscribe(
       data => {
-        this.routerNav.navigate(['/categorie-list']);
+        this.routerNav.navigate(['/categories']);
       },
       err => {
         if (err.status === 500) {

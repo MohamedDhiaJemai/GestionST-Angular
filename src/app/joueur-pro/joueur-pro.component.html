@@ -27,8 +27,8 @@
                         </ng-template>
 
                         <ng-template pTemplate="right">
-                            <button routerLink="/add-joueur-professionnel" pButton pRipple icon="pi pi-plus" label="Ajouter Joueur"
-                                class="p-button-success p-mr-2"></button>
+                            <button [disabled]="!edition" routerLink="/add-joueur-professionnel" pButton pRipple
+                                icon="pi pi-plus" label="Ajouter Joueur" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 

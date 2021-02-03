@@ -15,12 +15,15 @@ export class ConsulterJoueurProComponent implements OnInit {
   urlPhoto: string;
 
   id: number;
-
-  constructor(private joueurProService: JoueurProService, private router: ActivatedRoute,
-    private routerNav: Router) { }
+  edition: boolean;
+  consultation: boolean;
+  constructor(private joueurProService: JoueurProService, private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    this.id = this.router.snapshot.params['id'];
+    this.checkAutorisations();
+
+    this.id = this.activatedRoute.snapshot.params['id'];
     this.urlPhoto = 'http://127.0.0.1:8443/photo/get/' + this.id;
     this.joueurProService.findById(this.id).subscribe(
       data => {
@@ -30,4 +33,25 @@ export class ConsulterJoueurProComponent implements OnInit {
     );
   }
 
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'joueur-professionnel') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
+    }
+  }
 }

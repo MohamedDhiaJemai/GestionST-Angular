@@ -20,8 +20,8 @@
                         </ng-template>
 
                         <ng-template pTemplate="right">
-                            <button routerLink="/add-categorie" pButton pRipple icon="pi pi-plus" label="Ajouter Role"
-                                class="p-button-success p-mr-2"></button>
+                            <button [disabled]="!edition" routerLink="/add-categorie" pButton pRipple icon="pi pi-plus"
+                                label="Ajouter Role" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -64,19 +64,20 @@
                                     <td>{{categorie.natifs}}</td>
                                     <td>
                                         <div style="text-align: center;">
-                                            <button routerLink="/update-categorie/{{ categorie.id }}" pButton pRipple
-                                        type="button" icon="pi pi-refresh"
-                                        class="p-button-rounded p-button-success"></button>
+                                            <button [disabled]="!edition"
+                                                routerLink="/update-categorie/{{ categorie.id }}" pButton pRipple
+                                                type="button" icon="pi pi-refresh"
+                                                class="p-button-rounded p-button-success"></button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
                     </div>
-
-                    </td>
-                    </tr>
-                    </ng-template>
-                    </p-table>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>

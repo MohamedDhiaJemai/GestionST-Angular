@@ -100,6 +100,8 @@ import { UpdateSessionTestComponent } from './session-test/update-session-test/u
 import { AddSessionTestComponent } from './session-test/add-session-test/add-session-test.component';
 import { SearchRetourComponent } from './retour-cash/search-retour/search-retour.component';
 import { GratuiteComponent } from './gratuite/gratuite.component';
+import { AcceuilComponent } from './acceuil/acceuil.component';
+import { AutorisationComponent } from './autorisation/autorisation.component';
 
 @NgModule({
   imports: [
@@ -214,6 +216,8 @@ import { GratuiteComponent } from './gratuite/gratuite.component';
     AddSessionTestComponent,
     SearchRetourComponent,
     GratuiteComponent,
+    AcceuilComponent,
+    AutorisationComponent,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

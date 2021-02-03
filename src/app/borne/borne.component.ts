@@ -44,7 +44,8 @@ export class BorneComponent implements OnInit {
 
   imageToShow: any;
   isImageLoading: boolean;
-
+  edition: boolean;
+  consultation: boolean;
   urlPhoto = 'http://127.0.0.1:8443/screensaver/get/';
 
   constructor(private borneService: BorneService, private messageService: MessageService,
@@ -54,6 +55,8 @@ export class BorneComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkAutorisations();
+
     this.borneService.getAllBorne().subscribe(
       data => {
         this.bornes = data;
@@ -190,6 +193,29 @@ export class BorneComponent implements OnInit {
   }
   showDialogInformation() {
     this.displayBasicInformation = true;
+  }
+
+
+  checkAutorisations() {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+
+        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    this.edition = false;
+    this.consultation = false;
+    if (roless.includes('ADMIN')) {
+      this.edition = true;
+      this.consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === 'bornes') {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          this.edition = element.edition;
+          this.consultation = element.consultation;
+        }
+      });
+    }
   }
 
 }

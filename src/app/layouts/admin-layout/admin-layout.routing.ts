@@ -50,17 +50,20 @@ import { UpdateSessionTestComponent } from 'app/session-test/update-session-test
 import { AddSessionTestComponent } from 'app/session-test/add-session-test/add-session-test.component';
 import { SearchRetourComponent } from 'app/retour-cash/search-retour/search-retour.component';
 import { GratuiteComponent } from 'app/gratuite/gratuite.component';
+import { AcceuilComponent } from 'app/acceuil/acceuil.component';
+import { AutorisationComponent } from 'app/autorisation/autorisation.component';
 
 export const AdminLayoutRoutes: Routes = [
+    { path: 'acceuil', component: AcceuilComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'user-profile', component: UserProfileComponent },
-    { path: 'user-List', component: UserComponent },
-    { path: 'update-List/:id', component: UpdateUserComponent },
+    { path: 'utilisateurs', component: UserComponent },
+    { path: 'update-user/:id', component: UpdateUserComponent },
     { path: 'add-user', component: AddUserComponent },
-    { path: 'role-list', component: RoleComponent },
+    { path: 'roles', component: RoleComponent },
     { path: 'add-role', component: AddRoleComponent },
     { path: 'update-role/:id', component: UpdateRoleComponent },
-    { path: 'categorie-list', component: CategorieComponent },
+    { path: 'categories', component: CategorieComponent },
     { path: 'add-categorie', component: AddCategorieComponent },
     { path: 'update-categorie/:id', component: UpdateCategorieComponent },
     { path: 'services', component: ServiceSTComponent },
@@ -90,10 +93,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'transactions', component: TransactionComponent },
     { path: 'consulter-achats/:id', component: ConsulterAchatComponent },
     { path: 'consulter-borne/:id', component: ConsulterBorneComponent },
-    { path: 'Update-borne/:id', component: UpdateBorneComponent },
+    { path: 'update-borne/:id', component: UpdateBorneComponent },
     { path: 'remises', component: RemiseComponent },
-
-    { path: 'livrer', component: SearchLivraisonComponent },
+    { path: 'livraison', component: SearchLivraisonComponent },
     { path: 'donations', component: DonationComponent },
     { path: 'inscriptions-test', component: InscriptionTestComponent },
     { path: 'consulter-inscription/:id', component: ConsulterInscriptionComponent },
@@ -102,7 +104,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'update-session/:id', component: UpdateSessionTestComponent },
     { path: 'add-session', component: AddSessionTestComponent },
     { path: 'retour-cash', component: SearchRetourComponent },
-    { path: 'gratuite-joueur/:id', component: GratuiteComponent }
+    { path: 'gratuite-joueur/:id', component: GratuiteComponent },
+    { path: 'autorisations/:id', component: AutorisationComponent }
 
     // { path: 'typography',     component: TypographyComponent },
     // { path: 'icons',          component: IconsComponent },

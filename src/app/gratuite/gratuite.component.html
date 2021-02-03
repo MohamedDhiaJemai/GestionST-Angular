@@ -19,7 +19,7 @@
                             <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
                         </ng-template>
                         <ng-template pTemplate="right">
-                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+                            <button [disabled]="!edition" pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
                                 (click)="openNew()"></button>
                         </ng-template>
                     </p-toolbar>
@@ -91,7 +91,7 @@
                                         <td>{{gratuitee.moisDebut | date:'MM-yyyy'}}</td>
                                         <td>{{gratuitee.moisFin | date:'MM-yyyy'}}</td>
                                         <td>
-                                            <button pButton pRipple icon="pi pi-pencil"
+                                            <button [disabled]="!edition" pButton pRipple icon="pi pi-pencil"
                                                 class="p-button-rounded p-button-success p-mr-2"
                                                 (click)="edit(gratuitee)"></button>
                                         </td>

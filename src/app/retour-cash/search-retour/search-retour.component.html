@@ -92,8 +92,9 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <button mat-raised-button *ngIf="!retourCash.retour" type="submit"
-                                        class="btn btn-danger" (click)="validerRetour(retourCash.id)">Valider
+                                    <button [disabled]="!edition" mat-raised-button *ngIf="!retourCash.retour"
+                                        type="submit" class="btn btn-danger"
+                                        (click)="validerRetour(retourCash.id)">Valider
                                         Retour</button>
                                 </div>
                             </div>
