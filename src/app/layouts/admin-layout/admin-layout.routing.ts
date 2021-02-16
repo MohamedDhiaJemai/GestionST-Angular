@@ -52,6 +52,10 @@ import { SearchRetourComponent } from 'app/retour-cash/search-retour/search-reto
 import { GratuiteComponent } from 'app/gratuite/gratuite.component';
 import { AcceuilComponent } from 'app/acceuil/acceuil.component';
 import { AutorisationComponent } from 'app/autorisation/autorisation.component';
+import { AddBorneComponent } from 'app/borne/add-borne/add-borne.component';
+import { AppelComponent } from 'app/appel/appel.component';
+import { ListePresenceComponent } from 'app/appel/liste-presence/liste-presence.component';
+import { HistoriqueCaisseComponent } from 'app/borne/historique-caisse/historique-caisse.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'acceuil', component: AcceuilComponent },
@@ -94,6 +98,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'consulter-achats/:id', component: ConsulterAchatComponent },
     { path: 'consulter-borne/:id', component: ConsulterBorneComponent },
     { path: 'update-borne/:id', component: UpdateBorneComponent },
+    { path: 'add-borne', component: AddBorneComponent },
     { path: 'remises', component: RemiseComponent },
     { path: 'livraison', component: SearchLivraisonComponent },
     { path: 'donations', component: DonationComponent },
@@ -105,7 +110,12 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-session', component: AddSessionTestComponent },
     { path: 'retour-cash', component: SearchRetourComponent },
     { path: 'gratuite-joueur/:id', component: GratuiteComponent },
-    { path: 'autorisations/:id', component: AutorisationComponent }
+    { path: 'autorisations/:id', component: AutorisationComponent },
+    { path: 'appel', component: AppelComponent },
+    { path: 'liste-presence', component: ListePresenceComponent },
+    { path: 'historique-caisse/:id', component: HistoriqueCaisseComponent },
+    { path: 'profil/:id', component: UserProfileComponent }
+
 
     // { path: 'typography',     component: TypographyComponent },
     // { path: 'icons',          component: IconsComponent },

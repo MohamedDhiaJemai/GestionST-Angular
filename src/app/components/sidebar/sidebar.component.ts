@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { JwtHelper } from 'angular2-jwt';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
+import { LoginService } from 'app/services/login/login.service';
+import { log } from 'console';
 import { data } from 'jquery';
 
 declare const $: any;
@@ -27,7 +31,9 @@ export const ROUTES: RouteInfo[] = [
   { path: '/donations', title: 'Donations', icon: 'multiple_stop', class: '' },
   { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'multiple_stop', class: '' },
   { path: '/sessions-test', title: 'Sessions Test', icon: 'multiple_stop', class: '' },
-  { path: '/retour-cash', title: 'Retour Cash', icon: 'multiple_stop', class: '' }
+  { path: '/retour-cash', title: 'Retour Cash', icon: 'multiple_stop', class: '' },
+  { path: '/appel', title: 'Appel', icon: 'multiple_stop', class: '' },
+  { path: '/liste-presence', title: 'Présence', icon: 'multiple_stop', class: '' }
 
 
   // { path: '/produits', title: 'Produits', icon: 'add_shopping_cart', class: '' },
@@ -48,20 +54,17 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   autorisations;
-  // = JSON.parse(localStorage.getItem('autorisations'));
-
-  constructor(private autorisationService: AutorisationService) { }
+  jwtHelper: JwtHelper = new JwtHelper();
+  constructor(private autorisationService: AutorisationService, private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
     const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     if (roless.includes('ADMIN')) {
-      console.log('role')
       this.menuItems.forEach(element => {
         element.class = '';
       });
     } else {
-      console.log('no role')
       this.autorisationService.findAutorisations().subscribe(dataa => {
         this.autorisations = dataa;
         this.menuItems.forEach(element => {
@@ -86,5 +89,13 @@ export class SidebarComponent implements OnInit {
       }
     });
     return ret ? '' : 'd-none';
+  }
+
+  onLoggedout() {
+    this.loginService.logout();
+  }
+
+  onProfilClick() {
+    this.router.navigateByUrl('/profil/' + this.jwtHelper.decodeToken(localStorage.getItem('token')).sub);
   }
 }

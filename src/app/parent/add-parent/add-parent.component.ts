@@ -20,13 +20,7 @@ export class AddParentComponent implements OnInit {
   onAddParent() {
     this.parentService.addParent(this.parent).subscribe(
       data => {
-        console.log(data)
-        this.router.navigate(['parents'])
-      },
-      err => {
-        if (err.status === 500) {
-          console.log('problem with username');
-        }
+        this.router.navigate(['add-joueur-academie'])
       }
     );
   }

@@ -18,7 +18,6 @@ export class AutorisationComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params['id'];
     this.autorisationService.findAutorisationsByUser(id).subscribe(data => {
       this.autorisations = data;
-      console.log(this.autorisations)
     })
   }
 

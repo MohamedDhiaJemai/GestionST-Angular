@@ -26,7 +26,6 @@ export class UpateParentComponent implements OnInit {
     this.parentSubscription = this.parentService.findById(id).subscribe(
       data => {
         this.parent = data;
-        console.log(this.parent)
       }
     );
   }
@@ -38,18 +37,14 @@ export class UpateParentComponent implements OnInit {
         this.routerNav.navigate(['/parents']);
       },
       err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();
   }
 
-  public openModal (template: TemplateRef <any>) {
+  public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 

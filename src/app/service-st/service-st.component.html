@@ -16,19 +16,23 @@
                     <br>
                     <p-toolbar>
                         <ng-template pTemplate="left">
-                            <button pButton pRipple label="Tous Les Services"
-                                class="p-button-outlined p-button-rounded p-mr-2"
-                                (click)="onShowService('others')"></button>
-                            <button pButton pRipple label="Abonnements" class="p-button-outlined p-button-rounded p-mr-2"
-                                (click)="onShowService('principal')"></button>
-                            <button pButton pRipple label="Entraînements spécipfiques" class="p-button-outlined p-button-rounded p-mr-2"
-                                (click)="onShowService('complementaire')"></button>
-                            <button pButton pRipple label="Autres" class="p-button-outlined p-button-rounded p-mr-2"
-                                (click)="onShowService('autre')"></button>
+                            <div>
+                                <button pButton pRipple label="Tous Les Services"
+                                    class="p-button-outlined p-button-rounded p-mr-2"
+                                    (click)="onShowService('others')"></button>
+                                <button pButton pRipple label="Abonnements"
+                                    class="p-button-outlined p-button-rounded p-mr-2"
+                                    (click)="onShowService('principal')"></button>
+                                <button pButton pRipple label="Entraînements spécipfiques"
+                                    class="p-button-outlined p-button-rounded p-mr-2"
+                                    (click)="onShowService('complementaire')"></button>
+                                <button pButton pRipple label="Autres" class="p-button-outlined p-button-rounded p-mr-2"
+                                    (click)="onShowService('autre')"></button>
+                            </div>
                         </ng-template>
 
                         <ng-template pTemplate="right">
-                            <button routerLink="/add-service" pButton pRipple icon="pi pi-plus" label="Ajouter Service"
+                            <button [disabled]="!edition" routerLink="/add-service" pButton pRipple icon="pi pi-plus" label="Ajouter"
                                 class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
 import { SelectItem } from 'primeng/api';
 
@@ -10,35 +11,12 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./joueur-academie.component.scss']
 })
 export class JoueurAcademieComponent implements OnInit {
-
   edition: boolean;
   consultation: boolean;
-  constructor(private router: Router) { }
-
+  constructor(private autorisationService: AutorisationService) { }
   ngOnInit() {
-    this.checkAutorisations();
-
-  }
-
-  checkAutorisations() {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
-
-        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
-    this.edition = false;
-    this.consultation = false;
-    if (roless.includes('ADMIN')) {
-      this.edition = true;
-      this.consultation = true;
-    } else {
-      autorisations.forEach(element => {
-        if (element.metier === 'joueur-acamedie') {
-          if (!element.consultation) {
-            this.router.navigateByUrl('/acceuil');
-          }
-          this.edition = element.edition;
-          this.consultation = element.consultation;
-        }
-      });
-    }
+    const obj = this.autorisationService.checkAutorisations1('joueur-acamedie');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
   }
 }

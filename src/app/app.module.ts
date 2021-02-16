@@ -68,7 +68,6 @@ import { ValidationJoueurComponent } from './validation-joueur/validation-joueur
 import { ListDocumentComponent } from './list-document/list-document.component';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { ImageJoueurComponent } from './image-joueur/image-joueur.component';
 import { AddArticleComponent } from './article/add-article/add-article.component';
 import { DataviewArticleComponent } from './article/dataview-article/dataview-article.component';
 import { ConsulterArticleComponent } from './article/consulter-article/consulter-article.component';
@@ -102,6 +101,10 @@ import { SearchRetourComponent } from './retour-cash/search-retour/search-retour
 import { GratuiteComponent } from './gratuite/gratuite.component';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { AutorisationComponent } from './autorisation/autorisation.component';
+import { CaisseComponent } from './caisse/caisse.component';
+import { AppelComponent } from './appel/appel.component';
+import { ListePresenceComponent } from './appel/liste-presence/liste-presence.component';
+import { HistoriqueCaisseComponent } from './borne/historique-caisse/historique-caisse.component';
 
 @NgModule({
   imports: [
@@ -112,7 +115,6 @@ import { AutorisationComponent } from './autorisation/autorisation.component';
     HttpClientModule,
     ComponentsModule,
     RouterModule,
-    MatFormFieldModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
@@ -145,13 +147,17 @@ import { AutorisationComponent } from './autorisation/autorisation.component';
     GalleriaModule,
     InputNumberModule,
     InputSwitchModule,
-    TabViewModule
+    TabViewModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule
   ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule,
+    MatRippleModule
   ],
   declarations: [
     AppComponent,
@@ -186,7 +192,6 @@ import { AutorisationComponent } from './autorisation/autorisation.component';
     UpdateJoueurAcademieValidationComponent,
     ValidationJoueurComponent,
     ListDocumentComponent,
-    ImageJoueurComponent,
     AddArticleComponent,
     DataviewArticleComponent,
     ConsulterArticleComponent,
@@ -218,6 +223,10 @@ import { AutorisationComponent } from './autorisation/autorisation.component';
     GratuiteComponent,
     AcceuilComponent,
     AutorisationComponent,
+    CaisseComponent,
+    ListePresenceComponent,
+    AppelComponent,
+    HistoriqueCaisseComponent,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

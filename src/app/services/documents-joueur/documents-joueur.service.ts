@@ -1,63 +1,28 @@
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
-import { DocumentsJoueur } from 'app/model/DocumentsJoueur.model';
+import { TokenService } from '../token/token.service';
 import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentsJoueurService {
-
-  apiUrl = 'http://127.0.0.1:8443/documents';
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   upload(file: any, id: number): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-
-    return this.httpClient.post(this.apiUrl + '/' + id, file,
-      {
-        headers: new HttpHeaders({
-          'authorization': this.jwtToken,
-        }), reportProgress: true,
-      },
-    );
+    return this.httpClient.post(environment.apiUrl + 'documents/' + id, file,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken(), }), reportProgress: true });
   }
-
   deleteFile(id: number, nom: string): any {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.delete(this.apiUrl + '/' + id + '/' + nom,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.delete(environment.apiUrl + 'documents/' + id + '/' + nom,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   getFiles(id): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/' + id,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'documents/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   viewFile(id: number, nom: string): any {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/' + id + '/' + nom,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'documents/' + id + '/' + nom,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
 }

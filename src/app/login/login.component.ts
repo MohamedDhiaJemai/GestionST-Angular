@@ -33,30 +33,19 @@ export class LoginComponent implements OnInit {
 
     this.authentificationService.login(data).subscribe(
       resp => {
-
         const jwt = resp.headers.get('Authorization');
         this.authentificationService.saveToken(jwt);
-
         if (this.jwtHelper.isTokenExpired(jwt)) {
-          console.log('Token Expired');
           localStorage.clear();
-          // location.reload();
           this.router.navigateByUrl('/login');
         }
         this.autorisationService.findAutorisations().subscribe(dataa => {
           this.autorisationService.setAutorisations(dataa);
-        })
-
+        });
         if (jwt != null) {
           this.router.navigateByUrl('/');
         }
-
-
-        // console.log('Token decode : ', this.jwtHelper.decodeToken(jwt));
-        // console.log('Token Expiration : ', this.jwtHelper.getTokenExpirationDate(jwt));
-        // console.log('Is Token Expired : ', this.jwtHelper.isTokenExpired(jwt));
-      },
-      err => {
+      }, err => {
         if (err.status === 403) {
           this.modalRef = this.modalService.show(template);
         }

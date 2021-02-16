@@ -1,55 +1,29 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { TokenService } from '../token/token.service';
 import { Parent } from 'app/model/Parent.model';
 import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParentService {
-
-  apiUrl = 'http://127.0.0.1:8443/parent';
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   getAllParent(): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/all', { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'parent/all',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   addParent(parent: Parent) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.post(this.apiUrl + '/add', parent,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.post(environment.apiUrl + 'parent/add', parent,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   updateParent(id: number, parent: Parent) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.put(this.apiUrl + '/update/' + id, parent,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.put(environment.apiUrl + 'parent/update/' + id, parent,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findById(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<Parent>(this.apiUrl + '/' + id,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get<Parent>(environment.apiUrl + 'parent/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
 }

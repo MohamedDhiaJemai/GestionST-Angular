@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Produit } from 'app/model/produit.model';
 import { ProduitService } from 'app/services/produit/produit.service';
 import { SelectItem } from 'primeng/api';
-import {ViewEncapsulation} from '@angular/core';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-produit',
@@ -24,7 +24,6 @@ export class ProduitComponent implements OnInit {
     this.produitService.getAllProduit().subscribe(
       data => {
         this.products = data;
-        console.log(this.products)
       }
     );
 

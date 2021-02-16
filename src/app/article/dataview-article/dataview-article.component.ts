@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'app/model/Article.model';
 import { ArticleService } from 'app/services/article/article.service';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
+import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
 
 @Component({
@@ -19,15 +21,14 @@ export class DataviewArticleComponent implements OnInit {
   sortKey: string;
   edition: boolean;
   consultation: boolean;
-
-  constructor(private articleService: ArticleService, private router: Router) { }
-
+  imgUrl = environment.apiUrl + 'image/get/';
+  constructor(private articleService: ArticleService, private autorisationService: AutorisationService) { }
   ngOnInit() {
-    this.checkAutorisations();
-
+    const obj = this.autorisationService.checkAutorisations1('articles');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
     this.articleService.getAllArticle().subscribe(
       data => {
-        console.log(data)
         this.articles = data;
       }
     );
@@ -37,7 +38,6 @@ export class DataviewArticleComponent implements OnInit {
       { label: 'UNISEXE', value: 'UNISEXE' }
     ];
   }
-
   onSortChange(event) {
     const value = event.value;
     if (value.indexOf('!') === 0) {
@@ -50,27 +50,4 @@ export class DataviewArticleComponent implements OnInit {
       this.sortField = value;
     }
   }
-
-  checkAutorisations() {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
-
-        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
-    this.edition = false;
-    this.consultation = false;
-    if (roless.includes('ADMIN')) {
-      this.edition = true;
-      this.consultation = true;
-    } else {
-      autorisations.forEach(element => {
-        if (element.metier === 'articles') {
-          if (!element.consultation) {
-            this.router.navigateByUrl('/acceuil');
-          }
-          this.edition = element.edition;
-          this.consultation = element.consultation;
-        }
-      });
-    }
-  }
-
 }

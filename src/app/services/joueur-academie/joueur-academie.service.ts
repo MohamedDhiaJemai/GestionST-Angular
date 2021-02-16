@@ -1,77 +1,41 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { TokenService } from '../token/token.service';
 import { Observable } from 'rxjs';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JoueurAcademieService {
-
-  apiUrl = 'http://127.0.0.1:8443/academie';
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   getAlljAcademie(): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/all', { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'academie/all',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   getAlljAcademieNonValider(): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/non-valide', { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'academie/non-valide',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   addjAcademie(jAcademie: JoueurAcamedie) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.post(this.apiUrl + '/add', jAcademie,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.post(environment.apiUrl + 'academie/add', jAcademie,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   updatejAcademie(id: number, jAcademie: JoueurAcamedie) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.put(this.apiUrl + '/update/' + id, jAcademie,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.put(environment.apiUrl + 'academie/update/' + id, jAcademie,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   validerjAcademie(id: number, jAcademie: JoueurAcamedie) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.put(this.apiUrl + '/valider/' + id, jAcademie,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.put(environment.apiUrl + 'academie/valider/' + id, jAcademie,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findById(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<JoueurAcamedie>(this.apiUrl + '/' + id,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get<JoueurAcamedie>(environment.apiUrl + 'academie/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findByParent(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<JoueurAcamedie>(this.apiUrl + '/parent/' + id,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get<JoueurAcamedie>(environment.apiUrl + 'academie/parent/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
-
 }

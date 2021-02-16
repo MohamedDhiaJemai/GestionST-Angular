@@ -1,10 +1,9 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Article } from 'app/model/Article.model';
 import { ArticleService } from 'app/services/article/article.service';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -41,9 +40,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   onSelectFile(event) {
-    console.log(event)
     this.file = event.target.files && event.target.files[0];
-    console.log(this.file)
     if (this.file) {
       const reader = new FileReader();
       reader.readAsDataURL(this.file);
@@ -69,19 +66,15 @@ export class AddArticleComponent implements OnInit {
     }
     this.articleService.addArticle(this.article).subscribe(
       data => {
-        console.log(this.url)
         const formData = new FormData();
         formData.append('file', this.uploadForm.get('profile').value);
-        console.log('formdata', formData);
 
         this.imageProduitService.upload(formData, data.id).subscribe(
           data2 => {
-            console.log('ok');
+            this.routerNav.navigate(['articles']);
           }
         );
-        this.routerNav.navigate(['articles']);
-      },
-      error => console.log(error)
+      }
     );
   }
 

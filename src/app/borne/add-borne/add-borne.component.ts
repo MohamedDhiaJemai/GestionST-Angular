@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Borne } from 'app/model/Borne.model';
+import { BorneService } from 'app/services/borne/borne.service';
 
 @Component({
   selector: 'app-add-borne',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddBorneComponent implements OnInit {
 
-  constructor() { }
+  borne: Borne = new Borne();
 
-  ngOnInit(): void {
+  constructor(private borneService: BorneService, private router: Router) { }
+
+  ngOnInit() {
+  }
+
+  onAddBorne() {
+    this.borneService.addBorne(this.borne).subscribe(
+      data => {
+        this.router.navigate(['bornes'])
+      }
+    );
   }
 
 }

@@ -1,55 +1,29 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { TokenService } from '../token/token.service';
 import { Categorie } from 'app/model/Categorie.model';
 import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategorieService {
-
-  apiUrl = 'http://127.0.0.1:8443/categorie';
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   getAllCategorie(): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/all', { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'categorie/all',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   addCategorie(categorie: Categorie) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.post(this.apiUrl + '/add', categorie,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.post(environment.apiUrl + 'categorie/add', categorie,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   updateCategorie(id: number, categorie: Categorie) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.put(this.apiUrl + '/update/' + id, categorie,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.put(environment.apiUrl + 'categorie/update/' + id, categorie,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findById(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<Categorie>(this.apiUrl + '/' + id,
-    {headers: new HttpHeaders({'authorization': this.jwtToken})});
+    return this.httpClient.get<Categorie>(environment.apiUrl + 'categorie/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
 }

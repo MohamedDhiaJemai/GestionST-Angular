@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JoueurPro } from 'app/model/JoueurPro.model';
 import { JoueurProService } from 'app/services/joueur-pro/joueur-pro.service';
+import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
 
 @Component({
@@ -15,7 +16,7 @@ export class DataViewjProComponent implements OnInit {
   sortOrder: number;
   sortField: string;
   sortKey: string;
-
+  photoUrl = environment.apiUrl + 'photo/get/';
   constructor(private joueurProService: JoueurProService) { }
 
   ngOnInit() {
@@ -23,7 +24,6 @@ export class DataViewjProComponent implements OnInit {
     this.joueurProService.getAlljProfessionnel().subscribe(
       data => {
         this.joueurPros = data;
-        console.log(this.joueurPros);
       }
     );
 

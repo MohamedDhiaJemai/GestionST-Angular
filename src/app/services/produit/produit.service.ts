@@ -1,55 +1,29 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { TokenService } from '../token/token.service';
 import { Produit } from 'app/model/produit.model';
 import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
-
-  apiUrl = 'http://127.0.0.1:8443/produit';
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   getAllProduit(): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/all', { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'produit/all',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   addProduit(produit: Produit) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.post(this.apiUrl + '/add', produit,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.post(environment.apiUrl + 'produit/add', produit,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   updateProduit(id: number, produit: Produit) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.put(this.apiUrl + '/update/' + id, produit,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.put(environment.apiUrl + 'produit/update/' + id, produit,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findById(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<Produit>(this.apiUrl + '/findById/' + id,
-    {headers: new HttpHeaders({'authorization': this.jwtToken})});
+    return this.httpClient.get<Produit>(environment.apiUrl + 'produit/findById/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
 }

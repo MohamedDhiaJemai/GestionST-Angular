@@ -43,11 +43,8 @@ export class ListDocumentComponent implements OnChanges {
   }
 
   deleteFile(name: string) {
-    console.log(name)
-    console.log(this.id)
     this.docuementsJoueurService.deleteFile(this.id, name).subscribe(
       resp => {
-        console.log('name:' + name)
         this.ngOnChanges();
       }
     );

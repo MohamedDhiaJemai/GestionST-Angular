@@ -9,6 +9,7 @@ import { DocumentsJoueurService } from 'app/services/documents-joueur/documents-
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
 import { ParentService } from 'app/services/parent/parent.service';
 import { PhotoService } from 'app/services/photo/photo.service';
+import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
@@ -84,13 +85,8 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.router.snapshot.params['id'];
-
-    this.urlPhoto = 'http://127.0.0.1:8443/photo/get/' + this.id;
-
-    console.log(this.urlPhoto)
-
+    this.urlPhoto = environment.apiUrl + 'photo/get/' + this.id;
     this.fileInfos = this.docuementsJoueurService.getFiles(this.id);
-
     this.parentService.getAllParent().subscribe(
       data => {
         this.itemsParents = data;
@@ -100,10 +96,8 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
       data => {
         this.joueurAcademie = data;
         this.date = new Date(this.joueurAcademie.dateNaissance);
-        console.log(this.joueurAcademie)
       }
     );
-
     this.uploadForm = this.formBuilder.group({
       profile: ['']
     });
@@ -138,29 +132,20 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
     }
 
     this.joueurAcademie.dateNaissance = this.datePipe.transform(this.date, 'yyyy-MM-dd');
-    console.log(this.joueurAcademie.validation);
     this.joueurAcademieSubscription = this.joueurAcademieService.validerjAcademie(this.joueurAcademie.id, this.joueurAcademie).subscribe(
       data => {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
-          console.log('formdata', formData);
           this.photoService.upload(formData, this.joueurAcademie.id).subscribe(
             data2 => {
-              console.log('ok');
+              this.routerNav.navigate(['/consulter-joueur-academie/' + this.joueurAcademie.id]);
             }
           );
         }
-
-        this.routerNav.navigate(['/consulter-joueur-academie/' + this.joueurAcademie.id]);
-      },
-      err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+      }, err => {
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();
@@ -207,7 +192,6 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
         },
       );
     }
-    console.log('my file ', this.myfile)
     this.myfile = [];
   }
 
@@ -228,7 +212,6 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
         this.myfilePhoto = [];
       },
     );
-    console.log('my file ', this.myfilePhoto)
     this.myfilePhoto = [];
     this.inputValueImage = 0;
   }

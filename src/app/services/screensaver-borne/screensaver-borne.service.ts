@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
-import { Observable, Subject } from 'rxjs';
-import { Upload } from 'tus-js-client';
+import { TokenService } from '../token/token.service';
+import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
 
 export interface FileStatus {
@@ -17,46 +16,20 @@ export interface FileStatus {
   providedIn: 'root'
 })
 export class ScreensaverBorneService {
-
-  apiUrl = 'http://127.0.0.1:8443/screensaver';
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
-  // getImage(id: number): Observable<Blob> {
-  //   return this.httpClient.get(this.apiUrl + '/' + id, { responseType: 'blob' });
-  // }
-
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   getImage(id: number): Observable<Blob> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/get/' + id,
-      { responseType: 'blob', headers: new HttpHeaders({ 'authorization': this.jwtToken }) },
+    return this.httpClient.get(environment.apiUrl + 'screensaver/get/' + id,
+      { responseType: 'blob', headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) },
     );
   }
-
-
+  getFileType(id: number) {
+    return this.httpClient.get(environment.apiUrl + 'screensaver/file-type/' + id,
+      { responseType: 'text', headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) },
+    );
+  }
   upload(file: any, id: number): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-
-    return this.httpClient.post(this.apiUrl + '/' + id, file,
-      {
-        headers: new HttpHeaders({
-          'authorization': this.jwtToken,
-        }), reportProgress: true,
-      },
+    return this.httpClient.post(environment.apiUrl + 'screensaver/' + id, file,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken(), }), reportProgress: true, },
     );
   }
 

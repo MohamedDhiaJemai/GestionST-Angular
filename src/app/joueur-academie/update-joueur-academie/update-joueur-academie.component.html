@@ -45,12 +45,22 @@
                                     </p-dropdown>
                                 </div>
                                 <div class="col-md-6">
-                                    <p-calendar name="date" dateFormat='dd/mm/yy' [(ngModel)]="date" [touchUI]="true">
+                                    <p-calendar [(ngModel)]="date" placeholder="Date Naissance" name="date"
+                                        dateFormat="dd-mm-yy" name="date" [yearNavigator]="true" yearRange="{{annees}}"
+                                        [monthNavigator]="true">
                                     </p-calendar>
                                 </div>
                             </div>
-                            <br><br>
-
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Mobile" type="text" name="mobile"
+                                            [(ngModel)]="joueurAcademie.mobile">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
                             <div class="row">
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
@@ -60,32 +70,23 @@
 
                                 <div class="col-md-6" style="margin-top: 1%;">
                                     <p-dropdown [options]="itemsParents" [(ngModel)]="joueurAcademie.parent"
-                                        name="parent" [filter]="true" [showClear]="true" optionLabel="identifiant"
-                                        placeholder="Select a Parent" filterPlaceholder="Search By Identifiant">
+                                        name="parent" [filter]="true" [showClear]="true" optionLabel="mobile"
+                                        placeholder="Select a Parent" filterPlaceholder="Search By mobile">
 
                                         <ng-template pTemplate="selectedItem">
                                             <div class="country-item country-item-value" *ngIf="joueurAcademie.parent">
-                                                <div> {{joueurAcademie.parent.identifiant}} -
+                                                <div> {{joueurAcademie.parent.mobile}} -
                                                     {{joueurAcademie.parent.nom}} {{joueurAcademie.parent.prenom}}</div>
                                             </div>
                                         </ng-template>
 
                                         <ng-template let-country pTemplate="item">
                                             <div class="country-item">
-                                                <div>{{country.value.identifiant}} - {{country.value.nom}}
+                                                <div>{{country.value.mobile}} - {{country.value.nom}}
                                                     {{country.value.prenom}}</div>
                                             </div>
                                         </ng-template>
                                     </p-dropdown>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Gratuité (%)" type="text" name="tauxGratuite"
-                                            [(ngModel)]="joueurAcademie.tauxGratuite">
-                                    </mat-form-field>
                                 </div>
                             </div>
                             <br>
@@ -167,8 +168,6 @@
                         <h6 class="card-category text-gray">{{joueurAcademie.identifiant}}</h6>
                         <br>
                         <p class="card-description">
-                            Don't be scared of the truth because we need to restart the human foundation in truth And I
-                            love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
 
                         <p-messages key="photo"></p-messages>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Transaction } from 'app/model/Transaction.model';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { TransactionService } from 'app/services/transaction/transaction.service';
 import { Table } from 'primeng/table';
 
@@ -19,46 +20,25 @@ export class TransactionComponent implements OnInit {
   consultation: boolean;
   @ViewChild('dt') table: Table;
 
-  constructor(private transactionService: TransactionService, private activatedRoute: ActivatedRoute, private router: Router) { }
-
+  constructor(private transactionService: TransactionService, private activatedRoute: ActivatedRoute,
+    private autorisationService: AutorisationService) { }
   ngOnInit() {
-    this.checkAutorisations();
-
-    console.log(this.activatedRoute.routeConfig.path)
+    const obj = this.autorisationService.checkAutorisations1('transactions');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
     this.transactionService.getAllTrascation().subscribe(
       data => {
         this.transactions = data;
       }
     );
   }
-
   showDialogEncaissement() {
     this.displayEncaissement = true;
   }
-
   showDialogAchats() {
     this.displayAchats = true;
   }
-
-  checkAutorisations() {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
-
-        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
-    this.edition = false;
-    this.consultation = false;
-    if (roless.includes('ADMIN')) {
-      this.edition = true;
-      this.consultation = true;
-    } else {
-      autorisations.forEach(element => {
-        if (element.metier === 'transactions') {
-          if (!element.consultation) {
-            this.router.navigateByUrl('/acceuil');
-          }
-          this.edition = element.edition;
-          this.consultation = element.consultation;
-        }
-      });
-    }
+  clear(table: Table) {
+    table.clear();
   }
 }

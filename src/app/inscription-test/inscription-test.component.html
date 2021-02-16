@@ -1,4 +1,3 @@
-
 <div class="main-content">
     <div class="container-fluid">
 
@@ -30,6 +29,10 @@
 
                             <ng-template pTemplate="header">
                                 <tr>
+                                    <th pSortableColumn="type" class="text-center">Type
+                                        <p-sortIcon field="type">
+                                        </p-sortIcon>
+                                    </th>
                                     <th pSortableColumn="nom" class="text-center">Nom
                                         <p-sortIcon field="nom">
                                         </p-sortIcon>
@@ -61,6 +64,11 @@
                                     <th style="width:4rem"></th>
                                 </tr>
                                 <tr>
+                                    <th>
+                                        <input pInputText type="text" style="width: 100%;"
+                                            (input)="dt.filter($event.target.value, 'type', 'contains')"
+                                            placeholder="type" class="p-column-filter">
+                                    </th>
                                     <th>
                                         <input pInputText type="text" style="width: 100%;"
                                             (input)="dt.filter($event.target.value, 'nom', 'contains')"
@@ -102,6 +110,10 @@
 
                             <ng-template pTemplate="body" let-inscription>
                                 <tr [pSelectableRow]="inscription">
+                                    <td>
+                                        <div *ngIf="inscription.identifiant">Interne</div>
+                                        <div *ngIf="inscription.identifiant==null">Externe</div>
+                                    </td>
                                     <td>{{inscription.nom}}</td>
                                     <td>{{inscription.prenom}}</td>
                                     <td>{{inscription.mobile}}</td>

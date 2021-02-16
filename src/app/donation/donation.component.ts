@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Donation } from 'app/model/Donation.model';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { DonationService } from 'app/services/donation/donation.service';
 import { Table } from 'primeng/table';
 
@@ -10,45 +11,20 @@ import { Table } from 'primeng/table';
   styleUrls: ['./donation.component.css']
 })
 export class DonationComponent implements OnInit {
-
   donations: Donation[];
   selectedDonation: Donation;
   edition: boolean;
   consultation: boolean;
-
   @ViewChild('dt') table: Table;
-  constructor(private donationService: DonationService, private router: Router) { }
-
+  constructor(private donationService: DonationService, private autorisationService: AutorisationService) { }
   ngOnInit(): void {
-    this.checkAutorisations();
-
+    const obj = this.autorisationService.checkAutorisations1('donations');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
     this.donationService.getAll().subscribe(
       data => {
         this.donations = data;
       }
     );
   }
-
-  checkAutorisations() {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
-
-        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
-    this.edition = false;
-    this.consultation = false;
-    if (roless.includes('ADMIN')) {
-      this.edition = true;
-      this.consultation = true;
-    } else {
-      autorisations.forEach(element => {
-        if (element.metier === 'donations') {
-          if (!element.consultation) {
-            this.router.navigateByUrl('/acceuil');
-          }
-          this.edition = element.edition;
-          this.consultation = element.consultation;
-        }
-      });
-    }
-  }
-
 }

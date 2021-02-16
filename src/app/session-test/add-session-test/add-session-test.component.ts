@@ -52,12 +52,8 @@ export class AddSessionTestComponent implements OnInit {
         this.routerNav.navigate(['/sessions-test']);
       },
       err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();

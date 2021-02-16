@@ -19,8 +19,8 @@
                             <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
                         </ng-template>
                         <ng-template pTemplate="right">
-                            <button [disabled]="!edition" pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-                                (click)="openNew()"></button>
+                            <button [disabled]="!edition" pButton pRipple label="New" icon="pi pi-plus"
+                                class="p-button-success p-mr-2" (click)="openNew()"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -45,19 +45,19 @@
                                             <p-sortIcon field="taux">
                                             </p-sortIcon>
                                         </th>
+                                        <th pSortableColumn="moisDebut" class="text-center">Date début
+                                            <p-sortIcon field="moisDebut">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th pSortableColumn="moisFin" class="text-center">Date fin
+                                            <p-sortIcon field="moisFin">
+                                            </p-sortIcon>
+                                        </th>
                                         <th pSortableColumn="activation" class="text-center">Activation
                                             <p-sortIcon field="activation">
                                             </p-sortIcon>
                                         </th>
-                                        <th pSortableColumn="dateDebut" class="text-center">Date début
-                                            <p-sortIcon field="dateDebut">
-                                            </p-sortIcon>
-                                        </th>
-                                        <th pSortableColumn="dateFin" class="text-center">Date fin
-                                            <p-sortIcon field="dateFin">
-                                            </p-sortIcon>
-                                        </th>
-                                        <th style="width: 6rem;"></th>
+                                        <!-- <th style="width: 6rem;"></th> -->
                                     </tr>
                                     <tr>
                                         <th>
@@ -67,34 +67,43 @@
                                         </th>
                                         <th>
                                             <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'moisDebut', 'contains')"
+                                                placeholder="moisDebut" class="p-column-filter">
+                                        </th>
+                                        <th>
+                                            <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'moisFin', 'contains')"
+                                                placeholder="moisFin" class="p-column-filter">
+                                        </th>
+                                        <th>
+                                            <input pInputText type="text" style="width: 100%;"
                                                 (input)="dt.filter($event.target.value, 'activation', 'contains')"
                                                 placeholder="activation" class="p-column-filter">
                                         </th>
-                                        <th>
-                                            <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'dateDebut', 'contains')"
-                                                placeholder="dateDebut" class="p-column-filter">
-                                        </th>
-                                        <th>
-                                            <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'dateFin', 'contains')"
-                                                placeholder="dateFin" class="p-column-filter">
-                                        </th>
-                                        <th></th>
+                                        <!-- <th></th> -->
                                     </tr>
                                 </ng-template>
 
                                 <ng-template pTemplate="body" let-gratuitee>
                                     <tr [pSelectableRow]="gratuitee">
                                         <td>{{gratuitee.taux}} %</td>
-                                        <td>{{gratuitee.activation}}</td>
                                         <td>{{gratuitee.moisDebut | date:'MM-yyyy'}}</td>
                                         <td>{{gratuitee.moisFin | date:'MM-yyyy'}}</td>
                                         <td>
+                                            <button [disabled]="!edition" [hidden]="!gratuitee.activation" type="button"
+                                                (click)="editActivation(gratuitee)" pButton pRipple
+                                                icon="pi pi-thumbs-up"
+                                                class="p-button-rounded p-button-success"></button>
+                                            <button [disabled]="!edition" [hidden]="gratuitee.activation" type="button"
+                                                (click)="editActivation(gratuitee)" pButton pRipple
+                                                icon="pi pi-thumbs-down"
+                                                class="p-button-rounded p-button-danger"></button>
+                                        </td>
+                                        <!-- <td>
                                             <button [disabled]="!edition" pButton pRipple icon="pi pi-pencil"
                                                 class="p-button-rounded p-button-success p-mr-2"
                                                 (click)="edit(gratuitee)"></button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 </ng-template>
                             </p-table>

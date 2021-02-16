@@ -32,9 +32,9 @@
                                 </div>
                             </div>
                             <br>
-                            <div *ngIf="!exist" class="row text-center">
-                                <div class="col-md-12">
-                                    Aucun achat.
+                            <div *ngIf="submitted && !exist" class="row text-center">
+                                <div class="col-md-12 p-error">
+                                    Aucun retour.
                                 </div>
                             </div>
                             <div *ngIf="exist" class="row text-center">
@@ -47,7 +47,7 @@
 
                                         <ng-template pTemplate="header">
                                             <tr>
-                                                <th pSortableColumn="dateCreation">Date <p-sortIcon
+                                                <th pSortableColumn="dateCreation">Date achat<p-sortIcon
                                                         field="dateCreation">
                                                     </p-sortIcon>
                                                 </th>
@@ -80,6 +80,10 @@
                                                         type="button" (click)="validerById(livraison.id)" pButton
                                                         icon="pi pi-external-link" label="Valider"
                                                         class="p-button-success"></button>
+                                                        <div *ngIf="livraison.validation" class="text-center">
+                                                            Validé le <br>
+                                                            {{livraison.dateValidation | date:'dd-MM-yyyy HH:mm:ss'}}
+                                                        </div>
                                                 </td>
                                             </tr>
                                         </ng-template>

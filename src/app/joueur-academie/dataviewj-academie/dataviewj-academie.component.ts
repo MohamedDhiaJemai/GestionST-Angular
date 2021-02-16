@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
+import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
 
 @Component({
@@ -15,14 +16,13 @@ export class DataviewjAcademieComponent implements OnInit {
   sortOrder: number;
   sortField: string;
   sortKey: string;
-
+  photoUrl = environment.apiUrl + 'photo/get/';
   constructor(private joueurAcademieService: JoueurAcademieService) { }
 
   ngOnInit() {
     this.joueurAcademieService.getAlljAcademie().subscribe(
       data => {
         this.joueurAcads = data;
-        console.log(this.joueurAcads);
       }
     );
 

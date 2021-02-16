@@ -5,6 +5,7 @@ import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
 import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
+import { environment } from 'environments/environment';
 import { MessageService, SelectItem } from 'primeng/api';
 
 export enum sexe {
@@ -37,7 +38,7 @@ export class AddServiceComponent implements OnInit {
   jourEnvoi: string[] = [];
   servicePrincipal: ServicePrincipal = new ServicePrincipal();
   serviceComplementaire: ServiceComplementaire = new ServiceComplementaire();
-  urlphotoST = 'http://127.0.0.1:8443/image/get/';
+  urlphotoST = environment.apiUrl + 'image/get/';
   sexes: SelectItem[];
   item: string;
 
@@ -61,9 +62,7 @@ export class AddServiceComponent implements OnInit {
   }
 
   onSelectFile(event) {
-    console.log(event)
     this.file = event.target.files && event.target.files[0];
-    console.log(this.file)
     if (this.file) {
       const reader = new FileReader();
       reader.readAsDataURL(this.file);
@@ -86,15 +85,10 @@ export class AddServiceComponent implements OnInit {
       (data: ServicePrincipal) => {
         const formData = new FormData();
         formData.append('file', this.uploadForm.get('profile').value);
-        console.log('formdata', formData);
         this.imageProduitService.upload(formData, data.id).subscribe(
-          data2 => {
-            console.log('ok');
-          }
+          data2 => { this.routerNav.navigate(['services']) }
         );
-        this.routerNav.navigate(['services'])
-      },
-      error => console.log(error)
+      }
     );
   }
 
@@ -104,27 +98,19 @@ export class AddServiceComponent implements OnInit {
     }
 
     this.selectedJour.forEach(element => {
-      console.log(element.label);
       this.jourEnvoi.push(element.label);
     });
     this.serviceComplementaire.jours = this.jourEnvoi;
-    console.log(this.serviceComplementaire.jours);
-
-
-    console.log(this.serviceComplementaire);
     this.serviceSTService.addServiceComplement(this.serviceComplementaire).subscribe(
       (data: ServiceComplementaire) => {
         const formData = new FormData();
         formData.append('file', this.uploadForm.get('profile').value);
-        console.log('formdata', formData);
         this.imageProduitService.upload(formData, data.id).subscribe(
           data2 => {
-            console.log('ok');
+            this.routerNav.navigate(['services'])
           }
         );
-        this.routerNav.navigate(['services'])
-      },
-      error => console.log(error)
+      }
     );
 
   }

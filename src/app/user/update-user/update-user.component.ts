@@ -45,19 +45,14 @@ export class UpdateUserComponent implements OnInit {
   }
 
   ngOnUpdateUtilisateur(templateAnnulation: TemplateRef<any>) {
-    console.log('user', this.user)
     this.user.roles = this.selectedRole;
     this.userSubscription = this.userService.updateUtilisateur(this.user.id, this.user).subscribe(
       data => {
         this.routerNav.navigate(['/utilisateurs']);
       },
       err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
+import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
 
 @Component({
@@ -19,14 +20,13 @@ export class DataviewServiceComponent implements OnInit {
   sortOrder: number;
   sortField: string;
   sortKey: string;
-
+  imgUrl = environment.apiUrl + 'image/get/';
   constructor(private serviceSTService: ServiceSTService, private router: ActivatedRoute) { }
 
   ngOnInit() {
     if (this.someInput === 'principal') {
       this.serviceSTService.getAllService().subscribe(
         data => {
-          console.log(data)
           this.services = data;
         }
       );
@@ -34,7 +34,6 @@ export class DataviewServiceComponent implements OnInit {
     } else if (this.someInput === 'complementaire') {
       this.serviceSTService.getAllServiceComplement().subscribe(
         data => {
-          console.log(data)
           this.services = data;
         }
       );
@@ -42,7 +41,6 @@ export class DataviewServiceComponent implements OnInit {
     } else if (this.someInput === 'autre') {
       this.serviceSTService.getAllServiceAutre().subscribe(
         data => {
-          console.log(data)
           this.services = data;
         }
       );
@@ -59,8 +57,6 @@ export class DataviewServiceComponent implements OnInit {
                   data3.forEach(element2 => {
                     data.push(element2)
                   });
-                  console.log('others')
-                  console.log(data)
                   this.services = data;
                 }
               );

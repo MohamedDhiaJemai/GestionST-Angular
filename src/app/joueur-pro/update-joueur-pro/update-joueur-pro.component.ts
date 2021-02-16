@@ -6,6 +6,7 @@ import { JoueurPro } from 'app/model/JoueurPro.model';
 import { CategorieService } from 'app/services/categorie/categorie.service';
 import { JoueurProService } from 'app/services/joueur-pro/joueur-pro.service';
 import { PhotoService } from 'app/services/photo/photo.service';
+import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -54,7 +55,7 @@ export class UpdateJoueurProComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.router.snapshot.params['id'];
-    this.urlPhoto = 'http://127.0.0.1:8443/photo/get/' + this.id;
+    this.urlPhoto = environment.apiUrl + 'photo/get/' + this.id;
     this.categorieService.getAllCategorie().subscribe(
       data => {
         this.itemsCategories = data;
@@ -65,7 +66,6 @@ export class UpdateJoueurProComponent implements OnInit {
       data => {
         this.joueurPro = data;
         this.date = new Date(this.joueurPro.dateNaissance);
-        console.log(this.joueurPro)
       }
     );
 
@@ -97,24 +97,18 @@ export class UpdateJoueurProComponent implements OnInit {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
-          console.log('formdata', formData);
           this.photoService.upload(formData, this.joueurPro.id).subscribe(
             data2 => {
-              console.log('ok');
+              this.routerNav.navigate(['/consulter-joueur-professionnel/' + this.joueurPro.id]);
             }
           );
         }
 
 
-        this.routerNav.navigate(['/consulter-joueur-professionnel/' + this.joueurPro.id]);
       },
       err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();

@@ -6,7 +6,7 @@
           <div class="card-header card-header-danger">
             <div style="float: left;">
               <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-              <h4 class="card-title ">Listes Des Articles</h4>
+              <h4 class="card-title ">Infos Service</h4>
               <p class="card-category"> STADE TUNISIEN</p>
             </div>
           </div>
@@ -17,11 +17,11 @@
                 <div class="wrapper row">
                   <div class="preview col-md-1">
                   </div>
-                  <div class="preview col-md-5">
+                  <div class="preview col-md-4">
                     <br><br><br>
                     <div class="preview-pic tab-content">
                       <div class="tab-pane active" id="pic-1">
-                        <img [src]="urlphotoServiceST" width="100%" />
+                        <img [src]="urlphotoServiceST" style="max-width: 320px;max-height: 240px;" />
                       </div>
                     </div>
                   </div>
@@ -29,14 +29,6 @@
                   </div>
                   <div class="details col-md-4">
                     <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <!-- <button style="margin-bottom: 20%; float: left;" class="add-to-cart btn btn-warning" type="button"
-                            routerLink="/approvisionnement-article/{{ servicePrincipal.id }}">Approvisonnement</button> -->
-                      </div>
-                    </div>
                     <br>
                     <h2 class="product-title">{{ servicePrincipal.libelle }}</h2>
                     <br>
@@ -85,8 +77,8 @@
                     <div class="row">
                       <div class="col-md-11" style="margin-top: 5%;">
                         <div class="action">
-                          <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                            routerLink="/update-service/{{ servicePrincipal.id }}">Update</button>
+                          <button [disabled]="!edition" style="margin: 5%" class="add-to-cart btn btn-success"
+                            type="button" routerLink="/update-service/{{ servicePrincipal.id }}">Update</button>
                           <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                         </div>
                       </div>
@@ -106,11 +98,11 @@
                 <div class="wrapper row">
                   <div class="preview col-md-1">
                   </div>
-                  <div class="preview col-md-5">
+                  <div class="preview col-md-4">
                     <br><br><br>
                     <div class="preview-pic tab-content">
                       <div class="tab-pane active" id="pic-1">
-                        <img [src]="urlphotoServiceST" width="100%" />
+                        <img [src]="urlphotoServiceST" style="max-width: 320px;max-height: 240px;" />
                       </div>
                     </div>
                   </div>
@@ -186,11 +178,11 @@
                 <div class="wrapper row">
                   <div class="preview col-md-1">
                   </div>
-                  <div class="preview col-md-5">
+                  <div class="preview col-md-4">
                     <br><br><br>
                     <div class="preview-pic tab-content">
                       <div class="tab-pane active" id="pic-1">
-                        <img [src]="urlphotoServiceST" width="100%" />
+                        <img [src]="urlphotoServiceST" style="max-width: 320px;max-height: 240px;" />
                       </div>
                     </div>
                   </div>
@@ -217,7 +209,7 @@
                         </h5>
                       </div>
                     </div>
-           
+
                     <div class="row">
                       <div class="col-md-6">
                         <h5 class="price">Jours :
@@ -264,7 +256,7 @@
                         </h5>
                       </div>
                     </div>
-        
+
                     <div class="row">
                       <div class="col-md-11" style="margin-top: 5%;">
                         <div class="action">

@@ -21,22 +21,36 @@
                             [showCurrentPageReport]="true" [sortOrder]="-1" sortField="dateTransaction"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedTransaction"
+                            [globalFilterFields]="['id','parent.nom','parent.prenom','joueur.nom','joueur.prenom','typeClient']"
                             styleClass="p-datatable-customers">
-
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="clear(dt)"></button>
+                                    <span class="p-input-icon-left p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="dateTransaction">ID Transaction<p-sortIcon
-                                            field="dateTransaction">
+                                    <th pSortableColumn="id">ID Transaction<p-sortIcon field="id">
                                         </p-sortIcon>
                                     </th>
                                     <th pSortableColumn="dateTransaction">Date Transaction<p-sortIcon
                                             field="dateTransaction">
                                         </p-sortIcon>
                                     </th>
+                                    <th pSortableColumn="parent.nom">Client<p-sortIcon field="parent.nom">
+                                        </p-sortIcon>
+                                    </th>
                                     <th pSortableColumn="typeClient">Type Client<p-sortIcon field="typeClient">
                                         </p-sortIcon>
                                     </th>
-                                    <th></th>
+                                    <th>Détails</th>
 
 
 
@@ -49,18 +63,19 @@
                                             placeholder="ID Transaction" class="p-column-filter">
                                     </th>
                                     <th>
+                                    </th>
+                                    <th>
                                         <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'dateTransaction', 'contains')"
-                                            placeholder="Date Transaction" class="p-column-filter">
+                                            (input)="dt.filter($event.target.value, 'parent.nom', 'contains')"
+                                            placeholder="Client" class="p-column-filter">
                                     </th>
                                     <th>
                                         <input pInputText type="text"
                                             (input)="dt.filter($event.target.value, 'typeClient', 'contains')"
                                             placeholder="Type Client" class="p-column-filter">
                                     </th>
-                                    <th pSortableColumn="achat">
-                                        Détails<p-sortIcon field="achat">
-                                        </p-sortIcon>
+                                    <th>
+
                                     </th>
                                 </tr>
 
@@ -73,8 +88,11 @@
                                         {{transaction.id}}
                                     </td>
                                     <td>
-                                        {{transaction.dateTransaction| date:'shortDate' | date : 'dd-MM-yyyy'}},
-                                        {{transaction.dateTransaction| date:'shortTime'}}
+                                        {{transaction.dateTransaction| date: 'dd-MM-yyyy HH:mm:ss'}}
+                                    </td>
+                                    <td>
+                                        {{transaction?.parent?.nom}} {{transaction?.parent?.prenom}}
+                                        {{transaction?.joueur?.nom}} {{transaction?.joueur?.prenom}}
                                     </td>
                                     <td>
                                         {{transaction.typeClient}}

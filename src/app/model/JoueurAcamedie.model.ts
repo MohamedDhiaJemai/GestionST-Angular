@@ -11,7 +11,7 @@ export class JoueurAcamedie {
     public dateValidation: Date;
     public validation: boolean;
     public parent: Parent;
-    public tauxGratuite: number;
+    public mobile: string;
 
     constructor() {
 

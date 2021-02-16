@@ -58,7 +58,7 @@
                                         placeholder="Sexe" (onChange)="OnChange($event)" [showClear]="true">
                                     </p-dropdown> -->
 
-                                    <p-dropdown #dd [options]="sexes" name="sexe" [(ngModel)]="joueurPro.sexe"placeholder="Sexe" [showClear]="true"  (onChange)="OnChange($event)"></p-dropdown>
+                                    <p-dropdown #dd [options]="sexes" name="sexe" [(ngModel)]="joueurPro.sexe"placeholder="Sexe" [showClear]="true"></p-dropdown>
                                 </div>
                                 <div class="col-md-6">
                                     <p-calendar placeholder="Date Naissance" name="dateNaissance"
@@ -105,11 +105,10 @@
                         <h6 class="card-category text-gray">CEO / Co-Founder</h6>
                         <h4 class="card-title">Alec Thompson</h4>
                         <p class="card-description">
-                            Don't be scared of the truth because we need to restart the human foundation in truth And I
-                            love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+        
                         </p>
-                        <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                            maxFileSize="1000000" (onUpload)="onBasicUpload($event)" [auto]="true"></p-fileUpload>
+                        <!-- <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*"
+                            maxFileSize="1000000" (onUpload)="onBasicUpload($event)" [auto]="true"></p-fileUpload> -->
                     </div>
                 </div>
             </div>

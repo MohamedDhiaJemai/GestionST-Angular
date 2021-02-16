@@ -6,6 +6,7 @@ import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
 import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
+import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -60,7 +61,7 @@ export class UpdateServiceComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
-    this.urlphotoService = 'http://127.0.0.1:8443/image/get/' + id;
+    this.urlphotoService = environment.apiUrl + 'image/get/' + id;
     this.serviceSTService.findById(id).subscribe(
       data => {
         if (data === null) {
@@ -71,24 +72,19 @@ export class UpdateServiceComponent implements OnInit {
                   (dataAutre: ServiceAutre) => {
                     this.typeService = 'autre';
                     this.serviceAutre = dataAutre;
-                    console.log('serviceAutre', this.serviceAutre)
                   });
               } else {
-                console.log('complementaire')
                 this.typeService = 'complementaire';
                 this.serviceComplementaire = dataComp;
                 this.serviceComplementaire.jours.forEach(element => {
                   this.selectedJour.push(element);
                 });
-                console.log('serviceComplementaire', this.serviceComplementaire)
               }
             }
           );
         } else {
-          console.log('principal')
           this.typeService = 'principal';
           this.servicePrincipal = data;
-          console.log('servicePrincipal', this.servicePrincipal)
         }
       }
     );
@@ -114,97 +110,65 @@ export class UpdateServiceComponent implements OnInit {
   }
 
   ngOnUpdateServicePrincipale(templateAnnulation: TemplateRef<any>, type) {
-    console.log('SERVICE PRINCIPALE');
-    console.log(this.servicePrincipal.id);
     this.serviceSTSubscription = this.serviceSTService.updateService(this.servicePrincipal.id, this.servicePrincipal).subscribe(
       data => {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
-          console.log('formdata', formData);
           this.imageProduitService.upload(formData, this.servicePrincipal.id).subscribe(
             data2 => {
-              console.log('ok');
+              this.routerNav.navigate(['/consulter-service/' + this.servicePrincipal.id]);
             }
           );
         }
-        this.routerNav.navigate(['/consulter-service/' + this.servicePrincipal.id]);
-      },
-      err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-        }
+      }, err => {
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();
   }
 
   ngOnUpdateServiceComplementaire(templateAnnulation: TemplateRef<any>) {
-    console.log('SERVICE COMPLEMENTAIRE');
     this.serviceComplementaire.jours = this.selectedJour;
     this.serviceSTSubscription = this.serviceSTService.updateServiceComplement(this.serviceComplementaire.id, this.serviceComplementaire)
       .subscribe(data => {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
-          console.log('formdata', formData);
           this.imageProduitService.upload(formData, this.serviceComplementaire.id).subscribe(
             data2 => {
-              console.log('ok');
+              this.routerNav.navigate(['/consulter-service/' + this.serviceComplementaire.id]);
             }
           );
         }
-        this.routerNav.navigate(['/consulter-service/' + this.serviceComplementaire.id]);
-      },
-        err => {
-          if (err.status === 500) {
-            this.modalRef.hide();
-            this.modalRefAnnul = this.modalService.show(templateAnnulation);
-            console.log('STATUS 500');
-          }
-        }
+      }, err => {
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
+      }
       );
     this.modalRef.hide();
   }
 
   ngOnUpdateServiceAutre(templateAnnulation: TemplateRef<any>, type) {
-    console.log('SERVICE Autre');
-    console.log(this.serviceAutre.id);
     this.serviceSTSubscription = this.serviceSTService.updateServiceAutre(this.serviceAutre.id, this.serviceAutre).subscribe(
       data => {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
-          console.log('formdata', formData);
           this.imageProduitService.upload(formData, this.serviceAutre.id).subscribe(
             data2 => {
-              console.log('ok');
+              this.routerNav.navigate(['/consulter-service/' + this.serviceAutre.id]);
             }
           );
         }
-        this.routerNav.navigate(['/consulter-service/' + this.serviceAutre.id]);
-      },
-      err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-        }
+      }, err => {
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();
   }
-
-  // ngOnUpdateService(templateAnnulation: TemplateRef<any>) {
-  //   console.log(this.test);
-  //   if (this.test = false) {
-
-  //   } else if (this.test = true) {
-
-  //   }
-  // }
 
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

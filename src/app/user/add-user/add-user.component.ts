@@ -35,17 +35,11 @@ export class AddUserComponent implements OnInit {
   }
 
   onAddUser() {
-    console.log('selected Role', this.selectedRole)
     this.user.roles = this.selectedRole;
     this.userService.addUtilisateur(this.user).subscribe(
       data => {
 
         this.router.navigate(['utilisateurs'])
-      },
-      err => {
-        if (err.status === 500) {
-          console.log(err);
-        }
       }
     );
   }

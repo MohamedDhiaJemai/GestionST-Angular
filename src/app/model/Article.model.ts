@@ -8,7 +8,7 @@ export class Article {
     public quantite: number;
     public sexe: string;
     public visible: boolean;
-    public stocks: Stocks;
+    public stocks: Stocks[];
 
     constructor() { }
 

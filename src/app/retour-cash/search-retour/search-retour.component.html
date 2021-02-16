@@ -31,8 +31,8 @@
                                 </div>
                             </div>
                             <br>
-                            <div *ngIf="!exist" class="row text-center">
-                                <div class="col-md-12">
+                            <div *ngIf="submitted && !exist" class="row text-center">
+                                <div class="col-md-12 p-error">
                                     Aucun retour.
                                 </div>
                             </div>

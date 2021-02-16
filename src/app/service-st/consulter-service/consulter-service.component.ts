@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ServiceAutre } from 'app/model/ServiceAutre.model';
 import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
 import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { ServiceSTService } from 'app/services/serviceST/service-st.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-consulter-service',
@@ -17,12 +19,17 @@ export class ConsulterServiceComponent implements OnInit {
   serviceAutre: ServiceAutre = new ServiceAutre();
   urlphotoServiceST: string;
   typeService: string;
-
-  constructor(private router: ActivatedRoute, private serviceSTService: ServiceSTService) { }
+  edition: boolean;
+  consultation: boolean;
+  constructor(private router: ActivatedRoute, private serviceSTService: ServiceSTService,
+    private autorisationService: AutorisationService) { }
 
   ngOnInit() {
+    const obj = this.autorisationService.checkAutorisations1('services');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
     const id = this.router.snapshot.params['id'];
-    this.urlphotoServiceST = 'http://127.0.0.1:8443/image/get/' + id;
+    this.urlphotoServiceST = environment.apiUrl + 'image/get/' + id;
 
     this.serviceSTService.findById(id).subscribe(
       data => {
@@ -32,24 +39,19 @@ export class ConsulterServiceComponent implements OnInit {
               if (dataComp === null) {
                 this.serviceSTService.findByIdAutre(id).subscribe(
                   (dataTest: ServiceAutre) => {
-                    console.log(dataTest)
                     this.typeService = 'autre';
                     this.serviceAutre = dataTest;
                   }
                 );
               } else {
-                console.log(dataComp)
                 this.typeService = 'complementaire';
                 this.serviceComplementaire = dataComp;
-                console.log('complementaire')
               }
             }
           );
-          console.log('complementaire')
         } else {
           this.typeService = 'principal';
           this.servicePrincipal = data;
-          console.log(this.servicePrincipal)
         }
       }
     );

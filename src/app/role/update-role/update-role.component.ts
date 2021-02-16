@@ -25,34 +25,27 @@ export class UpdateRoleComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
-    console.log('id', id);
     this.roleSubscription = this.roleService.findById(id).subscribe(
       data => {
         this.ancienRole = data.designation;
-        console.log('ancienRole', this.ancienRole);
         this.role = data;
       });
   }
 
   ngOnUpdateRole(templateAnnulation: TemplateRef<any>) {
-    console.log('role', this.role)
     this.roleSubscription = this.roleService.updateRole(this.role.id, this.role).subscribe(
       data => {
         this.routerNav.navigate(['/roles']);
       },
       err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();
   }
 
-  public openModal (template: TemplateRef <any>) {
+  public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 

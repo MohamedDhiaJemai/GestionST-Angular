@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Categorie } from 'app/model/Categorie.model';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { CategorieService } from 'app/services/categorie/categorie.service';
 import { Table } from 'primeng/table';
 
@@ -10,44 +11,20 @@ import { Table } from 'primeng/table';
   styleUrls: ['./categorie.component.css']
 })
 export class CategorieComponent implements OnInit {
-
   categories: Categorie[];
   selectedCategorie: Categorie;
   edition: boolean;
   consultation: boolean;
   @ViewChild('dt') table: Table;
-
-  constructor(private categorieService: CategorieService, private router: Router) { }
-
+  constructor(private categorieService: CategorieService, private autorisationService: AutorisationService) { }
   ngOnInit() {
-    this.checkAutorisations();
-
+    const obj = this.autorisationService.checkAutorisations1('categories');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
     this.categorieService.getAllCategorie().subscribe(
       data => {
         this.categories = data;
       }
     );
-  }
-
-  checkAutorisations() {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
-
-    const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
-    this.edition = false;
-    this.consultation = false;
-    if (roless.includes('ADMIN')) {
-      this.edition = true;
-      this.consultation = true;
-    } else {
-      autorisations.forEach(element => {
-        if (element.metier === 'categories') {
-          if (!element.consultation) {
-            this.router.navigateByUrl('/acceuil');
-          }
-          this.edition = element.edition;
-          this.consultation = element.consultation;
-        }
-      });
-    }
   }
 }

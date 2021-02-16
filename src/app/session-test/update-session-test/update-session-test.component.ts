@@ -38,11 +38,6 @@ export class UpdateSessionTestComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.router.snapshot.params['id'];
-    // const now = new Date();
-    // const year = now.getFullYear();
-    // this.annees = (year - 45).toString() + ':' + (year - 4).toString();
-    // console.log(this.annees);
-
     this.categorieService.getAllCategorie().subscribe(
       data => {
         this.categories = data;
@@ -56,7 +51,6 @@ export class UpdateSessionTestComponent implements OnInit {
         this.fs = new Date(this.session.finSession);
         this.di = new Date(this.session.debutInscription);
         this.fi = new Date(this.session.finInscription);
-        console.log(this.session)
       }
     );
   }
@@ -73,12 +67,8 @@ export class UpdateSessionTestComponent implements OnInit {
         this.routerNav.navigate(['/sessions-test']);
       },
       err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();

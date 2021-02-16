@@ -19,7 +19,6 @@ export class ConsulterBorneComponent implements OnInit {
     this.borneService.findById(id).subscribe(
       data => {
         this.borne = data;
-        console.log(this.borne)
       }
     );
   }

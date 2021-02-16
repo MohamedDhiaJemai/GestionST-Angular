@@ -1,57 +1,32 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { TokenService } from '../token/token.service';
 import { JwtHelper } from 'angular2-jwt';
 import { Autorisation } from 'app/model/Autorisation.model';
 import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutorisationService {
-  apiUrl = 'http://127.0.0.1:8443/autorisations';
-
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  private roles: Array<any> = [];
-
   username: string;
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
+  jwtHelper: JwtHelper = new JwtHelper();
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService, private router: Router) { }
   updateAutorisation(autorisation: Autorisation) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.put(this.apiUrl + '/update', autorisation,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.put(environment.apiUrl + 'autorisations/update', autorisation,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findAutorisations(): Observable<any> {
-    this.loadToken();
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/utilisateur/' + this.jwtHelper.decodeToken(this.jwtToken).sub,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/'
+      + this.jwtHelper.decodeToken(this.tokenUtil.getToken()).sub,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findAutorisationsByUser(username: string): Observable<any> {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get(this.apiUrl + '/utilisateur/' + username,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
-
+    return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/' + username,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   setAutorisations(autorisations: Autorisation[]) {
     let array = new Array<any>();
     autorisations.forEach(element => {
@@ -61,9 +36,51 @@ export class AutorisationService {
     localStorage.setItem('autorisations', JSON.stringify(array));
   }
 
-  // getAutorisations(): Array<any> {
-  //   return JSON.parse(localStorage.getItem('autorisations'));
-  // }
-
-
+  checkAutorisations1(metier: string) {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+    const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    let edition = false;
+    let consultation = false;
+    if (roless.includes('ADMIN')) {
+      edition = true;
+      consultation = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === metier) {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          edition = element.edition;
+          consultation = element.consultation;
+        }
+      });
+    }
+    return { edition: edition, consultation: consultation };
+  }
+  checkAutorisations2(metier1: string, metier2: string) {
+    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+    const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
+    let edition = false;
+    let consultation = false;
+    let consultationSup = false;
+    if (roless.includes('ADMIN')) {
+      edition = true;
+      consultation = true;
+      consultationSup = true;
+    } else {
+      autorisations.forEach(element => {
+        if (element.metier === metier1) {
+          if (!element.consultation) {
+            this.router.navigateByUrl('/acceuil');
+          }
+          edition = element.edition;
+          consultation = element.consultation;
+        }
+        if (element.metier === metier2) {
+          consultationSup = element.consultation;
+        }
+      });
+    }
+    return { edition: edition, consultation: consultation, consultationSup: consultationSup };
+  }
 }

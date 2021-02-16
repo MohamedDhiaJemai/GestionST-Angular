@@ -36,17 +36,14 @@ export class AddJoueurProComponent implements OnInit {
     this.categorieService.getAllCategorie().subscribe(
       data => {
         this.itemsCategories = data;
-        console.log(this.itemsCategories);
       }
     );
   }
 
   onAddJoueurPro() {
     this.joueurPro.dateNaissance = this.datePipe.transform(this.joueurPro.dateNaissance, 'yyyy-MM-dd');
-    console.log('Professionnel', this.joueurPro)
     this.joueurProService.addjProfessionnel(this.joueurPro).subscribe(
-      data => this.router.navigate(['joueur-professionnel']),
-      error => console.log(error)
+      data => this.router.navigate(['joueur-professionnel'])
     );
   }
 

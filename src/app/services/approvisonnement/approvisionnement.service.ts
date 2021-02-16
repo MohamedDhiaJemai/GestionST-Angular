@@ -1,57 +1,28 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
 import { Approvisonnement } from 'app/model/Approvisonnement.model';
-import { Stocks } from 'app/model/Stocks.model';
+import { environment } from 'environments/environment';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApprovisionnementService {
-
-  apiUrl = 'http://127.0.0.1:8443/approvisionnement';
-  private jwtToken = null;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
-
-  loadToken() {
-    this.jwtToken = localStorage.getItem('token');
-  }
-
-  addToken() {
-    localStorage.clear();
-    // location.reload();
-    this.router.navigateByUrl('/login');
-  }
-
+  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   findByArticle(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<Approvisonnement>(this.apiUrl + '/article/' + id,
-    {headers: new HttpHeaders({'authorization': this.jwtToken})});
+    return this.httpClient.get<Approvisonnement>(environment.apiUrl + 'approvisionnement/article/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findByStock(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<Approvisonnement>(this.apiUrl + '/stock' + id,
-    {headers: new HttpHeaders({'authorization': this.jwtToken})});
+    return this.httpClient.get<Approvisonnement>(environment.apiUrl + 'approvisionnement/stock' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   addApprovisonnement(approvisionnement: Approvisonnement) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.post(this.apiUrl + '/add', approvisionnement,
-      { headers: new HttpHeaders({ 'authorization': this.jwtToken }) });
+    return this.httpClient.post(environment.apiUrl + 'approvisionnement/add', approvisionnement,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
   findById(id) {
-    if (this.jwtToken == null) { this.loadToken(); }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) { this.addToken(); }
-    return this.httpClient.get<ApprovisionnementService>(this.apiUrl + '/' + id,
-    {headers: new HttpHeaders({'authorization': this.jwtToken})});
+    return this.httpClient.get<ApprovisionnementService>(environment.apiUrl + 'approvisionnement/' + id,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-
 }

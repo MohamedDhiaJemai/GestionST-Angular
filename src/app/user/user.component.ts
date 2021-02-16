@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Utilisateur } from 'app/model/Utilisateur.model';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { UserService } from 'app/services/user/user.service';
 import { Table } from 'primeng/table';
 
@@ -10,51 +11,20 @@ import { Table } from 'primeng/table';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
   users: Utilisateur[];
   selecteduser: Utilisateur;
-
   edition: boolean;
   consultation: boolean;
-
   @ViewChild('dt') table: Table;
-
-  constructor(private userService: UserService, private router: Router) { }
-
+  constructor(private userService: UserService, private autorisationService: AutorisationService) { }
   ngOnInit() {
-    this.checkAutorisations();
-
+    const obj = this.autorisationService.checkAutorisations1('utilisateurs');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
     this.userService.getAllUtilisateur().subscribe(
       data => {
         this.users = data;
-        console.log('users List : ', this.users);
       }
     );
   }
-
-  checkAutorisations() {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
-
-        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
-    this.edition = false;
-    this.consultation = false;
-    if (roless.includes('ADMIN')) {
-      this.edition = true;
-      this.consultation = true;
-    } else {
-      autorisations.forEach(element => {
-        if (element.metier === 'utilisateurs') {
-          if (!element.consultation) {
-            this.router.navigateByUrl('/acceuil');
-          }
-          this.edition = element.edition;
-          this.consultation = element.consultation;
-        }
-      });
-    }
-  }
-
-  selectUser(user) {
-  }
-
 }

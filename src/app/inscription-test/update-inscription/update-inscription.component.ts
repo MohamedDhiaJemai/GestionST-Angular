@@ -6,6 +6,7 @@ import { InscriptionTest } from 'app/model/InscriptionTest.model';
 import { CategorieService } from 'app/services/categorie/categorie.service';
 import { InscriptionTestService } from 'app/services/inscription-test/inscription-test.service';
 import { PhotoTestService } from 'app/services/photo-test/photo-test.service';
+import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
@@ -67,12 +68,11 @@ export class UpdateInscriptionComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.router.snapshot.params['id'];
-    this.urlPhoto = 'http://127.0.0.1:8443/photo-test/get/' + this.id;
+    this.urlPhoto = environment.apiUrl + 'photo-test/get/' + this.id;
 
     const now = new Date();
     const year = now.getFullYear();
     this.annees = (year - 45).toString() + ':' + (year - 4).toString();
-    console.log(this.annees);
 
     this.categorieService.getAllCategorie().subscribe(
       data => {
@@ -84,7 +84,6 @@ export class UpdateInscriptionComponent implements OnInit {
       data => {
         this.inscription = data;
         this.date = new Date(this.inscription.dateNaissance);
-        console.log(this.inscription)
       }
     );
 
@@ -117,24 +116,18 @@ export class UpdateInscriptionComponent implements OnInit {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
-          console.log('formdata', formData);
           this.photoService.upload(formData, this.inscription.id).subscribe(
             data2 => {
-              console.log('ok');
+              this.routerNav.navigate(['/consulter-inscription/' + this.inscription.id]);
             }
           );
         }
 
 
-        this.routerNav.navigate(['/consulter-inscription/' + this.inscription.id]);
       },
       err => {
-        if (err.status === 500) {
-          this.modalRef.hide();
-          this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
-          // this.routerNav.navigateByUrl('/role/details/' + id);
-        }
+        this.modalRef.hide();
+        this.modalRefAnnul = this.modalService.show(templateAnnulation);
       }
     );
     this.modalRef.hide();
@@ -160,7 +153,6 @@ export class UpdateInscriptionComponent implements OnInit {
         this.myfilePhoto = [];
       },
     );
-    console.log('my file ', this.myfilePhoto)
     this.myfilePhoto = [];
     this.inputValueImage = 0;
   }

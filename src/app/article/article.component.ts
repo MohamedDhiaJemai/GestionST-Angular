@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 
 @Component({
   selector: 'app-article',
@@ -9,34 +9,10 @@ import { Router } from '@angular/router';
 export class ArticleComponent implements OnInit {
   edition: boolean;
   consultation: boolean;
-
-  constructor(private router: Router) { }
-
+  constructor(private autorisationService: AutorisationService) { }
   ngOnInit(): void {
-    this.checkAutorisations();
-
+    const obj = this.autorisationService.checkAutorisations1('articles');
+    this.edition = obj.edition;
+    this.consultation = obj.consultation;
   }
-
-  checkAutorisations() {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
-
-        const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
-    this.edition = false;
-    this.consultation = false;
-    if (roless.includes('ADMIN')) {
-      this.edition = true;
-      this.consultation = true;
-    } else {
-      autorisations.forEach(element => {
-        if (element.metier === 'articles') {
-          if (!element.consultation) {
-            this.router.navigateByUrl('/acceuil');
-          }
-          this.edition = element.edition;
-          this.consultation = element.consultation;
-        }
-      });
-    }
-  }
-
 }

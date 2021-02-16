@@ -94,8 +94,8 @@
                                     </td>
                                     <td>
                                         <div style="text-align: center;">
-                                            <button  [disabled]="!edition" routerLink="/update-parent/{{ parent.id }}" pButton pRipple
-                                                type="button" icon="pi pi-refresh"
+                                            <button [disabled]="!edition" routerLink="/update-parent/{{ parent.id }}"
+                                                pButton pRipple type="button" icon="pi pi-refresh"
                                                 class="p-button-rounded p-button-success"></button>
                                         </div>
 
@@ -122,12 +122,16 @@
     <ol>
         <div *ngFor="let enfant of listEnfant">
             <br>
-            <li>
+            <li [hidden]="!enfant.validation">
                 <a style="color: black;" routerLink="/consulter-joueur-academie/{{enfant.id}}" target="_blank">
                     {{enfant.nom}}
                     {{enfant.prenom}}</a>
             </li>
-
+            <li [hidden]="enfant.validation">
+                <a style="color: black;" routerLink="/update-joueur-academie-validation/{{enfant.id}}" target="_blank">
+                    {{enfant.nom}}
+                    {{enfant.prenom}}</a>
+            </li>
         </div>
     </ol>
     <p-footer>

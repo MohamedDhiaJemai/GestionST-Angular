@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'app/model/Article.model';
 import { ArticleService } from 'app/services/article/article.service';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
+import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -53,7 +54,7 @@ export class UpdateArticleComponent implements OnInit {
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
 
-    this.urlphotoArticle = 'http://127.0.0.1:8443/image/get/' + id;
+    this.urlphotoArticle = environment.apiUrl + 'image/get/' + id;
     this.articleService.findById(id).subscribe(
       data => {
         this.article = data;
@@ -87,20 +88,18 @@ export class UpdateArticleComponent implements OnInit {
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
-          console.log('formdata', formData);
           this.imageProduitService.upload(formData, this.article.id).subscribe(
             data2 => {
-              console.log('ok');
+              this.routerNav.navigate(['/consulter-article/' + this.article.id]);
+
             }
           );
         }
-        this.routerNav.navigate(['/consulter-article/' + this.article.id]);
       },
       err => {
         if (err.status === 500) {
           this.modalRef.hide();
           this.modalRefAnnul = this.modalService.show(templateAnnulation);
-          console.log('STATUS 500');
         }
       }
     );

@@ -21,7 +21,7 @@
                                 <div class="wrapper row">
                                     <div class="preview col-md-1">
                                     </div>
-                                    <div class="preview col-md-5">
+                                    <div class="preview col-md-4">
                                         <br><br><br>
                                         <div class="preview-pic tab-content">
                                             <div class="tab-pane active" id="pic-1">
@@ -63,6 +63,16 @@
                                         </div>
 
                                         <br>
+                                        <div class="row">
+                                            <div class="col-md-6" style="margin-top: 4%;">
+                                                <h5 class="price">libellé:
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input pInputText type="text" name="nbrMois"
+                                                    [(ngModel)]="servicePrincipal.libelle">
+                                            </div>
+                                        </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-6" style="margin-top: 4%;">
@@ -70,10 +80,8 @@
                                                 </h5>
                                             </div>
                                             <div class="col-md-6">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput type="text" name="nbrMois"
-                                                        [(ngModel)]="servicePrincipal.nbrMois">
-                                                </mat-form-field>
+                                                <input pInputText type="text" name="nbrMois"
+                                                    [(ngModel)]="servicePrincipal.nbrMois">
                                             </div>
                                         </div>
                                         <br>
@@ -99,7 +107,8 @@
 
                                             <div class="col-md-6">
                                                 <p-dropdown #dd [options]="sexes" name="sexe"
-                                                    [(ngModel)]="servicePrincipal.sexe" placeholder="Sexe" [showClear]="true">
+                                                    [(ngModel)]="servicePrincipal.sexe" placeholder="Sexe"
+                                                    [showClear]="true">
                                                 </p-dropdown>
                                             </div>
                                         </div>
@@ -146,7 +155,7 @@
                                 <div class="wrapper row">
                                     <div class="preview col-md-1">
                                     </div>
-                                    <div class="preview col-md-5">
+                                    <div class="preview col-md-4">
                                         <br><br><br>
                                         <div class="preview-pic tab-content">
                                             <div class="tab-pane active" id="pic-1">
@@ -188,7 +197,17 @@
                                         </div>
 
                                         <br>
-                                        <br>
+                                        <!-- <div class="row">
+                                            <div class="col-md-6" style="margin-top: 4%;">
+                                                <h5 class="price">libellé:
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input pInputText type="text" name="libelle"
+                                                    [(ngModel)]="serviceAutre.libelle">
+                                            </div>
+                                        </div>
+                                        <br> -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <h5 class="price" style="margin-top: 5%;">current price:
@@ -203,19 +222,20 @@
 
                                         <br>
 
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-md-6">
                                                 <h5 class="price" style="margin-top: 5%;">Category :</h5>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <p-dropdown #dd [options]="sexes" name="sexe"
-                                                    [(ngModel)]="serviceAutre.sexe" placeholder="Sexe" [showClear]="true">
+                                                    [(ngModel)]="serviceAutre.sexe" placeholder="Sexe"
+                                                    [showClear]="true">
                                                 </p-dropdown>
                                             </div>
                                         </div>
-                                        <br>
-                                        <div class="row">
+                                        <br> -->
+                                        <!-- <div class="row">
                                             <div class="col-md-6">
                                                 <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
                                             </div>
@@ -223,12 +243,12 @@
                                                 <p-inputSwitch name="visible" [(ngModel)]="serviceAutre.visible">
                                                 </p-inputSwitch>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="row">
                                             <div class="col-md-11" style="margin-top: 5%;">
                                                 <div class="action">
-                                                    <button style="margin: 5%" class="add-to-cart btn btn-success"
+                                                    <button style="margin-right: 5%" class="add-to-cart btn btn-success"
                                                         type="button" (click)="openModal(template)">Sauvegarder
                                                     </button>
                                                     <button class="like btn btn-default" type="button"
@@ -257,7 +277,7 @@
                                 <div class="wrapper row">
                                     <div class="preview col-md-1">
                                     </div>
-                                    <div class="preview col-md-5">
+                                    <div class="preview col-md-4">
                                         <br><br><br>
                                         <div class="preview-pic tab-content">
                                             <div class="tab-pane active" id="pic-1">
@@ -299,6 +319,16 @@
                                         </div>
 
                                         <br>
+                                        <div class="row">
+                                            <div class="col-md-6" style="margin-top: 4%;">
+                                                <h5 class="price">libellé:
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input pInputText type="text" name="nbrMois"
+                                                    [(ngModel)]="serviceComplementaire.libelle">
+                                            </div>
+                                        </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-6" style="margin-top: 4%;">
@@ -306,10 +336,8 @@
                                                 </h5>
                                             </div>
                                             <div class="col-md-6">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput type="text" name="nbrMois"
-                                                        [(ngModel)]="serviceComplementaire.nbrMois">
-                                                </mat-form-field>
+                                                <input pInputText type="text" name="nbrMois"
+                                                    [(ngModel)]="serviceComplementaire.nbrMois">
                                             </div>
                                         </div>
                                         <br>
@@ -335,7 +363,8 @@
 
                                             <div class="col-md-6">
                                                 <p-dropdown #dd [options]="sexes" name="sexe"
-                                                    [(ngModel)]="serviceComplementaire.sexe" placeholder="Sexe" [showClear]="true">
+                                                    [(ngModel)]="serviceComplementaire.sexe" placeholder="Sexe"
+                                                    [showClear]="true">
                                                 </p-dropdown>
                                             </div>
                                         </div>
@@ -345,7 +374,8 @@
                                                 <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
                                             </div>
                                             <div class="col-md-6">
-                                                <p-inputSwitch name="visible" [(ngModel)]="serviceComplementaire.visible">
+                                                <p-inputSwitch name="visible"
+                                                    [(ngModel)]="serviceComplementaire.visible">
                                                 </p-inputSwitch>
                                             </div>
                                         </div>

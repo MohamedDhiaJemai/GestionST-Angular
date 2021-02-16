@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageJoueurComponent } from './image-joueur.component';
+import { AppelComponent } from './appel.component';
 
-describe('ImageJoueurComponent', () => {
-  let component: ImageJoueurComponent;
-  let fixture: ComponentFixture<ImageJoueurComponent>;
+describe('AppelComponent', () => {
+  let component: AppelComponent;
+  let fixture: ComponentFixture<AppelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageJoueurComponent ]
+      declarations: [ AppelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageJoueurComponent);
+    fixture = TestBed.createComponent(AppelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

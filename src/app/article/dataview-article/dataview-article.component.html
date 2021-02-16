@@ -14,24 +14,21 @@
     <ng-template let-product pTemplate="listItem">
         <div class="p-col-12">
             <div class="product-list-item">
-                <img [src]="'http://127.0.0.1:8443/image/get/' + product.id" />
+                <img [src]="imgUrl + product.id" />
                 <div class="product-list-detail">
                     <div class="product-name">{{product.libelle}} </div>
                     <br>
                     <div class="product-description">{{product.sexe}}</div>
                     <span class="product-category">
-
                         <div *ngIf="product.visible === true" style="color: green;">
                             <i class="pi pi-tag product-category-icon"></i> VISIBLE
                         </div>
                         <div *ngIf="product.visible == false" style="color: red;">
                             <i class="pi pi-tag product-category-icon"></i> INVISIBLE
                         </div>
-
                     </span>
 
                 </div>
-
                 <div class="product-list-action">
                     <span class="product-price">{{product.prix}} TND </span>
                     <br>
@@ -61,12 +58,10 @@
                     </span>
                 </div>
                 <div class="product-grid-item-content">
-                    <img [src]="'http://127.0.0.1:8443/image/get/' + product.id" />
+                    <img [src]="imgUrl + product.id" style="max-width: 160px;max-height: 120px;" />
                     <div class="product-name">{{product.libelle}} {{product.prenom}}</div>
-                    <br>
-                    <div class="product-description">Référence : {{ product.id}}</div>
-
                 </div>
+                <br>
                 <div class="product-grid-item-bottom">
                     <span class="product-price">{{ product.prix }} TND</span>
                     <button routerLink="/consulter-article/{{ product.id }}" pButton pRipple type="button"
