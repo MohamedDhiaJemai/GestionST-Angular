@@ -44,6 +44,10 @@
                                         <th pSortableColumn="taux" class="text-center">Taux
                                             <p-sortIcon field="taux">
                                             </p-sortIcon>
+                                            <p-columnFilter type="text" field="taux" ></p-columnFilter>
+                                            <!-- <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'taux', 'contains')"
+                                                placeholder="taux" class="p-column-filter"> -->
                                         </th>
                                         <th pSortableColumn="moisDebut" class="text-center">Date début
                                             <p-sortIcon field="moisDebut">
@@ -53,34 +57,21 @@
                                             <p-sortIcon field="moisFin">
                                             </p-sortIcon>
                                         </th>
+                                        <th pSortableColumn="motif" class="text-center">motif
+                                            <p-sortIcon field="motif">
+                                            </p-sortIcon>
+                                            <input pInputText type="text" style="width: 100%;"
+                                                (input)="dt.filter($event.target.value, 'motif', 'contains')"
+                                                placeholder="motif" class="p-column-filter">
+                                        </th>
                                         <th pSortableColumn="activation" class="text-center">Activation
                                             <p-sortIcon field="activation">
                                             </p-sortIcon>
-                                        </th>
-                                        <!-- <th style="width: 6rem;"></th> -->
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'taux', 'contains')"
-                                                placeholder="taux" class="p-column-filter">
-                                        </th>
-                                        <th>
-                                            <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'moisDebut', 'contains')"
-                                                placeholder="moisDebut" class="p-column-filter">
-                                        </th>
-                                        <th>
-                                            <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'moisFin', 'contains')"
-                                                placeholder="moisFin" class="p-column-filter">
-                                        </th>
-                                        <th>
                                             <input pInputText type="text" style="width: 100%;"
                                                 (input)="dt.filter($event.target.value, 'activation', 'contains')"
                                                 placeholder="activation" class="p-column-filter">
                                         </th>
-                                        <!-- <th></th> -->
+                                        <!-- <th style="width: 6rem;"></th> -->
                                     </tr>
                                 </ng-template>
 
@@ -89,6 +80,7 @@
                                         <td>{{gratuitee.taux}} %</td>
                                         <td>{{gratuitee.moisDebut | date:'MM-yyyy'}}</td>
                                         <td>{{gratuitee.moisFin | date:'MM-yyyy'}}</td>
+                                        <td>{{gratuitee.motif}}</td>
                                         <td>
                                             <button [disabled]="!edition" [hidden]="!gratuitee.activation" type="button"
                                                 (click)="editActivation(gratuitee)" pButton pRipple
@@ -99,11 +91,6 @@
                                                 icon="pi pi-thumbs-down"
                                                 class="p-button-rounded p-button-danger"></button>
                                         </td>
-                                        <!-- <td>
-                                            <button [disabled]="!edition" pButton pRipple icon="pi pi-pencil"
-                                                class="p-button-rounded p-button-success p-mr-2"
-                                                (click)="edit(gratuitee)"></button>
-                                        </td> -->
                                     </tr>
                                 </ng-template>
                             </p-table>
@@ -117,18 +104,22 @@
 <p-dialog [(visible)]="gratuiteDialog" [style]="{width: '500px'}" header="Gratuité Details" [modal]="true"
     styleClass="p-fluid">
     <ng-template pTemplate="content">
-        <div class="p-formgrid p-grid">
-            <div class="p-field p-col">
+        <div class="p-formgrid p-grid p-jc-center">
+            <div class="p-field p-col-3">
                 <label for="name">Taux</label>
-                <input type="text" pInputText id="name" [(ngModel)]="gratuite.taux" required autofocus />
+                <input type="number" pInputText id="taux" [(ngModel)]="gratuite.taux" required autofocus />
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-3">
                 <div style="padding-left: 30px;">
                     <label for="name">Activation</label><br>
                     <p-inputSwitch [style]="{'margin-top': '10px'}" name="validation" [(ngModel)]="gratuite.activation">
                     </p-inputSwitch>
                 </div>
             </div>
+        </div>
+        <div class="p-field p-col">
+            <label for="name">Motif</label>
+            <input type="text" pInputText id="motif" [(ngModel)]="gratuite.motif" required />
         </div>
         <div class="p-field">
             <label for="name">Date début</label>
