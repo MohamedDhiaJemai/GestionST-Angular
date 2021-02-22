@@ -9,9 +9,10 @@ export class ArretCaisse {
     public montantRetour: number;
     public montantDon: number;
 
-    public borne: Borne;
-    public dateArret: string;
     public montantCaisseBorne: number;
+    public borne: Borne;
+
+    public dateArret: string;
     public caissier: Utilisateur;
 
     constructor() { }

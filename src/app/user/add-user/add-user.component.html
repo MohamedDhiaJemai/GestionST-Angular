@@ -14,7 +14,6 @@
 
           <div class="card-body">
             <form>
-
               <br>
               <div class="row">
                 <div class="col-md-5">
@@ -24,7 +23,6 @@
                 </div>
               </div>
               <br>
-
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
@@ -37,7 +35,6 @@
                   </mat-form-field>
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
@@ -50,32 +47,26 @@
                   </mat-form-field>
                 </div>
               </div>
-
               <br>
-
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
                     <input matInput placeholder="Selectionner role " disabled>
                   </mat-form-field>
                 </div>
-
                 <div class="col-md-6" style="margin-top: 1%;">
-                  <p-multiSelect [options]="items" [showToggleAll]="false" name="roles" [(ngModel)]="selectedRole"
+                  <p-multiSelect [options]="roles" [showToggleAll]="false" name="roles" [(ngModel)]="user.roles"
                     optionLabel="designation" [virtualScroll]="true" [filter]="true" [itemSize]="34"
                     class="multiselect-custom-virtual-scroll">
-                    <ng-template let-country pTemplate="item">
-                      <div class="country-item">
-                        <div>{{country.value.designation}}</div>
+                    <ng-template let-role pTemplate="item">
+                      <div class="role-item">
+                        <div>{{role.designation}}</div>
                       </div>
                     </ng-template>
-
                   </p-multiSelect>
-
                 </div>
               </div>
               <br>
-
               <div class="row">
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
@@ -83,22 +74,11 @@
                   </mat-form-field>
                 </div>
               </div>
-
               <br>
-
-
-              <div class="row">
-                <div class="col-md-12">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Username" type="text" name="username" [(ngModel)]="user.username">
-                  </mat-form-field>
-                </div>
-              </div>
-
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Password" type="password">
+                    <input matInput placeholder="Username" type="text" name="username" [(ngModel)]="user.username">
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
@@ -107,12 +87,6 @@
                   </mat-form-field>
                 </div>
               </div>
-
-              <br>
-
-
-              <br>
-
               <br>
               <br>
               <button mat-raised-button type="submit" class="btn btn-danger pull-right"

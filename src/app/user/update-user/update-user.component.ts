@@ -5,6 +5,7 @@ import { Utilisateur } from 'app/model/Utilisateur.model';
 import { RoleService } from 'app/services/role/role.service';
 import { UserService } from 'app/services/user/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,8 +22,7 @@ export class UpdateUserComponent implements OnInit {
   modalRef: BsModalRef;
   modalRefAnnul: BsModalRef;
 
-  listRole: any[];
-  selectedRole: any[];
+  listRole: Role[];
 
   constructor(private userService: UserService, private router: ActivatedRoute,
     private routerNav: Router, private modalService: BsModalService,
@@ -30,22 +30,18 @@ export class UpdateUserComponent implements OnInit {
 
   ngOnInit() {
     const id = this.router.snapshot.params['id'];
+    this.roleService.getAllRole().subscribe(
+      (dataRoles) => {
+        this.listRole = dataRoles;
+      }
+    );
     this.userSubscription = this.userService.findById(id).subscribe(
       data => {
         this.user = data;
-        this.selectedRole = data.roles;
-
-        this.roleService.getAllRole().subscribe(
-          (dataRoles) => {
-            this.listRole = dataRoles;
-          }
-        );
-
       });
   }
 
   ngOnUpdateUtilisateur(templateAnnulation: TemplateRef<any>) {
-    this.user.roles = this.selectedRole;
     this.userSubscription = this.userService.updateUtilisateur(this.user.id, this.user).subscribe(
       data => {
         this.routerNav.navigate(['/utilisateurs']);

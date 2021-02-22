@@ -14,13 +14,7 @@ import { SelectItem } from 'primeng/api';
 export class AddUserComponent implements OnInit {
 
   user: Utilisateur = new Utilisateur();
-
-  listRole: any[];
-  selectedRole: any[];
   roles: Role[];
-
-  item: string;
-  items: SelectItem[];
 
   constructor(private userService: UserService, private router: Router,
     private roleService: RoleService) { }
@@ -28,17 +22,14 @@ export class AddUserComponent implements OnInit {
   ngOnInit(): void {
     this.roleService.getAllRole().subscribe(
       data => {
-        this.items = data;
+        this.roles = data;
       }
     );
-    this.selectedRole = [];
   }
 
   onAddUser() {
-    this.user.roles = this.selectedRole;
     this.userService.addUtilisateur(this.user).subscribe(
       data => {
-
         this.router.navigate(['utilisateurs'])
       }
     );

@@ -11,6 +11,7 @@ export class Utilisateur {
     public telephone: string;
     public email: string;
     public roles: Role[];
+    public nomUtilisateur: string;
 
     constructor() { }
 

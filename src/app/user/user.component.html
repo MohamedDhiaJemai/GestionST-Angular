@@ -30,70 +30,52 @@
                         <p-table #dt [value]="users" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selecteduser"
-                            styleClass="p-datatable-customers">
+                            styleClass="p-datatable-striped" [responsive]="true">
 
                             <ng-template pTemplate="header">
                                 <tr>
-
-                                    <th pSortableColumn="nom">Nom <p-sortIcon field="nom"></p-sortIcon>
+                                    <th pSortableColumn="nom">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Nom
+                                            <p-sortIcon field="nomUtilisateur"></p-sortIcon>
+                                            <p-columnFilter type="text" field="nomUtilisateur" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="prenom">Prenom <p-sortIcon field="prenom"></p-sortIcon>
+                                    <th pSortableColumn="telephone">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Téléphone
+                                            <p-sortIcon field="telephone"></p-sortIcon>
+                                            <p-columnFilter type="text" field="telephone" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="telephone">Telephone <p-sortIcon field="telephone">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="email">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            E-mail
+                                            <p-sortIcon field="email"></p-sortIcon>
+                                            <p-columnFilter type="text" field="email" display="menu" class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon>
-                                    </th>
-                                    <th>Autorisations</th>
-                                    <th style="width:4rem"></th>
-                                </tr>
-                                <tr>
-
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'nom', 'contains')"
-                                            placeholder="Nom" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'Prenom', 'contains')"
-                                            placeholder="Prenom" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'telephone', 'contains')"
-                                            placeholder="Téléphone" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'email', 'contains')"
-                                            placeholder="E-mail" class="p-column-filter">
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                    <th>
-
-                                    </th>
+                                    <th style="width:8rem"></th>
                                 </tr>
                             </ng-template>
 
                             <ng-template pTemplate="body" let-user>
                                 <tr [pSelectableRow]="user">
-
-                                    <td>{{user.nom}}</td>
-                                    <td>{{user.prenom}}</td>
-                                    <td>{{user.telephone}}</td>
-                                    <td>{{user.email}}</td>
+                                    <td><span class="p-column-title">Nom</span>{{user.nomUtilisateur}}</td>
+                                    <td><span class="p-column-title">Téléphone</span>{{user.telephone}}</td>
+                                    <td><span class="p-column-title">E-mail</span>{{user.email}}</td>
                                     <td>
-                                        <button [disabled]="!edition" routerLink="/autorisations/{{ user.username }}"
-                                            pButton pRipple type="button" icon="pi pi-search"
+                                        <button style="float: left;margin-right: 5px;" [disabled]="!edition" routerLink="/autorisations/{{ user.username }}"
+                                            pButton pRipple type="button" icon="pi pi-bars"
                                             class="p-button-rounded p-button-success"></button>
-                                    </td>
-                                    <td>
-                                        <button [disabled]="!edition" routerLink="/update-user/{{ user.id }}" pButton
+                                        <button style="float: left;margin-right: 5px;" [disabled]="!edition" routerLink="/update-user/{{ user.id }}" pButton
                                             pRipple type="button" icon="pi pi-pencil"
-                                            class="p-button-rounded p-button-success"></button>
+                                            class="p-button-rounded p-button-warning"></button>
                                     </td>
                                 </tr>
                             </ng-template>

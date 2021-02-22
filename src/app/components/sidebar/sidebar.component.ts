@@ -32,6 +32,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'multiple_stop', class: '' },
   { path: '/sessions-test', title: 'Sessions Test', icon: 'multiple_stop', class: '' },
   { path: '/retour-cash', title: 'Retour Cash', icon: 'multiple_stop', class: '' },
+  { path: '/historique-retour', title: 'Historique Retours', icon: 'multiple_stop', class: '' },
   { path: '/appel', title: 'Appel', icon: 'multiple_stop', class: '' },
   { path: '/liste-presence', title: 'Présence', icon: 'multiple_stop', class: '' }
 

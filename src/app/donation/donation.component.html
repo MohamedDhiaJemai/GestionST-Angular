@@ -24,77 +24,68 @@
                         <p-table #dt [value]="donations" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedDonation"
-                            styleClass="p-datatable-customers">
+                            styleClass="p-datatable-striped" [responsive]="true">
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="dateDonation" class="text-center">Date
-                                        <p-sortIcon field="dateDonation">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="dateDonation" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Date
+                                            <p-sortIcon field="dateDonation"></p-sortIcon>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="montant" class="text-center">Montant
-                                        <p-sortIcon field="montant">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="montant" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Montant
+                                            <p-sortIcon field="montant"></p-sortIcon>
+                                            <p-columnFilter type="text" field="montant" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="nom" class="text-center">Nom
-                                        <p-sortIcon field="nom">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="nom" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Nom
+                                            <p-sortIcon field="nom"></p-sortIcon>
+                                            <p-columnFilter type="text" field="nom" display="menu" class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="prenom" class="text-center">Prenom
-                                        <p-sortIcon field="prenom">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="prenom" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Prénom
+                                            <p-sortIcon field="prenom"></p-sortIcon>
+                                            <p-columnFilter type="text" field="prenom" display="menu" class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="cin" class="text-center">CIN
-                                        <p-sortIcon field="cin">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="cin" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            CIN
+                                            <p-sortIcon field="cin"></p-sortIcon>
+                                            <p-columnFilter type="text" field="cin" display="menu" class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="mobile" class="text-center">Mobile
-                                        <p-sortIcon field="mobile">
-                                        </p-sortIcon>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'dateDonation', 'contains')"
-                                            placeholder="dateDonation" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'montant', 'contains')"
-                                            placeholder="montant" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'nom', 'contains')"
-                                            placeholder="nom" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'prenom', 'contains')"
-                                            placeholder="prenom" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'cin', 'contains')"
-                                            placeholder="cin" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'mobile', 'contains')"
-                                            placeholder="mobile" class="p-column-filter">
+                                    <th pSortableColumn="mobile" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Mobile
+                                            <p-sortIcon field="mobile"></p-sortIcon>
+                                            <p-columnFilter type="text" field="mobile" display="menu" class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
                                 </tr>
                             </ng-template>
 
                             <ng-template pTemplate="body" let-donation>
                                 <tr [pSelectableRow]="donation">
-                                    <td>{{donation.dateDonation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                                    <td>{{donation.montant}}</td>
-                                    <td>{{donation.nom}}</td>
-                                    <td>{{donation.prenom}}</td>
-                                    <td>{{donation.cin}}</td>
-                                    <td>{{donation.mobile}}</td>
+                                    <td><span class="p-column-title">Date</span>{{donation.dateDonation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                    <td><span class="p-column-title">Montant</span>{{donation.montant}}</td>
+                                    <td><span class="p-column-title">Nom</span>{{donation.nom}}</td>
+                                    <td><span class="p-column-title">Prénom</span>{{donation.prenom}}</td>
+                                    <td><span class="p-column-title">CIN</span>{{donation.cin}}</td>
+                                    <td><span class="p-column-title">Mobile</span>{{donation.mobile}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>

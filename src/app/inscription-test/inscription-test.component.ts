@@ -27,4 +27,7 @@ export class InscriptionTestComponent implements OnInit {
       }
     );
   }
+  clear(table: Table) {
+    table.clear();
+  }
 }

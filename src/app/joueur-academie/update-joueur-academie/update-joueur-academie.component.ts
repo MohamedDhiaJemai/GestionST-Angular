@@ -2,8 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Sexe } from 'app/model/Enums.model';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
-import { CategorieService } from 'app/services/categorie/categorie.service';
 import { DocumentsJoueurService } from 'app/services/documents-joueur/documents-joueur.service';
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
 import { ParentService } from 'app/services/parent/parent.service';
@@ -12,12 +12,6 @@ import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
-
-
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON'
-}
 
 @Component({
   selector: 'app-update-joueur-academie',
@@ -67,7 +61,7 @@ export class UpdateJoueurAcademieComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: ActivatedRoute, private datePipe: DatePipe,
     private routerNav: Router, private modalService: BsModalService) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
+    this.sexes = Object.keys(Sexe).map(key => ({ label: Sexe[key], value: key }));
     this.inputValueImage = 0;
     this.file = null;
   }
@@ -118,7 +112,6 @@ export class UpdateJoueurAcademieComponent implements OnInit {
     this.joueurAcademie.dateNaissance = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     this.joueurAcademieSubscription = this.joueurAcademieService.updatejAcademie(this.joueurAcademie.id, this.joueurAcademie).subscribe(
       data => {
-
         if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
@@ -127,6 +120,8 @@ export class UpdateJoueurAcademieComponent implements OnInit {
               this.routerNav.navigate(['/consulter-joueur-academie/' + this.joueurAcademie.id]);
             }
           );
+        } else {
+          this.routerNav.navigate(['/consulter-joueur-academie/' + this.joueurAcademie.id]);
         }
       },
       err => {

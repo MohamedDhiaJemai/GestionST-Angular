@@ -40,4 +40,7 @@ export class ParentComponent implements OnInit {
     );
     this.displayBasic = true;
   }
+  clear(table: Table) {
+    table.clear();
+  }
 }

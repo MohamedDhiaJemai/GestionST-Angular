@@ -1,89 +1,89 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header card-header-danger">
-            <div style="float: left;">
-              <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-              <h4 class="card-title ">Listes Des Articles</h4>
-              <p class="card-category"> STADE TUNISIEN</p>
-            </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-danger">
+          <div style="float: left;">
+            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+            <h4 class="card-title ">Listes Des Articles</h4>
+            <p class="card-category"> STADE TUNISIEN</p>
           </div>
-          <br>
-
-          <div class="container">
-            <div class="card">
-              <div class="container-fliud">
-                <div class="wrapper row">
-                  <div class="preview col-md-1">
+        </div>
+        <br>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <button [disabled]="!consultationStock" class="btn btn-warning" type="button"
+                    routerLink="/approvisionnement-article/{{ article.id }}">Approvisonnement</button>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="tab-pane active" id="pic-1">
+                    <img [src]="urlphotoArticle" width="100%" />
                   </div>
-                  <div class="preview col-md-4">
-                    <br><br><br>
-                    <div class="preview-pic tab-content">
-                      <div class="tab-pane active" id="pic-1">
-                        <img [src]="urlphotoArticle" style="max-width: 320px;max-height: 240px;" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="details col-md-1">
-                  </div>
-                  <div class="details col-md-4">
-                    <br>
-                    <div class="row">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <button [disabled]="!consultationStock" style="margin-bottom: 20%; float: left;"
-                          class="add-to-cart btn btn-warning" type="button"
-                          routerLink="/approvisionnement-article/{{ article.id }}">Approvisonnement</button>
-                      </div>
-                    </div>
-                    <br>
-                    <h2 class="product-title">{{ article.libelle }}</h2>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">current price:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{article.prix}} &nbsp; TND
-                        </h5>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Category:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{article.sexe}}
-                        </h5>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Visibilité :
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <p-inputSwitch name="visible" [(ngModel)]="article.visible" disabled>
-                        </p-inputSwitch>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-11" style="margin-top: 5%;">
-                        <div class="action">
-                          <button class="like btn btn-default" type="button" routerLink="/articles">Retour</button>
-                          <button [disabled]="!edition" style="margin: 5%" class="add-to-cart btn btn-success"
-                            type="button" routerLink="/update-article/{{ article.id }}">Update</button>
-                        </div>
-                      </div>
-                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-6">
+              <br>
+              <h2 class="product-title">{{ article.libelle }}</h2>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="price">Prix:
+                  </h5>
+                </div>
+                <div class="col-md-6" style="padding-left: 10%;">
+                  <h5 class="price">{{article.prix}} &nbsp; TND
+                  </h5>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="price">Sexe:
+                  </h5>
+                </div>
+                <div class="col-md-6" style="padding-left: 10%;">
+                  <h5 class="price">{{article.sexe}}
+                  </h5>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="price">Catégorie Tailles:</h5>
+                </div>
+                <div class="col-md-6" style="padding-left: 10%;">
+                  <h5 class="price">{{article.categoryTaille}}
+                  </h5>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="price">Visibilité :
+                  </h5>
+                </div>
+                <div class="col-md-6" style="padding-left: 10%;">
+                  <p-inputSwitch name="visible" [(ngModel)]="article.visible" disabled>
+                  </p-inputSwitch>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12" style="margin-top: 5%;">
+                  <div class="action">
+                    <button class="like btn btn-default" style="margin-right: 5%" type="button"
+                      routerLink="/articles">Retour</button>
+                    <button [disabled]="!edition" class="add-to-cart btn btn-success" type="button"
+                      routerLink="/update-article/{{ article.id }}">Update</button>
                   </div>
                 </div>
               </div>

@@ -14,315 +14,281 @@
                         </div>
                     </div>
                     <br>
-
-                    <div class="container">
-
-                        <div class="card">
+                    <div class="card-body">
+                        <div class="col-md-12">
                             <p-tabView>
                                 <p-tabPanel header="Princial">
-                                    <div class="container-fliud">
-                                        <div class="wrapper row">
-                                            <div class="preview col-md-1">
-                                            </div>
-                                            <div class="preview col-md-5">
-                                                <br><br><br><br>
-                                                <div class="preview-pic tab-content">
-                                                    <div class="tab-pane active" id="pic-1">
-                                                        <div *ngIf="url === undefined">
-                                                            <img src="assets//images//512.png" width="100%"
-                                                                height="100%" />
-                                                        </div>
-                                                        <div *ngIf="url">
-                                                            <img [src]="url" width="100%"> <br />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="details col-md-1">
-                                            </div>
-
-                                            <div class="details col-md-4">
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <h5 class="price">
-                                                            <form class="md-form">
-                                                                <div class="file-field">
-                                                                    <div class="btn btn-primary btn-sm float-left">
-                                                                        <span>Choose file</span>
-                                                                        <br><br>
-                                                                        <div style="float: left;">
-                                                                            <input type="file"
-                                                                                (change)="onSelectFile($event)">
-                                                                        </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5 class="price">
+                                                        <form class="md-form">
+                                                            <div class="file-field">
+                                                                <div class="btn btn-primary btn-sm float-left">
+                                                                    <span>Choose file</span>
+                                                                    <br><br>
+                                                                    <div style="float: left;">
+                                                                        <input type="file"
+                                                                            (change)="onSelectFile($event)">
                                                                     </div>
                                                                 </div>
-                                                            </form>
-                                                        </h5>
-                                                    </div>
+                                                            </div>
+                                                        </form>
+                                                    </h5>
                                                 </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 10%;">Libelle:
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <mat-form-field class="example-full-width">
-                                                            <input matInput placeholder="Libelle" type="text"
-                                                                name="libelle" [(ngModel)]="servicePrincipal.libelle">
-                                                        </mat-form-field>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6" style="margin-top: 4%;">
-                                                        <h5 class="price">Nombre des Mois:
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <mat-form-field class="example-full-width">
-                                                            <input matInput type="text" name="nbrMois"
-                                                                placeholder="Nbre Mois" [(ngModel)]="servicePrincipal.nbrMois">
-                                                        </mat-form-field>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 5%;">current price:
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <p-inputNumber name="prix" [(ngModel)]="servicePrincipal.prix"
-                                                            placeholder="0.0" [showButtons]="true" mode="currency"
-                                                            currency="TND"></p-inputNumber>
-                                                    </div>
-                                                </div>
-
-                                                <br>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 5%;">Category :</h5>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <p-dropdown #dd [options]="sexes" name="sexe"
-                                                            [(ngModel)]="servicePrincipal.sexe" placeholder="Sexe"
-                                                            [showClear]="true">
-                                                        </p-dropdown>
-                                                    </div>
-                                                </div>
-
-                                                <br>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <p-inputSwitch name="visible" [(ngModel)]="servicePrincipal.visible">
-                                                        </p-inputSwitch>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-11" style="margin-top: 5%;">
-                                                        <div class="action">
-                                                            <button mat-raised-button type="submit"
-                                                                class="btn btn-danger pull-right" (click)="
-                                                                    onAddService()">AJOUTER</button>
-
-                                                            <button routerLink="/services" mat-raised-button
-                                                                type="button" class="btn btn-success pull-right"
-                                                                style="margin-right: 1%;">ANNULER</button>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <br>
                                             </div>
-
-                                            <div class="details col-md-1">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-12" id="pic-1">
+                                                    <div *ngIf="url === undefined">
+                                                        <img src="assets//images//512.png" width="100%" />
+                                                    </div>
+                                                    <div *ngIf="url">
+                                                        <img [src]="url" width="100%">
+                                                    </div>
+                                                </div>
                                             </div>
-
                                         </div>
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 10%;">Libelle:
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="Libelle" type="text" name="libelle"
+                                                            [(ngModel)]="servicePrincipal.libelle">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6" style="margin-top: 4%;">
+                                                    <h5 class="price">Nombre des Mois:
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput type="text" name="nbrMois"
+                                                            placeholder="Nbre Mois"
+                                                            [(ngModel)]="servicePrincipal.nbrMois">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Prix:
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p-inputNumber name="prix" [(ngModel)]="servicePrincipal.prix"
+                                                        placeholder="0.0" [showButtons]="true" mode="currency"
+                                                        currency="TND"></p-inputNumber>
+                                                </div>
+                                            </div>
+
+                                            <br>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Category :</h5>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <p-dropdown #dd [options]="sexes" name="sexe"
+                                                        [(ngModel)]="servicePrincipal.sexe" placeholder="Sexe"
+                                                        [showClear]="true">
+                                                    </p-dropdown>
+                                                </div>
+                                            </div>
+
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p-inputSwitch name="visible"
+                                                        [(ngModel)]="servicePrincipal.visible">
+                                                    </p-inputSwitch>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button mat-raised-button type="submit"
+                                                        class="btn btn-danger" (click)="onAddService()"
+                                                        style="margin-right: 1%;">AJOUTER</button>
+                                                    <button routerLink="/services" mat-raised-button type="button"
+                                                        class="btn btn-success">ANNULER</button>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                        </div>
+
+                                        <div class="details col-md-1">
+                                        </div>
+
                                     </div>
 
                                 </p-tabPanel>
 
 
                                 <p-tabPanel header="Complementaire">
-
-                                    <div class="container-fliud">
-                                        <div class="wrapper row">
-                                            <div class="preview col-md-1">
-                                            </div>
-                                            <div class="preview col-md-5">
-                                                <br><br><br><br>
-                                                <div class="preview-pic tab-content">
-                                                    <div class="tab-pane active" id="pic-1">
-                                                        <div *ngIf="url === undefined">
-                                                            <img src="assets//images//512.png" width="100%"
-                                                                height="100%" />
-                                                        </div>
-                                                        <div *ngIf="url">
-                                                            <img [src]="url" width="100%"> <br />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="details col-md-1">
-                                            </div>
-
-                                            <div class="details col-md-4">
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <h5 class="price">
-                                                            <form class="md-form">
-                                                                <div class="file-field">
-                                                                    <div class="btn btn-primary btn-sm float-left">
-                                                                        <span>Choose file</span>
-                                                                        <br><br>
-                                                                        <div style="float: left;">
-                                                                            <input type="file"
-                                                                                (change)="onSelectFile($event)">
-                                                                        </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5 class="price">
+                                                        <form class="md-form">
+                                                            <div class="file-field">
+                                                                <div class="btn btn-primary btn-sm float-left">
+                                                                    <span>Choose file</span>
+                                                                    <br><br>
+                                                                    <div style="float: left;">
+                                                                        <input type="file"
+                                                                            (change)="onSelectFile($event)">
                                                                     </div>
                                                                 </div>
-                                                            </form>
-                                                        </h5>
+                                                            </div>
+                                                        </form>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-12" id="pic-1">
+                                                    <div *ngIf="url === undefined">
+                                                        <img src="assets//images//512.png" width="100%" />
+                                                    </div>
+                                                    <div *ngIf="url">
+                                                        <img [src]="url" width="100%">
                                                     </div>
                                                 </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 10%;">Libelle:</h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <mat-form-field class="example-full-width">
-                                                            <input matInput placeholder="Libelle" type="text"
-                                                                name="libelle" [(ngModel)]="serviceComplementaire.libelle">
-                                                        </mat-form-field>
-                                                    </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 10%;">Libelle:</h5>
                                                 </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6" style="margin-top: 4%;">
-                                                        <h5 class="price">Nombre des Mois:
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <mat-form-field class="example-full-width">
-                                                            <input matInput type="text" name="nbrMois"
-                                                                placeholder="Nbre Mois"
-                                                                [(ngModel)]="serviceComplementaire.nbrMois">
-                                                        </mat-form-field>
-                                                    </div>
+                                                <div class="col-md-6">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="Libelle" type="text" name="libelle"
+                                                            [(ngModel)]="serviceComplementaire.libelle">
+                                                    </mat-form-field>
                                                 </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 5%;">current price:
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <p-inputNumber name="prix" [(ngModel)]="serviceComplementaire.prix"
-                                                            placeholder="0.0" [showButtons]="true" mode="currency"
-                                                            currency="TND"></p-inputNumber>
-                                                    </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6" style="margin-top: 4%;">
+                                                    <h5 class="price">Nombre des Mois:
+                                                    </h5>
                                                 </div>
-
-                                                <br>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 5%;">Category :</h5>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <p-dropdown #dd [options]="sexes" name="sexe"
-                                                            [(ngModel)]="serviceComplementaire.sexe" placeholder="Sexe"
-                                                            [showClear]="true">
-                                                        </p-dropdown>
-                                                    </div>
+                                                <div class="col-md-6">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput type="text" name="nbrMois"
+                                                            placeholder="Nbre Mois"
+                                                            [(ngModel)]="serviceComplementaire.nbrMois">
+                                                    </mat-form-field>
                                                 </div>
-
-                                                <br>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <p-inputSwitch name="visible" [(ngModel)]="serviceComplementaire.visible">
-                                                        </p-inputSwitch>
-                                                    </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Prix:
+                                                    </h5>
                                                 </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price" style="margin-top: 5%;">Jour :</h5>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-
-                                                        <p-multiSelect [options]="jours" [showToggleAll]="false"
-                                                            name="jours" [(ngModel)]="selectedJour" placeholder="Jours"
-                                                            optionLabel="value" [virtualScroll]="true" [filter]="true"
-                                                            [itemSize]="34" class="multiselect-custom-virtual-scroll">
-                                                            <ng-template let-country pTemplate="item">
-                                                                <div class="country-item">
-                                                                    <div>{{country.value.value}}</div>
-                                                                </div>
-                                                            </ng-template>
-                                                        </p-multiSelect>
-                                                    </div>
+                                                <div class="col-md-6">
+                                                    <p-inputNumber name="prix" [(ngModel)]="serviceComplementaire.prix"
+                                                        placeholder="0.0" [showButtons]="true" mode="currency"
+                                                        currency="TND">
+                                                    </p-inputNumber>
                                                 </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-11" style="margin-top: 5%;">
-                                                        <div class="action">
-                                                            <button mat-raised-button type="submit"
-                                                                class="btn btn-danger pull-right" (click)="
-                                                                    onAddServiceComplementaire()">AJOUTER</button>
-
-                                                            <button routerLink="/services" mat-raised-button
-                                                                type="button" class="btn btn-success pull-right"
-                                                                style="margin-right: 1%;">ANNULER</button>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <br>
-                                                <p-messages key="photo"></p-messages>
-                                                <hr>
-                                                <br>
-
-
                                             </div>
 
-                                            <div class="details col-md-1">
+                                            <br>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Category :</h5>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <p-dropdown #dd [options]="sexes" name="sexe"
+                                                        [(ngModel)]="serviceComplementaire.sexe" placeholder="Sexe"
+                                                        [showClear]="true">
+                                                    </p-dropdown>
+                                                </div>
                                             </div>
 
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Visibilité :</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p-inputSwitch name="visible"
+                                                        [(ngModel)]="serviceComplementaire.visible">
+                                                    </p-inputSwitch>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Jour :</h5>
+                                                </div>
+
+                                                <div class="col-md-6">
+
+                                                    <p-multiSelect [options]="jours" [showToggleAll]="false"
+                                                        name="jours" [(ngModel)]="selectedJour" placeholder="Jours"
+                                                        optionLabel="value" [virtualScroll]="true" [filter]="true"
+                                                        [itemSize]="34" class="multiselect-custom-virtual-scroll">
+                                                        <ng-template let-country pTemplate="item">
+                                                            <div class="country-item">
+                                                                <div>{{country.value}}</div>
+                                                            </div>
+                                                        </ng-template>
+                                                    </p-multiSelect>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button mat-raised-button type="submit" class="btn btn-danger"
+                                                        (click)="onAddServiceComplementaire()"
+                                                        style="margin-right: 1%;">AJOUTER</button>
+                                                    <button routerLink="/services" mat-raised-button type="button"
+                                                        class="btn btn-success">ANNULER</button>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <p-messages key="photo"></p-messages>
                                         </div>
                                     </div>
-
                                 </p-tabPanel>
                             </p-tabView>
                         </div>
-
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

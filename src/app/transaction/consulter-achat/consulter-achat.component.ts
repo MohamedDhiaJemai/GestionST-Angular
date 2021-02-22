@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Achats } from 'app/model/Achats.model';
+import { ActivatedRoute } from '@angular/router';
+import { Achat } from 'app/model/Achat.model';
 import { Transaction } from 'app/model/Transaction.model';
 import { TransactionService } from 'app/services/transaction/transaction.service';
 // import * as jsPDF from 'jspdf';
@@ -20,7 +20,7 @@ export class ConsulterAchatComponent implements OnInit {
   @ViewChild('content') content: ElementRef;
 
 
-  achat: Achats;
+  achats: Achat[];
   transaction: Transaction;
 
 
@@ -31,7 +31,7 @@ export class ConsulterAchatComponent implements OnInit {
     this.transactionService.findById(id).subscribe(
       (data: Transaction) => {
         this.transaction = data;
-        this.achat = data.achats;
+        this.achats = data.achats;
       }
     );
   }

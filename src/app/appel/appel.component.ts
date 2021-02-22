@@ -1,34 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AppelDTO } from 'app/model/AppelDTO.model';
 import { AppelParams } from 'app/model/AppelParams.model';
+import { Jour, Sexe, TypeEntrainement } from 'app/model/Enums.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { PresenceService } from 'app/services/presence/presence.service';
 import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 
-
-export enum Sexe {
-  GARCON = 'GARCON',
-  FILLE = 'FILLE'
-}
-
-export enum TypeEntrainement {
-  NORMAL = 'NORMAL',
-  SPECIFIQUE = 'SPECIFIQUE',
-  ELITE = 'ELITE'
-}
-
-export enum Jour {
-  LUNDI = 'LUNDI',
-  MARDI = 'MARDI',
-  MERCREDI = 'MERCREDI',
-  JEUDI = 'JEUDI',
-  VENDREDI = 'VENDREDI ',
-  SAMEDI = 'SAMEDI',
-  DIMANCHE = 'DIMANCHE'
-}
 
 @Component({
   selector: 'app-appel',

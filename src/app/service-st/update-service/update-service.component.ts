@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Genre, Jour } from 'app/model/Enums.model';
 import { ServiceAutre } from 'app/model/ServiceAutre.model';
 import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
 import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
@@ -10,14 +11,6 @@ import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
-
-
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON',
-  UNISEXE = 'UNISEXE'
-}
-
 
 @Component({
   selector: 'app-update-service',
@@ -33,6 +26,8 @@ export class UpdateServiceComponent implements OnInit {
   typeService: string;
   urlphotoService: string;
   sexes: SelectItem[];
+  jours: SelectItem[];
+
   serviceSTSubscription: Subscription;
   modalRef: BsModalRef;
   modalRefAnnul: BsModalRef;
@@ -41,21 +36,13 @@ export class UpdateServiceComponent implements OnInit {
   file: File;
   uploadForm: FormGroup;
   selectedJour: any[] = [];
-  jours = [
-    { label: 'LUNDI', value: 'LUNDI' },
-    { label: 'MARDI', value: 'MARDI' },
-    { label: 'MERCREDI', value: 'MERCREDI' },
-    { label: 'JEUDI', value: 'JEUDI' },
-    { label: 'VENDREDI', value: 'VENDREDI' },
-    { label: 'SAMEDI', value: 'SAMEDI' },
-    { label: 'DIMANCHE', value: 'DIMANCHE' }
-  ];
 
   constructor(private serviceSTService: ServiceSTService, private router: ActivatedRoute,
     private formBuilder: FormBuilder,
     private routerNav: Router, private modalService: BsModalService,
     private messageService: MessageService, private imageProduitService: ImageProduitService) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
+    this.sexes = Object.keys(Genre).map(key => ({ label: Genre[key], value: key }));
+    this.jours = Object.keys(Jour).map(key => ({ label: Jour[key], value: key }));
     this.file = null;
   }
 

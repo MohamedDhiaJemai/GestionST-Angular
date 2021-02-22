@@ -1,4 +1,4 @@
-import { Utilisateur } from "./Utilisateur.model";
+import { Utilisateur } from './Utilisateur.model';
 
 export class AppelParams {
 

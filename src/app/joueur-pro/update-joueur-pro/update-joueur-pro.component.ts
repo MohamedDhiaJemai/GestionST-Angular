@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Sexe } from 'app/model/Enums.model';
 import { JoueurPro } from 'app/model/JoueurPro.model';
 import { CategorieService } from 'app/services/categorie/categorie.service';
 import { JoueurProService } from 'app/services/joueur-pro/joueur-pro.service';
@@ -11,10 +12,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON'
-}
 
 @Component({
   selector: 'app-update-joueur-pro',
@@ -48,7 +45,7 @@ export class UpdateJoueurProComponent implements OnInit {
     private photoService: PhotoService,
     private router: ActivatedRoute, private datePipe: DatePipe,
     private routerNav: Router, private modalService: BsModalService) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
+    this.sexes = Object.keys(Sexe).map(key => ({ label: Sexe[key], value: key }));
     this.file = null;
   }
 

@@ -25,102 +25,80 @@
                             [showCurrentPageReport]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedInscription"
-                            styleClass="p-datatable-customers">
-
+                            styleClass="p-datatable-striped" [responsive]="true"
+                            [globalFilterFields]="['identifiant','sessionTest.libelle','categorie.designation','nomInscri', 'code', 'mobile']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="clear(dt)"></button>
+                                    <span class="p-input-icon-left p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="type" class="text-center">Type
-                                        <p-sortIcon field="type">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="identifiant">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Type
+                                            <p-sortIcon field="identifiant"></p-sortIcon>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="nom" class="text-center">Nom
-                                        <p-sortIcon field="nom">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="nom">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Nom
+                                            <p-sortIcon field="nom"></p-sortIcon>
+                                            <p-columnFilter type="text" field="nomInscri" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="prenom" class="text-center">Prenom
-                                        <p-sortIcon field="prenom">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="categorie">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Catégorie
+                                            <p-sortIcon field="categorie"></p-sortIcon>
+                                            <p-columnFilter type="text" field="categorie.designation" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="mobile" class="text-center">Mobile
-                                        <p-sortIcon field="mobile">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="dateInscription">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Date inscription
+                                            <p-sortIcon field="dateInscription"></p-sortIcon>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="categorie" class="text-center">Categorie
-                                        <p-sortIcon field="categorie">
-                                        </p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="code" class="text-center">Code
-                                        <p-sortIcon field="code">
-                                        </p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="dateInscription" class="text-center">Date inscription
-                                        <p-sortIcon field="dateInscription">
-                                        </p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="SessionTest" class="text-center">Session
-                                        <p-sortIcon field="SessionTest">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="sessionTest">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Session
+                                            <p-sortIcon field="sessionTest"></p-sortIcon>
+                                            <p-columnFilter type="text" field="sessionTest.libelle" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
                                     <th style="width:4rem"></th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'type', 'contains')"
-                                            placeholder="type" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'nom', 'contains')"
-                                            placeholder="nom" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'prenom', 'contains')"
-                                            placeholder="prenom" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'mobile', 'contains')"
-                                            placeholder="mobile" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'categorie', 'contains')"
-                                            placeholder="categorie" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'code', 'contains')"
-                                            placeholder="code" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'dateInscription', 'contains')"
-                                            placeholder="dateInscription" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text" style="width: 100%;"
-                                            (input)="dt.filter($event.target.value, 'SessionTest', 'contains')"
-                                            placeholder="SessionTest" class="p-column-filter">
-                                    </th>
-                                    <th></th>
                                 </tr>
                             </ng-template>
 
                             <ng-template pTemplate="body" let-inscription>
                                 <tr [pSelectableRow]="inscription">
-                                    <td>
-                                        <div *ngIf="inscription.identifiant">Interne</div>
-                                        <div *ngIf="inscription.identifiant==null">Externe</div>
+                                    <td><span class="p-column-title" style="float: left;">Type</span>
+                                        <div style="float: left;" *ngIf="inscription.identifiant">Interne</div>
+                                        <div style="float: left;" *ngIf="inscription.identifiant==null">Externe</div>
                                     </td>
-                                    <td>{{inscription.nom}}</td>
-                                    <td>{{inscription.prenom}}</td>
-                                    <td>{{inscription.mobile}}</td>
-                                    <td>{{inscription.categorie.designation}}</td>
-                                    <td>{{inscription.code}}</td>
-                                    <td>{{inscription.dateInscription | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                                    <td>{{inscription.sessionTest.libelle}}</td>
+                                    <td><span class="p-column-title">Nom</span>{{inscription.nomInscri}}</td>
+                                    <td><span
+                                            class="p-column-title">Catégorie</span>{{inscription.categorie.designation}}
+                                    </td>
+                                    <td><span class="p-column-title">Date
+                                            inscription</span>{{inscription.dateInscription | date:'dd-MM-yyyy HH:mm:ss'}}
+                                    </td>
+                                    <td><span class="p-column-title">Session</span>{{inscription.sessionTest.libelle}}
+                                    </td>
                                     <td>
                                         <button routerLink="/consulter-inscription/{{inscription.id}}" pButton pRipple
                                             type="button" icon="pi pi-search"

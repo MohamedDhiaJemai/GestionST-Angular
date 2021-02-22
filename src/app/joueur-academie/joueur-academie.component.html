@@ -14,28 +14,24 @@
                         </div>
                     </div>
                     <br>
-                    <p-toolbar>
-                        <ng-template pTemplate="left">
-                            <!-- <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
-                                maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
-                                chooseLabel="Browse"></p-fileUpload> -->
-                            &nbsp;&nbsp;
-                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
-
-
-
-                        </ng-template>
-
-                        <ng-template pTemplate="right">
-                            <button [disabled]="!edition" routerLink="/add-joueur-academie" pButton pRipple
-                                icon="pi pi-plus" label="Ajouter Joueur" class="p-button-success p-mr-2"></button>
-                        </ng-template>
-                    </p-toolbar>
-
-                    <br>
-                    <app-dataviewj-academie></app-dataviewj-academie>
-
-
+                    <div class="card-body">
+                        <p-toolbar>
+                            <ng-template pTemplate="left">
+                                <!-- <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
+                            maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                            chooseLabel="Browse"></p-fileUpload> -->
+                                &nbsp;&nbsp;
+                                <button pButton pRipple label="Export" icon="pi pi-download"
+                                    class="p-button-help"></button>
+                            </ng-template>
+                            <ng-template pTemplate="right">
+                                <button [disabled]="!edition" routerLink="/add-joueur-academie" pButton pRipple
+                                    icon="pi pi-plus" label="Ajouter Joueur" class="p-button-success p-mr-2"></button>
+                            </ng-template>
+                        </p-toolbar>
+                        <br>
+                        <app-dataviewj-academie></app-dataviewj-academie>
+                    </div>
                 </div>
             </div>
         </div>

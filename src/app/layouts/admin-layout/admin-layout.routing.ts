@@ -56,6 +56,8 @@ import { AddBorneComponent } from 'app/borne/add-borne/add-borne.component';
 import { AppelComponent } from 'app/appel/appel.component';
 import { ListePresenceComponent } from 'app/appel/liste-presence/liste-presence.component';
 import { HistoriqueCaisseComponent } from 'app/borne/historique-caisse/historique-caisse.component';
+import { HistoriqueRetourComponent } from 'app/retour-cash/historique-retour/historique-retour.component';
+import { AutorisationRoleComponent } from 'app/autorisation-role/autorisation-role.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'acceuil', component: AcceuilComponent },
@@ -109,8 +111,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'update-session/:id', component: UpdateSessionTestComponent },
     { path: 'add-session', component: AddSessionTestComponent },
     { path: 'retour-cash', component: SearchRetourComponent },
+    { path: 'historique-retour', component: HistoriqueRetourComponent },
     { path: 'gratuite-joueur/:id', component: GratuiteComponent },
     { path: 'autorisations/:id', component: AutorisationComponent },
+    { path: 'autorisations-role/:id', component: AutorisationRoleComponent },
     { path: 'appel', component: AppelComponent },
     { path: 'liste-presence', component: ListePresenceComponent },
     { path: 'historique-caisse/:id', component: HistoriqueCaisseComponent },

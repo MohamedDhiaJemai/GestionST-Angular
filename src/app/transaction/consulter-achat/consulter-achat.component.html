@@ -9,7 +9,7 @@
                         <div style="float:    left;">
                             <img src="assets\\images\\loginsST.png"
                                 style="width:2%;float:    left;    margin-right:    2%;">
-                            <h4 class="card-title    ">Détails Achats</h4>
+                            <h4 class="card-title    ">Détails transaction</h4>
                             <p class="card-category"> STADE TUNISIEN</p>
                         </div>
                     </div>
@@ -20,8 +20,11 @@
                         <ng-template pTemplate="right">
                             <p-button hidden (click)="downloadAsPDF('MyDIv')" label="Export To PDF" icon="pi pi-print">
                             </p-button>
-                            <p-button (click)="print('MyDIv')" label="Print" icon="pi pi-print">
+                            <p-button (click)="print('MyDIv')" [style]="{'margin-right': '5px'}" label="Print"
+                                icon="pi pi-print">
                             </p-button>
+                            <p-button label="Retour" routerLink="/transactions"
+                                styleClass="p-button p-button-secondary"></p-button>
                         </ng-template>
                     </p-toolbar>
 
@@ -29,19 +32,18 @@
 
                     <div id="MyDIv" class="card-body">
 
-                        <html>
+                        <html style="padding: 5px;">
 
-                        <body style="margin-left: 45px;" class="main-container">
+                        <body>
                             <header>
-                                <h1 style="text-transform: uppercase;">Détails - Achats</h1>
+                                <h1 style="text-transform: uppercase;">Détails transaction</h1>
                                 <br>
-                                <address style="margin-top:    2%;">
+                                <address style="margin-top: 2%;margin-left: 1cm;">
                                     <p>STADE TUNISIEN</p>
-                                    <p> Rue Marrakech. 2000 <br>Bardo, Tunis</p>
-                                    <p>(+216) 71.505.900 / 71.517.800</p>
+                                    <p> Rue Marrakech<br>2000 Bardo, Tunis</p>
+                                    <p>(+216) 71 505 900 / 71 517 800</p>
                                 </address>
-                                <span><img alt="" src="assets\\images\\loginsST.png" width="16%"
-                                        style="margin-right:    5%;"></span>
+                                <span><img alt="" src="assets\\images\\loginsST.png" width="16%" style="margin-right: 1cm;"></span>
                             </header>
 
                             <article>
@@ -51,25 +53,21 @@
                                         <p>{{transaction?.typeClient}}</p>
                                         <br>
                                     </div>
-                                    <div *ngIf="transaction?.joueur">
-                                        {{transaction.joueur.nom}}{{transaction.joueur.prenom}}
-                                    </div>
-                                    <div *ngIf="transaction?.parent">
-                                        {{transaction.parent.nom}} {{transaction.parent.prenom}}
+                                    <div>
+                                        {{transaction?.nomClient}}
                                     </div>
                                 </address>
                                 <table class="meta">
                                     <tr>
-                                        <th><span>Invoice #</span></th>
+                                        <th><span>Facture #</span></th>
                                         <td><span>{{transaction?.id}}</span></td>
                                     </tr>
                                     <tr>
                                         <th><span>Date</span></th>
-                                        <td><span>
-                                                {{transaction?.dateTransaction| date:'shortDate' | date : 'dd-MM-yyyy'}},
-                                                {{transaction?.dateTransaction| date:'shortTime'}}</span></td>
+                                        <td><span> {{transaction?.dateTransaction| date: 'dd-MM-yyyy HH:mm'}}</span>
+                                        </td>
                                     </tr>
-                                    <tr>
+                                    <tr *ngIf="transaction?.achats.length==0">
                                         <th><span>Montant</span></th>
                                         <td><span>{{transaction?.totalApresRemise}} </span><span id="prefix">
                                                 TND</span>
@@ -78,11 +76,11 @@
                                 </table>
 
 
-                                <table class="inventory">
+                                <table *ngIf="transaction?.achats.length>0" class="inventory">
                                     <thead>
                                         <tr>
                                             <th><span>Produit</span></th>
-                                            <th><span>Description</span></th>
+                                            <th><span>Détail</span></th>
                                             <th><span>Joueur</span></th>
                                             <th><span>Taille</span></th>
                                             <th><span>Quantité</span></th>
@@ -92,9 +90,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let a of achat">
+                                        <tr *ngFor="let a of achats">
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <span>{{a.produit.libelle}}</span>
+                                                <span>{{a.libelleProduit}}</span>
                                             </td>
                                             <td style="text-align: center; vertical-align: middle;">
                                                 <div *ngIf="a.type === 'SERVICE_COMPLEMENTAIRE'; else elseBlock">
@@ -155,7 +153,7 @@
                                     </tbody>
                                 </table>
 
-                                <table class="balance">
+                                <table *ngIf="transaction?.achats.length>0" class="balance">
                                     <tr>
                                         <th><span>Total</span></th>
                                         <td><span>{{transaction?.totalAvantRemise}}</span><span data-prefix>
@@ -176,12 +174,13 @@
                                 </table>
                             </article>
                             <aside>
-                                <h1><span>
-                                        <div style="margin-bottom: 3%;">Additional Notes</div>
-                                    </span></h1>
-
+                                <h1>
+                                    <span>
+                                        <div style="margin-bottom: 5px;">Notes</div>
+                                    </span>
+                                </h1>
                                 <div>
-                                    <p>Ces transaction ont été réalisés à travers la borne :
+                                    <p>Cette transaction ont été réalisés à travers la borne :
                                         {{transaction?.borne.reference}} </p>
                                 </div>
                             </aside>

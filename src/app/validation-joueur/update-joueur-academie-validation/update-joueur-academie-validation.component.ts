@@ -4,6 +4,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentsJoueur } from 'app/model/DocumentsJoueur.model';
+import { Sexe } from 'app/model/Enums.model';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
 import { DocumentsJoueurService } from 'app/services/documents-joueur/documents-joueur.service';
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
@@ -14,11 +15,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
 
-
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON'
-}
 
 @Component({
   selector: 'app-update-joueur-academie-validation',
@@ -67,7 +63,7 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
   format;
   file: File;
   uploadForm: FormGroup;
-
+  annees: string;
 
   constructor(private joueurAcademieService: JoueurAcademieService,
     private parentService: ParentService,
@@ -78,12 +74,17 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
     private messageService: MessageService,
     private photoService: PhotoService,
     private http: HttpClient) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
+    this.sexes = Object.keys(Sexe).map(key => ({ label: Sexe[key], value: key }));
     this.inputValueImage = 0;
     this.file = null;
   }
 
   ngOnInit() {
+    const now = new Date();
+    const year = now.getFullYear();
+    this.annees = (year - 45).toString() + ':' + (year - 4).toString();
+
+
     this.id = this.router.snapshot.params['id'];
     this.urlPhoto = environment.apiUrl + 'photo/get/' + this.id;
     this.fileInfos = this.docuementsJoueurService.getFiles(this.id);
@@ -126,15 +127,10 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
 
 
   ngOnUpdateJoueurAcademie(templateAnnulation: TemplateRef<any>) {
-
-    if (this.joueurAcademie.validation === true) {
-      this.joueurAcademie.dateValidation = new Date();
-    }
-
-    this.joueurAcademie.dateNaissance = this.datePipe.transform(this.date, 'yyyy-MM-dd');
-    this.joueurAcademieSubscription = this.joueurAcademieService.validerjAcademie(this.joueurAcademie.id, this.joueurAcademie).subscribe(
-      data => {
-        if (this.url !== undefined) {
+    if (this.url !== undefined) {
+      this.joueurAcademie.dateNaissance = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+      this.joueurAcademieSubscription = this.joueurAcademieService.validerjAcademie(this.joueurAcademie.id, this.joueurAcademie).subscribe(
+        data => {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
           this.photoService.upload(formData, this.joueurAcademie.id).subscribe(
@@ -142,13 +138,13 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
               this.routerNav.navigate(['/consulter-joueur-academie/' + this.joueurAcademie.id]);
             }
           );
+        }, err => {
+          this.modalRef.hide();
+          this.modalRefAnnul = this.modalService.show(templateAnnulation);
         }
-      }, err => {
-        this.modalRef.hide();
-        this.modalRefAnnul = this.modalService.show(templateAnnulation);
-      }
-    );
-    this.modalRef.hide();
+      );
+      this.modalRef.hide();
+    }
   }
 
   public openModal(template: TemplateRef<any>) {

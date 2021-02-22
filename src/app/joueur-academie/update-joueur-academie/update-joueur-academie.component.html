@@ -1,6 +1,27 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <a href="javascript:void(0)">
+                        <div *ngIf="url === undefined">
+                            <img class="img" [src]="urlPhoto" width="100%" />
+                        </div>
+                        <div *ngIf="url">
+                            <img class="img" [src]="url" width="100%"> <br />
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">{{joueurAcademie.nom}} {{joueurAcademie.prenom}}</h4>
+                        <h6 class="card-category text-gray">{{joueurAcademie.identifiant}}</h6>
+                        <br>
+                        <p-messages key="photo"></p-messages>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
+                            <input type="file" (change)="onSelectFile($event)">
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
@@ -12,15 +33,6 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Identifiant" name="identifiant"
-                                            [(ngModel)]="joueurAcademie.identifiant">
-                                    </mat-form-field>
-                                </div>
-                            </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-6">
@@ -37,17 +49,28 @@
                                 </div>
                             </div>
                             <br>
-                            <br>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Sexe " disabled>
+                                    </mat-form-field>
+                                </div>
                                 <div class="col-md-6">
                                     <p-dropdown #dd [options]="sexes" name="sexe" [(ngModel)]="joueurAcademie.sexe"
                                         placeholder="Sexe" [showClear]="true">
                                     </p-dropdown>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Date de naissance" disabled>
+                                    </mat-form-field>
+                                </div>
                                 <div class="col-md-6">
                                     <p-calendar [(ngModel)]="date" placeholder="Date Naissance" name="date"
                                         dateFormat="dd-mm-yy" name="date" [yearNavigator]="true" yearRange="{{annees}}"
-                                        [monthNavigator]="true">
+                                        [monthNavigator]="true" [touchUI]="true">
                                     </p-calendar>
                                 </div>
                             </div>
@@ -59,6 +82,12 @@
                                             [(ngModel)]="joueurAcademie.mobile">
                                     </mat-form-field>
                                 </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input maxLength="4" minLength="4" matInput placeholder="Pin" type="text"
+                                            name="pin" [(ngModel)]="joueurAcademie.pin">
+                                    </mat-form-field>
+                                </div>
                             </div>
                             <br>
                             <div class="row">
@@ -67,23 +96,21 @@
                                         <input matInput placeholder="Parent " disabled>
                                     </mat-form-field>
                                 </div>
-
-                                <div class="col-md-6" style="margin-top: 1%;">
+                                <div class="col-md-9" style="margin-top: 1%;">
                                     <p-dropdown [options]="itemsParents" [(ngModel)]="joueurAcademie.parent"
                                         name="parent" [filter]="true" [showClear]="true" optionLabel="mobile"
-                                        placeholder="Select a Parent" filterPlaceholder="Search By mobile">
+                                        placeholder="Select a Parent" filterPlaceholder="Search..."
+                                        filterBy="mobile,nomParent">
 
                                         <ng-template pTemplate="selectedItem">
-                                            <div class="country-item country-item-value" *ngIf="joueurAcademie.parent">
+                                            <div *ngIf="joueurAcademie.parent">
                                                 <div> {{joueurAcademie.parent.mobile}} -
-                                                    {{joueurAcademie.parent.nom}} {{joueurAcademie.parent.prenom}}</div>
+                                                    {{joueurAcademie.parent.nomParent}}</div>
                                             </div>
                                         </ng-template>
-
-                                        <ng-template let-country pTemplate="item">
-                                            <div class="country-item">
-                                                <div>{{country.value.mobile}} - {{country.value.nom}}
-                                                    {{country.value.prenom}}</div>
+                                        <ng-template let-parent pTemplate="item">
+                                            <div>
+                                                <div>{{parent.mobile}} - {{parent.nomParent}} </div>
                                             </div>
                                         </ng-template>
                                     </p-dropdown>
@@ -150,41 +177,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-
-                <div class="card card-profile">
-                    <a href="javascript:void(0)">
-                        <div *ngIf="url === undefined">
-                            <img class="img" [src]="urlPhoto" width="100%" />
-                        </div>
-                        <div *ngIf="url">
-                            <img class="img" [src]="url" width="100%"> <br />
-                        </div>
-                    </a>
-
-                    <div class="card-body">
-                        <h4 class="card-title">{{joueurAcademie.nom}} {{joueurAcademie.prenom}}</h4>
-                        <h6 class="card-category text-gray">{{joueurAcademie.identifiant}}</h6>
-                        <br>
-                        <p class="card-description">
-                        </p>
-
-                        <p-messages key="photo"></p-messages>
-
-                        <!-- <p-fileUpload [files]="myfilePhoto" customUpload="false" 
-                            (uploadHandler)="uploadPhoto($event)" [showUploadButton]="clikedPhoto" accept="image/*">
-                        </p-fileUpload> -->
-
-                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
-                            <input type="file" (change)="onSelectFile($event)">
-                        </a>
-
-                    </div>
-                </div>
-
-                <br><br>
-                <!--  -->
             </div>
         </div>
     </div>

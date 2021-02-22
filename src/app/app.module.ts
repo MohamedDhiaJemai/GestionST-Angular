@@ -10,10 +10,8 @@ import { ComponentsModule } from './components/components.module';
 
 import { AppComponent } from './app.component';
 
-import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
-import { AccountComponent } from './account/account.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AuthGuard } from './shared/guard/auth.guard';
@@ -105,6 +103,9 @@ import { CaisseComponent } from './caisse/caisse.component';
 import { AppelComponent } from './appel/appel.component';
 import { ListePresenceComponent } from './appel/liste-presence/liste-presence.component';
 import { HistoriqueCaisseComponent } from './borne/historique-caisse/historique-caisse.component';
+import { TaillepipePipe } from './taillepipe.pipe';
+import { HistoriqueRetourComponent } from './retour-cash/historique-retour/historique-retour.component';
+import { AutorisationRoleComponent } from './autorisation-role/autorisation-role.component';
 
 @NgModule({
   imports: [
@@ -116,9 +117,6 @@ import { HistoriqueCaisseComponent } from './borne/historique-caisse/historique-
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    }),
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
@@ -163,7 +161,6 @@ import { HistoriqueCaisseComponent } from './borne/historique-caisse/historique-
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    AccountComponent,
     UserComponent,
     AddUserComponent,
     RoleComponent,
@@ -227,6 +224,9 @@ import { HistoriqueCaisseComponent } from './borne/historique-caisse/historique-
     ListePresenceComponent,
     AppelComponent,
     HistoriqueCaisseComponent,
+    TaillepipePipe,
+    HistoriqueRetourComponent,
+    AutorisationRoleComponent,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

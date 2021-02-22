@@ -12,6 +12,8 @@ export class JoueurAcamedie {
     public validation: boolean;
     public parent: Parent;
     public mobile: string;
+    public pin: string;
+    public nomJoueur: string;
 
     constructor() {
 

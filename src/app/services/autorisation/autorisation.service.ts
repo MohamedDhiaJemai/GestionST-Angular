@@ -14,17 +14,27 @@ export class AutorisationService {
   username: string;
   jwtHelper: JwtHelper = new JwtHelper();
   constructor(private httpClient: HttpClient, private tokenUtil: TokenService, private router: Router) { }
-  updateAutorisation(autorisation: Autorisation) {
-    return this.httpClient.put(environment.apiUrl + 'autorisations/update', autorisation,
+  findAutorisationsByRole(username: string): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'autorisations/role/' + username,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-  findAutorisations(): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/'
-      + this.jwtHelper.decodeToken(this.tokenUtil.getToken()).sub,
+  updateAutorisationRole(autorisation: Autorisation) {
+    return this.httpClient.put(environment.apiUrl + 'autorisations/role/update', autorisation,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
+  updateAutorisationUser(autorisation: Autorisation) {
+    return this.httpClient.put(environment.apiUrl + 'autorisations/user/update', autorisation,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
   findAutorisationsByUser(username: string): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/' + username,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
+
+
+  findAutorisations(): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/'
+      + this.jwtHelper.decodeToken(this.tokenUtil.getToken()).sub,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
   setAutorisations(autorisations: Autorisation[]) {
@@ -35,7 +45,6 @@ export class AutorisationService {
     });
     localStorage.setItem('autorisations', JSON.stringify(array));
   }
-
   checkAutorisations1(metier: string) {
     const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
     const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));

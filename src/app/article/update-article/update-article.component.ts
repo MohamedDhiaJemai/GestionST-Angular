@@ -2,19 +2,13 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'app/model/Article.model';
+import { CategoryTaille, Genre } from 'app/model/Enums.model';
 import { ArticleService } from 'app/services/article/article.service';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
 import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
-
-
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON',
-  UNISEXE = 'UNISEXE'
-}
 
 @Component({
   selector: 'app-update-article',
@@ -29,6 +23,8 @@ export class UpdateArticleComponent implements OnInit {
   urlphotoArticle: string;
 
   sexes: SelectItem[];
+  categorys: SelectItem[];
+
   item: string;
 
   articleSubscription: Subscription;
@@ -47,7 +43,8 @@ export class UpdateArticleComponent implements OnInit {
     private formBuilder: FormBuilder, private router: ActivatedRoute,
     private routerNav: Router, private modalService: BsModalService,
     private messageService: MessageService, private imageProduitService: ImageProduitService) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
+    this.sexes = Object.keys(Genre).map(key => ({ label: Genre[key], value: key }));
+    this.categorys = Object.keys(CategoryTaille).map(key => ({ label: CategoryTaille[key], value: key }));
     this.file = null;
   }
 
@@ -91,9 +88,10 @@ export class UpdateArticleComponent implements OnInit {
           this.imageProduitService.upload(formData, this.article.id).subscribe(
             data2 => {
               this.routerNav.navigate(['/consulter-article/' + this.article.id]);
-
             }
           );
+        } else {
+          this.routerNav.navigate(['/consulter-article/' + this.article.id]);
         }
       },
       err => {

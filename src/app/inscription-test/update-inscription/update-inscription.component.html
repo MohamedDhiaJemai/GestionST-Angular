@@ -1,6 +1,28 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <a href="javascript:void(0)">
+                        <div *ngIf="url === undefined">
+                            <img class="img" [src]="urlPhoto" width="100%" />
+                        </div>
+                        <div *ngIf="url">
+                            <img class="img" [src]="url" width="100%"> <br />
+                        </div>
+                    </a>
+
+                    <div class="card-body">
+                        <h4 class="card-title">{{inscription.nom}} {{inscription.prenom}}</h4>
+                        <h6 class="card-category text-gray">{{inscription.identifiant}}</h6>
+                        <br>
+                        <p-messages key="photo"></p-messages>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
+                            <input type="file" (change)="onSelectFile($event)">
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
@@ -53,7 +75,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p-calendar [(ngModel)]="date" dateFormat="dd-mm-yy" name="date"
-                                        [yearNavigator]="true" yearRange="{{annees}}" [monthNavigator]="true">
+                                        [yearNavigator]="true" yearRange="{{annees}}" [monthNavigator]="true"
+                                        [touchUI]="true">
                                     </p-calendar>
                                 </div>
                             </div>
@@ -77,42 +100,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-
-                <div class="card card-profile">
-                    <a href="javascript:void(0)">
-                        <div *ngIf="url === undefined">
-                            <img class="img" [src]="urlPhoto" width="100%" />
-                        </div>
-                        <div *ngIf="url">
-                            <img class="img" [src]="url" width="100%"> <br />
-                        </div>
-                    </a>
-
-                    <div class="card-body">
-                        <h4 class="card-title">{{inscription.nom}} {{inscription.prenom}}</h4>
-                        <h6 class="card-category text-gray">{{inscription.identifiant}}</h6>
-                        <br>
-                        <p class="card-description">
-                            <!-- description -->
-                        </p>
-
-                        <p-messages key="photo"></p-messages>
-
-                        <!-- <p-fileUpload [files]="myfilePhoto" customUpload="false" 
-                            (uploadHandler)="uploadPhoto($event)" [showUploadButton]="clikedPhoto" accept="image/*">
-                        </p-fileUpload> -->
-
-                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
-                            <input type="file" (change)="onSelectFile($event)">
-                        </a>
-
-                    </div>
-                </div>
-
-                <br><br>
-                <!--  -->
             </div>
         </div>
     </div>

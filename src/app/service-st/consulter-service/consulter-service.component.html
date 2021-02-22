@@ -11,263 +11,217 @@
             </div>
           </div>
           <br>
-          <div class="container" *ngIf="typeService === 'principal'">
-            <div class="card">
-              <div class="container-fliud">
-                <div class="wrapper row">
-                  <div class="preview col-md-1">
+          <div class="card-body">
+            <div class="row" *ngIf="typeService === 'principal'">
+              <div class="col-md-4">
+                <br>
+                <div class="row">
+                  <div class="col-md-12" id="pic-1">
+                    <img [src]="urlphotoServiceST" width="100%" />
                   </div>
-                  <div class="preview col-md-4">
-                    <br><br><br>
-                    <div class="preview-pic tab-content">
-                      <div class="tab-pane active" id="pic-1">
-                        <img [src]="urlphotoServiceST" style="max-width: 320px;max-height: 240px;" />
-                      </div>
-                    </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-6">
+                <br>
+                <h2 class="product-title">{{ servicePrincipal.libelle }}</h2>
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Nombre des Mois:
+                    </h5>
                   </div>
-                  <div class="details col-md-1">
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{servicePrincipal.nbrMois}}
+                    </h5>
                   </div>
-                  <div class="details col-md-4">
-                    <br>
-                    <br>
-                    <h2 class="product-title">{{ servicePrincipal.libelle }}</h2>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Nombre des Mois:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{servicePrincipal.nbrMois}}
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">current price:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{servicePrincipal.prix}} &nbsp; TND
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Category:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{servicePrincipal.sexe}}
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Visibilité :
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">
-                          <p-inputSwitch name="visible" [(ngModel)]="servicePrincipal.visible" disabled>
-                          </p-inputSwitch>
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-11" style="margin-top: 5%;">
-                        <div class="action">
-                          <button [disabled]="!edition" style="margin: 5%" class="add-to-cart btn btn-success"
-                            type="button" routerLink="/update-service/{{ servicePrincipal.id }}">Update</button>
-                          <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
-                        </div>
-                      </div>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Prix:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{servicePrincipal.prix}} &nbsp; TND
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Category:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{servicePrincipal.sexe}}
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Visibilité :
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">
+                      <p-inputSwitch name="visible" [(ngModel)]="servicePrincipal.visible" disabled>
+                      </p-inputSwitch>
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button [disabled]="!edition" class="add-to-cart btn btn-success" type="button"
+                      routerLink="/update-service/{{ servicePrincipal.id }}">Update</button>
+                    <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- -->
+            <!-- -->
 
 
-          <div class="container" *ngIf="typeService === 'autre'">
-            <div class="card">
-              <div class="container-fliud">
-                <div class="wrapper row">
-                  <div class="preview col-md-1">
+            <div class="row" *ngIf="typeService === 'autre'">
+              <div class="preview col-md-4">
+                <br>
+                <div class="row">
+                  <div class="col-md-12" id="pic-1">
+                    <img [src]="urlphotoServiceST" width="100%" />
                   </div>
-                  <div class="preview col-md-4">
-                    <br><br><br>
-                    <div class="preview-pic tab-content">
-                      <div class="tab-pane active" id="pic-1">
-                        <img [src]="urlphotoServiceST" style="max-width: 320px;max-height: 240px;" />
-                      </div>
-                    </div>
+                </div>
+              </div>
+              <div class="details col-md-1">
+              </div>
+              <div class="details col-md-6">
+                <br>
+                <h2 class="product-title">{{ serviceAutre.libelle }}</h2>
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Prix:
+                    </h5>
                   </div>
-                  <div class="details col-md-1">
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceAutre.prix}} &nbsp; TND
+                    </h5>
                   </div>
-                  <div class="details col-md-4">
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <!-- <button style="margin-bottom: 20%; float: left;" class="add-to-cart btn btn-warning" type="button"
-                            routerLink="/approvisionnement-article/{{ servicePrincipal.id }}">Approvisonnement</button> -->
-                      </div>
-                    </div>
-                    <br>
-                    <h2 class="product-title">{{ serviceAutre.libelle }}</h2>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">current price:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceAutre.prix}} &nbsp; TND
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Category:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceAutre.sexe}}
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Visibilité :
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">
-                          <p-inputSwitch name="visible" [(ngModel)]="serviceAutre.visible" disabled>
-                          </p-inputSwitch>
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-11" style="margin-top: 5%;">
-                        <div class="action">
-                          <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                            routerLink="/update-service/{{ serviceAutre.id }}">Update</button>
-                          <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
-                        </div>
-                      </div>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Category:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceAutre.sexe}}
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Visibilité :
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">
+                      <p-inputSwitch name="visible" [(ngModel)]="serviceAutre.visible" disabled>
+                      </p-inputSwitch>
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="add-to-cart btn btn-success" type="button"
+                      routerLink="/update-service/{{ serviceAutre.id }}">Update</button>
+                    <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- -->
-
+            <!-- -->
 
 
-          <div class="container" *ngIf="typeService === 'complementaire'">
-            <div class="card">
-              <div class="container-fliud">
-                <div class="wrapper row">
-                  <div class="preview col-md-1">
+
+            <div class="row" *ngIf="typeService === 'complementaire'">
+              <div class="col-md-4">
+                <br>
+                <div class="row">
+                  <div class="col-md-12" id="pic-1">
+                    <img [src]="urlphotoServiceST" width="100%" />
                   </div>
-                  <div class="preview col-md-4">
-                    <br><br><br>
-                    <div class="preview-pic tab-content">
-                      <div class="tab-pane active" id="pic-1">
-                        <img [src]="urlphotoServiceST" style="max-width: 320px;max-height: 240px;" />
-                      </div>
-                    </div>
+                </div>
+              </div>
+              <div class="details col-md-1">
+              </div>
+              <div class="details col-md-6">
+                <br>
+                <h2 class="product-title">{{ serviceComplementaire.libelle }}</h2>
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Nombre des Mois:
+                    </h5>
                   </div>
-                  <div class="details col-md-1">
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceComplementaire.nbrMois}}
+                    </h5>
                   </div>
-                  <div class="details col-md-4">
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                      </div>
-                    </div>
-                    <br>
-                    <h2 class="product-title">{{ serviceComplementaire.libelle }}</h2>
-                    <br>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Nombre des Mois:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceComplementaire.nbrMois}}
-                        </h5>
-                      </div>
-                    </div>
+                </div>
 
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Jours :
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">
-                          {{serviceComplementaire.jours}}
-                        </h5>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">current price:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceComplementaire.prix}} &nbsp; TND
-                        </h5>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Category:
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">{{serviceComplementaire.sexe}}
-                        </h5>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="price">Visibilité :
-                        </h5>
-                      </div>
-                      <div class="col-md-6" style="padding-left: 10%;">
-                        <h5 class="price">
-                          <p-inputSwitch name="visible" [(ngModel)]="serviceComplementaire.visible" disabled>
-                          </p-inputSwitch>
-                        </h5>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-11" style="margin-top: 5%;">
-                        <div class="action">
-                          <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                            routerLink="/update-service/{{ serviceComplementaire.id }}">Update</button>
-                          <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
-                        </div>
-                      </div>
-                    </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Jours :
+                    </h5>
                   </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">
+                      {{serviceComplementaire.jours}}
+                    </h5>
+                  </div>
+                </div>
 
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Prix:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceComplementaire.prix}} &nbsp; TND
+                    </h5>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Category:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceComplementaire.sexe}}
+                    </h5>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Visibilité :
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">
+                      <p-inputSwitch name="visible" [(ngModel)]="serviceComplementaire.visible" disabled>
+                      </p-inputSwitch>
+                    </h5>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="add-to-cart btn btn-success" type="button"
+                      routerLink="/update-service/{{ serviceComplementaire.id }}">Update</button>
+                    <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
+                  </div>
                 </div>
               </div>
             </div>

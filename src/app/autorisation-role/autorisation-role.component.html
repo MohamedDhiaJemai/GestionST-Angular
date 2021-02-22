@@ -7,7 +7,7 @@
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
                             <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Autorisations utilisateur</h4>
+                            <h4 class="card-title ">Autorisations role</h4>
                             <p class="card-category"> STADE TUNISIEN</p>
                         </div>
                     </div>
@@ -19,7 +19,7 @@
 
                         <ng-template pTemplate="right">
                             <td>
-                                <button routerLink="/utilisateurs" pButton pRipple label="Retour" type="button"
+                                <button routerLink="/roles" pButton pRipple label="Retour" type="button"
                                     class="p-button-success"></button>
                             </td>
                         </ng-template>
@@ -30,13 +30,13 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <h3>
-                                    Autorisations de l'utilisateur <strong> {{utilisateur}}</strong>
+                                    Autorisations du role <strong> {{role}}</strong>
                                 </h3>
                             </div>
                         </div>
                         <p-table [value]="autorisations" styleClass="p-datatable-striped" [responsive]="true">
                             <ng-template pTemplate="header">
-                                <tr>
+                                <tr >
                                     <th style="width:50%" class="text-center">Menu</th>
                                     <th style="width:25%" class="text-center" pSortableColumn="consultation">
                                         Consultation <p-sortIcon field="consultation">

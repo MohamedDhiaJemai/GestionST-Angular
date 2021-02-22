@@ -15,101 +15,111 @@
                     </div>
                     <br>
 
-                    <div class="container">
-                        <div class="card">
-                            <div class="container-fliud">
-                                <div class="wrapper row">
-                                    <div class="preview col-md-1">
-                                    </div>
-                                    <div class="preview col-md-5">
-                                        <br><br><br>
-                                        <div class="preview-pic tab-content">
-                                            <div class="tab-pane active" id="pic-1">
-                                                <img [src]="urlphotoArticle" width="100%" />
-                                            </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <br>
+                                    <div class="col-md-12">
+                                        <div id="pic-1">
+                                            <img [src]="urlphotoArticle" width="100%" />
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="details col-md-1">
-                                    </div>
-
-                                    <div class="details col-md-4">
-                                        <br><br><br>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h5 class="price" style="margin-top: 10%;">Observation:
-                                                </h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Observation" type="text"
-                                                        name="observation" [(ngModel)]="approvisionnement.observation">
-                                                </mat-form-field>
-                                            </div>
+                                <div class="details col-md-1">
+                                </div>
+                                <div class="details col-md-6">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="price" style="margin-top: 10%;">Observation:
+                                            </h5>
                                         </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h5 class="price" style="margin-top: 10%;">Reference:
-                                                </h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Référence" type="text" name="reference"
-                                                        [(ngModel)]="approvisionnement.reference">
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h5 class="price" style="margin-top: 5%;">Taille :</h5>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <p-dropdown #dd [options]="tailles" name="taille"
-                                                    [(ngModel)]="approvisionnement.taille" placeholder="Taille"
-                                                    [showClear]="true">
-                                                </p-dropdown>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h5 class="price" style="margin-top: 5%;">Quantity :</h5>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <p-inputNumber [(ngModel)]="approvisionnement.quantite" name="quantite"
-                                                    [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
-                                                    spinnerMode="horizontal" [step]="1"
-                                                    decrementButtonClass="p-button-danger"
-                                                    incrementButtonClass="p-button-success"
-                                                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
-                                                </p-inputNumber>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <hr>
-
-                                        <div class="row justify-content-center">
-                                            <div class="col-md-11">
-                                                <div class="action">
-                                                    <button class="like btn btn-default" type="button"
-                                                        routerLink="/approvisionnement-article/{{article.id}}">Retour</button>
-                                                    <button style="margin: 5%" class="add-to-cart btn btn-success"
-                                                        type="button" (click)="ngOnAddApprovisionnement()">Sauvegarder
-                                                    </button>
-                                                </div>
-                                            </div>
-
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Observation" type="text" name="observation"
+                                                    [(ngModel)]="approvisionnement.observation">
+                                            </mat-form-field>
                                         </div>
                                     </div>
-
-                                    <div class="details col-md-1">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="price" style="margin-top: 10%;">Reference:
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Référence" type="text" name="reference"
+                                                    [(ngModel)]="approvisionnement.reference">
+                                            </mat-form-field>
+                                        </div>
                                     </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="price" style="margin-top: 5%;">Taille :</h5>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p-dropdown *ngIf="article.categoryTaille=='HABITS'" #dd [options]="habits"
+                                                name="taille" [(ngModel)]="approvisionnement.taille"
+                                                placeholder="Taille" [showClear]="true">
+                                            </p-dropdown>
+                                            <p-dropdown *ngIf="article.categoryTaille=='POINTURE'" #dd
+                                                [options]="pointures" name="taille"
+                                                [(ngModel)]="approvisionnement.taille" placeholder="Taille"
+                                                [showClear]="true">
+                                            </p-dropdown>
+                                            <p-dropdown *ngIf="article.categoryTaille=='GANT'" #dd [options]="gants"
+                                                name="taille" [(ngModel)]="approvisionnement.taille"
+                                                placeholder="Taille" [showClear]="true">
+                                            </p-dropdown>
+                                            <p-dropdown *ngIf="article.categoryTaille=='CHAUSSETTE'" #dd
+                                                [options]="chaussettes" name="taille"
+                                                [(ngModel)]="approvisionnement.taille" placeholder="Taille"
+                                                [showClear]="true">
+                                            </p-dropdown>
+                                            <p-dropdown *ngIf="article.categoryTaille=='UNIQUE'" #dd [options]="uniques"
+                                                name="taille" [(ngModel)]="approvisionnement.taille"
+                                                placeholder="Taille" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="price" style="margin-top: 5%;">Quantity :</h5>
+                                        </div>
 
+                                        <div class="col-md-6">
+                                            <p-inputNumber [(ngModel)]="approvisionnement.quantite" name="quantite"
+                                                [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
+                                                spinnerMode="horizontal" [step]="1"
+                                                decrementButtonClass="p-button-danger"
+                                                incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                                                decrementButtonIcon="pi pi-minus">
+                                            </p-inputNumber>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="action">
+                                                <button style="margin-right: 5%" class="like btn btn-default"
+                                                    type="button"
+                                                    routerLink="/approvisionnement-article/{{article.id}}">
+                                                    Retour</button>
+                                                <button class="add-to-cart btn btn-success" type="button"
+                                                    (click)="ngOnAddApprovisionnement()">Sauvegarder
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="details col-md-1">
                                 </div>
                             </div>
                         </div>

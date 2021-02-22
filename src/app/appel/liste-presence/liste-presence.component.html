@@ -45,7 +45,8 @@
                                 </p-dropdown>
 
                                 <p-dropdown [options]="utilisateurs" [(ngModel)]="appelParams.utilisateur"
-                                    name="utilisateur" [showClear]="true" optionLabel="nom" placeholder="Utilisateur">
+                                    name="utilisateur" [showClear]="true" [filter]="true" optionLabel="nom"
+                                    placeholder="Utilisateur">
                                     <ng-template pTemplate="selectedItem">
                                         <div *ngIf="appelParams.utilisateur">
                                             <div>
@@ -56,7 +57,7 @@
                                     <ng-template let-user pTemplate="item">
                                         <div>
                                             <div>
-                                                {{user.value.nom}} {{user.value.prenom}}
+                                                {{user.nom}} {{user.prenom}}
                                             </div>
                                         </div>
                                     </ng-template>
@@ -84,8 +85,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <p-table #dt [value]="listeAppel" [paginator]="true" styleClass="p-datatable-customers"
-                                [rows]="10" [showCurrentPageReport]="true"
+                            <p-table #dt [value]="listeAppel" [paginator]="true" styleClass="p-datatable-striped"
+                                [responsive]="true" [rows]="10" [showCurrentPageReport]="true"
                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                                 [rowsPerPageOptions]="[10,25,50,100]" selectionMode="single"
                                 [globalFilterFields]="['nomJoueur']">
@@ -103,30 +104,21 @@
                                 </ng-template>
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th style="width: 5rem;">
-                                        </th>
-                                        <th style="width: 4rem;" pSortableColumn="nom">Nom<p-sortIcon field="nom">
+                                        <th pSortableColumn="nom">Nom<p-sortIcon field="nom">
                                             </p-sortIcon>
-                                        </th>
-                                        <th style="width: 1rem;">
                                         </th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-appel>
                                     <tr [pSelectableRow]="appel">
                                         <td>
-                                            <div>
-                                                <img [src]="photoUrl + appel.idJoueur"
-                                                    style="max-height: 100px;max-width: 90px;" />
+                                            <div style="width: 40%;padding-right: 2%;float: left;">
+                                                <img [src]="photoUrl + appel.idJoueur" width="98%" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div>
+                                            <div style="width: 40%; padding-left:2%;float: left;">
                                                 {{appel.nomJoueur}}
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div>
+                                            <div style="width: 20%;float: left;">
                                                 <button [hidden]="!appel.idPresence" type="button" pButton pRipple
                                                     icon="pi pi-thumbs-up"
                                                     class="p-button-rounded p-button-success"></button>

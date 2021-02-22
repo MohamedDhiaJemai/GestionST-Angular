@@ -1,17 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Sexe } from 'app/model/Enums.model';
 import { JoueurPro } from 'app/model/JoueurPro.model';
-import { Sexe } from 'app/model/Sexe.model';
 import { CategorieService } from 'app/services/categorie/categorie.service';
 import { JoueurProService } from 'app/services/joueur-pro/joueur-pro.service';
 import { SelectItem } from 'primeng/api';
 
 
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON'
-}
 
 @Component({
   selector: 'app-add-joueur-pro',
@@ -28,7 +24,7 @@ export class AddJoueurProComponent implements OnInit {
 
   constructor(private joueurProService: JoueurProService, private categorieService: CategorieService,
     private router: Router, private datePipe: DatePipe) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
+    this.sexes = Object.keys(Sexe).map(key => ({ label: Sexe[key], value: key }));
   }
 
   ngOnInit() {

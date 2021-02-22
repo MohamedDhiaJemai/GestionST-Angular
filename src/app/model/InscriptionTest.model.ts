@@ -19,6 +19,7 @@ export class InscriptionTest {
     public phase1: boolean;
     public phase2: boolean;
     public sessionTest: SessionTest;
+    public nomInscri: string;
 
     constructor() { }
 }

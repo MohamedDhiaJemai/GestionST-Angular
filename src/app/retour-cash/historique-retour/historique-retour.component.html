@@ -1,0 +1,105 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
+                            <h4 class="card-title ">Listes des retours</h4>
+                            <p class="card-category"> STADE TUNISIEN</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
+                        </ng-template>
+                    </p-toolbar>
+
+                    <div class="card-body">
+                        <p-table #dt [value]="retours" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" styleClass="p-datatable-striped"
+                            [responsive]="true"
+                            [globalFilterFields]="['id','borne.reference','retour','utilisateur.nomUtilisateur', 'transaction.id']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="clear(dt)"></button>
+                                    <span class="p-input-icon-left p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="id" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Ref
+                                            <p-sortIcon field="id"></p-sortIcon>
+                                            <p-columnFilter type="text" field="id" display="menu" class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="dateCreation" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Date
+                                            <p-sortIcon field="dateCreation"></p-sortIcon>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="borne" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Borne
+                                            <p-sortIcon field="borne"></p-sortIcon>
+                                            <p-columnFilter type="text" field="borne.reference" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="montant" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Montant
+                                            <p-sortIcon field="montant"></p-sortIcon>
+                                            <p-columnFilter type="text" field="montant" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="retour" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Retourné
+                                            <p-sortIcon field="retour"></p-sortIcon>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-retour>
+                                <tr [pSelectableRow]="retour">
+                                    <td> <span class="p-column-title">Ref</span>{{retour.id}}</td>
+                                    <td> <span
+                                            class="p-column-title">Date</span>{{retour.dateCreation | date: 'dd-MM-yyyy HH:mm'}}
+                                    </td>
+                                    <td> <span class="p-column-title">Borne</span>{{retour.borne.reference}}</td>
+                                    <td> <span class="p-column-title">Montant</span>{{retour.montant}}</td>
+                                    <td> <span class="p-column-title">Retourné</span>
+                                        <div *ngIf="!retour.retour">{{retour.retour}}</div>
+                                        <div>{{retour.dateRetour | date: 'dd-MM-yyyy HH:mm'}}</div>
+                                        <div> {{retour.utilisateur?.nomUtilisateur}}</div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,44 +29,34 @@
                         <p-table #dt [value]="roles" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedRole"
-                            styleClass="p-datatable-customers">
+                            styleClass="p-datatable-striped" [responsive]="true">
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon>
+                                    <th pSortableColumn="designation">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Désignation
+                                            <p-sortIcon field="designation"></p-sortIcon>
+                                            <p-columnFilter type="text" field="designation" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="designation">Désignation <p-sortIcon field="designation">
-                                        </p-sortIcon>
-                                    <th style="width:4rem"></th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'id', 'contains')" placeholder="ID"
-                                            class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'designation', 'contains')"
-                                            placeholder="Désignation" class="p-column-filter">
-                                    </th>
-                                    <th>
-
-                                    </th>
+                                    <th style="width:10rem"></th>
                                 </tr>
                             </ng-template>
 
                             <ng-template pTemplate="body" let-role>
                                 <tr [pSelectableRow]="role">
-                                    <td>{{role.id}}</td>
-                                    <td>{{role.designation}}</td>
-                                    <td>
-                                        <div style="text-align: center;">
-                                            <button [disabled]="!edition" routerLink="/update-role/{{ role.id }}"
-                                                pButton pRipple type="button" icon="pi pi-refresh"
-                                                class="p-button-rounded p-button-success"></button>
-                                        </div>
+                                    <td><span class="p-column-title">Désignation</span>{{role.designation}}</td>
 
+                                    <td>
+                                        <button style="float: left;margin-right: 5px;" [disabled]="!edition"
+                                            routerLink="/autorisations-role/{{ role.id }}" pButton pRipple type="button"
+                                            icon="pi pi-bars" class="p-button-rounded p-button-success"></button>
+                                        <button style="float: left;margin-right: 5px;" [disabled]="!edition" routerLink="/update-role/{{ role.id }}" pButton
+                                            pRipple type="button" icon="pi pi-pencil"
+                                            class="p-button-rounded p-button-warning"></button>
                                     </td>
                                 </tr>
                             </ng-template>

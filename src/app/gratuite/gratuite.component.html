@@ -37,17 +37,17 @@
                                 [showCurrentPageReport]="true"
                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                                 [rowsPerPageOptions]="[10,25,50]" selectionMode="single" onselect=""
-                                styleClass="p-datatable-customers">
+                                styleClass="p-datatable-striped" [responsive]="true">
 
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th pSortableColumn="taux" class="text-center">Taux
-                                            <p-sortIcon field="taux">
-                                            </p-sortIcon>
-                                            <p-columnFilter type="text" field="taux" ></p-columnFilter>
-                                            <!-- <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'taux', 'contains')"
-                                                placeholder="taux" class="p-column-filter"> -->
+                                        <th pSortableColumn="taux" class="text-center">
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Taux
+                                                <p-sortIcon field="taux"></p-sortIcon>
+                                                <p-columnFilter type="text" field="taux" display="menu"
+                                                    class="p-ml-auto"></p-columnFilter>
+                                            </div>
                                         </th>
                                         <th pSortableColumn="moisDebut" class="text-center">Date début
                                             <p-sortIcon field="moisDebut">
@@ -57,31 +57,32 @@
                                             <p-sortIcon field="moisFin">
                                             </p-sortIcon>
                                         </th>
-                                        <th pSortableColumn="motif" class="text-center">motif
-                                            <p-sortIcon field="motif">
-                                            </p-sortIcon>
-                                            <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'motif', 'contains')"
-                                                placeholder="motif" class="p-column-filter">
+                                        <th pSortableColumn="motif" class="text-center">
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Motif
+                                                <p-sortIcon field="motif"></p-sortIcon>
+                                                <p-columnFilter type="text" field="motif" display="menu"
+                                                    class="p-ml-auto"></p-columnFilter>
+                                            </div>
                                         </th>
-                                        <th pSortableColumn="activation" class="text-center">Activation
-                                            <p-sortIcon field="activation">
-                                            </p-sortIcon>
-                                            <input pInputText type="text" style="width: 100%;"
-                                                (input)="dt.filter($event.target.value, 'activation', 'contains')"
-                                                placeholder="activation" class="p-column-filter">
+                                        <th pSortableColumn="activation" class="text-center">
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Activation
+                                                <p-sortIcon field="activation"></p-sortIcon>
+                                                <p-columnFilter type="text" field="activation" display="menu"
+                                                    class="p-ml-auto"></p-columnFilter>
+                                            </div>
                                         </th>
-                                        <!-- <th style="width: 6rem;"></th> -->
                                     </tr>
                                 </ng-template>
 
                                 <ng-template pTemplate="body" let-gratuitee>
                                     <tr [pSelectableRow]="gratuitee">
-                                        <td>{{gratuitee.taux}} %</td>
-                                        <td>{{gratuitee.moisDebut | date:'MM-yyyy'}}</td>
-                                        <td>{{gratuitee.moisFin | date:'MM-yyyy'}}</td>
-                                        <td>{{gratuitee.motif}}</td>
-                                        <td>
+                                        <td><span class="p-column-title">Taux</span>{{gratuitee.taux}} %</td>
+                                        <td><span class="p-column-title">Date début</span>{{gratuitee.moisDebut | date:'MM-yyyy'}}</td>
+                                        <td><span class="p-column-title">Date fin</span>{{gratuitee.moisFin | date:'MM-yyyy'}}</td>
+                                        <td><span class="p-column-title">Motif</span>{{gratuitee.motif}}</td>
+                                        <td><span class="p-column-title">Activation</span>
                                             <button [disabled]="!edition" [hidden]="!gratuitee.activation" type="button"
                                                 (click)="editActivation(gratuitee)" pButton pRipple
                                                 icon="pi pi-thumbs-up"

@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Genre, Jour } from 'app/model/Enums.model';
 import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
 import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
@@ -8,21 +9,6 @@ import { ServiceSTService } from 'app/services/serviceST/service-st.service';
 import { environment } from 'environments/environment';
 import { MessageService, SelectItem } from 'primeng/api';
 
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON',
-  UNISEXE = 'UNISEXE'
-}
-
-export enum jour {
-  LUNDI = 'LUNDI',
-  MARDI = 'MARDI',
-  MERCREDI = 'MERCREDI',
-  JEUDI = 'JEUDI',
-  VENDREDI = 'VENDREDI ',
-  SAMEDI = 'SAMEDI',
-  DIMANCHE = 'DIMANCHE'
-}
 
 @Component({
   selector: 'app-add-service',
@@ -50,8 +36,8 @@ export class AddServiceComponent implements OnInit {
 
   constructor(private serviceSTService: ServiceSTService, private formBuilder: FormBuilder,
     private routerNav: Router, private imageProduitService: ImageProduitService) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
-    this.jours = Object.keys(jour).map(key => ({ label: jour[key], value: key }));
+    this.sexes = Object.keys(Genre).map(key => ({ label: Genre[key], value: key }));
+    this.jours = Object.keys(Jour).map(key => ({ label: Jour[key], value: key }));
     this.file = null;
   }
 
@@ -80,16 +66,17 @@ export class AddServiceComponent implements OnInit {
     if (this.servicePrincipal.visible === null) {
       this.servicePrincipal.visible = false;
     }
-
-    this.serviceSTService.addService(this.servicePrincipal).subscribe(
-      (data: ServicePrincipal) => {
-        const formData = new FormData();
-        formData.append('file', this.uploadForm.get('profile').value);
-        this.imageProduitService.upload(formData, data.id).subscribe(
-          data2 => { this.routerNav.navigate(['services']) }
-        );
-      }
-    );
+    if (this.url !== undefined) {
+      this.serviceSTService.addService(this.servicePrincipal).subscribe(
+        (data: ServicePrincipal) => {
+          const formData = new FormData();
+          formData.append('file', this.uploadForm.get('profile').value);
+          this.imageProduitService.upload(formData, data.id).subscribe(
+            data2 => { this.routerNav.navigate(['services']) }
+          );
+        }
+      );
+    }
   }
 
   onAddServiceComplementaire() {
@@ -101,18 +88,19 @@ export class AddServiceComponent implements OnInit {
       this.jourEnvoi.push(element.label);
     });
     this.serviceComplementaire.jours = this.jourEnvoi;
-    this.serviceSTService.addServiceComplement(this.serviceComplementaire).subscribe(
-      (data: ServiceComplementaire) => {
-        const formData = new FormData();
-        formData.append('file', this.uploadForm.get('profile').value);
-        this.imageProduitService.upload(formData, data.id).subscribe(
-          data2 => {
-            this.routerNav.navigate(['services'])
-          }
-        );
-      }
-    );
-
+    if (this.url !== undefined) {
+      this.serviceSTService.addServiceComplement(this.serviceComplementaire).subscribe(
+        (data: ServiceComplementaire) => {
+          const formData = new FormData();
+          formData.append('file', this.uploadForm.get('profile').value);
+          this.imageProduitService.upload(formData, data.id).subscribe(
+            data2 => {
+              this.routerNav.navigate(['services'])
+            }
+          );
+        }
+      );
+    }
   }
 
 }

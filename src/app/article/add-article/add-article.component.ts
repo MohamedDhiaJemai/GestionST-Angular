@@ -2,16 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Article } from 'app/model/Article.model';
+import { CategoryTaille, Genre } from 'app/model/Enums.model';
 import { ArticleService } from 'app/services/article/article.service';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
-export enum sexe {
-  FILLE = 'FILLE',
-  GARCON = 'GARCON',
-  UNISEXE = 'UNISEXE'
-}
+
 
 @Component({
   selector: 'app-add-article',
@@ -25,6 +22,7 @@ export class AddArticleComponent implements OnInit {
   articleSubscription: Subscription;
 
   sexes: SelectItem[];
+  categorys: SelectItem[];
   item: string;
 
   url;
@@ -35,7 +33,8 @@ export class AddArticleComponent implements OnInit {
   constructor(private articleService: ArticleService,
     private formBuilder: FormBuilder,
     private routerNav: Router, private imageProduitService: ImageProduitService) {
-    this.sexes = Object.keys(sexe).map(key => ({ label: sexe[key], value: key }));
+    this.sexes = Object.keys(Genre).map(key => ({ label: Genre[key], value: key }));
+    this.categorys = Object.keys(CategoryTaille).map(key => ({ label: CategoryTaille[key], value: key }));
     this.file = null;
   }
 
@@ -64,18 +63,20 @@ export class AddArticleComponent implements OnInit {
     if (this.article.visible === undefined) {
       this.article.visible = false;
     }
-    this.articleService.addArticle(this.article).subscribe(
-      data => {
-        const formData = new FormData();
-        formData.append('file', this.uploadForm.get('profile').value);
+    if (this.url !== undefined) {
+      this.articleService.addArticle(this.article).subscribe(
+        data => {
+          const formData = new FormData();
+          formData.append('file', this.uploadForm.get('profile').value);
 
-        this.imageProduitService.upload(formData, data.id).subscribe(
-          data2 => {
-            this.routerNav.navigate(['articles']);
-          }
-        );
-      }
-    );
+          this.imageProduitService.upload(formData, data.id).subscribe(
+            data2 => {
+              this.routerNav.navigate(['articles']);
+            }
+          );
+        }
+      );
+    }
   }
 
 }

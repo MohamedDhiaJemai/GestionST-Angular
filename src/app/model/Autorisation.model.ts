@@ -1,7 +1,7 @@
-import { Tache } from "./Tache.model";
+import { Tache } from './Tache.model';
 
 export class AutorisationKey {
-    public utilisateurId: number;
+    public entityrId: number;
     public tacheId: number;
 }
 

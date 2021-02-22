@@ -1,6 +1,24 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <a href="javascript:void(0)">
+                        <img class="img" [src]="urlPhoto" width="100%"> <br />
+                    </a>
+                    <div class="card-body">
+                        <br>
+                        <h4 class="card-title">{{joueurAcademie?.nom}} {{joueurAcademie?.prenom}}</h4>
+                        <h6 class="card-category text-gray">{{joueurAcademie?.identifiant}}</h6>
+                        <br>
+                        <a href="javascript:void(0)" [hidden]="!edition"
+                            routerLink="/update-joueur-academie/{{ joueurAcademie?.id }}"
+                            class="btn btn-danger btn-round">UPDATE</a>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+            </div>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
@@ -13,8 +31,6 @@
                     <div class="card-body">
                         <form>
                             <br>
-
-                            <br>
                             <div class="row">
                                 <div class="col-md-5">
                                     Identifiant
@@ -23,7 +39,15 @@
                                     {{joueurAcademie?.identifiant}}
                                 </div>
                             </div>
-
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Pin
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurAcademie?.pin}}
+                                </div>
+                            </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-5">
@@ -117,8 +141,7 @@
                                 <div class="col-md-7" *ngIf="joueurAcademie?.parent != null">
                                     <ul>
                                         <li>Mobile : {{joueurAcademie.parent.mobile}}</li>
-                                        <li>Nom : {{joueurAcademie.parent.nom}}</li>
-                                        <li>Prenom : {{joueurAcademie.parent.prenom}}</li>
+                                        <li>Nom : {{joueurAcademie.parent.nomParent}}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -178,27 +201,6 @@
                             <div class="clearfix"></div>
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-profile">
-                    <a href="javascript:void(0)">
-                        <img class="img" [src]="urlPhoto" width="100%"> <br />
-                    </a>
-                    <div class="card-body">
-                        <br>
-                        <h4 class="card-title">{{joueurAcademie?.nom}} {{joueurAcademie?.prenom}}</h4>
-                        <h6 class="card-category text-gray">{{joueurAcademie?.identifiant}}</h6>
-                        <br>
-                        <p class="card-description">
-                        </p>
-                        <br>
-                        <a href="javascript:void(0)" [hidden]="!edition"
-                            routerLink="/update-joueur-academie/{{ joueurAcademie?.id }}"
-                            class="btn btn-danger btn-round">UPDATE</a>
-                        <br>
-                    </div>
-                    <br>
                 </div>
             </div>
         </div>

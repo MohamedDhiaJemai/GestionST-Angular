@@ -43,7 +43,7 @@
                                         [showCurrentPageReport]="true"
                                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                                         [rowsPerPageOptions]="[10,25,50]" selectionMode="single"
-                                        [(selection)]="selectedLivraison" styleClass="p-datatable-customers">
+                                        [(selection)]="selectedLivraison" styleClass="p-datatable-striped" [responsive]="true">
 
                                         <ng-template pTemplate="header">
                                             <tr>
@@ -71,10 +71,10 @@
 
                                         <ng-template pTemplate="body" let-livraison>
                                             <tr [pSelectableRow]="livraison">
-                                                <td>{{livraison.dateCreation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                                                <td>{{livraison.article.libelle}}</td>
-                                                <td>{{livraison.taille}}</td>
-                                                <td>{{livraison.quantite}}</td>
+                                                <td><span class="p-column-title">Date achat</span>{{livraison.dateCreation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                                <td><span class="p-column-title">Article</span>{{livraison.article.libelle}}</td>
+                                                <td><span class="p-column-title">Taille</span>{{livraison.taille}}</td>
+                                                <td><span class="p-column-title">Quantité</span>{{livraison.quantite}}</td>
                                                 <td>
                                                     <button [disabled]="!edition" *ngIf="!livraison.validation"
                                                         type="button" (click)="validerById(livraison.id)" pButton

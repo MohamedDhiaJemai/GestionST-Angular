@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'acceuil', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'acceuil', pathMatch: 'full' },
   {
     path: '', component: AdminLayoutComponent,
     children: [{
