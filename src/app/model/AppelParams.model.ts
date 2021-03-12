@@ -1,3 +1,4 @@
+import { Categorie } from './Categorie.model';
 import { Utilisateur } from './Utilisateur.model';
 
 export class AppelParams {
@@ -7,6 +8,7 @@ export class AppelParams {
     public jour: string;
     public sexe: string;
     public utilisateur: Utilisateur;
+    public categorie: Categorie;
 
     constructor() { }
 

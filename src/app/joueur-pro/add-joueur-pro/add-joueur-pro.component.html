@@ -5,9 +5,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Ajouter Joueur Professionnel</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Ajout Joueur Signataire</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -58,11 +61,13 @@
                                         placeholder="Sexe" (onChange)="OnChange($event)" [showClear]="true">
                                     </p-dropdown> -->
 
-                                    <p-dropdown #dd [options]="sexes" name="sexe" [(ngModel)]="joueurPro.sexe"placeholder="Sexe" [showClear]="true"></p-dropdown>
+                                    <p-dropdown #dd [options]="sexes" name="sexe" [(ngModel)]="joueurPro.sexe"
+                                        placeholder="Sexe" [showClear]="true"></p-dropdown>
                                 </div>
                                 <div class="col-md-6">
-                                    <p-calendar placeholder="Date Naissance" name="dateNaissance"
-                                        [(ngModel)]="joueurPro.dateNaissance" [touchUI]="true" [readonlyInput]="true">
+                                    <p-calendar placeholder="Date Naissance" dateFormat='dd-mm-yy' name="dateNaissance"
+                                        [(ngModel)]="joueurPro.dateNaissance" [yearNavigator]="true"
+                                        [monthNavigator]="true" yearRange="1952:2120" [touchUI]="true">
                                     </p-calendar>
                                 </div>
                             </div>
@@ -85,7 +90,7 @@
                             </div>
                             <br><br>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="onAddJoueurPro()">AJOUTER</button>
+                                (click)="onAddJoueurPro()">Valider</button>
                             <button routerLink="/joueur-professionnel" mat-raised-button type="button"
                                 class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix"></div>

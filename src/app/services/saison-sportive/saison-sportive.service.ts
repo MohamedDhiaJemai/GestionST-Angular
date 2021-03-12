@@ -1,29 +1,29 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TokenService } from '../token/token.service';
-import { Produit } from 'app/model/produit.model';
-import { Observable } from 'rxjs';
+import { SaisonSportive } from 'app/model/SaisonSportive.model';
 import { environment } from 'environments/environment';
+import { Observable } from 'rxjs';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProduitService {
+export class SaisonSportiveService {
   constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
-  getAllProduit(): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + 'produit/all',
+  getAll(): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'saison/all',
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-  addProduit(produit: Produit) {
-    return this.httpClient.post(environment.apiUrl + 'produit/add', produit,
+  add(saison: SaisonSportive) {
+    return this.httpClient.post(environment.apiUrl + 'saison/add', saison,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-  updateProduit(id: number, produit: Produit) {
-    return this.httpClient.put(environment.apiUrl + 'produit/update/' + id, produit,
+  update(id: number, saison: SaisonSportive) {
+    return this.httpClient.put(environment.apiUrl + 'saison/update/' + id, saison,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
   findById(id) {
-    return this.httpClient.get<Produit>(environment.apiUrl + 'produit/findById/' + id,
+    return this.httpClient.get<SaisonSportive>(environment.apiUrl + 'saison/' + id,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
 }

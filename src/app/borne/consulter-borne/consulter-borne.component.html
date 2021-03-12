@@ -5,9 +5,11 @@
         <div class="card">
           <div class="card-header card-header-danger">
             <div style="float: left;">
-              <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-              <h4 class="card-title ">Consultation Borne</h4>
-              <p class="card-category"> STADE TUNISIEN</p>
+              <img src="assets\\images\\loginsST.png" style="width: 35px;float: left; margin-right: 10px;">
+              <div style="float: left;">
+                <h4 class="card-title">Détails Borne</h4>
+                <p class="card-category">STADE TUNISIEN</p>
+              </div>
             </div>
           </div>
           <br>
@@ -35,29 +37,6 @@
                   </div>
                   <br>
                   <h2 class="product-title" style="text-align: center;">{{ borne.reference }}</h2>
-                  <br>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h5 class="price"><b>FTP Username :</b>
-                      </h5>
-                    </div>
-                    <div class="col-md-6">
-                      <h5 class="price">{{borne.ftpUsername}}
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h5 class="price"><b>FTP Password :</b>
-                      </h5>
-                    </div>
-                    <div class="col-md-6">
-                      <h5 class="price">{{borne.ftpPassword}}
-                      </h5>
-                    </div>
-                  </div>
-
                   <div class="row">
                     <div class="col-md-6">
                       <h5 class="price"><b>Date Creation :</b>
@@ -171,7 +150,7 @@
                     <div class="col-md-11" style="margin-top: 5%;">
                       <div class="action">
                         <button style="margin: 5%" class="add-to-cart btn btn-success" type="button"
-                          routerLink="/update-borne/{{ borne.id }}">Update</button>
+                          routerLink="/update-borne/{{ borne.id }}">Modifier</button>
                         <button class="like btn btn-default" type="button" routerLink="/bornes">Retour</button>
                       </div>
                     </div>

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Gratuite } from 'app/model/Gratuite.model';
+import { Joueur } from 'app/model/Joueur.model';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
+import { Obligation } from 'app/model/Obligation.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { GratuiteService } from 'app/services/gratuite/gratuite.service';
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
+import { ObligationService } from 'app/services/obligation/obligation.service';
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-consulter-joueur-academie',
@@ -24,7 +26,12 @@ export class ConsulterJoueurAcademieComponent implements OnInit {
   edition: boolean;
   consultation: boolean;
   consultationGratuite: boolean;
+  obligationTenu: Obligation;
+  obligationInscri: Obligation;
+  annee: string;
+
   constructor(private joueurAcademieService: JoueurAcademieService, private gratuiteService: GratuiteService,
+    private obligationService: ObligationService,
     private activatedRoute: ActivatedRoute, private autorisationService: AutorisationService) { }
   ngOnInit() {
     const obj = this.autorisationService.checkAutorisations2('joueur-acamedie', 'gratuite-joueur');
@@ -33,9 +40,16 @@ export class ConsulterJoueurAcademieComponent implements OnInit {
     this.consultationGratuite = obj.consultationSup;
     this.id = this.activatedRoute.snapshot.params['id'];
     this.urlPhoto = environment.apiUrl + 'photo/get/' + this.id;
+    this.annee = new Date().getFullYear().toString();
     this.joueurAcademieService.findById(this.id).subscribe(
       data => {
         this.joueurAcademie = data;
+        this.obligationService.tenu(this.id, this.annee).subscribe(dataa => {
+          this.obligationTenu = dataa;
+        });
+        this.obligationService.inscri(this.id, this.annee).subscribe(dataa => {
+          this.obligationInscri = dataa;
+        });
       }
     );
     this.gratuiteService.active(this.id).subscribe(
@@ -44,4 +58,32 @@ export class ConsulterJoueurAcademieComponent implements OnInit {
       }
     );
   }
+
+  createTenu() {
+    let joueur: Joueur = new Joueur();
+    joueur.id = this.id;
+    let obligation = new Obligation();
+    obligation.annee = this.annee;
+    obligation.joueur = joueur;
+    obligation.type = 'TENU';
+    this.obligationService.add(obligation).subscribe(data =>
+      this.obligationTenu = data);
+  }
+  createInscri() {
+    let joueur: Joueur = new Joueur();
+    joueur.id = this.id;
+    let obligation = new Obligation();
+    obligation.annee = this.annee;
+    obligation.joueur = joueur;
+    obligation.type = 'INSCRIPTION';
+    this.obligationService.add(obligation).subscribe(data =>
+      this.obligationInscri = data);
+  }
+
+  // deleteTenu() {
+
+  // }
+  // deleteInscri() {
+
+  // }
 }

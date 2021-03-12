@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class AutorisationService {
   username: string;
   jwtHelper: JwtHelper = new JwtHelper();
+  autorisationsList: Autorisation[];
+  autorisationsArray: any[];
   constructor(private httpClient: HttpClient, private tokenUtil: TokenService, private router: Router) { }
   findAutorisationsByRole(username: string): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'autorisations/role/' + username,
@@ -37,16 +39,33 @@ export class AutorisationService {
       + this.jwtHelper.decodeToken(this.tokenUtil.getToken()).sub,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-  setAutorisations(autorisations: Autorisation[]) {
-    let array = new Array<any>();
-    autorisations.forEach(element => {
+  setAutorisations(auts: Autorisation[]) {
+    this.autorisationsArray = new Array<any>();
+    this.autorisationsList = auts;
+    auts.forEach(element => {
       let obj = { metier: element.tache.metier, edition: element.edition, consultation: element.consultation };
-      array.push(obj);
+      this.autorisationsArray.push(obj);
     });
-    localStorage.setItem('autorisations', JSON.stringify(array));
+    localStorage.setItem('autorisations', JSON.stringify(this.autorisationsArray));
+    this.router.navigateByUrl('/');
+  }
+
+  getAutorisations(): Array<any> {
+    if (this.autorisationsArray === undefined) {
+      this.autorisationsArray = JSON.parse(localStorage.getItem('autorisations'));
+      return this.autorisationsArray;
+    } else {
+      return this.autorisationsArray;
+    }
+  }
+  clearAutorisations() {
+    this.autorisationsList = undefined;
+    this.autorisationsArray = undefined;
   }
   checkAutorisations1(metier: string) {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+    if (this.autorisationsArray === undefined) {
+      this.autorisationsArray = JSON.parse(localStorage.getItem('autorisations'));
+    }
     const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
     let edition = false;
     let consultation = false;
@@ -54,7 +73,7 @@ export class AutorisationService {
       edition = true;
       consultation = true;
     } else {
-      autorisations.forEach(element => {
+      this.autorisationsArray.forEach(element => {
         if (element.metier === metier) {
           if (!element.consultation) {
             this.router.navigateByUrl('/acceuil');
@@ -67,7 +86,9 @@ export class AutorisationService {
     return { edition: edition, consultation: consultation };
   }
   checkAutorisations2(metier1: string, metier2: string) {
-    const autorisations: Array<any> = JSON.parse(localStorage.getItem('autorisations'));
+    if (this.autorisationsArray === undefined) {
+      this.autorisationsArray = JSON.parse(localStorage.getItem('autorisations'));
+    }
     const roless: Array<any> = JSON.parse(localStorage.getItem('roles'));
     let edition = false;
     let consultation = false;
@@ -77,7 +98,7 @@ export class AutorisationService {
       consultation = true;
       consultationSup = true;
     } else {
-      autorisations.forEach(element => {
+      this.autorisationsArray.forEach(element => {
         if (element.metier === metier1) {
           if (!element.consultation) {
             this.router.navigateByUrl('/acceuil');

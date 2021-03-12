@@ -8,9 +8,12 @@
 
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Ajouter Taille</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Ajout Stock</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -33,20 +36,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h5 class="price" style="margin-top: 10%;">Observation:
-                                            </h5>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Observation" type="text" name="observation"
-                                                    [(ngModel)]="approvisionnement.observation">
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h5 class="price" style="margin-top: 10%;">Reference:
+                                            <h5 class="price" style="margin-top: 10%;">Reference Commande:
                                             </h5>
                                         </div>
                                         <div class="col-md-6">
@@ -103,15 +93,28 @@
                                         </div>
                                     </div>
                                     <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="price" style="margin-top: 10%;">Remarque:
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Observation" type="text" name="observation"
+                                                    [(ngModel)]="approvisionnement.observation">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <div class="row justify-content-center">
                                         <div class="col-md-12">
                                             <div class="action">
                                                 <button style="margin-right: 5%" class="like btn btn-default"
                                                     type="button"
                                                     routerLink="/approvisionnement-article/{{article.id}}">
-                                                    Retour</button>
+                                                    Annuler</button>
                                                 <button class="add-to-cart btn btn-success" type="button"
-                                                    (click)="ngOnAddApprovisionnement()">Sauvegarder
+                                                    (click)="ngOnAddApprovisionnement()">Valider
                                                 </button>
                                             </div>
                                         </div>

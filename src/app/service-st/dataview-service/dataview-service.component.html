@@ -14,7 +14,7 @@
     <ng-template let-product pTemplate="listItem">
         <div class="p-col-12">
             <div class="product-list-item">
-                <img [src]="imgUrl + product.id" />
+                <img [src]="imgUrl + product.id" style="max-width: 151px;max-height: 184px;"/>
                 <div class="product-list-detail">
                     <div class="product-name">{{product.libelle}} </div>
                     <br>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="product-grid-item-content">
-                    <img [src]="imgUrl + product.id" style="max-width: 160px;max-height: 120px;" />
+                    <img [src]="imgUrl + product.id" style="max-width: 151px;max-height: 184px;"/>
                     <div class="product-name">{{product.libelle}}</div>
                     <br>
                     <!-- <span [class]="'product-badge status-' + product.dateNaissance"> Nombre Mois :

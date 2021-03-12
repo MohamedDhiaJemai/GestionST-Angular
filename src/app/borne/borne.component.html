@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Bornes</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Bornes</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -20,7 +23,7 @@
 
                         <ng-template pTemplate="right">
                             <button [disabled]="!edition" routerLink="/add-borne" pButton pRipple icon="pi pi-plus"
-                                label="Ajouter Borne" class="p-button-success"></button>
+                                label="Ajout Borne" class="p-button-success"></button>
                         </ng-template>
 
                     </p-toolbar>
@@ -49,25 +52,34 @@
                                             (click)="showDialogConnexion(borne)" label="{{borne.reference}}"></button>
                                     </td>
                                     <td><span class="p-column-title">Etat</span>
-                                        <p-inputSwitch name="validation" (onChange)="maintenance(borne)"
-                                            [(ngModel)]="borne.maintenance">
-                                        </p-inputSwitch>
+                                        <button [hidden]="!borne.maintenance" pButton style="margin-right: 5px;"
+                                            icon="pi pi-ban" class="p-button-rounded p-button-danger"
+                                            (click)="openModal(template,borne)">
+                                        </button>
+                                        <button [hidden]="borne.maintenance" pButton style="margin-right: 5px;"
+                                            icon="pi pi-sun" class="p-button-rounded p-button-success"
+                                            (click)="openModal(template,borne)">
+                                        </button>
+                                        <button class="p-button-rounded p-button-warning"
+                                            (click)="showDialogMateriel(borne)"
+                                            [hidden]="borne.counterBillets < borne.seuilMaxBillets && borne.counterLongueurRuban > borne.seuilMinRuban"
+                                            pButton style="margin-right: 5px;" icon="pi pi-exclamation-triangle">
+                                        </button>
                                     </td>
                                     <td>
+                                        <button pButton style="margin-right: 5px;" icon="pi pi-cog"
+                                            class="p-button-rounded p-button-info" (click)="showDialogMateriel(borne)">
+                                        </button>
+                                        <button pButton style="margin-right: 5px;" icon="pi pi-dollar"
+                                            class="p-button-rounded p-button-secondary"
+                                            (click)="showBasicDialogCaisse(borne)">
+                                        </button>
+                                        <button pButton icon="pi pi-video" style="margin-right: 5px;"
+                                            class="p-button-rounded p-button-help" (click)="showHibernate(borne)">
+                                        </button>
                                         <button pButton style="margin-right: 5px;" icon="pi pi-pencil"
                                             class="p-button-rounded p-button-warning"
                                             routerLink="/update-borne/{{ borne.id }}">
-                                        </button>
-                                        <button pButton style="margin-right: 5px;" icon="pi pi-cog"
-                                            class="p-button-rounded p-button-success"
-                                            (click)="showDialogMateriel(borne)">
-                                        </button>
-                                        <button pButton style="margin-right: 5px;" icon="pi pi-dollar"
-                                            class="p-button-rounded p-button-danger"
-                                            (click)="showBasicDialogCaisse(borne)">
-                                        </button>
-                                        <button pButton icon="pi pi-video" class="p-button-rounded p-button-primary"
-                                            (click)="showHibernate(borne)">
                                         </button>
                                     </td>
                                 </tr>
@@ -77,19 +89,20 @@
                     <p-dialog header="Informations matériel" [(visible)]="displayBasicMateriel"
                         [style]="{width: '50vw'}" [baseZIndex]="10000">
                         <ul *ngIf="borneSelected">
-                            <li>
+                            <li
+                                [class.seuil-critique]="borneSelected.counterLongueurRuban <= borneSelected.seuilMinRuban">
                                 Longueur ruban : {{borneSelected.counterLongueurRuban}} (Seuil:
                                 {{borneSelected.seuilMinRuban}}, Initiale: {{borneSelected.longueurRuban}})
                             </li>
                         </ul>
                         <ul *ngIf="borneSelected">
-                            <li>
+                            <li [class.seuil-critique]="borneSelected.counterBillets >= borneSelected.seuilMaxBillets">
                                 Nombre billets {{borneSelected.counterBillets}} (Seuil:
                                 {{borneSelected.seuilMaxBillets}}, Capacité: {{borneSelected.capaciteBillets}})
                             </li>
                         </ul>
                         <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-check" (click)="displayBasicMateriel=false" label="Ok"
+                            <p-button icon="pi pi-times" (click)="displayBasicMateriel=false" label="Fermer"
                                 styleClass="p-button-text"></p-button>
                         </ng-template>
                     </p-dialog>
@@ -99,13 +112,11 @@
                         <ul *ngIf="borneSelected">
                             <li> Ip : {{borneSelected.ip}} </li>
                             <li> Port : {{borneSelected.communication}} </li>
-                        </ul>
-                        <ul *ngIf="borneSelected">
-                            <li> FTP Username : {{borneSelected.ftpUsername}} </li>
-                            <li> FTP Password : {{borneSelected.ftpPassword}} </li>
+                            <br>
+                            <li> Numéro : {{borneSelected.numeroEnvoi}} </li>
                         </ul>
                         <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-check" (click)="displayBasicConnexion=false" label="Ok"
+                            <p-button icon="pi pi-times" (click)="displayBasicConnexion=false" label="Fermer"
                                 styleClass="p-button-text"></p-button>
                         </ng-template>
                     </p-dialog>
@@ -133,7 +144,7 @@
                         </ng-template>
                     </p-dialog>
 
-                    <p-dialog header="Ecran de veuille borne" [(visible)]="displayHibernate" [modal]="true"
+                    <p-dialog header="Ecran de veille borne" [(visible)]="displayHibernate" [modal]="true"
                         [style]="{'width': '50vw'}" [maximizable]="true" [baseZIndex]="10000" [draggable]="false"
                         [resizable]="false">
                         <p-messages key="photo"></p-messages>
@@ -163,10 +174,10 @@
                         <ng-template pTemplate="footer">
                             <div>
                                 <button pButton type="button" icon="pi pi-check" (click)="upload(borneSelected.id)"
-                                    label="Changer l'ecran de veille" class="p-button-outlined">
+                                    label="Changer l'écran de veille" class="p-button-outlined">
                                 </button>
                                 <button pButton type="button" icon="pi pi-times" (click)="displayHibernate=false"
-                                    label="Close" class="p-button-outlined"></button>
+                                    label="Fermer" class="p-button-outlined"></button>
                             </div>
                         </ng-template>
                     </p-dialog>
@@ -175,3 +186,27 @@
         </div>
     </div>
 </div>
+
+<ng-template #template>
+
+    <div class="modal-header">
+        <h5 class="modal-title">CONFIRMATION</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <p>Êtes-vous sûr de vouloir modifier l'état de la borne.</p>
+    </div>
+
+    <div class="modal-footer">
+
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="modalRef.hide()">NON</button>
+
+        <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
+            (click)="maintenance()">OUI</button>
+
+    </div>
+
+</ng-template>

@@ -7,6 +7,7 @@ export class ServiceComplementaire {
     public prix: number;
     public sexe: string;
     public visible: Boolean;
+    public elite: Boolean;
 
     constructor() { }
 

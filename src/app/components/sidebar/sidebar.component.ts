@@ -15,36 +15,28 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
-  { path: '/articles', title: 'Articles', icon: 'add_shopping_cart', class: '' },
-  { path: '/services', title: 'Services', icon: 'shop_two', class: '' },
-  { path: '/transactions', title: 'Transaction', icon: 'shop_two', class: '' },
-  { path: '/validation-joueur', title: 'Validation', icon: 'content_paste', class: '' },
-  { path: '/joueur-professionnel', title: 'Joueur Pro', icon: 'sports_soccer', class: '' },
-  { path: '/joueur-acamedie', title: 'Joueur Academie', icon: 'sports_soccer', class: '' },
-  { path: '/parents', title: 'Parents', icon: 'supervisor_account', class: '' },
-  { path: '/categories', title: 'Catégories', icon: 'content_paste', class: '' },
-  { path: '/bornes', title: 'Bornes', icon: 'multiple_stop', class: '' },
-  { path: '/utilisateurs', title: 'Utilisateurs', icon: 'person', class: '' },
-  { path: '/roles', title: 'Roles', icon: 'multiple_stop', class: '' },
-  { path: '/remises', title: 'Remises', icon: 'multiple_stop', class: '' },
-  { path: '/livraison', title: 'livraison Achats', icon: 'multiple_stop', class: '' },
-  { path: '/donations', title: 'Donations', icon: 'multiple_stop', class: '' },
-  { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'multiple_stop', class: '' },
-  { path: '/sessions-test', title: 'Sessions Test', icon: 'multiple_stop', class: '' },
-  { path: '/retour-cash', title: 'Retour Cash', icon: 'multiple_stop', class: '' },
-  { path: '/historique-retour', title: 'Historique Retours', icon: 'multiple_stop', class: '' },
-  { path: '/appel', title: 'Appel', icon: 'multiple_stop', class: '' },
-  { path: '/liste-presence', title: 'Présence', icon: 'multiple_stop', class: '' }
-
-
-  // { path: '/produits', title: 'Produits', icon: 'add_shopping_cart', class: '' },
-  // { path: '/upgrade', title: 'Upgrade to PRO', icon: 'unarchive', class: 'active-pro' }
-  // { path: '/user-profile', title: 'User Profile', icon: 'person', class: '' },
-  // { path: '/table-list', title: 'Table List', icon: 'content_paste', class: '' },
-  // { path: '/typography', title: 'Typography', icon: 'library_books', class: '' },
-  // { path: '/icons', title: 'Icons', icon: 'bubble_chart', class: '' },
-  // { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
-  // { path: '/notifications', title: 'Notifications', icon: 'notifications', class: '' },
+  { path: '/roles', title: 'Roles', icon: 'rule', class: '' },
+  { path: '/utilisateurs', title: 'Utilisateurs', icon: 'supervisor_account', class: '' },
+  { path: '/bornes', title: 'Bornes', icon: 'sensor_window', class: '' },
+  { path: '/remises', title: 'Remises', icon: 'money_off', class: '' },
+  { path: '/articles', title: 'Articles', icon: 'view_in_ar', class: '' },
+  { path: '/services', title: 'Services', icon: 'inventory', class: '' },
+  { path: '/saisons', title: 'Saisons Sportives', icon: 'sports_score', class: '' },
+  { path: '/categories', title: 'Catégories', icon: 'category', class: '' },
+  { path: '/joueur-professionnel', title: 'Joueurs Signataires', icon: 'sports_soccer', class: '' },
+  { path: '/validation-joueur', title: 'Validation Joueurs', icon: 'task_alt', class: '' },
+  { path: '/joueur-acamedie', title: 'Joueurs Academie', icon: 'face', class: '' },
+  { path: '/parents', title: 'Parents', icon: 'escalator_warning', class: '' },
+  { path: '/transactions', title: 'Transactions', icon: 'multiple_stop', class: '' },
+  { path: '/livraison', title: 'Livraison Achats', icon: 'shopping_cart', class: '' },
+  { path: '/retour-cash', title: 'Retour Cash', icon: 'paid', class: '' },
+  { path: '/historique-retour', title: 'Historique Retours', icon: 'request_quote', class: '' },
+  { path: '/donations', title: 'Donations', icon: 'money', class: '' },
+  { path: '/sessions-test', title: 'Sessions Test', icon: 'date_range', class: '' },
+  { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'fact_check', class: '' },
+  { path: '/joueurs-test', title: 'Joueurs Test', icon: 'groups', class: '' },
+  { path: '/appel', title: 'Appel', icon: 'spellcheck', class: '' },
+  { path: '/liste-presence', title: 'Présence', icon: 'fact_check', class: '' }
 ];
 
 @Component({
@@ -66,12 +58,14 @@ export class SidebarComponent implements OnInit {
         element.class = '';
       });
     } else {
-      this.autorisationService.findAutorisations().subscribe(dataa => {
-        this.autorisations = dataa;
+      this.autorisations = this.autorisationService.getAutorisations();
+      if (this.autorisations) {
         this.menuItems.forEach(element => {
           element.class = this.checkClass(element);
         });
-      });
+      } else {
+        this.router.navigateByUrl('/login');
+      }
     }
   }
 
@@ -85,7 +79,7 @@ export class SidebarComponent implements OnInit {
   checkClass(route: RouteInfo): string {
     let ret = false;
     this.autorisations.forEach(element => {
-      if (element.tache.metier === route.path.substr(1) && element.consultation) {
+      if (element.metier === route.path.substr(1) && element.consultation) {
         ret = true;
       }
     });

@@ -107,6 +107,8 @@ export class UpdateServiceComponent implements OnInit {
               this.routerNav.navigate(['/consulter-service/' + this.servicePrincipal.id]);
             }
           );
+        } else {
+          this.routerNav.navigate(['/consulter-service/' + this.servicePrincipal.id]);
         }
       }, err => {
         this.modalRef.hide();
@@ -128,6 +130,9 @@ export class UpdateServiceComponent implements OnInit {
               this.routerNav.navigate(['/consulter-service/' + this.serviceComplementaire.id]);
             }
           );
+        } else {
+          this.routerNav.navigate(['/consulter-service/' + this.serviceComplementaire.id]);
+
         }
       }, err => {
         this.modalRef.hide();
@@ -148,6 +153,8 @@ export class UpdateServiceComponent implements OnInit {
               this.routerNav.navigate(['/consulter-service/' + this.serviceAutre.id]);
             }
           );
+        } else {
+          this.routerNav.navigate(['/consulter-service/' + this.serviceAutre.id]);
         }
       }, err => {
         this.modalRef.hide();

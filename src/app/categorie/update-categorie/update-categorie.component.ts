@@ -1,7 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categorie } from 'app/model/Categorie.model';
+import { SaisonSportive } from 'app/model/SaisonSportive.model';
 import { CategorieService } from 'app/services/categorie/categorie.service';
+import { SaisonSportiveService } from 'app/services/saison-sportive/saison-sportive.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 
@@ -15,7 +17,7 @@ export class UpdateCategorieComponent implements OnInit {
   categorie: Categorie = new Categorie();
   categorieSubscription: Subscription;
   ancienCategorie: string;
-
+  saisons: SaisonSportive[];
   annees: any[] = [];
 
   modalRef: BsModalRef;
@@ -23,7 +25,7 @@ export class UpdateCategorieComponent implements OnInit {
 
   constructor(private categorieService: CategorieService,
     private router: ActivatedRoute,
-    private routerNav: Router, private modalService: BsModalService) { }
+    private routerNav: Router, private modalService: BsModalService, private saisonSportiveService: SaisonSportiveService) { }
 
   ngOnInit() {
     const now = new Date();
@@ -41,6 +43,11 @@ export class UpdateCategorieComponent implements OnInit {
         this.categorie.natifs.forEach(element => {
         })
       });
+    this.saisonSportiveService.getAll().subscribe(
+      data => {
+        this.saisons = data;
+      }
+    );
   }
 
   ngOnUpdateCategorie(templateAnnulation: TemplateRef<any>) {

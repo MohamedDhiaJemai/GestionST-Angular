@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Listes Des Donations</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Inscriptions Test</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -33,9 +36,9 @@
                                         (click)="clear(dt)"></button>
                                     <span class="p-input-icon-left p-ml-auto">
                                         <i class="pi pi-search"></i>
-                                        <input pInputText type="text"
+                                        <input style="width: 100%;" pInputText type="text"
                                             (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                            placeholder="Search keyword" />
+                                            placeholder="Search ..." />
                                     </span>
                                 </div>
                             </ng-template>
@@ -100,8 +103,8 @@
                                     <td><span class="p-column-title">Session</span>{{inscription.sessionTest.libelle}}
                                     </td>
                                     <td>
-                                        <button routerLink="/consulter-inscription/{{inscription.id}}" pButton pRipple
-                                            type="button" icon="pi pi-search"
+                                        <button routerLink="/update-inscription/{{inscription.id}}" pButton pRipple
+                                            type="button" icon="pi pi-pencil"
                                             class="p-button-rounded p-button-success"></button>
                                     </td>
                                 </tr>

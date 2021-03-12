@@ -1,0 +1,89 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Saisons Sportives</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <button pButton pRipple label="Export" icon="pi pi-download" class="p-button-help"></button>
+                        </ng-template>
+
+                        <ng-template pTemplate="right">
+                            <button [disabled]="!edition" routerLink="/add-saison" pButton pRipple icon="pi pi-plus"
+                                label="Ajout Saison" class="p-button-success p-mr-2"></button>
+                        </ng-template>
+                    </p-toolbar>
+
+                    <div class="card-body">
+                        <p-table #dt [value]="saisons" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedSaison"
+                            styleClass="p-datatable-striped" [responsive]="true">
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="designation">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Désignation
+                                            <p-sortIcon field="designation"></p-sortIcon>
+                                            <p-columnFilter type="text" field="designation" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="dateDebut">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Début
+                                            <p-sortIcon field="dateDebut"></p-sortIcon>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="dateFin">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Fin
+                                            <p-sortIcon field="dateFin"></p-sortIcon>
+                                        </div>
+                                    </th>
+                                    <th style="width:4rem"></th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-saison>
+                                <tr [pSelectableRow]="saison">
+                                    <td><span class="p-column-title">Désignation</span>{{saison.designation}}</td>
+                                    <td><span
+                                            class="p-column-title">Début</span>{{saison.dateDebut | date:'dd-MM-yyyy'}}
+                                    </td>
+                                    <td><span class="p-column-title">Fin</span>{{saison.dateFin | date:'dd-MM-yyyy'}}
+                                    </td>
+                                    <td>
+                                        <div style="text-align: center;">
+                                            <button [disabled]="!edition" routerLink="/update-saison/{{ saison.id }}"
+                                                pButton pRipple type="button" icon="pi pi-pencil"
+                                                class="p-button-rounded p-button-success"></button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

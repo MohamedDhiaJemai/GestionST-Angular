@@ -8,16 +8,19 @@
 
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Ajouter Service</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Ajout Service</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <br>
                     <div class="card-body">
                         <div class="col-md-12">
                             <p-tabView>
-                                <p-tabPanel header="Princial">
+                                <p-tabPanel header="Abonnement">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <br>
@@ -27,7 +30,7 @@
                                                         <form class="md-form">
                                                             <div class="file-field">
                                                                 <div class="btn btn-primary btn-sm float-left">
-                                                                    <span>Choose file</span>
+                                                                    <span>Choisir un fichier</span>
                                                                     <br><br>
                                                                     <div style="float: left;">
                                                                         <input type="file"
@@ -122,12 +125,11 @@
                                                 </div>
                                             </div>
                                             <br>
-                                            <br>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <button mat-raised-button type="submit"
-                                                        class="btn btn-danger" (click)="onAddService()"
-                                                        style="margin-right: 1%;">AJOUTER</button>
+                                                    <button mat-raised-button type="submit" class="btn btn-danger"
+                                                        (click)="onAddService()"
+                                                        style="margin-right: 1%;">Valider</button>
                                                     <button routerLink="/services" mat-raised-button type="button"
                                                         class="btn btn-success">ANNULER</button>
                                                 </div>
@@ -144,7 +146,7 @@
                                 </p-tabPanel>
 
 
-                                <p-tabPanel header="Complementaire">
+                                <p-tabPanel header="Spécipfique">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <br>
@@ -154,7 +156,7 @@
                                                         <form class="md-form">
                                                             <div class="file-field">
                                                                 <div class="btn btn-primary btn-sm float-left">
-                                                                    <span>Choose file</span>
+                                                                    <span>Choisir un fichier</span>
                                                                     <br><br>
                                                                     <div style="float: left;">
                                                                         <input type="file"
@@ -270,12 +272,12 @@
                                                     </p-multiSelect>
                                                 </div>
                                             </div>
-
+                                            <br>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <button mat-raised-button type="submit" class="btn btn-danger"
                                                         (click)="onAddServiceComplementaire()"
-                                                        style="margin-right: 1%;">AJOUTER</button>
+                                                        style="margin-right: 1%;">Valider</button>
                                                     <button routerLink="/services" mat-raised-button type="button"
                                                         class="btn btn-success">ANNULER</button>
                                                 </div>

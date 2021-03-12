@@ -38,7 +38,7 @@ export class UpdateSessionTestComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.router.snapshot.params['id'];
-    this.categorieService.getAllCategorie().subscribe(
+    this.categorieService.enCours().subscribe(
       data => {
         this.categories = data;
       }

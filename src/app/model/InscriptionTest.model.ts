@@ -13,13 +13,17 @@ export class InscriptionTest {
     public sexe: string;
     public mobile: string;
     public categorie: Categorie;
-
     public code: string;
     public dateInscription: Date;
-    public phase1: boolean;
-    public phase2: boolean;
     public sessionTest: SessionTest;
     public nomInscri: string;
+
+    public phase1: boolean;
+    public phase2: boolean;
+    public refus: boolean;
+
+    public valide: boolean;
+    public dateValidation: Date;
 
     constructor() { }
 }

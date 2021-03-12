@@ -13,7 +13,7 @@
                         <br>
                         <a [hidden]="!edition" href="javascript:void(0)"
                             routerLink="/update-inscription/{{ inscription.id }}"
-                            class="btn btn-danger btn-round">UPDATE</a>
+                            class="btn btn-danger btn-round">Modifier</a>
                         <br>
                     </div>
                     <br>
@@ -23,9 +23,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Fiche inscription test</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Détails Inscription</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -107,24 +110,6 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-5">
-                                    Phase 1 test
-                                </div>
-                                <div class="col-md-7">
-                                    {{inscription.phase1}}
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    Phase 2 test
-                                </div>
-                                <div class="col-md-7">
-                                    {{inscription.phase2}}
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5">
                                     Session test
                                 </div>
                                 <div class="col-md-7">
@@ -141,7 +126,7 @@
                             <br>
                             <hr>
                             <button routerLink="/inscriptions-test" mat-raised-button type="button"
-                                class="btn btn-success pull-right" style="margin-right: 1%;">Retourner</button>
+                                class="btn btn-success pull-right" style="margin-right: 1%;">Retour</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
                         </form>

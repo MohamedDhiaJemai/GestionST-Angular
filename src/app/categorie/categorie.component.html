@@ -7,12 +7,14 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Catégories</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Catégories</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
-
                     <br>
                     <p-toolbar>
                         <ng-template pTemplate="left">
@@ -21,7 +23,7 @@
 
                         <ng-template pTemplate="right">
                             <button [disabled]="!edition" routerLink="/add-categorie" pButton pRipple icon="pi pi-plus"
-                                label="Ajouter catégorie" class="p-button-success p-mr-2"></button>
+                                label="Ajout Catégorie" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -42,6 +44,15 @@
                                             </p-columnFilter>
                                         </div>
                                     </th>
+                                    <th pSortableColumn="saison.designation">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Saison
+                                            <p-sortIcon field="saison.designation"></p-sortIcon>
+                                            <p-columnFilter type="text" field="saison.designation" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
                                     <th pSortableColumn="natifs">
                                         <div class="p-d-flex p-jc-between p-ai-center">
                                             Natifs
@@ -57,12 +68,13 @@
                             <ng-template pTemplate="body" let-categorie>
                                 <tr [pSelectableRow]="categorie">
                                     <td><span class="p-column-title">Désignation</span>{{categorie.designation}}</td>
+                                    <td><span class="p-column-title">Saison</span>{{categorie.saison?.designation}}</td>
                                     <td><span class="p-column-title">Natifs</span>{{categorie.natifs}}</td>
                                     <td>
                                         <div style="text-align: center;">
                                             <button [disabled]="!edition"
                                                 routerLink="/update-categorie/{{ categorie.id }}" pButton pRipple
-                                                type="button" icon="pi pi-refresh"
+                                                type="button" icon="pi pi-pencil"
                                                 class="p-button-rounded p-button-success"></button>
                                         </div>
 

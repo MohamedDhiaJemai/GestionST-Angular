@@ -16,7 +16,7 @@
                         <h4 class="card-title">{{joueurPro.nom}} {{joueurPro.prenom}}</h4>
                         <h6 class="card-category text-gray">{{joueurPro.categorie.designation}}</h6>
                         <br>
-                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
+                        <a href="javascript:void(0)" style="width: 100%;" class="btn btn-danger btn-sm">
                             <input type="file" (change)="onSelectFile($event)">
                         </a>
                         <br>
@@ -27,9 +27,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Ajouter Joueur Professionnel</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Modification Joueur Signataire</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -85,7 +88,9 @@
                                     </p-dropdown>
                                 </div>
                                 <div class="col-md-6">
-                                    <p-calendar name="date" dateFormat='dd/mm/yy' [(ngModel)]="date" [touchUI]="true">
+                                    <p-calendar name="date" dateFormat='dd-mm-yy' [(ngModel)]="date"
+                                        [yearNavigator]="true" [monthNavigator]="true" yearRange="1952:2120"
+                                        [touchUI]="true">
                                     </p-calendar>
                                 </div>
                             </div>
@@ -108,7 +113,7 @@
                             </div>
                             <br><br>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="openModal(template)">AJOUTER</button>
+                                (click)="openModal(template)">Valider</button>
                             <button routerLink="/joueur-professionnel" mat-raised-button type="button"
                                 class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix"></div>

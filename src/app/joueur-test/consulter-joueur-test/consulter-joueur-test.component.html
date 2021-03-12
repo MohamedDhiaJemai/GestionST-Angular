@@ -1,0 +1,184 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <a href="javascript:void(0)">
+                        <img class="img" [src]="urlPhoto" width="100%"> <br />
+                    </a>
+                    <div class="card-body">
+                        <br>
+                        <h4 class="card-title">{{inscription.nom}} {{inscription.prenom}}</h4>
+                        <h6 class="card-category text-gray">{{inscription.identifiant}}</h6>
+                        <br>
+                        <a [hidden]="!edition" href="javascript:void(0)"
+                            routerLink="/update-joueur-test/{{inscription.id}}"
+                            class="btn btn-danger btn-round">Modifier</a>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Fiche Joueur Test</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Nom
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.nom}}
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Prenom
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.prenom}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Date Naissance
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.dateNaissance | date:'dd-MM-yyyy'}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Sexe
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.sexe}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Mobile
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.mobile}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Catégorie
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.categorie?.designation}}
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Code inscription
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.code}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Date inscription
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.dateInscription | date:'dd-MM-yyyy HH:mm:ss'}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Session test
+                                </div>
+                                <div class="col-md-7">
+                                    {{inscription.sessionTest?.libelle}}
+                                    <br>
+                                    {{inscription.sessionTest?.categorie.designation}}
+                                    <br>
+                                    du
+                                    {{inscription.sessionTest?.debutSession | date:'dd-MM-yyyy'}}
+                                    au
+                                    {{inscription.sessionTest?.finSession | date:'dd-MM-yyyy'}}
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Phase 1 test
+                                </div>
+                                <div class="col-md-7">
+                                    <button [hidden]="!inscription.phase1"
+                                        [disabled]="inscription.refus || inscription.phase2" type="button"
+                                        (click)="editPase1(inscription)" pButton pRipple icon="pi pi-thumbs-up"
+                                        class="p-button-rounded p-button-success"></button>
+                                    <button [hidden]="inscription.phase1"
+                                        [disabled]="inscription.refus || inscription.phase2" type="button"
+                                        (click)="editPase1(inscription)" pButton pRipple icon="pi pi-thumbs-down"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Phase 2 test
+                                </div>
+                                <div class="col-md-7">
+                                    <button [hidden]="!inscription.phase2"
+                                        [disabled]="!inscription.phase1 || inscription.refus" type="button"
+                                        (click)="editPase2(inscription)" pButton pRipple icon="pi pi-thumbs-up"
+                                        class="p-button-rounded p-button-success"></button>
+                                    <button [hidden]="inscription.phase2"
+                                        [disabled]="!inscription.phase1 || inscription.refus" type="button"
+                                        (click)="editPase2(inscription)" pButton pRipple icon="pi pi-thumbs-down"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Refus
+                                </div>
+                                <div class="col-md-7">
+                                    <button [hidden]="!inscription.refus" type="button" (click)="editRefus(inscription)"
+                                        pButton pRipple icon="pi pi-thumbs-down"
+                                        class="p-button-rounded p-button-danger"></button>
+                                    <button [hidden]="inscription.refus" type="button" (click)="editRefus(inscription)"
+                                        pButton pRipple icon="pi pi-question-circle"
+                                        class="p-button-rounded p-button-secondary"></button>
+                                </div>
+                            </div>
+                            <br>
+                            <button routerLink="/joueurs-test" mat-raised-button type="button"
+                                class="btn btn-success pull-right" style="margin-right: 1%;">Retour</button>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

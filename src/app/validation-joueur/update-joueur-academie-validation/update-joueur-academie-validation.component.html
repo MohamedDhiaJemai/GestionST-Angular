@@ -16,7 +16,7 @@
                         <h6 class="card-category text-gray">{{joueurAcademie.identifiant}}</h6>
                         <br>
                         <p-messages key="photo"></p-messages>
-                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
+                        <a href="javascript:void(0)" style="width: 100%;" class="btn btn-danger btn-sm">
                             <input type="file" (change)="onSelectFile($event)">
                         </a>
                     </div>
@@ -26,9 +26,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Validation Joueur Academie</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Validation Joueur Academie</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -73,6 +76,15 @@
                                         [yearRange]="annees" [monthNavigator]="true" [(ngModel)]="date"
                                         [touchUI]="true">
                                     </p-calendar>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Mobile" type="text" name="mpbile"
+                                            [(ngModel)]="joueurAcademie.mobile">
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <br>
@@ -163,7 +175,7 @@
                             <br>
 
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="openModal(template)">AJOUTER</button>
+                                (click)="openModal(template)">Valider</button>
                             <button routerLink="/validation-joueur" mat-raised-button type="button"
                                 class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix"></div>

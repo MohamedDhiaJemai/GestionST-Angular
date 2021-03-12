@@ -30,7 +30,6 @@ import { RoleComponent } from './role/role.component';
 import { AddRoleComponent } from './role/add-role/add-role.component';
 import { UpdateRoleComponent } from './role/update-role/update-role.component';
 import { CategorieComponent } from './categorie/categorie.component';
-import { ProduitComponent } from './produit/produit.component';
 import { ServiceSTComponent } from './service-st/service-st.component';
 import { ArticleComponent } from './article/article.component';
 import { ParentComponent } from './parent/parent.component';
@@ -106,6 +105,14 @@ import { HistoriqueCaisseComponent } from './borne/historique-caisse/historique-
 import { TaillepipePipe } from './taillepipe.pipe';
 import { HistoriqueRetourComponent } from './retour-cash/historique-retour/historique-retour.component';
 import { AutorisationRoleComponent } from './autorisation-role/autorisation-role.component';
+import { HistoriquePresenceComponent } from './appel/historique-presence/historique-presence.component';
+import { SaisonSportiveComponent } from './saison-sportive/saison-sportive.component';
+import { AddSaisonComponent } from './saison-sportive/add-saison/add-saison.component';
+import { UpdateSaisonComponent } from './saison-sportive/update-saison/update-saison.component';
+import { JoueurTestComponent } from './joueur-test/joueur-test.component';
+import { DataviewJTestComponent } from './joueur-test/dataview-j-test/dataview-j-test.component';
+import { ConsulterJoueurTestComponent } from './joueur-test/consulter-joueur-test/consulter-joueur-test.component';
+import { UpdateJoueurTestComponent } from './joueur-test/update-joueur-test/update-joueur-test.component';
 
 @NgModule({
   imports: [
@@ -167,7 +174,6 @@ import { AutorisationRoleComponent } from './autorisation-role/autorisation-role
     AddRoleComponent,
     UpdateRoleComponent,
     CategorieComponent,
-    ProduitComponent,
     ServiceSTComponent,
     ArticleComponent,
     ParentComponent,
@@ -227,6 +233,14 @@ import { AutorisationRoleComponent } from './autorisation-role/autorisation-role
     TaillepipePipe,
     HistoriqueRetourComponent,
     AutorisationRoleComponent,
+    HistoriquePresenceComponent,
+    SaisonSportiveComponent,
+    AddSaisonComponent,
+    UpdateSaisonComponent,
+    JoueurTestComponent,
+    DataviewJTestComponent,
+    ConsulterJoueurTestComponent,
+    UpdateJoueurTestComponent,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

@@ -6,9 +6,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Autorisations role</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Autorisations Role</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -36,7 +39,7 @@
                         </div>
                         <p-table [value]="autorisations" styleClass="p-datatable-striped" [responsive]="true">
                             <ng-template pTemplate="header">
-                                <tr >
+                                <tr>
                                     <th style="width:50%" class="text-center">Menu</th>
                                     <th style="width:25%" class="text-center" pSortableColumn="consultation">
                                         Consultation <p-sortIcon field="consultation">

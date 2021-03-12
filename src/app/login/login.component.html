@@ -1,4 +1,4 @@
-<div class="login-page" >
+<div class="login-page">
   <div class="row justify-content-md-center">
     <div class="col-md-4">
       <br><br><br>
@@ -11,42 +11,34 @@
         <div class="form-content">
           <div class="form-group">
             <input type="text" name="username" ngModel class="form-control input-underline input-lg"
-              placeholder="Username">
+              placeholder="Nom d'utilisateur">
           </div>
           <br>
           <div class="form-group">
             <input type="password" name="password" ngModel class="form-control input-underline input-lg"
-              placeholder="Password">
+              placeholder="Mot de passe">
           </div>
         </div>
         <br><br>
         <div style="text-align: center;">
-          <button style="margin-right: 5%;" pButton type="reset" label="Cancel" class="p-button-danger"></button>
+          <button style="margin-right: 5%;" pButton type="reset" label="Annuler" class="p-button-danger"></button>
 
-          <button pButton type="submit" label="Log In" class="p-button-success"></button>
-
-          <!-- <button type="reset" class="btn rounded-btn">Cancel</button>
-          <button style="margin: 5%;" type="submit" class="btn rounded-btn">Log in</button> -->
+          <button pButton type="submit" label="Connecter" class="p-button-success"></button>
 
         </div>
         <ng-template #template>
           <div class="modal-header">
-            <h5 class="modal-title">Problème d'authentification </h5>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <h5 class="modal-title"><strong>Problème d'authentification</strong></h5>
           </div>
-
           <div class="modal-body">
-            <p> Veillez verifier votre Login et/ou Votre Password : </p>
+            <div class="text-center">
+              Veillez verifier votre nom d'utilisateur et/ou votre mot de passe!
+            </div>
           </div>
-
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Close</button>
+            <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Fermer</button>
           </div>
-
         </ng-template>
-        &nbsp;
       </form>
     </div>
   </div>

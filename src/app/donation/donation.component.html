@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Listes Des Donations</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Donations</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -80,7 +83,9 @@
 
                             <ng-template pTemplate="body" let-donation>
                                 <tr [pSelectableRow]="donation">
-                                    <td><span class="p-column-title">Date</span>{{donation.dateDonation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                    <td><span
+                                            class="p-column-title">Date</span>{{donation.dateDonation | date:'dd-MM-yyyy HH:mm:ss'}}
+                                    </td>
                                     <td><span class="p-column-title">Montant</span>{{donation.montant}}</td>
                                     <td><span class="p-column-title">Nom</span>{{donation.nom}}</td>
                                     <td><span class="p-column-title">Prénom</span>{{donation.prenom}}</td>

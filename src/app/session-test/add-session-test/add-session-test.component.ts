@@ -35,7 +35,7 @@ export class AddSessionTestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categorieService.getAllCategorie().subscribe(
+    this.categorieService.enCours().subscribe(
       data => {
         this.categories = data;
       }

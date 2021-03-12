@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Listes Des Donations</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Sessions Test</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -20,7 +23,7 @@
                         </ng-template>
                         <ng-template pTemplate="right">
                             <button [disabled]="!edition" routerLink="/add-session" pButton pRipple icon="pi pi-plus"
-                                label="Ajouter Session" class="p-button-success p-mr-2"></button>
+                                label="Ajout Session" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -69,9 +72,12 @@
                             <ng-template pTemplate="body" let-session>
                                 <tr [pSelectableRow]="session">
                                     <td><span class="p-column-title">Libelle</span>{{session.libelle}}</td>
-                                    <td><span class="p-column-title">Catégorie</span>{{session?.categorie.designation}}</td>
-                                    <td><span class="p-column-title">Début inscriptions</span>{{session.debutInscription | date:'dd-MM-yyyy'}}</td>
-                                    <td><span class="p-column-title">Début Session</span>{{session.debutSession | date:'dd-MM-yyyy'}}</td>
+                                    <td><span class="p-column-title">Catégorie</span>{{session?.categorie.designation}}
+                                    </td>
+                                    <td><span class="p-column-title">Début
+                                            inscriptions</span>{{session.debutInscription | date:'dd-MM-yyyy'}}</td>
+                                    <td><span class="p-column-title">Début
+                                            Session</span>{{session.debutSession | date:'dd-MM-yyyy'}}</td>
                                     <td>
                                         <button [disabled]="!edition" routerLink="/update-session/{{session.id}}"
                                             pButton pRipple type="button" icon="pi pi-pencil"

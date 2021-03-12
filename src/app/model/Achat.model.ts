@@ -1,5 +1,4 @@
 import { JoueurAcamedie } from './JoueurAcamedie.model';
-import { Produit } from './produit.model';
 
 export class Achat {
 
@@ -8,7 +7,6 @@ export class Achat {
     public jours: string[];
     public mois: string[];
 
-    public produit: Produit;
     public quantite: number;
     public taille: string;
     public type: string;

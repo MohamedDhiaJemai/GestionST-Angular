@@ -53,6 +53,7 @@ export class UpdateJoueurAcademieComponent implements OnInit {
   fileInfos: Observable<any>;
   clicked = true;
 
+
   constructor(private joueurAcademieService: JoueurAcademieService,
     private parentService: ParentService,
     private messageService: MessageService,

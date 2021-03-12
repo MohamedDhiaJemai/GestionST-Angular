@@ -135,6 +135,7 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
           formData.append('file', this.uploadForm.get('profile').value);
           this.photoService.upload(formData, this.joueurAcademie.id).subscribe(
             data2 => {
+              this.modalRef.hide();
               this.routerNav.navigate(['/consulter-joueur-academie/' + this.joueurAcademie.id]);
             }
           );
@@ -143,7 +144,7 @@ export class UpdateJoueurAcademieValidationComponent implements OnInit {
           this.modalRefAnnul = this.modalService.show(templateAnnulation);
         }
       );
-      this.modalRef.hide();
+
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Borne } from 'app/model/Borne.model';
@@ -8,6 +8,7 @@ import { BorneService } from 'app/services/borne/borne.service';
 import { CaisseService } from 'app/services/caisse/caisse.service';
 import { ScreensaverBorneService } from 'app/services/screensaver-borne/screensaver-borne.service';
 import { environment } from 'environments/environment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
@@ -19,6 +20,7 @@ import { Subscription } from 'rxjs';
   providers: [MessageService]
 })
 export class BorneComponent implements OnInit {
+  modalRef: BsModalRef;
   bornes: Borne[];
   selectedBorne: Borne;
   borneSelected: Borne;
@@ -41,7 +43,7 @@ export class BorneComponent implements OnInit {
   constructor(private borneService: BorneService, private router: Router,
     private caisseService: CaisseService, private messageService: MessageService,
     private screensaverService: ScreensaverBorneService, private formBuilder: FormBuilder,
-    private autorisationService: AutorisationService) {
+    private autorisationService: AutorisationService, private modalService: BsModalService) {
     this.file = null;
   }
   ngOnInit() {
@@ -137,11 +139,19 @@ export class BorneComponent implements OnInit {
       this.messageService.clear();
     });
   }
-  maintenance(bornee: Borne) {
-    this.borneService.maintenance(bornee.id).subscribe(data => {
+  maintenance() {
+    this.borneSelected.maintenance = !this.borneSelected.maintenance;
+    this.borneService.maintenance(this.borneSelected.id).subscribe(data => {
+      this.modalRef.hide();
     },
       err => {
-        bornee.maintenance = !bornee.maintenance;
+        this.borneSelected.maintenance = !this.borneSelected.maintenance;
+        this.modalRef.hide();
       });
+  }
+
+  public openModal(template: TemplateRef<any>, born: Borne) {
+    this.borneSelected = born;
+    this.modalRef = this.modalService.show(template);
   }
 }

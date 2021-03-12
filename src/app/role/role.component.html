@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Listes Des Roles</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Roles</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -21,7 +24,7 @@
 
                         <ng-template pTemplate="right">
                             <button [disabled]="!edition" routerLink="/add-role" pButton pRipple icon="pi pi-plus"
-                                label="Ajouter Role" class="p-button-success p-mr-2"></button>
+                                label="Ajout Role" class="p-button-success p-mr-2"></button>
                         </ng-template>
                     </p-toolbar>
 
@@ -54,9 +57,9 @@
                                         <button style="float: left;margin-right: 5px;" [disabled]="!edition"
                                             routerLink="/autorisations-role/{{ role.id }}" pButton pRipple type="button"
                                             icon="pi pi-bars" class="p-button-rounded p-button-success"></button>
-                                        <button style="float: left;margin-right: 5px;" [disabled]="!edition" routerLink="/update-role/{{ role.id }}" pButton
-                                            pRipple type="button" icon="pi pi-pencil"
-                                            class="p-button-rounded p-button-warning"></button>
+                                        <button style="float: left;margin-right: 5px;" [disabled]="!edition"
+                                            routerLink="/update-role/{{ role.id }}" pButton pRipple type="button"
+                                            icon="pi pi-pencil" class="p-button-rounded p-button-warning"></button>
                                     </td>
                                 </tr>
                             </ng-template>

@@ -14,6 +14,7 @@ export class JoueurAcamedie {
     public mobile: string;
     public pin: string;
     public nomJoueur: string;
+    public elite: boolean;
 
     constructor() {
 

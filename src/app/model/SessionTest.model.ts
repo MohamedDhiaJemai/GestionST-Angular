@@ -1,4 +1,4 @@
-import { Categorie } from "./Categorie.model";
+import { Categorie } from './Categorie.model';
 
 export class SessionTest {
 
@@ -11,6 +11,8 @@ export class SessionTest {
 
     public debutInscription: string;
     public finInscription: string;
+
+    public prix: number;
 
     constructor() { }
 }

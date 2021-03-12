@@ -3,6 +3,7 @@ import { AppelDTO } from 'app/model/AppelDTO.model';
 import { AppelParams } from 'app/model/AppelParams.model';
 import { Jour, Sexe, TypeEntrainement } from 'app/model/Enums.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
+import { CategorieService } from 'app/services/categorie/categorie.service';
 import { PresenceService } from 'app/services/presence/presence.service';
 import { UserService } from 'app/services/user/user.service';
 import { environment } from 'environments/environment';
@@ -23,14 +24,16 @@ export class ListePresenceComponent implements OnInit {
   types: SelectItem[];
   jours: SelectItem[];
   sexes: SelectItem[];
+  categories: SelectItem[];
   edition: boolean;
   consultation: boolean;
   submitted: boolean;
   nombrePresents: number;
   utilisateurs: SelectItem[];
-  photoUrl = environment.apiUrl + 'photo/get/';
+  photoJoueurUrl = environment.apiUrl + 'photo/get/';
+  photoTestUrl = environment.apiUrl + 'photo-test/get/';
   constructor(private presenceService: PresenceService, private autorisationService: AutorisationService,
-    private userService: UserService) {
+    private categorieService: CategorieService, private userService: UserService) {
     const now = new Date();
     const year = now.getFullYear();
     let i: number;
@@ -51,14 +54,32 @@ export class ListePresenceComponent implements OnInit {
     this.userService.getbyRoles(['COACH']).subscribe(data => {
       this.utilisateurs = data;
     });
+    this.categorieService.enCours().subscribe(
+      data => {
+        this.categories = data;
+      }
+    );
   }
   getListePresence() {
     this.submitted = true;
-    if (this.appelParams.typeEntrainement && this.appelParams.natifs && this.appelParams.natifs.length > 0) {
+    if (this.appelParams.typeEntrainement === 'TESTP1') {
       this.presenceService.listePresence(this.appelParams).subscribe(data => {
         this.listeAppel = data;
         this.nombrePresents = this.listeAppel.length;
+      }, err => {
+        this.listeAppel = [];
+        this.nombrePresents = 0;
       });
+    } else {
+      if (this.appelParams.typeEntrainement && this.appelParams.natifs && this.appelParams.natifs.length > 0) {
+        this.presenceService.listePresence(this.appelParams).subscribe(data => {
+          this.listeAppel = data;
+          this.nombrePresents = this.listeAppel.length;
+        }, err => {
+          this.listeAppel = [];
+          this.nombrePresents = 0;
+        });
+      }
     }
   }
   clear(table: Table) {

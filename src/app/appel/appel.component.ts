@@ -3,6 +3,7 @@ import { AppelDTO } from 'app/model/AppelDTO.model';
 import { AppelParams } from 'app/model/AppelParams.model';
 import { Jour, Sexe, TypeEntrainement } from 'app/model/Enums.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
+import { CategorieService } from 'app/services/categorie/categorie.service';
 import { PresenceService } from 'app/services/presence/presence.service';
 import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
@@ -21,11 +22,14 @@ export class AppelComponent implements OnInit {
   types: SelectItem[];
   jours: SelectItem[];
   sexes: SelectItem[];
+  categories: SelectItem[];
   edition: boolean;
   consultation: boolean;
   submitted: boolean;
-  photoUrl = environment.apiUrl + 'photo/get/';
-  constructor(private presenceService: PresenceService, private autorisationService: AutorisationService) {
+  photoJoueurUrl = environment.apiUrl + 'photo/get/';
+  photoTestUrl = environment.apiUrl + 'photo-test/get/';
+  constructor(private presenceService: PresenceService, private categorieService: CategorieService,
+    private autorisationService: AutorisationService) {
     const now = new Date();
     const year = now.getFullYear();
     let i: number;
@@ -43,13 +47,28 @@ export class AppelComponent implements OnInit {
     this.consultation = obj.consultation;
     this.appelParams = new AppelParams();
     this.submitted = false;
+    this.categorieService.enCours().subscribe(
+      data => {
+        this.categories = data;
+      }
+    );
   }
   getListeAppel() {
     this.submitted = true;
-    if (this.appelParams.typeEntrainement && this.appelParams.natifs.length > 0) {
+    if (this.appelParams.typeEntrainement === 'TESTP1') {
       this.presenceService.listeAppel(this.appelParams).subscribe(data => {
         this.listeAppel = data;
+      }, err => {
+        this.listeAppel = [];
       });
+    } else {
+      if (this.appelParams.typeEntrainement && this.appelParams.natifs.length > 0) {
+        this.presenceService.listeAppel(this.appelParams).subscribe(data => {
+          this.listeAppel = data;
+        }, err => {
+          this.listeAppel = [];
+        });
+      }
     }
   }
   clear(table: Table) {

@@ -5,9 +5,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 5%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Ajouter Catégorie</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Ajout Catégorie</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -26,6 +29,31 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Saison" disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-dropdown [options]="saisons" [(ngModel)]="categorie.saison" name="saison"
+                                        [filter]="true" [showClear]="true" optionLabel="designation"
+                                        placeholder="Select a saison" filterPlaceholder="Search..."
+                                        filterBy="designation">
+
+                                        <ng-template pTemplate="selectedItem">
+                                            <div *ngIf="categorie.saison">
+                                                <div> {{categorie.saison.designation}}</div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template let-saison pTemplate="item">
+                                            <div>
+                                                <div>{{saison.designation}} </div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
                                         <input matInput placeholder="Natifs" disabled>
                                     </mat-form-field>
                                 </div>
@@ -37,7 +65,7 @@
                             </div>
                             <br>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="onAddCategorie()">AJOUTER</button>
+                                (click)="onAddCategorie()">Valider</button>
                             <button routerLink="/categories" mat-raised-button type="button"
                                 class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix"></div>

@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Listes Des Joueurs Academiques Non-Valider</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Joueurs Académie à valider</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -45,7 +48,8 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-joueurAcademie>
                                 <tr [pSelectableRow]="joueurAcademie">
-                                    <td><span class="p-column-title">Identifiant</span>{{joueurAcademie.identifiant}}</td>
+                                    <td><span class="p-column-title">Identifiant</span>{{joueurAcademie.identifiant}}
+                                    </td>
                                     <td><span class="p-column-title">Nom</span>{{joueurAcademie.nomJoueur}}</td>
                                     <td>
                                         <div style="text-align: center;">

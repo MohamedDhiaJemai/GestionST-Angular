@@ -6,15 +6,17 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 5%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Ajouter Borne</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Modification Borne</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card-body">
                         <form>
-
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
@@ -36,6 +38,21 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Numéro" type="number" name="timer"
+                                            [(ngModel)]="borne.numeroEnvoi">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Timer veille" type="number" name="timer"
+                                            [(ngModel)]="borne.timer">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
                                         <input matInput placeholder="Ip" type="text" name="ip" [(ngModel)]="borne.ip">
                                     </mat-form-field>
                                 </div>
@@ -50,64 +67,35 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="FTP username" type="text" name="un"
-                                            [(ngModel)]="borne.ftpUsername">
+                                        <input matInput placeholder="Capacité CashBox" type="number" name="cc"
+                                            [(ngModel)]="borne.capaciteBillets">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="FTP password" type="text" name="pd"
-                                            [(ngModel)]="borne.ftpPassword">
+                                        <input matInput placeholder="Seuil Max CashBox" type="number" name="sc"
+                                            [(ngModel)]="borne.seuilMaxBillets">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h5 style="margin-top: 5%;">Capacité CashBox
-                                    </h5>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Longeur initiale ruban" type="number" name="lr"
+                                            [(ngModel)]="borne.longueurRuban">
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
-                                    <p-inputNumber name="billets" [(ngModel)]="borne.capaciteBillets"
-                                        [showButtons]="false" mode="decimal"></p-inputNumber>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 style="margin-top: 5%;">Seuil Max CashBox
-                                    </h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p-inputNumber name="sbillets" [(ngModel)]="borne.seuilMaxBillets"
-                                        [showButtons]="false" mode="decimal"></p-inputNumber>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 style="margin-top: 5%;">Longeur initiale ruban
-                                    </h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p-inputNumber name="ruban" [(ngModel)]="borne.longueurRuban" [showButtons]="false"
-                                        mode="decimal"></p-inputNumber>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 style="margin-top: 5%;">Seuil min ruban
-                                    </h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <p-inputNumber name="ruban" [(ngModel)]="borne.seuilMinRuban" [showButtons]="false"
-                                        mode="decimal"></p-inputNumber>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Seuil min ruban" type="number" name="minruban"
+                                            [(ngModel)]="borne.seuilMinRuban">
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <br>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="openModal(template)">AJOUTER</button>
+                                (click)="openModal(template)">Valider</button>
                             <button routerLink="/bornes" mat-raised-button type="button"
                                 class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix" style="margin-bottom : 3%"></div>
@@ -130,7 +118,7 @@
     </div>
 
     <div class="modal-body">
-        <p>Êtes-vous sûr de vouloir modifier définitivement ce borne.</p>
+        <p>Êtes-vous sûr de vouloir modifier définitivement cette borne.</p>
     </div>
 
     <div class="modal-footer">

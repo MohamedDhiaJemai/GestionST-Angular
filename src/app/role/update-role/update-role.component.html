@@ -5,9 +5,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 5%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Update Role</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Modification Role</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -39,7 +42,7 @@
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="openModal(template)">AJOUTER</button>
+                                (click)="openModal(template)">Valider</button>
                             <button routerLink="/roles" mat-raised-button type="button"
                                 class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix"></div>
@@ -47,7 +50,7 @@
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </div>
@@ -68,11 +71,10 @@
 
     <div class="modal-footer">
 
-        <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-        (click)="modalRef.hide()" >NON</button>
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="modalRef.hide()">NON</button>
 
         <button mat-raised-button type="button" class="btn btn-success pull-right" style="margin-right: 1%;"
-        (click)="ngOnUpdateRole()">OUI</button>
+            (click)="ngOnUpdateRole()">OUI</button>
 
     </div>
 

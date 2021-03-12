@@ -13,7 +13,7 @@
                         <br>
                         <a href="javascript:void(0)" [hidden]="!edition"
                             routerLink="/update-joueur-academie/{{ joueurAcademie?.id }}"
-                            class="btn btn-danger btn-round">UPDATE</a>
+                            class="btn btn-danger btn-round">Modifier</a>
                         <br>
                     </div>
                     <br>
@@ -23,9 +23,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Fiche Joueur Académie</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Fiche Joueur Académie</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -37,6 +40,15 @@
                                 </div>
                                 <div class="col-md-7">
                                     {{joueurAcademie?.identifiant}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Elite
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurAcademie?.elite}}
                                 </div>
                             </div>
                             <br>
@@ -106,26 +118,16 @@
                                     Date Inscription
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie?.dateInscription}}
+                                    {{joueurAcademie?.dateInscription | date:'dd-MM-yyyy HH:mm'}}
                                 </div>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    Validation
-                                </div>
-                                <div class="col-md-7">
-                                    {{joueurAcademie?.validation}}
-                                </div>
-                            </div>
-
                             <br>
                             <div class="row">
                                 <div class="col-md-5">
                                     Date Validation
                                 </div>
                                 <div class="col-md-7">
-                                    {{joueurAcademie?.dateValidation}}
+                                    {{joueurAcademie?.dateValidation | date:'dd-MM-yyyy HH:mm'}}
                                 </div>
                             </div>
                             <hr>
@@ -148,6 +150,43 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-4">
+                                    Tenu {{annee}}:
+                                </div>
+                                <div class="col-md-4" *ngIf="obligationTenu!=null">
+                                    Oui
+                                </div>
+                                <div class="col-md-4" *ngIf="obligationTenu==null">
+                                    Non
+                                </div>
+                                <div class="col-md-4" [hidden]="!consultationGratuite">
+                                    <button [hidden]="obligationTenu!=null" pButton icon="pi pi-plus"
+                                        style="margin-right: 5px;" class="p-button-rounded p-button-success"
+                                        (click)="createTenu()">
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Inscription {{annee}}:
+                                </div>
+                                <div class="col-md-4" *ngIf="obligationInscri!=null">
+                                    Oui
+                                </div>
+                                <div class="col-md-4" *ngIf="obligationInscri==null">
+                                    Non
+                                </div>
+                                <div class="col-md-4" [hidden]="!consultationGratuite">
+                                    <button [hidden]="obligationInscri!=null" pButton icon="pi pi-plus"
+                                        style="margin-right: 5px;" class="p-button-rounded p-button-success"
+                                        (click)="createInscri()">
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4">
                                     Gratuité (%)
                                 </div>
                                 <div class="col-md-5" *ngIf="gratuite != null;else elseBlock">
@@ -161,7 +200,7 @@
                                     </div>
                                 </ng-template>
                                 <div class="col-md-2">
-                                    <button [disabled]="!consultationGratuite"
+                                    <button [hidden]="!consultationGratuite"
                                         routerLink="/gratuite-joueur/{{joueurAcademie?.id}}" mat-raised-button
                                         type="button" class="btn btn-success pull-right"
                                         style="margin-right: 1%;">Gérer</button>
@@ -196,7 +235,7 @@
 
                             <br><br>
                             <button routerLink="/joueur-acamedie" mat-raised-button type="button"
-                                class="btn btn-success pull-right" style="margin-right: 1%;">Retourner</button>
+                                class="btn btn-success pull-right" style="margin-right: 1%;">Retour</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
                         </form>

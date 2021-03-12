@@ -14,6 +14,10 @@ export class CategorieService {
     return this.httpClient.get(environment.apiUrl + 'categorie/all',
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
+  enCours(): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'categorie/encours',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
   addCategorie(categorie: Categorie) {
     return this.httpClient.post(environment.apiUrl + 'categorie/add', categorie,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });

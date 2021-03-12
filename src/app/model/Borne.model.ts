@@ -6,8 +6,8 @@ export class Borne {
     public counterBillets: number;
     public counterLongueurRuban: number;
     public dateCreation: string;
-    public ftpPassword: string;
-    public ftpUsername: string;
+    // public ftpPassword: string;
+    // public ftpUsername: string;
     public ip: string;
     public longueurRuban: string;
     public maintenance: Boolean;
@@ -15,6 +15,8 @@ export class Borne {
     public reference: string;
     public seuilMaxBillets: number;
     public seuilMinRuban: number;
+    public timer: number;
+    public numeroEnvoi: string;
 
     constructor() { }
 }

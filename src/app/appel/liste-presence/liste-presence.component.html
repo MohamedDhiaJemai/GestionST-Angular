@@ -7,12 +7,14 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Présence</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Présence</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
-
                     <br>
                     <p-toolbar>
                         <ng-template pTemplate="left">
@@ -26,22 +28,41 @@
                                 <small class="p-error" *ngIf="submitted && !appelParams.typeEntrainement">Champ
                                     obligatoire.</small>
 
-                                <p-multiSelect [ngStyle]="{'margin-right': '5px'}" [options]="annees" name="natifs"
+                                <p-multiSelect [disabled]=" appelParams.typeEntrainement=='TESTP1'"
+                                    [ngStyle]="{'margin-right': '5px'}" [options]="annees" name="natifs"
                                     [(ngModel)]="appelParams.natifs" class="multiselect-custom">
                                 </p-multiSelect>
 
-                                <small class="p-error"
+                                <!-- <small class="p-error"
                                     *ngIf="submitted && (!appelParams.natifs || appelParams.natifs.length==0)">Champ
-                                    obligatoire.</small>
+                                    obligatoire.</small> -->
 
                                 <p-dropdown [ngStyle]="{'margin-right': '5px'}" [options]="sexes" name="sexe"
                                     [(ngModel)]="appelParams.sexe" placeholder="Sexe" [showClear]="true">
                                 </p-dropdown>
 
                                 <p-dropdown [ngStyle]="{'margin-right': '5px'}"
-                                    [disabled]="appelParams.typeEntrainement=='NORMAL' || appelParams.typeEntrainement==null"
+                                    [disabled]="appelParams.typeEntrainement=='NORMAL' || appelParams.typeEntrainement=='TESTP1' || appelParams.typeEntrainement==null"
                                     [options]="jours" name="jour" [(ngModel)]="appelParams.jour" placeholder="Jour"
                                     [showClear]="true">
+                                </p-dropdown>
+
+                                <p-dropdown [ngStyle]="{'margin-right': '5px'}"
+                                    [disabled]="appelParams.typeEntrainement!='TESTP1' || appelParams.typeEntrainement==null"
+                                    [options]="categories" name="categorie" [(ngModel)]="appelParams.categorie"
+                                    placeholder="Categorie" [filter]="true" [showClear]="true" optionLabel="designation"
+                                    filterPlaceholder="Search By designation" [showClear]="true">
+                                    <ng-template pTemplate="selectedItem">
+                                        <div class="country-item country-item-value" *ngIf="appelParams.categorie">
+                                            <div> {{appelParams.categorie.designation}}</div>
+                                        </div>
+                                    </ng-template>
+
+                                    <ng-template let-categorie pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{categorie.designation}}</div>
+                                        </div>
+                                    </ng-template>
                                 </p-dropdown>
 
                                 <p-dropdown [options]="utilisateurs" [(ngModel)]="appelParams.utilisateur"
@@ -76,61 +97,55 @@
                         <div *ngIf="listeAppel" class="row">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <h4>
-                                        <strong>
-                                            Nombre de joueurs: {{nombrePresents}}
-                                        </strong>
-                                    </h4>
+                                    <h4> <strong> Nombre de joueurs: {{nombrePresents}} </strong> </h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <p-table #dt [value]="listeAppel" [paginator]="true" styleClass="p-datatable-striped"
-                                [responsive]="true" [rows]="10" [showCurrentPageReport]="true"
-                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                                [rowsPerPageOptions]="[10,25,50,100]" selectionMode="single"
-                                [globalFilterFields]="['nomJoueur']">
-                                <ng-template pTemplate="caption">
-                                    <div class="p-d-flex">
-                                        <button pButton label="Clear" class="p-button-outlined"
-                                            icon="pi pi-filter-slash" (click)="clear(dt)"></button>
-                                        <span class="p-input-icon-left p-ml-auto">
-                                            <i class="pi pi-search"></i>
-                                            <input pInputText type="text"
-                                                (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                                placeholder="Search keyword" />
-                                        </span>
-                                    </div>
-                                </ng-template>
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th pSortableColumn="nom">Nom<p-sortIcon field="nom">
-                                            </p-sortIcon>
-                                        </th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-appel>
-                                    <tr [pSelectableRow]="appel">
-                                        <td>
-                                            <div style="width: 40%;padding-right: 2%;float: left;">
-                                                <img [src]="photoUrl + appel.idJoueur" width="98%" />
-                                            </div>
-                                            <div style="width: 40%; padding-left:2%;float: left;">
-                                                {{appel.nomJoueur}}
-                                            </div>
-                                            <div style="width: 20%;float: left;">
-                                                <button [hidden]="!appel.idPresence" type="button" pButton pRipple
-                                                    icon="pi pi-thumbs-up"
-                                                    class="p-button-rounded p-button-success"></button>
-                                                <button [hidden]="appel.idPresence" type="button" pButton pRipple
-                                                    icon="pi pi-thumbs-down"
-                                                    class="p-button-rounded p-button-danger"></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                        </div>
+                        <p-table #dt [value]="listeAppel" styleClass="p-datatable-striped" [responsive]="true"
+                            selectionMode="single" [globalFilterFields]="['nomJoueur']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="clear(dt)"></button>
+                                    <span class="p-input-icon-left p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input style="width: 100%;" pInputText type="text"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search ..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="nom">Nom<p-sortIcon field="nom">
+                                        </p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-appel>
+                                <tr [pSelectableRow]="appel">
+                                    <td>
+                                        <div style="width: 40%;padding-right: 2%;float: left;">
+                                            <img *ngIf="appel.idJoueur" [src]="photoJoueurUrl + appel.idJoueur"
+                                                width="98%" style="max-width: 151px;max-height: 184px;" />
+                                            <img *ngIf="appel.idJoueurTest" [src]="photoTestUrl + appel.idJoueurTest"
+                                                width="98%" style="max-width: 151px;max-height: 184px;" />
+                                        </div>
+                                        <div style="width: 40%; padding-left:2%;float: left;">
+                                            <strong>{{appel.nomJoueur}}</strong>
+                                        </div>
+                                        <div style="width: 20%;float: left;">
+                                            <button [hidden]="!appel.idPresence" type="button" pButton pRipple
+                                                icon="pi pi-thumbs-up"
+                                                class="p-button-rounded p-button-success"></button>
+                                            <button [hidden]="appel.idPresence" type="button" pButton pRipple
+                                                icon="pi pi-thumbs-down"
+                                                class="p-button-rounded p-button-danger"></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </div>
                 </div>
             </div>

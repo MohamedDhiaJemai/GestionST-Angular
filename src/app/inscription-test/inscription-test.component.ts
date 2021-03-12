@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { InscriptionTest } from 'app/model/InscriptionTest.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { InscriptionTestService } from 'app/services/inscription-test/inscription-test.service';
@@ -21,7 +20,7 @@ export class InscriptionTestComponent implements OnInit {
     const obj = this.autorisationService.checkAutorisations1('inscriptions-test');
     this.edition = obj.edition;
     this.consultation = obj.consultation;
-    this.inscriptionTestService.getAll().subscribe(
+    this.inscriptionTestService.nonValide().subscribe(
       data => {
         this.inscriptions = data;
       }

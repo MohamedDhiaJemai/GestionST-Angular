@@ -50,5 +50,6 @@ export enum Jour {
 export enum TypeEntrainement {
     NORMAL = 'NORMAL',
     SPECIFIQUE = 'SPECIFIQUE',
-    ELITE = 'ELITE'
+    ELITE = 'ELITE',
+    TESTP1 = 'TEST'
 }

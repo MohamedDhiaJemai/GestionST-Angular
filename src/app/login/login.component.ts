@@ -4,6 +4,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { UserAuthentification } from 'app/model/UserAuthentification.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { LoginService } from 'app/services/login/login.service';
+import { TokenService } from 'app/services/token/token.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
   userAuth: UserAuthentification;
   jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private authentificationService: LoginService,
+  constructor(private loginService: LoginService,
     private autorisationService: AutorisationService,
+    private tokenService: TokenService,
     private router: Router,
     private modalService: BsModalService
   ) { }
@@ -30,23 +32,27 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(data, template: TemplateRef<any>) {
-
-    this.authentificationService.login(data).subscribe(
+    localStorage.clear();
+    this.tokenService.clearToken();
+    this.autorisationService.clearAutorisations();
+    this.loginService.login(data).subscribe(
       resp => {
         const jwt = resp.headers.get('Authorization');
-        this.authentificationService.saveToken(jwt);
-        if (this.jwtHelper.isTokenExpired(jwt)) {
+        if (jwt != null && !this.jwtHelper.isTokenExpired(jwt)) {
+          this.tokenService.saveToken(jwt);
+          this.autorisationService.findAutorisations().subscribe(dataa => {
+            this.autorisationService.setAutorisations(dataa);
+          }, err => {
+            localStorage.clear();
+            this.modalRef = this.modalService.show(template);
+          });
+        } else {
           localStorage.clear();
-          this.router.navigateByUrl('/login');
-        }
-        this.autorisationService.findAutorisations().subscribe(dataa => {
-          this.autorisationService.setAutorisations(dataa);
-        });
-        if (jwt != null) {
-          this.router.navigateByUrl('/');
+          this.modalRef = this.modalService.show(template);
         }
       }, err => {
         if (err.status === 403) {
+          localStorage.clear();
           this.modalRef = this.modalService.show(template);
         }
       }

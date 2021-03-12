@@ -14,12 +14,32 @@ export class InscriptionTestService {
     return this.httpClient.get<InscriptionTest>(environment.apiUrl + 'inscriptions/' + id,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
-  update(id: number, livraison: InscriptionTest) {
-    return this.httpClient.put(environment.apiUrl + 'inscriptions/update/' + id, livraison,
+  update(id: number, inscription: InscriptionTest) {
+    return this.httpClient.put(environment.apiUrl + 'inscriptions/update/' + id, inscription,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
+
+  editerEtat(id: number, inscription: InscriptionTest) {
+    return this.httpClient.put(environment.apiUrl + 'inscriptions/etat/' + id, inscription,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
+
+  valider(id: number, inscription: InscriptionTest) {
+    return this.httpClient.put(environment.apiUrl + 'inscriptions/valider/' + id, inscription,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
   getAll(): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'inscriptions/all',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
+
+  valide(): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'inscriptions/valide',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
+
+  nonValide(): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'inscriptions/non-valide',
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
 }

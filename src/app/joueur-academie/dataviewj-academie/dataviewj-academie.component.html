@@ -14,7 +14,7 @@
     <ng-template let-product pTemplate="listItem">
         <div class="p-col-12">
             <div class="product-list-item">
-                <img [src]="photoUrl + product.id" />
+                <img [src]="photoUrl + product.id" style="max-width: 151px;max-height: 184px;" />
                 <div class="product-list-detail">
                     <div class="product-name">{{product.nom}} {{product.prenom}}</div>
                     <div class="product-description">{{product.identifiant}}</div>
@@ -35,14 +35,13 @@
                 <div class="product-grid-item-top">
                     <div>
                         <i class="pi pi-tag product-category-icon"></i>
-                        <span class="product-category">{{product.identifiant}}</span>
+                        <span class="product-category">{{product.sexe}}</span>
                     </div>
                     <span [class]="'product-badge status-' + product.dateNaissance">{{product.dateNaissance}}</span>
                 </div>
                 <div class="product-grid-item-content">
-                    <img [src]="photoUrl + product.id" />
+                    <img [src]="photoUrl + product.id" style="max-width: 151px;max-height: 184px;" />
                     <div class="product-name">{{product.nom}} {{product.prenom}}</div>
-                    <div class="product-description">{{ product.license}}</div>
 
                 </div>
                 <div class="product-grid-item-bottom">

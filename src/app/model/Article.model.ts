@@ -10,6 +10,8 @@ export class Article {
     public visible: boolean;
     public stocks: Stocks[];
     public categoryTaille: string;
+    public exige: boolean;
+    public prixExterne: number;
 
     constructor() { }
 

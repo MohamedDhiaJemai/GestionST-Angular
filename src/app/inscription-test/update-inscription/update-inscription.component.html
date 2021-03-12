@@ -17,7 +17,7 @@
                         <h6 class="card-category text-gray">{{inscription.identifiant}}</h6>
                         <br>
                         <p-messages key="photo"></p-messages>
-                        <a href="javascript:void(0)" class="btn btn-danger btn-round">
+                        <a href="javascript:void(0)" style="width: 100%;" class="btn btn-danger btn-sm">
                             <input type="file" (change)="onSelectFile($event)">
                         </a>
                     </div>
@@ -27,9 +27,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Update inscription test</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Validation Inscription</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -91,9 +94,9 @@
                             </div>
                             <br><br>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="openModal(template)">AJOUTER</button>
-                            <button routerLink="/consulter-inscription/{{inscription.id}}" mat-raised-button
-                                type="button" class="btn btn-success pull-right" style="margin-right:
+                                (click)="openModal(template)">Valider</button>
+                            <button routerLink="/inscriptions-test" mat-raised-button type="button"
+                                class="btn btn-success pull-right" style="margin-right:
                                                     1%;">ANNULER</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
@@ -116,7 +119,7 @@
     </div>
 
     <div class="modal-body">
-        <p>Êtes-vous sûr de vouloir modifier définitivement cette inscription.</p>
+        <p>Êtes-vous sûr de vouloir Valider cette inscription.</p>
     </div>
 
     <div class="modal-footer">

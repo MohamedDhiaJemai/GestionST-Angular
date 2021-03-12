@@ -5,9 +5,11 @@
         <div class="card">
           <div class="card-header card-header-danger">
             <div style="float: left;">
-              <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-              <h4 class="card-title ">Infos Service</h4>
-              <p class="card-category"> STADE TUNISIEN</p>
+              <img src="assets\\images\\loginsST.png" style="width: 35px;float: left; margin-right: 10px;">
+              <div style="float: left;">
+                <h4 class="card-title">Détails Service</h4>
+                <p class="card-category">STADE TUNISIEN</p>
+              </div>
             </div>
           </div>
           <br>
@@ -39,21 +41,21 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <h5 class="price">Prix:
+                    <h5 class="price">Sexe:
                     </h5>
                   </div>
                   <div class="col-md-6" style="padding-left: 10%;">
-                    <h5 class="price">{{servicePrincipal.prix}} &nbsp; TND
+                    <h5 class="price">{{servicePrincipal.sexe}}
                     </h5>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <h5 class="price">Category:
+                    <h5 class="price">Prix:
                     </h5>
                   </div>
                   <div class="col-md-6" style="padding-left: 10%;">
-                    <h5 class="price">{{servicePrincipal.sexe}}
+                    <h5 class="price">{{servicePrincipal.prix}} &nbsp; TND
                     </h5>
                   </div>
                 </div>
@@ -72,7 +74,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <button [disabled]="!edition" class="add-to-cart btn btn-success" type="button"
-                      routerLink="/update-service/{{ servicePrincipal.id }}">Update</button>
+                      routerLink="/update-service/{{ servicePrincipal.id }}">Modifier</button>
                     <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                   </div>
                 </div>
@@ -97,6 +99,16 @@
                 <br>
                 <h2 class="product-title">{{ serviceAutre.libelle }}</h2>
                 <br>
+                <!-- <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Sexe:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceAutre.sexe}}
+                    </h5>
+                  </div>
+                </div> -->
                 <div class="row">
                   <div class="col-md-6">
                     <h5 class="price">Prix:
@@ -107,17 +119,7 @@
                     </h5>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <h5 class="price">Category:
-                    </h5>
-                  </div>
-                  <div class="col-md-6" style="padding-left: 10%;">
-                    <h5 class="price">{{serviceAutre.sexe}}
-                    </h5>
-                  </div>
-                </div>
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-md-6">
                     <h5 class="price">Visibilité :
                     </h5>
@@ -128,11 +130,11 @@
                       </p-inputSwitch>
                     </h5>
                   </div>
-                </div>
+                </div> -->
                 <div class="row">
                   <div class="col-md-12">
                     <button class="add-to-cart btn btn-success" type="button"
-                      routerLink="/update-service/{{ serviceAutre.id }}">Update</button>
+                      routerLink="/update-service/{{ serviceAutre.id }}">Modifier</button>
                     <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                   </div>
                 </div>
@@ -180,7 +182,16 @@
                     </h5>
                   </div>
                 </div>
-
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Sexe:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceComplementaire.sexe}}
+                    </h5>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-md-6">
                     <h5 class="price">Prix:
@@ -191,18 +202,6 @@
                     </h5>
                   </div>
                 </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <h5 class="price">Category:
-                    </h5>
-                  </div>
-                  <div class="col-md-6" style="padding-left: 10%;">
-                    <h5 class="price">{{serviceComplementaire.sexe}}
-                    </h5>
-                  </div>
-                </div>
-
                 <div class="row">
                   <div class="col-md-6">
                     <h5 class="price">Visibilité :
@@ -215,11 +214,23 @@
                     </h5>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Elite :
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">
+                      <p-inputSwitch name="visible" [(ngModel)]="serviceComplementaire.elite" disabled>
+                      </p-inputSwitch>
+                    </h5>
+                  </div>
+                </div>
 
                 <div class="row">
                   <div class="col-md-12">
                     <button class="add-to-cart btn btn-success" type="button"
-                      routerLink="/update-service/{{ serviceComplementaire.id }}">Update</button>
+                      routerLink="/update-service/{{ serviceComplementaire.id }}">Modifier</button>
                     <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
                   </div>
                 </div>

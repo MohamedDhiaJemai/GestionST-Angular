@@ -58,6 +58,13 @@ import { ListePresenceComponent } from 'app/appel/liste-presence/liste-presence.
 import { HistoriqueCaisseComponent } from 'app/borne/historique-caisse/historique-caisse.component';
 import { HistoriqueRetourComponent } from 'app/retour-cash/historique-retour/historique-retour.component';
 import { AutorisationRoleComponent } from 'app/autorisation-role/autorisation-role.component';
+import { HistoriquePresenceComponent } from 'app/appel/historique-presence/historique-presence.component';
+import { SaisonSportiveComponent } from 'app/saison-sportive/saison-sportive.component';
+import { AddSaisonComponent } from 'app/saison-sportive/add-saison/add-saison.component';
+import { UpdateSaisonComponent } from 'app/saison-sportive/update-saison/update-saison.component';
+import { JoueurTestComponent } from 'app/joueur-test/joueur-test.component';
+import { ConsulterJoueurTestComponent } from 'app/joueur-test/consulter-joueur-test/consulter-joueur-test.component';
+import { UpdateJoueurTestComponent } from 'app/joueur-test/update-joueur-test/update-joueur-test.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'acceuil', component: AcceuilComponent },
@@ -72,6 +79,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'categories', component: CategorieComponent },
     { path: 'add-categorie', component: AddCategorieComponent },
     { path: 'update-categorie/:id', component: UpdateCategorieComponent },
+    { path: 'saisons', component: SaisonSportiveComponent },
+    { path: 'add-saison', component: AddSaisonComponent },
+    { path: 'update-saison/:id', component: UpdateSaisonComponent },
     { path: 'services', component: ServiceSTComponent },
     { path: 'articles', component: ArticleComponent },
     { path: 'add-service', component: AddServiceComponent },
@@ -107,6 +117,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'inscriptions-test', component: InscriptionTestComponent },
     { path: 'consulter-inscription/:id', component: ConsulterInscriptionComponent },
     { path: 'update-inscription/:id', component: UpdateInscriptionComponent },
+    { path: 'joueurs-test', component: JoueurTestComponent },
+    { path: 'consulter-joueur-test/:id', component: ConsulterJoueurTestComponent },
+    { path: 'update-joueur-test/:id', component: UpdateJoueurTestComponent },
     { path: 'sessions-test', component: SessionTestComponent },
     { path: 'update-session/:id', component: UpdateSessionTestComponent },
     { path: 'add-session', component: AddSessionTestComponent },
@@ -117,13 +130,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'autorisations-role/:id', component: AutorisationRoleComponent },
     { path: 'appel', component: AppelComponent },
     { path: 'liste-presence', component: ListePresenceComponent },
+    { path: 'historique-presence', component: HistoriquePresenceComponent },
     { path: 'historique-caisse/:id', component: HistoriqueCaisseComponent },
     { path: 'profil/:id', component: UserProfileComponent }
-
-
-    // { path: 'typography',     component: TypographyComponent },
-    // { path: 'icons',          component: IconsComponent },
-    // { path: 'maps',           component: MapsComponent },
-    // { path: 'notifications',  component: NotificationsComponent },
-    // { path: 'upgrade',        component: UpgradeComponent },
 ];

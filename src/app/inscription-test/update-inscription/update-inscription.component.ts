@@ -104,12 +104,12 @@ export class UpdateInscriptionComponent implements OnInit {
   }
 
   ngOnUpdateInscription(templateAnnulation: TemplateRef<any>) {
-    this.inscription.dateNaissance = this.datePipe.transform(this.date, 'yyyy-MM-dd');
     // this.inscription.dateNaissance = new Date(Date.UTC(this.date.getFullYear(), this.date.getMonth(), this.date.getDate()));
-    this.inscriptionSubscription = this.inscriptionTestService.update(this.inscription.id, this.inscription).subscribe(
-      data => {
+    if (this.url !== undefined) {
+      this.inscription.dateNaissance = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+      this.inscriptionSubscription = this.inscriptionTestService.valider(this.inscription.id, this.inscription).subscribe(
+        data => {
 
-        if (this.url !== undefined) {
           const formData = new FormData();
           formData.append('file', this.uploadForm.get('profile').value);
           this.photoService.upload(formData, this.inscription.id).subscribe(
@@ -117,16 +117,14 @@ export class UpdateInscriptionComponent implements OnInit {
               this.routerNav.navigate(['/consulter-inscription/' + this.inscription.id]);
             }
           );
+        },
+        err => {
+          this.modalRef.hide();
+          this.modalRefAnnul = this.modalService.show(templateAnnulation);
         }
-
-
-      },
-      err => {
-        this.modalRef.hide();
-        this.modalRefAnnul = this.modalService.show(templateAnnulation);
-      }
-    );
-    this.modalRef.hide();
+      );
+      this.modalRef.hide();
+    }
   }
 
   public openModal(template: TemplateRef<any>) {

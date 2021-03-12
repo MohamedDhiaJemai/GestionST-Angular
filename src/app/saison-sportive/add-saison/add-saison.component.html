@@ -1,0 +1,68 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Ajout Saison Sportive</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <br>
+                                <br>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Désignation" type="text" name="designation"
+                                            [(ngModel)]="saison.designation">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Début Saison " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="ds" dateFormat="dd-mm-yy" name="ds" [yearNavigator]="true"
+                                        [monthNavigator]="true" yearRange="2020:2120" [touchUI]="true">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Fin Saison " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="fs" dateFormat="dd-mm-yy" name="fs" [yearNavigator]="true"
+                                        [monthNavigator]="true" yearRange="2020:2120" [touchUI]="true">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <br>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                (click)="onAddSaison()">Valider</button>
+                            <button routerLink="/saisons" mat-raised-button type="button"
+                                class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

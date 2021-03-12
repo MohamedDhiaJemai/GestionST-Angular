@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Listes Des Services</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Services</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -23,7 +26,7 @@
                                     <button pButton pRipple label="Abonnements"
                                         class="p-button-outlined p-button-rounded p-mr-2"
                                         (click)="onShowService('principal')"></button>
-                                    <button pButton pRipple label="Entraînements spécipfiques"
+                                    <button pButton pRipple label="Spécipfiques"
                                         class="p-button-outlined p-button-rounded p-mr-2"
                                         (click)="onShowService('complementaire')"></button>
                                     <button pButton pRipple label="Autres"
@@ -34,7 +37,7 @@
 
                             <ng-template pTemplate="right">
                                 <button [disabled]="!edition" routerLink="/add-service" pButton pRipple
-                                    icon="pi pi-plus" label="Ajouter" class="p-button-success p-mr-2"></button>
+                                    icon="pi pi-plus" label="Ajout Service" class="p-button-success p-mr-2"></button>
                             </ng-template>
                         </p-toolbar>
                         <br>

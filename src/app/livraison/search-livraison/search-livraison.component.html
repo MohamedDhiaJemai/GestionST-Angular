@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\loginsST.png" style="width: 3%;float: left; margin-right: 2%;">
-                            <h4 class="card-title ">Livraison Achats</h4>
-                            <p class="card-category"> STADE TUNISIEN</p>
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Livraison Achats</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
                         </div>
                     </div>
 
@@ -43,7 +46,8 @@
                                         [showCurrentPageReport]="true"
                                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                                         [rowsPerPageOptions]="[10,25,50]" selectionMode="single"
-                                        [(selection)]="selectedLivraison" styleClass="p-datatable-striped" [responsive]="true">
+                                        [(selection)]="selectedLivraison" styleClass="p-datatable-striped"
+                                        [responsive]="true">
 
                                         <ng-template pTemplate="header">
                                             <tr>
@@ -62,28 +66,33 @@
                                                     </p-sortIcon>
                                                 </th>
                                                 <th style="width:8rem">
-                                                    <button *ngIf="tout" [disabled]="!edition" type="button" (click)="validerTout()" pButton
-                                                        icon="pi pi-external-link" label="Valider Tout"
-                                                        class="p-button-success"></button>
+                                                    <button *ngIf="tout" [disabled]="!edition" type="button"
+                                                        (click)="validerTout()" pButton icon="pi pi-external-link"
+                                                        label="Valider Tout" class="p-button-success"></button>
                                                 </th>
                                             </tr>
                                         </ng-template>
 
                                         <ng-template pTemplate="body" let-livraison>
                                             <tr [pSelectableRow]="livraison">
-                                                <td><span class="p-column-title">Date achat</span>{{livraison.dateCreation | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                                                <td><span class="p-column-title">Article</span>{{livraison.article.libelle}}</td>
+                                                <td><span class="p-column-title">Date
+                                                        achat</span>{{livraison.dateCreation | date:'dd-MM-yyyy HH:mm:ss'}}
+                                                </td>
+                                                <td><span
+                                                        class="p-column-title">Article</span>{{livraison.article.libelle}}
+                                                </td>
                                                 <td><span class="p-column-title">Taille</span>{{livraison.taille}}</td>
-                                                <td><span class="p-column-title">Quantité</span>{{livraison.quantite}}</td>
+                                                <td><span class="p-column-title">Quantité</span>{{livraison.quantite}}
+                                                </td>
                                                 <td>
                                                     <button [disabled]="!edition" *ngIf="!livraison.validation"
                                                         type="button" (click)="validerById(livraison.id)" pButton
                                                         icon="pi pi-external-link" label="Valider"
                                                         class="p-button-success"></button>
-                                                        <div *ngIf="livraison.validation" class="text-center">
-                                                            Validé le <br>
-                                                            {{livraison.dateValidation | date:'dd-MM-yyyy HH:mm:ss'}}
-                                                        </div>
+                                                    <div *ngIf="livraison.validation" class="text-center">
+                                                        Validé le <br>
+                                                        {{livraison.dateValidation | date:'dd-MM-yyyy HH:mm:ss'}}
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </ng-template>
