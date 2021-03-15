@@ -1,14 +1,16 @@
 import { Article } from "./Article.model";
+import { Utilisateur } from './Utilisateur.model';
 
 export class Approvisonnement {
 
     public id: number;
-
-    public quantite: number;
-    public taille: string;
     public reference: string;
-    public observation: string;
     public article: Article;
+    public taille: string;
+    public quantite: number;
+    public observation: string;
+    public dateCreation: string;
+    public utilisateur: Utilisateur;
 
     constructor() { }
 }

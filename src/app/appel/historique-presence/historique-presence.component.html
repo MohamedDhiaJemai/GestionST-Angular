@@ -1,1 +1,160 @@
-<p>historique-presence works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Historique Présence</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="float: left;margin: 5px;">
+                                        <label style="margin-right: 5px;"><strong>Début</strong></label>
+                                        <p-calendar [(ngModel)]="dd" dateFormat="dd-mm-yy" name="dd" [showTime]="true"
+                                            [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
+                                            [touchUI]="true">
+                                        </p-calendar>
+                                    </div>
+
+                                    <div style="float: left;margin: 5px;">
+                                        <label style="margin-right: 5px;"><strong>Fin</strong></label>
+                                        <p-calendar [(ngModel)]="df" dateFormat="dd-mm-yy" name="df" [showTime]="true"
+                                            [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
+                                            [touchUI]="true">
+                                        </p-calendar>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-12">
+                                    <p-dropdown [ngStyle]="{'margin': '5px'}" [options]="types" name="typeEntrainement"
+                                        [(ngModel)]="appelParams.typeEntrainement" placeholder="Type Entrainement"
+                                        [showClear]="true">
+                                    </p-dropdown>
+
+                                    <small class="p-error" *ngIf="submitted && !appelParams.typeEntrainement">Champ
+                                        obligatoire.</small>
+
+                                    <p-multiSelect [disabled]=" appelParams.typeEntrainement=='TESTP1'"
+                                        [ngStyle]="{'margin': '5px'}" [options]="annees" name="natifs"
+                                        [(ngModel)]="appelParams.natifs" class="multiselect-custom">
+                                    </p-multiSelect>
+
+                                    <!-- <small class="p-error"
+                                    *ngIf="submitted && (!appelParams.natifs || appelParams.natifs.length==0)">Champ
+                                    obligatoire.</small> -->
+
+                                    <p-dropdown [ngStyle]="{'margin': '5px'}" [options]="sexes" name="sexe"
+                                        [(ngModel)]="appelParams.sexe" placeholder="Sexe" [showClear]="true">
+                                    </p-dropdown>
+
+                                    <p-dropdown [ngStyle]="{'margin': '5px'}"
+                                        [disabled]="appelParams.typeEntrainement=='NORMAL' || appelParams.typeEntrainement=='TESTP1' || appelParams.typeEntrainement==null"
+                                        [options]="jours" name="jour" [(ngModel)]="appelParams.jour" placeholder="Jour"
+                                        [showClear]="true">
+                                    </p-dropdown>
+
+                                    <p-dropdown [ngStyle]="{'margin': '5px'}" [options]="utilisateurs"
+                                        [(ngModel)]="appelParams.utilisateur" name="utilisateur" [showClear]="true"
+                                        [filter]="true" optionLabel="nom" placeholder="Utilisateur">
+                                        <ng-template pTemplate="selectedItem">
+                                            <div *ngIf="appelParams.utilisateur">
+                                                <div>
+                                                    {{appelParams.utilisateur.nom}} {{appelParams.utilisateur.prenom}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template let-user pTemplate="item">
+                                            <div>
+                                                <div>
+                                                    {{user.nom}} {{user.prenom}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <ng-template pTemplate="right">
+                            <button type="button" (click)="getListePresence()" mat-raised-button
+                                icon="pi pi-external-link" class="btn btn-success">Recherche</button>
+                        </ng-template>
+                    </p-toolbar>
+
+                    <div class="card-body">
+                        <div *ngIf="listeAppel" class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <h4> <strong> Nombre de joueurs: {{nombrePresents}} </strong> </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <p-table #dt [value]="listeAppel" styleClass="p-datatable-striped" [responsive]="true"
+                            selectionMode="single" [globalFilterFields]="['nomJoueur','natif']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="clear(dt)"></button>
+                                    <span class="p-input-icon-left p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input style="width: 100%;" pInputText type="text"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search ..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th pSortableColumn="nom">Nom<p-sortIcon field="nom">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="natif" style="width: 8rem;">Natif<p-sortIcon field="natif">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="datePresence">Date<p-sortIcon field="datePresence">
+                                        </p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-appel>
+                                <tr [pSelectableRow]="appel">
+                                    <td>
+                                        <div style="padding-right: 2%;float: left;">
+                                            <img *ngIf="appel.idJoueur" [src]="photoJoueurUrl + appel.idJoueur"
+                                                width="98%" style="max-width: 151px;max-height: 184px;" />
+                                            <img *ngIf="appel.idJoueurTest" [src]="photoTestUrl + appel.idJoueurTest"
+                                                width="98%" style="max-width: 151px;max-height: 184px;" />
+                                        </div>
+                                    </td>
+                                    <td><span class="p-column-title">Nom</span>
+                                        <strong>{{appel.nomJoueur}}</strong>
+                                    </td>
+                                    <td><span class="p-column-title">Natif</span>
+                                        {{appel.natif}}
+                                    </td>
+                                    <td><span class="p-column-title">Date</span>
+                                        {{appel.datePresence | date:'dd-MM-yyyy HH:mm'}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

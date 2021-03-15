@@ -51,7 +51,7 @@ export class ListePresenceComponent implements OnInit {
     this.consultation = obj.consultation;
     this.appelParams = new AppelParams();
     this.submitted = false;
-    this.userService.getbyRoles(['COACH']).subscribe(data => {
+    this.userService.hasPresence().subscribe(data => {
       this.utilisateurs = data;
     });
     this.categorieService.enCours().subscribe(

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
   public jwtToken: string;
-  private jwtHelper: JwtHelper = new JwtHelper();
+  private jwtHelper: JwtHelperService = new JwtHelperService();
   constructor(private router: Router) { }
   saveToken(jwt: string) {
     this.jwtToken = jwt;

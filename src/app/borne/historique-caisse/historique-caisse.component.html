@@ -10,7 +10,7 @@
                             <img src="assets\\images\\loginsST.png"
                                 style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
-                                <h4 class="card-title">Historique Arrêts</h4>
+                                <h4 class="card-title">Historique Arrêts Caisse</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
                             </div>
                         </div>
@@ -30,58 +30,73 @@
                     </p-toolbar>
 
                     <div class="card-body">
-                        <!-- <p-table #dt [value]="arrets" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+
+                        <p-table #dt [value]="arrets" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" styleClass="p-datatable-striped" [responsive]="true">
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" styleClass="p-datatable-striped"
+                            [responsive]="true">
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="nbrEnfants">Date arret <p-sortIcon field="nbrEnfants">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="dateArret" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Date arrêt
+                                            <p-sortIcon field="dateArret"></p-sortIcon>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="nbrMois">Montant Caisse <p-sortIcon field="nbrMois">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="caissier.nomUtilisateur" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Caissier
+                                            <p-sortIcon field="caissier.nomUtilisateur"></p-sortIcon>
+                                            <p-columnFilter type="text" field="caissier.nomUtilisateur" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                    <th pSortableColumn="taux">Taux <p-sortIcon field="taux">
-                                        </p-sortIcon>
+                                    <th style="width: 14rem;" class="text-center">
+                                        Détails
                                     </th>
-                                    <th pSortableColumn="activation">Active <p-sortIcon field="activation">
-                                        </p-sortIcon>
+                                    <th pSortableColumn="montantCaisse" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Total
+                                            <p-sortIcon field="montantCaisse"></p-sortIcon>
+                                            <p-columnFilter type="text" field="montantCaisse" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'nbrEnfants', 'contains')"
-                                            placeholder="" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="text"
-                                            (input)="dt.filter($event.target.value, 'nbrMois', 'contains')"
-                                            placeholder="" class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="number"
-                                            (input)="dt.filter($event.target.value, 'taux', 'contains')" placeholder=""
-                                            class="p-column-filter">
-                                    </th>
-                                    <th>
-                                        <input pInputText type="boolean"
-                                            (input)="dt.filter($event.target.value, 'activation', 'contains')"
-                                            placeholder="" class="p-column-filter">
+                                    <th pSortableColumn="montantCaisseBorne" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Total Borne
+                                            <p-sortIcon field="montantCaisseBorne"></p-sortIcon>
+                                            <p-columnFilter type="text" field="montantCaisseBorne" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
                                     </th>
                                 </tr>
                             </ng-template>
 
                             <ng-template pTemplate="body" let-arret>
-                                <tr [pSelectableRow]="remisee">
-                                    <td>{{arret.nbrEnfants}}</td>
-                                    <td>{{arret.nbrMois}}</td>
-                                    <td>{{arret.taux}}</td>
-                                    <td>{{arret.activation}}</td>
+                                <tr [pSelectableRow]="arret">
+                                    <td><span class="p-column-title">Date
+                                            arrêt</span>{{arret.dateArret | date:'dd-MM-yyyy'}}
+                                        <br>
+                                        {{arret.dateArret | date:'HH:mm:ss'}}
+                                    </td>
+                                    <td><span class="p-column-title">Caissier</span>{{arret.caissier.nomUtilisateur}}
+                                    </td>
+                                    <td><span class="p-column-title">Détails</span>
+                                        Ventes: {{arret.montantVente}} TND <br>
+                                        Retours: {{arret.montantRetour}} TND <br>
+                                        Donations: {{arret.montantDon}} TND
+                                    </td>
+                                    <td><span class="p-column-title">Total</span>{{arret.montantCaisse}} TND</td>
+                                    <td><span class="p-column-title">Total Borne</span>{{arret.montantCaisseBorne}} TND
+                                    </td>
                                 </tr>
                             </ng-template>
-                        </p-table> -->
+                        </p-table>
 
                     </div>
                 </div>

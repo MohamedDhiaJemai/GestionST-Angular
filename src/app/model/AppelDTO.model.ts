@@ -8,6 +8,7 @@ export class AppelDTO {
     public natif: string;
     public elite: boolean;
     public idPresence: number;
+    public datePresence: string;
 
     constructor() { }
 

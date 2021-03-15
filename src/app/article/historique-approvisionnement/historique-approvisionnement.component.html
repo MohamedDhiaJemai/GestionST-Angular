@@ -1,0 +1,104 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\loginsST.png"
+                                style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Historique Approvisionnement</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                        </ng-template>
+
+                        <ng-template pTemplate="right">
+                            <button routerLink="/consulter-article/{{id}}" pButton label="Retour"
+                                class="p-button-success"></button>
+                        </ng-template>
+                    </p-toolbar>
+
+                    <div class="card-body">
+
+                        <p-table #dt [value]="approvisionnements" [paginator]="true" [rows]="10"
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" styleClass="p-datatable-striped"
+                            [responsive]="true"
+                            [globalFilterFields]="['reference','taille','quantite','utilisateur.nomUtilisateur', 'observation']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="clear(dt)"></button>
+                                    <span class="p-input-icon-left p-ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input style="width: 100%;" pInputText type="text"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search ..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="reference" class="text-center">
+                                        Référence
+                                        <p-sortIcon field="reference"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="dateCreation" class="text-center">
+                                        Date
+                                        <p-sortIcon field="dateCreation"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="utilisateur.nomUtilisateur" class="text-center">
+                                        Utilisateur
+                                        <p-sortIcon field="utilisateur.nomUtilisateur"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="taille" class="text-center">
+                                        Taille
+                                        <p-sortIcon field="taille"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="quantite" class="text-center">
+                                        Quantité
+                                        <p-sortIcon field="quantite"></p-sortIcon>
+                                    </th>
+                                    <th class="text-center">
+                                        Remarque
+                                    </th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-approvisionnement>
+                                <tr [pSelectableRow]="approvisionnement">
+                                    <td><span class="p-column-title">Référence</span>
+                                        {{approvisionnement.reference}}
+                                    </td>
+                                    <td><span class="p-column-title">Date</span>
+                                        {{approvisionnement.dateCreation | date:'dd-MM-yyyy HH:mm'}}
+                                    </td>
+                                    <td><span class="p-column-title">Utilisateur</span>
+                                        {{approvisionnement.utilisateur.nomUtilisateur}}
+                                    </td>
+                                    <td><span class="p-column-title">Taille</span>
+                                        {{approvisionnement.taille | taillepipe}}
+                                    </td>
+                                    <td><span class="p-column-title">Quantité</span>{{approvisionnement.quantite}}</td>
+                                    <td><span class="p-column-title">Remarque</span>{{approvisionnement.observation}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

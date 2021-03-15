@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     private jwtToken = null;
-    jwtHelper: JwtHelper = new JwtHelper();
+    jwtHelper: JwtHelperService = new JwtHelperService();
 
     constructor(private router: Router) { }
 

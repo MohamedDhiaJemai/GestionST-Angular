@@ -98,7 +98,6 @@ import { SearchRetourComponent } from './retour-cash/search-retour/search-retour
 import { GratuiteComponent } from './gratuite/gratuite.component';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { AutorisationComponent } from './autorisation/autorisation.component';
-import { CaisseComponent } from './caisse/caisse.component';
 import { AppelComponent } from './appel/appel.component';
 import { ListePresenceComponent } from './appel/liste-presence/liste-presence.component';
 import { HistoriqueCaisseComponent } from './borne/historique-caisse/historique-caisse.component';
@@ -113,6 +112,8 @@ import { JoueurTestComponent } from './joueur-test/joueur-test.component';
 import { DataviewJTestComponent } from './joueur-test/dataview-j-test/dataview-j-test.component';
 import { ConsulterJoueurTestComponent } from './joueur-test/consulter-joueur-test/consulter-joueur-test.component';
 import { UpdateJoueurTestComponent } from './joueur-test/update-joueur-test/update-joueur-test.component';
+import { HistoriqueApprovisionnementComponent } from './article/historique-approvisionnement/historique-approvisionnement.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   imports: [
@@ -156,7 +157,17 @@ import { UpdateJoueurTestComponent } from './joueur-test/update-joueur-test/upda
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule
+    MatRippleModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        allowedDomains: ['41.224.10.222:2061', '192.168.0.246:8443'],
+        disallowedRoutes: [],
+      },
+    }),
   ],
   exports: [
     MatButtonModule,
@@ -226,7 +237,6 @@ import { UpdateJoueurTestComponent } from './joueur-test/update-joueur-test/upda
     GratuiteComponent,
     AcceuilComponent,
     AutorisationComponent,
-    CaisseComponent,
     ListePresenceComponent,
     AppelComponent,
     HistoriqueCaisseComponent,
@@ -241,6 +251,7 @@ import { UpdateJoueurTestComponent } from './joueur-test/update-joueur-test/upda
     DataviewJTestComponent,
     ConsulterJoueurTestComponent,
     UpdateJoueurTestComponent,
+    HistoriqueApprovisionnementComponent,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

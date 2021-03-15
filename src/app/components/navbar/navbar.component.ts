@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginService } from 'app/services/login/login.service';
 import { ROUTES } from '../sidebar/sidebar.component';
 
@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-    jwtHelper: JwtHelper = new JwtHelper();
+    jwtHelper: JwtHelperService = new JwtHelperService();
     constructor(location: Location, private element: ElementRef,
         private router: Router, private loginService: LoginService) {
         this.location = location;

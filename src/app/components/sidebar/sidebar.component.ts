@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { LoginService } from 'app/services/login/login.service';
-import { log } from 'console';
-import { data } from 'jquery';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -36,7 +34,8 @@ export const ROUTES: RouteInfo[] = [
   { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'fact_check', class: '' },
   { path: '/joueurs-test', title: 'Joueurs Test', icon: 'groups', class: '' },
   { path: '/appel', title: 'Appel', icon: 'spellcheck', class: '' },
-  { path: '/liste-presence', title: 'Présence', icon: 'fact_check', class: '' }
+  { path: '/liste-presence', title: 'Vérification Présence', icon: 'fact_check', class: '' },
+  { path: '/historique-presence', title: 'Historique Présence', icon: 'fact_check', class: '' }
 ];
 
 @Component({
@@ -47,7 +46,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   autorisations;
-  jwtHelper: JwtHelper = new JwtHelper();
+  jwtHelper: JwtHelperService = new JwtHelperService();
   constructor(private autorisationService: AutorisationService, private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {

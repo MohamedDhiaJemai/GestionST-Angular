@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserAuthentification } from 'app/model/UserAuthentification.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { LoginService } from 'app/services/login/login.service';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   modalRef: BsModalRef;
 
   userAuth: UserAuthentification;
-  jwtHelper: JwtHelper = new JwtHelper();
+  jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(private loginService: LoginService,
     private autorisationService: AutorisationService,

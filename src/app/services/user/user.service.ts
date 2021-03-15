@@ -14,6 +14,11 @@ export class UserService {
     return this.httpClient.get<Utilisateur[]>(environment.apiUrl + 'utilisateur/all',
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
+
+  hasPresence(): Observable<any> {
+    return this.httpClient.get<Utilisateur[]>(environment.apiUrl + 'utilisateur/has-presence',
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
   addUtilisateur(utilisateur: Utilisateur) {
     return this.httpClient.post(environment.apiUrl + 'utilisateur/add', utilisateur,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });

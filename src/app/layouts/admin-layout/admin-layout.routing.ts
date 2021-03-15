@@ -65,6 +65,7 @@ import { UpdateSaisonComponent } from 'app/saison-sportive/update-saison/update-
 import { JoueurTestComponent } from 'app/joueur-test/joueur-test.component';
 import { ConsulterJoueurTestComponent } from 'app/joueur-test/consulter-joueur-test/consulter-joueur-test.component';
 import { UpdateJoueurTestComponent } from 'app/joueur-test/update-joueur-test/update-joueur-test.component';
+import { HistoriqueApprovisionnementComponent } from 'app/article/historique-approvisionnement/historique-approvisionnement.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'acceuil', component: AcceuilComponent },
@@ -131,6 +132,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'appel', component: AppelComponent },
     { path: 'liste-presence', component: ListePresenceComponent },
     { path: 'historique-presence', component: HistoriquePresenceComponent },
+    { path: 'historique-presence', component: HistoriquePresenceComponent },
     { path: 'historique-caisse/:id', component: HistoriqueCaisseComponent },
-    { path: 'profil/:id', component: UserProfileComponent }
+    { path: 'profil/:id', component: UserProfileComponent },
+    { path: 'historique-approvisionnement/:id', component: HistoriqueApprovisionnementComponent }
 ];

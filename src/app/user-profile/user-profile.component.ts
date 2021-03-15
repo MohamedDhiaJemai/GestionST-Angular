@@ -1,9 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Utilisateur } from 'app/model/Utilisateur.model';
-import { RoleService } from 'app/services/role/role.service';
-import { TokenService } from 'app/services/token/token.service';
 import { UserService } from 'app/services/user/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -19,7 +17,7 @@ export class UserProfileComponent implements OnInit {
 
   modalRef: BsModalRef;
   modalRefAnnul: BsModalRef;
-  jwtHelper: JwtHelper = new JwtHelper();
+  jwtHelper: JwtHelperService = new JwtHelperService();
   permitted = false;
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private modalService: BsModalService) { }
 

@@ -11,19 +11,15 @@ import { TokenService } from '../token/token.service';
 export class ArticleService {
   constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
   getAllArticle(): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + 'article/all',
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get(environment.apiUrl + 'article/all');
   }
   addArticle(article: Article): Observable<any> {
-    return this.httpClient.post(environment.apiUrl + 'article/add', article,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.post(environment.apiUrl + 'article/add', article);
   }
   updateArticle(id: number, article: Article) {
-    return this.httpClient.put(environment.apiUrl + 'article/update/' + id, article,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.put(environment.apiUrl + 'article/update/' + id, article);
   }
   findById(id) {
-    return this.httpClient.get<Article>(environment.apiUrl + 'article/' + id,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get<Article>(environment.apiUrl + 'article/' + id);
   }
 }

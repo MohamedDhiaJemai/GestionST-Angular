@@ -19,6 +19,10 @@ export class PresenceService {
     return this.httpClient.post(environment.apiUrl + 'presence/liste-presence', appelParams,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
   }
+  historiquePresence(appelParams: AppelParams): Observable<any> {
+    return this.httpClient.post(environment.apiUrl + 'presence/historique-presence', appelParams,
+      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+  }
   editPresence(appelDTO: AppelDTO) {
     return this.httpClient.post<AppelDTO>(environment.apiUrl + 'presence/appel', appelDTO,
       { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });

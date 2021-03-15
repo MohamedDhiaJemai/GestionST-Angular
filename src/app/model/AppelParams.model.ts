@@ -9,6 +9,8 @@ export class AppelParams {
     public sexe: string;
     public utilisateur: Utilisateur;
     public categorie: Categorie;
+    public dateDebut: string;
+    public dateFin: string;
 
     constructor() { }
 

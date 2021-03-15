@@ -16,63 +16,60 @@
                     <div class="card-body">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <button [disabled]="!edition" class="btn btn-success" type="button"
-                                        routerLink="/ajouter-taille/{{ article.id }}"> Ajout Stock </button>
-
-                                    <button class="like btn btn-default" type="button"
-                                        routerLink="/articles">Retour</button>
-                                </div>
-                            </div>
-                            <div class="row" *ngIf="article.stocks?.length === 0"
-                                style="margin-bottom: 5%; margin-top: 5%; font-size: large;">
-                                <li>Aucune Taille!</li>
-                            </div>
-
-                            <div class="row" *ngIf="article.stocks?.length > 0">
-                                <p-tabView class=col-md-12>
-                                    <p-tabPanel [header]="item.taille | taillepipe"
-                                        *ngFor="let item of article.stocks; let i = index" [selected]="i == 0">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <br>
-                                                <div class="col-md-12">
-                                                    <div id="pic-1">
-                                                        <img [src]="urlphotoArticle + article.id" width="100%" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <br>
-                                                <h2 class="product-title">{{ article.libelle }}</h2>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price">Quantité :
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-left: 10%;">
-                                                        <h5 class="price">{{item.quantite}}
-                                                        </h5>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h5 class="price">Taille:
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-left: 10%;">
-                                                        <h5 class="price">{{item.taille | taillepipe}}
-                                                        </h5>
-                                                    </div>
-                                                </div>
+                                <div class=col-md-4>
+                                    <div class="col-md-12">
+                                        <div class="col-md-12 text-center">
+                                            <h3 class="product-title">{{ article.libelle }}</h3>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-12">
+                                            <div id="pic-1">
+                                                <img [src]="urlphotoArticle + id" width="100%" />
                                             </div>
                                         </div>
-                                    </p-tabPanel>
-                                </p-tabView>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <button [disabled]="!edition" class="btn btn-success" type="button"
+                                                routerLink="/ajouter-taille/{{ article.id }}"> Ajout Stock </button>
+
+                                            <button class="like btn btn-default" type="button"
+                                                routerLink="/consulter-article/{{article.id}}">Retour</button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-12" *ngIf="article.stocks?.length === 0"
+                                            style="margin-bottom: 5%; margin-top: 5%; font-size: large;">
+                                            <li>Aucune Taille!</li>
+                                        </div>
+
+                                        <div class="col-md-12" *ngIf="article.stocks?.length > 0">
+                                            <p-tabView>
+                                                <p-tabPanel [header]="item.taille | taillepipe"
+                                                    *ngFor="let item of article.stocks; let i = index"
+                                                    [selected]="i == 0">
+                                                    <div class="col-md-12 text-center">
+                                                        <br>
+                                                        <h4>Taille : {{item.taille | taillepipe}}
+                                                        </h4>
+                                                        <br>
+                                                        <h4>Quantité : {{item.quantite}}
+                                                        </h4>
+                                                        <br>
+                                                        <button [disabled]="!edition || item.quantite>0"
+                                                            class="like btn btn-danger" type="button"
+                                                            (click)="deleteStock(item.id)">Supprimer la taille</button>
+                                                    </div>
+                                                </p-tabPanel>
+                                            </p-tabView>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

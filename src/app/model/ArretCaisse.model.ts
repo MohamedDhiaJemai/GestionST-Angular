@@ -4,8 +4,9 @@ import { Utilisateur } from './Utilisateur.model';
 export class ArretCaisse {
 
     public id: number;
-    public montantVente: number;
     public montantCaisse: number;
+
+    public montantVente: number;
     public montantRetour: number;
     public montantDon: number;
 

@@ -40,7 +40,7 @@ export class BorneComponent implements OnInit {
   url: string | ArrayBuffer;
   uploadForm: FormGroup;
   urlPhoto = environment.apiUrl + 'screensaver/get/';
-  constructor(private borneService: BorneService, private router: Router,
+  constructor(private borneService: BorneService,
     private caisseService: CaisseService, private messageService: MessageService,
     private screensaverService: ScreensaverBorneService, private formBuilder: FormBuilder,
     private autorisationService: AutorisationService, private modalService: BsModalService) {

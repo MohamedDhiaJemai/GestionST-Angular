@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Autorisation } from 'app/model/Autorisation.model';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AutorisationService {
   username: string;
-  jwtHelper: JwtHelper = new JwtHelper();
+  jwtHelper: JwtHelperService = new JwtHelperService();
   autorisationsList: Autorisation[];
   autorisationsArray: any[];
   constructor(private httpClient: HttpClient, private tokenUtil: TokenService, private router: Router) { }
