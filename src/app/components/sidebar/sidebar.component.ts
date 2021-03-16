@@ -34,8 +34,8 @@ export const ROUTES: RouteInfo[] = [
   { path: '/inscriptions-test', title: 'Inscriptions Test', icon: 'fact_check', class: '' },
   { path: '/joueurs-test', title: 'Joueurs Test', icon: 'groups', class: '' },
   { path: '/appel', title: 'Appel', icon: 'spellcheck', class: '' },
-  { path: '/liste-presence', title: 'Vérification Présence', icon: 'fact_check', class: '' },
-  { path: '/historique-presence', title: 'Historique Présence', icon: 'fact_check', class: '' }
+  { path: '/liste-presence', title: 'Vérification Présence', icon: 'checklist', class: '' },
+  { path: '/historique-presence', title: 'Historique Présence', icon: 'list_alt', class: '' }
 ];
 
 @Component({
@@ -45,6 +45,7 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  visibleMenuItems: any[];
   autorisations;
   jwtHelper: JwtHelperService = new JwtHelperService();
   constructor(private autorisationService: AutorisationService, private loginService: LoginService, private router: Router) { }
@@ -66,6 +67,7 @@ export class SidebarComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     }
+    this.visibleMenuItems = this.menuItems;
   }
 
   isMobileMenu() {
@@ -91,5 +93,10 @@ export class SidebarComponent implements OnInit {
 
   onProfilClick() {
     this.router.navigateByUrl('/profil/' + this.jwtHelper.decodeToken(localStorage.getItem('token')).sub);
+  }
+
+  filterRoutes(event) {
+    const str = event.target.value.toLowerCase();
+    this.visibleMenuItems = this.menuItems.filter(menuItem => menuItem.title.toLowerCase().includes(str) || str.length === 0);
   }
 }

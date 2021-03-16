@@ -26,13 +26,13 @@
                             styleClass="p-datatable-striped" [responsive]="true">
                             <ng-template pTemplate="caption">
                                 <div class="p-d-flex">
-                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                    <button pButton label="Nettoyer" class="p-button-outlined" icon="pi pi-filter-slash"
                                         (click)="clear(dt)"></button>
                                     <span class="p-input-icon-left p-ml-auto">
                                         <i class="pi pi-search"></i>
                                         <input style="width: 100%;" pInputText type="text"
                                             (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                            placeholder="Search ..." />
+                                            placeholder="Recherche..." />
                                     </span>
                                 </div>
                             </ng-template>
