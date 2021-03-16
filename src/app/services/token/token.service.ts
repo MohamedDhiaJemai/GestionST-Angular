@@ -20,10 +20,8 @@ export class TokenService {
     localStorage.setItem('roles', JSON.stringify(array));
   }
   getToken() {
-    if (this.jwtToken === undefined) {
-      this.jwtToken = localStorage.getItem('token');
-    }
-    if (this.jwtHelper.isTokenExpired(this.jwtToken)) {
+    this.jwtToken = localStorage.getItem('token');
+    if (this.jwtToken === undefined || this.jwtHelper.isTokenExpired(this.jwtToken)) {
       localStorage.clear();
       this.router.navigateByUrl('/login');
     }

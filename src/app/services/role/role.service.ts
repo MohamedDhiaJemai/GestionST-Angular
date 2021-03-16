@@ -1,6 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TokenService } from '../token/token.service';
 import { Role } from 'app/model/Role.model';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
@@ -9,21 +8,17 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class RoleService {
-  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
+  constructor(private httpClient: HttpClient) { }
   getAllRole(): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + 'role/all',
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get(environment.apiUrl + 'role/all');
   }
   addRole(role: Role) {
-    return this.httpClient.post(environment.apiUrl + 'role/add', role,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.post(environment.apiUrl + 'role/add', role);
   }
   updateRole(id: number, role: Role) {
-    return this.httpClient.put(environment.apiUrl + 'role/update/' + id, role,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.put(environment.apiUrl + 'role/update/' + id, role);
   }
   findById(id) {
-    return this.httpClient.get<Role>(environment.apiUrl + 'role/' + id,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get<Role>(environment.apiUrl + 'role/' + id);
   }
 }

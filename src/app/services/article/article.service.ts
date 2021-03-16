@@ -1,15 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Article } from 'app/model/Article.model';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
+  constructor(private httpClient: HttpClient) { }
   getAllArticle(): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'article/all');
   }

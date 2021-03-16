@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -17,27 +17,22 @@ export class AutorisationService {
   autorisationsArray: any[];
   constructor(private httpClient: HttpClient, private tokenUtil: TokenService, private router: Router) { }
   findAutorisationsByRole(username: string): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + 'autorisations/role/' + username,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get(environment.apiUrl + 'autorisations/role/' + username);
   }
   updateAutorisationRole(autorisation: Autorisation) {
-    return this.httpClient.put(environment.apiUrl + 'autorisations/role/update', autorisation,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.put(environment.apiUrl + 'autorisations/role/update', autorisation);
   }
   updateAutorisationUser(autorisation: Autorisation) {
-    return this.httpClient.put(environment.apiUrl + 'autorisations/user/update', autorisation,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.put(environment.apiUrl + 'autorisations/user/update', autorisation);
   }
   findAutorisationsByUser(username: string): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/' + username,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/' + username);
   }
 
 
   findAutorisations(): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'autorisations/utilisateur/'
-      + this.jwtHelper.decodeToken(this.tokenUtil.getToken()).sub,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+      + this.jwtHelper.decodeToken(this.tokenUtil.getToken()).sub);
   }
   setAutorisations(auts: Autorisation[]) {
     this.autorisationsArray = new Array<any>();

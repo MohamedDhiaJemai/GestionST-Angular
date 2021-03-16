@@ -113,7 +113,17 @@ import { DataviewJTestComponent } from './joueur-test/dataview-j-test/dataview-j
 import { ConsulterJoueurTestComponent } from './joueur-test/consulter-joueur-test/consulter-joueur-test.component';
 import { UpdateJoueurTestComponent } from './joueur-test/update-joueur-test/update-joueur-test.component';
 import { HistoriqueApprovisionnementComponent } from './article/historique-approvisionnement/historique-approvisionnement.component';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { TokenService } from './services/token/token.service'
+
+export function jwtOptionsFactory(tokenService) {
+  return {
+    tokenGetter: () => {
+      return tokenService.getToken();
+    },
+    allowedDomains: ['41.224.10.222:2061', '192.168.0.246:8443']
+  }
+}
 
 @NgModule({
   imports: [
@@ -160,14 +170,12 @@ import { JwtModule } from '@auth0/angular-jwt';
     MatRippleModule,
     HttpClientModule,
     JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
-        allowedDomains: ['41.224.10.222:2061', '192.168.0.246:8443'],
-        disallowedRoutes: [],
-      },
-    }),
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [TokenService]
+      }
+    })
   ],
   exports: [
     MatButtonModule,

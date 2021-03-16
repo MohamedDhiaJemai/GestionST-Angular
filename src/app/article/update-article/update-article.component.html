@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header card-header-danger">
                     <div style="float: left;">
-                        <img src="assets\\images\\loginsST.png" style="width: 35px;float: left; margin-right: 10px;">
+                        <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                         <div style="float: left;">
                             <h4 class="card-title">Modification Article</h4>
                             <p class="card-category">STADE TUNISIEN</p>
@@ -34,10 +34,10 @@
                                 <div class="col-md-12">
                                     <div id="pic-1">
                                         <div *ngIf="url === undefined">
-                                            <img [src]="urlphotoArticle" width="100%" />
+                                            <img [src]="urlphotoArticle" style="max-width: 100%;" />
                                         </div>
                                         <div *ngIf="url">
-                                            <img [src]="url" width="100%"> <br />
+                                            <img [src]="url" style="max-width: 100%;" /> <br />
                                         </div>
                                     </div>
                                 </div>

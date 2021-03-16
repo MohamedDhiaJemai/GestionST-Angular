@@ -1,6 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TokenService } from '../token/token.service';
 import { Donation } from 'app/model/Donation.model';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
@@ -9,13 +8,11 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class DonationService {
-  constructor(private httpClient: HttpClient, private tokenUtil: TokenService) { }
+  constructor(private httpClient: HttpClient) { }
   findById(id: number) {
-    return this.httpClient.get<Donation>(environment.apiUrl + 'donations/' + id,
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get<Donation>(environment.apiUrl + 'donations/' + id);
   }
   getAll(): Observable<any> {
-    return this.httpClient.get(environment.apiUrl + 'donations/all',
-      { headers: new HttpHeaders({ 'authorization': this.tokenUtil.getToken() }) });
+    return this.httpClient.get(environment.apiUrl + 'donations/all');
   }
 }
