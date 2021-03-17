@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Transactions</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -16,6 +15,72 @@
                         </div>
                     </div>
                     <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <label style="margin-right: 5px;"><strong>Début</strong></label>
+                                        <p-calendar [(ngModel)]="dd" dateFormat="dd-mm-yy" name="dd" [showTime]="false"
+                                            [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
+                                            [touchUI]="true">
+                                        </p-calendar>
+                                    </div>
+
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <label style="margin-right: 5px;"><strong>Fin</strong></label>
+                                        <p-calendar [(ngModel)]="df" dateFormat="dd-mm-yy" name="df" [showTime]="false"
+                                            [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
+                                            [touchUI]="true">
+                                        </p-calendar>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-12">
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <input pInputText type="text" [(ngModel)]="searchParams.id"
+                                            placeholder="Référence" />
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <input pInputText type="text" [(ngModel)]="searchParams.nomClient"
+                                            placeholder="Client" />
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <p-dropdown [options]="typesClient" name="typeClient"
+                                            [(ngModel)]="searchParams.typeClient" placeholder="Type Client"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <p-dropdown [options]="bornes" [(ngModel)]="searchParams.borne" name="borne"
+                                            [showClear]="true" [filter]="true" optionLabel="reference"
+                                            placeholder="Borne">
+                                            <ng-template pTemplate="selectedItem">
+                                                <div *ngIf="searchParams.borne">
+                                                    <div>
+                                                        {{searchParams.borne.reference}}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template let-borne pTemplate="item">
+                                                <div>
+                                                    <div>
+                                                        {{borne.reference}}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="right">
+                            <button type="button" (click)="findTransactions()" mat-raised-button
+                                icon="pi pi-external-link" class="btn btn-success">Recherche</button>
+                            <button type="button" (click)="reset()" mat-raised-button icon="pi pi-times"
+                                class="btn btn-danger">Reset</button>
+                        </ng-template>
+                    </p-toolbar>
                     <div class="card-body">
 
                         <p-table #dt [value]="transactions" [paginator]="true" [rows]="15"

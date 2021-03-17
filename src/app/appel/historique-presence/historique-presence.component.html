@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Historique Présence</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -20,7 +19,7 @@
                         <ng-template pTemplate="left">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div style="float: left;margin: 5px;">
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
                                         <label style="margin-right: 5px;"><strong>Début</strong></label>
                                         <p-calendar [(ngModel)]="dd" dateFormat="dd-mm-yy" name="dd" [showTime]="true"
                                             [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
@@ -28,7 +27,7 @@
                                         </p-calendar>
                                     </div>
 
-                                    <div style="float: left;margin: 5px;">
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
                                         <label style="margin-right: 5px;"><strong>Fin</strong></label>
                                         <p-calendar [(ngModel)]="df" dateFormat="dd-mm-yy" name="df" [showTime]="true"
                                             [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
@@ -38,51 +37,56 @@
                                 </div>
                                 <br>
                                 <div class="col-md-12">
-                                    <p-dropdown [ngStyle]="{'margin': '5px'}" [options]="types" name="typeEntrainement"
-                                        [(ngModel)]="appelParams.typeEntrainement" placeholder="Type Entrainement"
-                                        [showClear]="true">
-                                    </p-dropdown>
-
-                                    <small class="p-error" *ngIf="submitted && !appelParams.typeEntrainement">Champ
-                                        obligatoire.</small>
-
-                                    <p-multiSelect [disabled]=" appelParams.typeEntrainement=='TESTP1'"
-                                        [ngStyle]="{'margin': '5px'}" [options]="annees" name="natifs"
-                                        [(ngModel)]="appelParams.natifs" class="multiselect-custom">
-                                    </p-multiSelect>
-
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <p-dropdown [options]="types" name="typeEntrainement"
+                                            [(ngModel)]="appelParams.typeEntrainement" placeholder="Type Entrainement"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                        <small class="p-error" *ngIf="submitted && !appelParams.typeEntrainement">Champ
+                                            obligatoire.</small>
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <p-multiSelect [disabled]=" appelParams.typeEntrainement=='TESTP1'"
+                                            [options]="annees" name="natifs" [(ngModel)]="appelParams.natifs"
+                                            class="multiselect-custom">
+                                        </p-multiSelect>
+                                    </div>
                                     <!-- <small class="p-error"
                                     *ngIf="submitted && (!appelParams.natifs || appelParams.natifs.length==0)">Champ
                                     obligatoire.</small> -->
-
-                                    <p-dropdown [ngStyle]="{'margin': '5px'}" [options]="sexes" name="sexe"
-                                        [(ngModel)]="appelParams.sexe" placeholder="Sexe" [showClear]="true">
-                                    </p-dropdown>
-
-                                    <p-dropdown [ngStyle]="{'margin': '5px'}"
-                                        [disabled]="appelParams.typeEntrainement=='NORMAL' || appelParams.typeEntrainement=='TESTP1' || appelParams.typeEntrainement==null"
-                                        [options]="jours" name="jour" [(ngModel)]="appelParams.jour" placeholder="Jour"
-                                        [showClear]="true">
-                                    </p-dropdown>
-
-                                    <p-dropdown [ngStyle]="{'margin': '5px'}" [options]="utilisateurs"
-                                        [(ngModel)]="appelParams.utilisateur" name="utilisateur" [showClear]="true"
-                                        [filter]="true" optionLabel="nom" placeholder="Utilisateur">
-                                        <ng-template pTemplate="selectedItem">
-                                            <div *ngIf="appelParams.utilisateur">
-                                                <div>
-                                                    {{appelParams.utilisateur.nom}} {{appelParams.utilisateur.prenom}}
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <p-dropdown [options]="sexes" name="sexe" [(ngModel)]="appelParams.sexe"
+                                            placeholder="Sexe" [showClear]="true">
+                                        </p-dropdown>
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <p-dropdown
+                                            [disabled]="appelParams.typeEntrainement=='NORMAL' || appelParams.typeEntrainement=='TESTP1' || appelParams.typeEntrainement==null"
+                                            [options]="jours" name="jour" [(ngModel)]="appelParams.jour"
+                                            placeholder="Jour" [showClear]="true">
+                                        </p-dropdown>
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <p-dropdown [options]="utilisateurs" [(ngModel)]="appelParams.utilisateur"
+                                            name="utilisateur" [showClear]="true" [filter]="true" optionLabel="nom"
+                                            placeholder="Utilisateur">
+                                            <ng-template pTemplate="selectedItem">
+                                                <div *ngIf="appelParams.utilisateur">
+                                                    <div>
+                                                        {{appelParams.utilisateur.nom}}
+                                                        {{appelParams.utilisateur.prenom}}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </ng-template>
-                                        <ng-template let-user pTemplate="item">
-                                            <div>
+                                            </ng-template>
+                                            <ng-template let-user pTemplate="item">
                                                 <div>
-                                                    {{user.nom}} {{user.prenom}}
+                                                    <div>
+                                                        {{user.nom}} {{user.prenom}}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </ng-template>
-                                    </p-dropdown>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
                                 </div>
                             </div>
                         </ng-template>

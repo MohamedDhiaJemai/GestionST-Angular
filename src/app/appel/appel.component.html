@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Appel</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -20,50 +19,53 @@
                     <p-toolbar>
                         <ng-template pTemplate="left">
                             <div>
-
-                                <p-dropdown [ngStyle]="{'margin-right': '5px'}" [options]="types"
-                                    name="typeEntrainement" [(ngModel)]="appelParams.typeEntrainement"
-                                    placeholder="Type Entrainement" [showClear]="true">
-                                </p-dropdown>
-
-                                <small class="p-error" *ngIf="submitted && !appelParams.typeEntrainement">Champ
-                                    obligatoire.</small>
-
-                                <p-multiSelect [disabled]=" appelParams.typeEntrainement=='TESTP1'"
-                                    [ngStyle]="{'margin-right': '5px'}" [options]="annees" name="natifs"
-                                    [(ngModel)]="appelParams.natifs" class="multiselect-custom">
-                                </p-multiSelect>
-
+                                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                    <p-dropdown [ngStyle]="{'margin-right': '5px'}" [options]="types"
+                                        name="typeEntrainement" [(ngModel)]="appelParams.typeEntrainement"
+                                        placeholder="Type Entrainement" [showClear]="true">
+                                    </p-dropdown>
+                                    <small class="p-error" *ngIf="submitted && !appelParams.typeEntrainement">Champ
+                                        obligatoire.</small>
+                                </div>
+                                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                    <p-multiSelect [disabled]=" appelParams.typeEntrainement=='TESTP1'"
+                                        [ngStyle]="{'margin-right': '5px'}" [options]="annees" name="natifs"
+                                        [(ngModel)]="appelParams.natifs" class="multiselect-custom">
+                                    </p-multiSelect>
+                                </div>
                                 <!-- <small class="p-error"
                                     *ngIf="submitted && (!appelParams.natifs || appelParams.natifs.length==0)">Champ
                                     obligatoire.</small> -->
-
-                                <p-dropdown [ngStyle]="{'margin-right': '5px'}" [options]="sexes" name="sexe"
-                                    [(ngModel)]="appelParams.sexe" placeholder="Sexe" [showClear]="true">
-                                </p-dropdown>
-
-                                <p-dropdown [ngStyle]="{'margin-right': '5px'}"
-                                    [disabled]="appelParams.typeEntrainement=='NORMAL' || appelParams.typeEntrainement=='TESTP1' || appelParams.typeEntrainement==null"
-                                    [options]="jours" name="jour" [(ngModel)]="appelParams.jour" placeholder="Jour"
-                                    [showClear]="true">
-                                </p-dropdown>
-                                <p-dropdown [ngStyle]="{'margin-right': '5px'}"
-                                    [disabled]="appelParams.typeEntrainement!='TESTP1' || appelParams.typeEntrainement==null"
-                                    [options]="categories" name="categorie" [(ngModel)]="appelParams.categorie"
-                                    placeholder="Categorie" [filter]="true" [showClear]="true" optionLabel="designation"
-                                    filterPlaceholder="Recherche..." [showClear]="true">
-                                    <ng-template pTemplate="selectedItem">
-                                        <div class="country-item country-item-value" *ngIf="appelParams.categorie">
-                                            <div> {{appelParams.categorie.designation}}</div>
-                                        </div>
-                                    </ng-template>
-
-                                    <ng-template let-categorie pTemplate="item">
-                                        <div class="country-item">
-                                            <div>{{categorie.designation}}</div>
-                                        </div>
-                                    </ng-template>
-                                </p-dropdown>
+                                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                    <p-dropdown [ngStyle]="{'margin-right': '5px'}" [options]="sexes" name="sexe"
+                                        [(ngModel)]="appelParams.sexe" placeholder="Sexe" [showClear]="true">
+                                    </p-dropdown>
+                                </div>
+                                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                    <p-dropdown [ngStyle]="{'margin-right': '5px'}"
+                                        [disabled]="appelParams.typeEntrainement=='NORMAL' || appelParams.typeEntrainement=='TESTP1' || appelParams.typeEntrainement==null"
+                                        [options]="jours" name="jour" [(ngModel)]="appelParams.jour" placeholder="Jour"
+                                        [showClear]="true">
+                                    </p-dropdown>
+                                </div>
+                                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                    <p-dropdown [ngStyle]="{'margin-right': '5px'}"
+                                        [disabled]="appelParams.typeEntrainement!='TESTP1' || appelParams.typeEntrainement==null"
+                                        [options]="categories" name="categorie" [(ngModel)]="appelParams.categorie"
+                                        placeholder="Categorie" [filter]="true" [showClear]="true"
+                                        optionLabel="designation" filterPlaceholder="Recherche..." [showClear]="true">
+                                        <ng-template pTemplate="selectedItem">
+                                            <div class="country-item country-item-value" *ngIf="appelParams.categorie">
+                                                <div> {{appelParams.categorie.designation}}</div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template let-categorie pTemplate="item">
+                                            <div class="country-item">
+                                                <div>{{categorie.designation}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
                             </div>
 
                         </ng-template>
