@@ -63,7 +63,7 @@ export class AddServiceComponent implements OnInit {
   }
 
   onAddService() {
-    if (this.servicePrincipal.visible === null) {
+    if (this.servicePrincipal.visible === undefined) {
       this.servicePrincipal.visible = false;
     }
     if (this.url !== undefined) {
@@ -80,8 +80,12 @@ export class AddServiceComponent implements OnInit {
   }
 
   onAddServiceComplementaire() {
-    if (this.serviceComplementaire.visible === null) {
+    if (this.serviceComplementaire.visible === undefined) {
       this.serviceComplementaire.visible = false;
+    }
+
+    if (this.serviceComplementaire.elite === undefined) {
+      this.serviceComplementaire.elite = false;
     }
 
     this.selectedJour.forEach(element => {
@@ -89,6 +93,7 @@ export class AddServiceComponent implements OnInit {
     });
     this.serviceComplementaire.jours = this.jourEnvoi;
     if (this.url !== undefined) {
+      console.log(this.serviceComplementaire);
       this.serviceSTService.addServiceComplement(this.serviceComplementaire).subscribe(
         (data: ServiceComplementaire) => {
           const formData = new FormData();

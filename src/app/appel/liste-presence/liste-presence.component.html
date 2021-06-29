@@ -21,15 +21,16 @@
                                 <div class="p-ml-auto" style="float: left;margin: 5px;">
                                     <p-dropdown [ngStyle]="{'margin-right': '5px'}" [options]="types"
                                         name="typeEntrainement" [(ngModel)]="appelParams.typeEntrainement"
-                                        placeholder="Type Entrainement" [showClear]="true">
+                                        placeholder="Type Entrainement" [showClear]="true"
+                                        (onChange)="findCategories()">
                                     </p-dropdown>
                                     <small class="p-error" *ngIf="submitted && !appelParams.typeEntrainement">Champ
                                         obligatoire.</small>
                                 </div>
                                 <div class="p-ml-auto" style="float: left;margin: 5px;">
                                     <p-multiSelect [disabled]=" appelParams.typeEntrainement=='TESTP1'"
-                                        [ngStyle]="{'margin-right': '5px'}" [options]="annees" name="natifs"
-                                        [(ngModel)]="appelParams.natifs" class="multiselect-custom">
+                                        [ngStyle]="{'margin-right': '5px'}" [options]="annees" placeholder="Natifs"
+                                        name="natifs" [(ngModel)]="appelParams.natifs" class="multiselect-custom">
                                     </p-multiSelect>
                                 </div>
                                 <!-- <small class="p-error"

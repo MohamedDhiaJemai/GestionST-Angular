@@ -1,0 +1,121 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div style="float: left;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
+                            <div style="float: left;">
+                                <h4 class="card-title">Historique Livraisons</h4>
+                                <p class="card-category">STADE TUNISIEN</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <p-toolbar>
+                        <ng-template pTemplate="left">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <label style="margin-right: 5px;"><strong>Début</strong></label>
+                                        <p-calendar [(ngModel)]="dd" dateFormat="dd-mm-yy" name="dd" [showTime]="false"
+                                            [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
+                                            [touchUI]="true">
+                                        </p-calendar>
+                                    </div>
+
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <label style="margin-right: 5px;"><strong>Fin</strong></label>
+                                        <p-calendar [(ngModel)]="df" dateFormat="dd-mm-yy" name="df" [showTime]="false"
+                                            [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120"
+                                            [touchUI]="true">
+                                        </p-calendar>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-12">
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <label style="margin-right: 5px;"><strong>Validée</strong></label>
+                                        <p-radioButton name="vg" value="true" inputId="v1" [(ngModel)]="vRadio">
+                                        </p-radioButton>
+                                        <label for="v1" style="margin-right: 5px;">Oui</label>
+                                        <p-radioButton name="vg" value="false" inputId="v2" [(ngModel)]="vRadio">
+                                        </p-radioButton>
+                                        <label for="v2" style="margin-right: 20px;">Non</label>
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <input pInputText type="text" [(ngModel)]="searchParams.transaction"
+                                            placeholder="Référence" />
+                                    </div>
+                                    <div class="p-ml-auto" style="float: left;margin: 5px;">
+                                        <input pInputText type="text" [(ngModel)]="searchParams.libelleArticle"
+                                            placeholder="Article" />
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="right">
+                            <button type="button" (click)="findLivraisons()" mat-raised-button
+                                icon="pi pi-external-link" class="btn btn-success">Recherche</button>
+                            <button type="button" (click)="reset()" mat-raised-button icon="pi pi-times"
+                                class="btn btn-danger">Reset</button>
+                        </ng-template>
+                    </p-toolbar>
+                    <div class="card-body">
+                        <p-table #dt [value]="livraisons" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [rowsPerPageOptions]="[10,25,50]" selectionMode="single" [(selection)]="selectedLivraison"
+                            styleClass="p-datatable-striped" [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="dateCreation">Date achat<p-sortIcon field="dateCreation">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="article.libelle">Article <p-sortIcon field="article.libelle">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="taille">Taille <p-sortIcon field="taille">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="quantite">Quantité <p-sortIcon field="quantite">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-livraison>
+                                <tr [pSelectableRow]="livraison">
+                                    <td><span class="p-column-title">Date
+                                            achat</span>{{livraison.dateCreation | date:'dd-MM-yyyy HH:mm:ss'}}
+                                    </td>
+                                    <td><span class="p-column-title">Article</span>{{livraison.article.libelle}}
+                                    </td>
+                                    <td><span class="p-column-title">Taille</span>{{livraison.taille | taillepipe}}</td>
+                                    <td><span class="p-column-title">Quantité</span>{{livraison.quantite}}
+                                    </td>
+                                    <td>
+                                        <div *ngIf="livraison.validation" class="text-center">
+                                            Validée le <br>
+                                            {{livraison.dateValidation | date:'dd-MM-yyyy HH:mm:ss'}}
+                                            <br> par {{livraison.utilisateur.nomUtilisateur}}
+                                        </div>
+                                        <div *ngIf="!livraison.validation" class="text-center">
+                                            Non validée
+                                        </div>
+                                    </td>
+                                    <td> <button routerLink="/info-livraison/{{ livraison.id }}" pButton pRipple
+                                            type="button" icon="pi pi-search"
+                                            class="p-button-rounded p-button-success"></button></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

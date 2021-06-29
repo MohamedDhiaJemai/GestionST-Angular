@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceAutre } from 'app/model/ServiceAutre.model';
 import { ServiceComplementaire } from 'app/model/ServiceComplementaire.model';
 import { ServicePrincipal } from 'app/model/ServicePrincipal.model';
@@ -22,7 +22,7 @@ export class ConsulterServiceComponent implements OnInit {
   edition: boolean;
   consultation: boolean;
   constructor(private router: ActivatedRoute, private serviceSTService: ServiceSTService,
-    private autorisationService: AutorisationService) { }
+    private autorisationService: AutorisationService, private routerNav: Router) { }
 
   ngOnInit() {
     const obj = this.autorisationService.checkAutorisations1('services');
@@ -57,5 +57,25 @@ export class ConsulterServiceComponent implements OnInit {
     );
   }
 
+  deletePrincipal(id: number) {
+    this.serviceSTService.deletePrincipal(id).subscribe(
+      data => {
+        this.routerNav.navigate(['/services']);
+      }, err => {
+        console.log(err);
+        alert('Impossible de supprimer ce service!');
+      }
+    );
+  }
+  deleteComplementaire(id: number) {
+    this.serviceSTService.deleteComplementaire(id).subscribe(
+      data => {
+        this.routerNav.navigate(['/services']);
+      }, err => {
+        console.log(err);
+        alert('Impossible de supprimer ce service!');
+      }
+    );
+  }
 
 }

@@ -8,6 +8,7 @@ export class ServiceComplementaire {
     public sexe: string;
     public visible: Boolean;
     public elite: Boolean;
+    public ordre: number;
 
     constructor() { }
 

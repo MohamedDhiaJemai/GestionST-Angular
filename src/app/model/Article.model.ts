@@ -1,3 +1,4 @@
+import { Poste } from './Poste.model';
 import { Stocks } from './Stocks.model';
 
 export class Article {
@@ -12,6 +13,8 @@ export class Article {
     public categoryTaille: string;
     public exige: boolean;
     public prixExterne: number;
+    public ordre: number;
+    public poste: Poste;
 
     constructor() { }
 

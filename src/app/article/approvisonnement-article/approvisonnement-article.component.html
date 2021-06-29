@@ -5,8 +5,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Approvisionnement Article</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -60,6 +59,18 @@
                                                         <h4>Quantité : {{item.quantite}}
                                                         </h4>
                                                         <br>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label>Ordre&nbsp;</label>
+                                                                <p-inputNumber [(ngModel)]="item.ordre"
+                                                                    [showButtons]="true">
+                                                                </p-inputNumber>
+                                                                <p-button icon="pi pi-check" class="p-button-success"
+                                                                    (click)="updatePosition(item.id,item.ordre)">
+                                                                </p-button>
+                                                            </div>
+                                                        </div>
                                                         <button [disabled]="!edition || item.quantite>0"
                                                             class="like btn btn-danger" type="button"
                                                             (click)="deleteStock(item.id)">Supprimer la taille</button>

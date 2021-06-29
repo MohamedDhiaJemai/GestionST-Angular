@@ -43,6 +43,15 @@
                                             </p-columnFilter>
                                         </div>
                                     </th>
+                                    <th pSortableColumn="saisonSportive" class="text-center">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Saison
+                                            <p-sortIcon field="saisonSportive"></p-sortIcon>
+                                            <p-columnFilter type="text" field="saisonSportive.designation" display="menu"
+                                                class="p-ml-auto">
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
                                     <th pSortableColumn="categorie" class="text-center">
                                         <div class="p-d-flex p-jc-between p-ai-center">
                                             Catégorie
@@ -71,6 +80,8 @@
                             <ng-template pTemplate="body" let-session>
                                 <tr [pSelectableRow]="session">
                                     <td><span class="p-column-title">Libelle</span>{{session.libelle}}</td>
+                                    <td><span class="p-column-title">Saison</span>{{session?.saisonSportive.designation}}
+                                    </td>
                                     <td><span class="p-column-title">Catégorie</span>{{session?.categorie.designation}}
                                     </td>
                                     <td><span class="p-column-title">Début

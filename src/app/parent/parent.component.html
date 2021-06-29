@@ -80,7 +80,7 @@
                             <ng-template pTemplate="body" let-parent>
                                 <tr [pSelectableRow]="parent">
                                     <td><span class="p-column-title">Nom</span>{{parent.nomParent}}</td>
-                                    <td><span class="p-column-title">Mobile</span>{{parent.mobile}}</td>
+                                    <td><span class="p-column-title">Mobile</span>{{parent.mobile}} ({{parent.pin}})</td>
                                     <td><span class="p-column-title">CIN</span>{{parent.identifiant}}</td>
                                     <td>
                                         <button style="float: left;margin-right: 5px;" type="button"

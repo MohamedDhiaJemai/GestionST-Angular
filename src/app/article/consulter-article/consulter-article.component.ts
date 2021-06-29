@@ -17,7 +17,7 @@ export class ConsulterArticleComponent implements OnInit {
   consultation: boolean;
   consultationStock: boolean;
   constructor(private articleService: ArticleService, private activatedRoute: ActivatedRoute,
-    private autorisationService: AutorisationService) { }
+    private autorisationService: AutorisationService, private routerNav: Router) { }
   ngOnInit() {
     const obj = this.autorisationService.checkAutorisations2('articles', 'approvisionnement');
     this.edition = obj.edition;
@@ -28,6 +28,17 @@ export class ConsulterArticleComponent implements OnInit {
     this.articleService.findById(id).subscribe(
       data => {
         this.article = data;
+      }
+    );
+  }
+
+  delete(id: number) {
+    this.articleService.delete(id).subscribe(
+      data => {
+        this.routerNav.navigate(['/articles']);
+      }, err => {
+        console.log(err);
+        alert('Impossible de supprimer cet article!');
       }
     );
   }

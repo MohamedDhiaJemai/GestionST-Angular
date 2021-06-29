@@ -23,8 +23,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Fiche Joueur Académie</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -40,15 +39,6 @@
                                 </div>
                                 <div class="col-md-7">
                                     {{joueurAcademie?.identifiant}}
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    Elite
-                                </div>
-                                <div class="col-md-7">
-                                    {{joueurAcademie?.elite}}
                                 </div>
                             </div>
                             <br>
@@ -128,6 +118,24 @@
                                 </div>
                                 <div class="col-md-7">
                                     {{joueurAcademie?.dateValidation | date:'dd-MM-yyyy HH:mm'}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Poste
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurAcademie?.poste.designation}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Elite
+                                </div>
+                                <div class="col-md-7">
+                                    {{joueurAcademie?.elite}}
                                 </div>
                             </div>
                             <hr>
@@ -234,8 +242,11 @@
                             </div>
 
                             <br><br>
+
                             <button routerLink="/joueur-acamedie" mat-raised-button type="button"
-                                class="btn btn-success pull-right" style="margin-right: 1%;">Retour</button>
+                                class="btn btn-default pull-right" style="margin-right: 1%;">Retour</button>
+                            <button [disabled]="!edition" class="add-to-cart btn btn-danger pull-right" type="button"
+                                (click)="delete(joueurAcademie?.id)">Supprimer</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
                         </form>

@@ -8,8 +8,7 @@
 
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Joueurs Académie</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -18,15 +17,6 @@
                     </div>
                     <br>
                     <div class="card-body">
-                        <p-toolbar>
-                            <ng-template pTemplate="left">
-                            </ng-template>
-                            <ng-template pTemplate="right">
-                                <button [disabled]="!edition" routerLink="/add-joueur-academie" pButton pRipple
-                                    icon="pi pi-plus" label="Ajout Joueur" class="p-button-success p-mr-2"></button>
-                            </ng-template>
-                        </p-toolbar>
-                        <br>
                         <app-dataviewj-academie></app-dataviewj-academie>
                     </div>
                 </div>

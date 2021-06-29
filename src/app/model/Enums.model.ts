@@ -49,7 +49,7 @@ export enum Jour {
     MARDI = 'MARDI',
     MERCREDI = 'MERCREDI',
     JEUDI = 'JEUDI',
-    VENDREDI = 'VENDREDI ',
+    VENDREDI = 'VENDREDI',
     SAMEDI = 'SAMEDI',
     DIMANCHE = 'DIMANCHE'
 }

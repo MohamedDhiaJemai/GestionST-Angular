@@ -84,7 +84,6 @@ import { UpdateBorneComponent } from './borne/update-borne/update-borne.componen
 import { TransactionComponent } from './transaction/transaction.component';
 import { ConsulterAchatComponent } from './transaction/consulter-achat/consulter-achat.component';
 import { RemiseComponent } from './remise/remise.component';
-import { LivraisonsEnAttenteComponent } from './livraison/livraisons-en-attente/livraisons-en-attente.component';
 import { SearchLivraisonComponent } from './livraison/search-livraison/search-livraison.component';
 import { DonationComponent } from './donation/donation.component';
 import { InscriptionTestComponent } from './inscription-test/inscription-test.component';
@@ -114,14 +113,17 @@ import { ConsulterJoueurTestComponent } from './joueur-test/consulter-joueur-tes
 import { UpdateJoueurTestComponent } from './joueur-test/update-joueur-test/update-joueur-test.component';
 import { HistoriqueApprovisionnementComponent } from './article/historique-approvisionnement/historique-approvisionnement.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { TokenService } from './services/token/token.service'
+import { TokenService } from './services/token/token.service';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { HistoriqueLivraisonsComponent } from './livraison/historique-livraisons/historique-livraisons.component';
+import { InfoLivraisonComponent } from './livraison/info-livraison/info-livraison.component';
 
 export function jwtOptionsFactory(tokenService) {
   return {
     tokenGetter: () => {
       return tokenService.getToken();
     },
-    allowedDomains: ['41.224.10.222:2061', '192.168.0.246:8443']
+    allowedDomains: ['197.27.93.174:8443', '192.168.0.200:8443', '127.0.0.1:8443', '41.224.10.222:2061']
   }
 }
 
@@ -143,7 +145,6 @@ export function jwtOptionsFactory(tokenService) {
     ButtonModule,
     ToolbarModule,
     FileUploadModule,
-    DataViewModule,
     PickListModule,
     DropdownModule,
     RatingModule,
@@ -163,6 +164,7 @@ export function jwtOptionsFactory(tokenService) {
     GalleriaModule,
     InputNumberModule,
     InputSwitchModule,
+    RadioButtonModule,
     TabViewModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -231,7 +233,6 @@ export function jwtOptionsFactory(tokenService) {
     TransactionComponent,
     ConsulterAchatComponent,
     RemiseComponent,
-    LivraisonsEnAttenteComponent,
     SearchLivraisonComponent,
     DonationComponent,
     InscriptionTestComponent,
@@ -260,6 +261,8 @@ export function jwtOptionsFactory(tokenService) {
     ConsulterJoueurTestComponent,
     UpdateJoueurTestComponent,
     HistoriqueApprovisionnementComponent,
+    HistoriqueLivraisonsComponent,
+    InfoLivraisonComponent,
   ],
   providers: [AuthGuard, DatePipe],
   bootstrap: [AppComponent]

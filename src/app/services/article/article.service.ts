@@ -21,4 +21,7 @@ export class ArticleService {
   findById(id) {
     return this.httpClient.get<Article>(environment.apiUrl + 'article/' + id);
   }
+  delete(id: number) {
+    return this.httpClient.delete(environment.apiUrl + 'article/' + id);
+  }
 }

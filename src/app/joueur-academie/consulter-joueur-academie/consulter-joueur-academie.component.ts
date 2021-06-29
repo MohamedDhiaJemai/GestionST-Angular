@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Gratuite } from 'app/model/Gratuite.model';
 import { Joueur } from 'app/model/Joueur.model';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
@@ -31,7 +31,7 @@ export class ConsulterJoueurAcademieComponent implements OnInit {
   annee: string;
 
   constructor(private joueurAcademieService: JoueurAcademieService, private gratuiteService: GratuiteService,
-    private obligationService: ObligationService,
+    private obligationService: ObligationService, private routerNav: Router,
     private activatedRoute: ActivatedRoute, private autorisationService: AutorisationService) { }
   ngOnInit() {
     const obj = this.autorisationService.checkAutorisations2('joueur-acamedie', 'gratuite-joueur');
@@ -78,6 +78,17 @@ export class ConsulterJoueurAcademieComponent implements OnInit {
     obligation.type = 'INSCRIPTION';
     this.obligationService.add(obligation).subscribe(data =>
       this.obligationInscri = data);
+  }
+
+  delete(id: number) {
+    this.joueurAcademieService.delete(id).subscribe(
+      data => {
+        this.routerNav.navigate(['/joueur-acamedie']);
+      }, err => {
+        console.log(err);
+        alert('Impossible de supprimer ce joueur!');
+      }
+    );
   }
 
   // deleteTenu() {

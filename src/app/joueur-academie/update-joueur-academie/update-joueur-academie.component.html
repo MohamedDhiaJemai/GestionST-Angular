@@ -26,8 +26,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Modification Joueur Académie</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -94,13 +93,38 @@
                             </div>
                             <br>
                             <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Selectionner Poste " disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5" style="margin-top: 1%;">
+                                    <p-dropdown [options]="postes" [(ngModel)]="joueurAcademie.poste" name="poste"
+                                        [filter]="true" [showClear]="true" optionLabel="designation"
+                                        placeholder="Select a Post" filterPlaceholder="Recherche..."
+                                        filterBy="designation">
+                                        <ng-template pTemplate="selectedItem">
+                                            <div *ngIf="joueurAcademie.poste">
+                                                <div> {{joueurAcademie.poste.designation}}</div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template let-poste pTemplate="item">
+                                            <div>
+                                                <div>{{poste.designation}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
                                         <input matInput placeholder="Elite " disabled>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
-                                    <p-inputSwitch name="visible" [(ngModel)]="joueurAcademie.elite">
+                                    <p-inputSwitch name="elite" [(ngModel)]="joueurAcademie.elite">
                                     </p-inputSwitch>
                                 </div>
                             </div>
@@ -183,10 +207,10 @@
                                 </div>
                             </div>
                             <br><br>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                            <button mat-raised-button type="submit" class="btn btn-success pull-right"
                                 (click)="openModal(template)">Valider</button>
                             <button routerLink="/joueur-acamedie" mat-raised-button type="button"
-                                class="btn btn-success pull-right" style="margin-right: 1%;">ANNULER</button>
+                                class="btn btn-danger pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
                         </form>

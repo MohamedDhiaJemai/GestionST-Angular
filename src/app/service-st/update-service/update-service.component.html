@@ -97,13 +97,24 @@
                                     </p-inputSwitch>
                                 </div>
                             </div>
-
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="price" style="margin-top: 5%;">Ordre:
+                                    </h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-inputNumber name="ordre" [(ngModel)]="servicePrincipal.ordre"
+                                        [showButtons]="true">
+                                    </p-inputNumber>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="add-to-cart btn btn-success" type="button"
+                                    <button class="add-to-cart btn btn-success pull-right" type="button"
                                         (click)="openModal(template)">Valider
                                     </button>
-                                    <button class="like btn btn-default" type="button"
+                                    <button class="like btn btn-danger pull-right" type="button"
                                         routerLink="/consulter-service/{{servicePrincipal.id}}">Annuler</button>
                                 </div>
                             </div>
@@ -218,12 +229,24 @@
                             </div>
                             <br>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="price" style="margin-top: 5%;">Ordre:
+                                    </h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-inputNumber name="ordre" [(ngModel)]="serviceComplementaire.ordre"
+                                        [showButtons]="true">
+                                    </p-inputNumber>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="action">
-                                        <button class="add-to-cart btn btn-success" type="button"
+                                        <button class="add-to-cart btn btn-success pull-right" type="button"
                                             (click)="openModal(template)">Valider
                                         </button>
-                                        <button class="like btn btn-default" type="button"
+                                        <button class="like btn btn-danger pull-right" type="button"
                                             routerLink="/consulter-service/{{serviceComplementaire.id}}">Annuler</button>
                                     </div>
                                 </div>
@@ -277,10 +300,10 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="add-to-cart btn btn-success" type="button"
+                                    <button class="add-to-cart btn btn-success pull-right" type="button"
                                         (click)="openModal(template)">Valider
                                     </button>
-                                    <button class="like btn btn-default" type="button"
+                                    <button class="like btn btn-danger pull-right" type="button"
                                         routerLink="/consulter-service/{{serviceAutre.id}}">Annuler</button>
                                 </div>
                             </div>

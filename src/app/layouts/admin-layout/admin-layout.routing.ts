@@ -66,6 +66,8 @@ import { JoueurTestComponent } from 'app/joueur-test/joueur-test.component';
 import { ConsulterJoueurTestComponent } from 'app/joueur-test/consulter-joueur-test/consulter-joueur-test.component';
 import { UpdateJoueurTestComponent } from 'app/joueur-test/update-joueur-test/update-joueur-test.component';
 import { HistoriqueApprovisionnementComponent } from 'app/article/historique-approvisionnement/historique-approvisionnement.component';
+import { HistoriqueLivraisonsComponent } from 'app/livraison/historique-livraisons/historique-livraisons.component';
+import { InfoLivraisonComponent } from 'app/livraison/info-livraison/info-livraison.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'acceuil', component: AcceuilComponent },
@@ -135,5 +137,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'historique-presence', component: HistoriquePresenceComponent },
     { path: 'historique-caisse/:id', component: HistoriqueCaisseComponent },
     { path: 'profil/:id', component: UserProfileComponent },
-    { path: 'historique-approvisionnement/:id', component: HistoriqueApprovisionnementComponent }
+    { path: 'historique-approvisionnement/:id', component: HistoriqueApprovisionnementComponent },
+    { path: 'historique-livraisons', component: HistoriqueLivraisonsComponent },
+    { path: 'info-livraison/:id', component: InfoLivraisonComponent }
 ];

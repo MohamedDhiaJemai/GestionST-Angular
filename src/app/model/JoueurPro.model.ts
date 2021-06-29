@@ -1,4 +1,5 @@
 import { Categorie } from './Categorie.model';
+import { Poste } from './Poste.model';
 
 export class JoueurPro {
 
@@ -13,6 +14,8 @@ export class JoueurPro {
     public license: string;
 
     public categorie: Categorie;
+
+    public poste: Poste;
 
     constructor() {
 

@@ -5,6 +5,7 @@ import { Article } from 'app/model/Article.model';
 import { CategoryTaille, Genre } from 'app/model/Enums.model';
 import { ArticleService } from 'app/services/article/article.service';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
+import { PosteService } from 'app/services/poste/poste.service';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -24,7 +25,7 @@ export class AddArticleComponent implements OnInit {
   sexes: SelectItem[];
   categorys: SelectItem[];
   item: string;
-
+  postes: SelectItem[];
   url;
   format;
   file: File;
@@ -32,7 +33,7 @@ export class AddArticleComponent implements OnInit {
 
   constructor(private articleService: ArticleService,
     private formBuilder: FormBuilder,
-    private routerNav: Router, private imageProduitService: ImageProduitService) {
+    private routerNav: Router, private imageProduitService: ImageProduitService, private posteService: PosteService) {
     this.sexes = Object.keys(Genre).map(key => ({ label: Genre[key], value: key }));
     this.categorys = Object.keys(CategoryTaille).map(key => ({ label: CategoryTaille[key], value: key }));
     this.file = null;
@@ -54,6 +55,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.posteService.getAll().subscribe(data => this.postes = data);
     this.uploadForm = this.formBuilder.group({
       profile: ['']
     });
@@ -62,6 +64,9 @@ export class AddArticleComponent implements OnInit {
   onAddArticle() {
     if (this.article.visible === undefined) {
       this.article.visible = false;
+    }
+    if (this.article.exige === undefined) {
+      this.article.exige = false;
     }
     if (this.url !== undefined) {
       this.articleService.addArticle(this.article).subscribe(

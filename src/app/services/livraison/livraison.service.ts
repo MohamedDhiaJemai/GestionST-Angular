@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Livraison } from 'app/model/Livraison.model';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
+import { LivraisonSearch } from 'app/model/livraisonSearch.model';
+import { ChangerTailleInfos } from 'app/model/ChangerTailleInfos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +31,18 @@ export class LivraisonService {
   }
   validerById(id: number) {
     return this.httpClient.post(environment.apiUrl + 'livraison/' + id, null);
+  }
+  getToday(): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'livraison/today');
+  }
+  find(params: LivraisonSearch): Observable<any> {
+    return this.httpClient.post(environment.apiUrl + 'livraison/find', params);
+  }
+  findCommune(id: number): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'livraison/find/' + id);
+  }
+
+  changerTaille(params: ChangerTailleInfos): Observable<any> {
+    return this.httpClient.post(environment.apiUrl + 'livraison/change', params);
   }
 }

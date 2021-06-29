@@ -31,8 +31,12 @@ export class ApprovisonnementArticleComponent implements OnInit {
       }
     );
   }
+
+  updatePosition(idStock: number, ordre: number) {
+    this.approvisionnementService.updateOrdreStock(idStock, ordre).subscribe(data => this.article = data);
+  }
   deleteStock(idStock: number) {
-    this.approvisionnementService.deleteStock(idStock).subscribe(data => {
+    this.approvisionnementService.deleteStock(idStock).subscribe(dat => {
       this.articleService.findById(this.id).subscribe(
         dataa => {
           this.article = dataa;

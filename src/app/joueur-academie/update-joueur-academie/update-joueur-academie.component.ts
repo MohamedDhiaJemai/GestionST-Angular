@@ -8,6 +8,7 @@ import { DocumentsJoueurService } from 'app/services/documents-joueur/documents-
 import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
 import { ParentService } from 'app/services/parent/parent.service';
 import { PhotoService } from 'app/services/photo/photo.service';
+import { PosteService } from 'app/services/poste/poste.service';
 import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
@@ -34,6 +35,7 @@ export class UpdateJoueurAcademieComponent implements OnInit {
   joueurAcademie: JoueurAcamedie = new JoueurAcamedie();
   sexes: SelectItem[];
   itemsParents: SelectItem[];
+  postes: SelectItem[];
   item: string;
   date: Date;
   joueurAcademieSubscription: Subscription;
@@ -61,7 +63,7 @@ export class UpdateJoueurAcademieComponent implements OnInit {
     private docuementsJoueurService: DocumentsJoueurService,
     private formBuilder: FormBuilder,
     private router: ActivatedRoute, private datePipe: DatePipe,
-    private routerNav: Router, private modalService: BsModalService) {
+    private routerNav: Router, private modalService: BsModalService, private posteService: PosteService) {
     this.sexes = Object.keys(Sexe).map(key => ({ label: Sexe[key], value: key }));
     this.inputValueImage = 0;
     this.file = null;
@@ -76,12 +78,8 @@ export class UpdateJoueurAcademieComponent implements OnInit {
     this.annees = (year - 45).toString() + ':' + (year - 4).toString();
     this.fileInfos = this.docuementsJoueurService.getFiles(this.id);
 
-    this.parentService.getAllParent().subscribe(
-      data => {
-        this.itemsParents = data;
-      }
-    );
-
+    this.parentService.getAllParent().subscribe(data => this.itemsParents = data);
+    this.posteService.getAll().subscribe(data => this.postes = data);
     this.joueurAcademieService.findById(this.id).subscribe(
       data => {
         this.joueurAcademie = data;

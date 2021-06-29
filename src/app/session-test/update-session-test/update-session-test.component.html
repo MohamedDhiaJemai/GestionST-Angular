@@ -5,8 +5,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Modification Session Test</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -33,6 +32,32 @@
                                 <div class="col-md-6">
                                     <p-inputNumber name="prix" [(ngModel)]="session.prix" placeholder="0.0"
                                         [showButtons]="true" mode="currency" currency="TND"></p-inputNumber>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="price" style="margin-top: 5%;">Saison Sportive:
+                                    </h5>
+                                </div>
+                                <div class="col-md-6" style="margin-top: 1%;">
+                                    <p-dropdown [options]="saisons" (onChange)="findCategories()"
+                                        [(ngModel)]="session.saisonSportive" name="saison" [filter]="true"
+                                        [showClear]="true" optionLabel="designation" placeholder="Select a saison"
+                                        filterPlaceholder="Search By designation">
+
+                                        <ng-template pTemplate="selectedItem">
+                                            <div class="country-item country-item-value" *ngIf="session.saisonSportive">
+                                                <div> {{session.saisonSportive.designation}}</div>
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template let-saison pTemplate="item">
+                                            <div class="country-item">
+                                                <div>{{saison.designation}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
                                 </div>
                             </div>
                             <br>
@@ -109,11 +134,10 @@
                                 </div>
                             </div>
                             <br><br>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                            <button mat-raised-button type="submit" class="btn btn-success pull-right"
                                 (click)="openModal(template)">Valider</button>
                             <button routerLink="/sessions-test" mat-raised-button type="button"
-                                class="btn btn-success pull-right" style="margin-right:
-                                                    1%;">ANNULER</button>
+                                class="btn btn-danger pull-right" style="margin-right: 1%;">ANNULER</button>
                             <div class="clearfix"></div>
                             <div class="clearfix"></div>
                         </form>

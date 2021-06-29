@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SaisonSportive } from 'app/model/SaisonSportive.model';
 import { SessionTest } from 'app/model/SessionTest.model';
 import { CategorieService } from 'app/services/categorie/categorie.service';
+import { SaisonSportiveService } from 'app/services/saison-sportive/saison-sportive.service';
 import { SessionTestService } from 'app/services/session-test/session-test.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SelectItem } from 'primeng/api';
@@ -16,6 +18,7 @@ export class AddSessionTestComponent implements OnInit {
 
   session: SessionTest = new SessionTest();
   categories: SelectItem[];
+  saisons: SelectItem[];
 
   modalRef: BsModalRef;
   modalRefAnnul: BsModalRef;
@@ -29,17 +32,19 @@ export class AddSessionTestComponent implements OnInit {
   fi: Date;
 
   constructor(private sessionTestService: SessionTestService,
-    private categorieService: CategorieService,
+    private categorieService: CategorieService, private saisonService: SaisonSportiveService,
     private router: ActivatedRoute, private datePipe: DatePipe,
     private routerNav: Router, private modalService: BsModalService) {
   }
 
   ngOnInit() {
-    this.categorieService.enCours().subscribe(
-      data => {
-        this.categories = data;
-      }
-    );
+    this.saisonService.getAll().subscribe(data => this.saisons = data);
+    // this.categorieService.findByIdSaison().subscribe(data => this.categories = data);
+  }
+
+  findCategories() {
+    this.session.categorie = undefined;
+    this.categorieService.findByIdSaison(this.session.saisonSportive.id).subscribe(data => this.categories = data);
   }
 
   ngOnUpdateSession(templateAnnulation: TemplateRef<any>) {

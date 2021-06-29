@@ -38,7 +38,7 @@
               <br>
               <div class="row">
                 <div class="col-md-6">
-                  <h5 class="price">Prix:
+                  <h5 class="price">Prix :
                   </h5>
                 </div>
                 <div class="col-md-6" style="padding-left: 10%;">
@@ -49,7 +49,7 @@
               <br>
               <div class="row">
                 <div class="col-md-6">
-                  <h5 class="price">Prix Externe:
+                  <h5 class="price">Prix Externe :
                   </h5>
                 </div>
                 <div class="col-md-6" style="padding-left: 10%;">
@@ -60,7 +60,7 @@
               <br>
               <div class="row">
                 <div class="col-md-6">
-                  <h5 class="price">Sexe:
+                  <h5 class="price">Sexe :
                   </h5>
                 </div>
                 <div class="col-md-6" style="padding-left: 10%;">
@@ -71,7 +71,7 @@
               <br>
               <div class="row">
                 <div class="col-md-6">
-                  <h5 class="price">Catégorie Tailles:</h5>
+                  <h5 class="price">Catégorie Tailles :</h5>
                 </div>
                 <div class="col-md-6" style="padding-left: 10%;">
                   <h5 class="price">{{article.categoryTaille}}
@@ -100,13 +100,37 @@
                   </p-inputSwitch>
                 </div>
               </div>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="price">Poste :
+                  </h5>
+                </div>
+                <div class="col-md-6" style="padding-left: 10%;">
+                  <h5 class="price">{{article.poste?.designation}}
+                  </h5>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="price">Ordre :
+                  </h5>
+                </div>
+                <div class="col-md-6" style="padding-left: 10%;">
+                  <h5 class="price">{{article.ordre}}
+                  </h5>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-md-12" style="margin-top: 5%;">
                   <div class="action">
-                    <button class="like btn btn-default" style="margin-right: 5%" type="button"
-                      routerLink="/articles">Retour</button>
-                    <button [disabled]="!edition" class="add-to-cart btn btn-success" type="button"
+                    <button [disabled]="!edition" class="add-to-cart btn btn-success pull-right" type="button"
                       routerLink="/update-article/{{ article.id }}">Modifier</button>
+                    <button class="like btn btn-default pull-right" type="button"
+                      routerLink="/articles">Retour</button>
+                    <button [disabled]="!edition" class="add-to-cart btn btn-danger pull-right" type="button"
+                      (click)="delete(article.id)">Supprimer</button>
                   </div>
                 </div>
               </div>

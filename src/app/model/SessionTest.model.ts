@@ -1,4 +1,5 @@
 import { Categorie } from './Categorie.model';
+import { SaisonSportive } from './SaisonSportive.model';
 
 export class SessionTest {
 
@@ -11,6 +12,8 @@ export class SessionTest {
 
     public debutInscription: string;
     public finInscription: string;
+
+    saisonSportive: SaisonSportive;
 
     public prix: number;
 

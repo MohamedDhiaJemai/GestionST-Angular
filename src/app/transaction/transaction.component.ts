@@ -34,7 +34,6 @@ export class TransactionComponent implements OnInit {
   constructor(private transactionService: TransactionService, private autorisationService: AutorisationService,
     private borneService: BorneService, private datePipe: DatePipe) {
     this.typesClient = Object.keys(TypeClient).map(key => ({ label: TypeClient[key], value: key }));
-
   }
   ngOnInit() {
     const obj = this.autorisationService.checkAutorisations1('transactions');
@@ -67,9 +66,6 @@ export class TransactionComponent implements OnInit {
     }
     if (this.searchParams && Object.keys(this.searchParams).length > 0) {
       this.transactionService.find(this.searchParams).subscribe(data => this.transactions = data);
-      console.log(this.searchParams);
-    } else {
-      console.log('empty');
     }
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
+import { JAcademieSearch } from 'app/model/JAcademieSearch.model';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -24,10 +25,17 @@ export class JoueurAcademieService {
   validerjAcademie(id: number, jAcademie: JoueurAcamedie) {
     return this.httpClient.put(environment.apiUrl + 'academie/valider/' + id, jAcademie);
   }
-  findById(id) {
+  findById(id: number) {
     return this.httpClient.get<JoueurAcamedie>(environment.apiUrl + 'academie/' + id);
   }
-  findByParent(id) {
+  findByParent(id: number) {
     return this.httpClient.get<JoueurAcamedie>(environment.apiUrl + 'academie/parent/' + id);
+  }
+  find(params: JAcademieSearch): Observable<any> {
+    return this.httpClient.post(environment.apiUrl + 'academie/find', params);
+  }
+
+  delete(id: number) {
+    return this.httpClient.delete(environment.apiUrl + 'academie/' + id);
   }
 }

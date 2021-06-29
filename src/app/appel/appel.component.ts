@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AppelDTO } from 'app/model/AppelDTO.model';
 import { AppelParams } from 'app/model/AppelParams.model';
 import { Jour, Sexe, TypeEntrainement } from 'app/model/Enums.model';
+import { SessionTest } from 'app/model/SessionTest.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { CategorieService } from 'app/services/categorie/categorie.service';
 import { PresenceService } from 'app/services/presence/presence.service';
+import { SessionTestService } from 'app/services/session-test/session-test.service';
+import { log } from 'console';
 import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -28,8 +31,9 @@ export class AppelComponent implements OnInit {
   submitted: boolean;
   photoJoueurUrl = environment.apiUrl + 'photo/get/';
   photoTestUrl = environment.apiUrl + 'photo-test/get/';
+  sessionTest: SessionTest;
   constructor(private presenceService: PresenceService, private categorieService: CategorieService,
-    private autorisationService: AutorisationService) {
+    private autorisationService: AutorisationService, private sessionTestService: SessionTestService) {
     const now = new Date();
     const year = now.getFullYear();
     let i: number;
@@ -47,12 +51,27 @@ export class AppelComponent implements OnInit {
     this.consultation = obj.consultation;
     this.appelParams = new AppelParams();
     this.submitted = false;
-    this.categorieService.enCours().subscribe(
-      data => {
-        this.categories = data;
+
+    this.sessionTestService.testEnCours().subscribe(data => {
+      if (data != null) {
+        this.sessionTest = data;
+      } else {
+        this.sessionTestService.inscriptionEnCours().subscribe(dataa => this.sessionTest = dataa)
       }
-    );
+    });
   }
+
+  findCategories() {
+    if (this.appelParams.typeEntrainement === 'TESTP1') {
+      console.log(this.sessionTest);
+      if (this.sessionTest != null) {
+        this.categorieService.findByIdSaison(this.sessionTest.saisonSportive.id).subscribe(datac => this.categories = datac);
+      } else {
+        this.categorieService.enCours().subscribe(datac => this.categories = datac);
+      }
+    }
+  }
+
   getListeAppel() {
     this.submitted = true;
     if (this.appelParams.typeEntrainement === 'TESTP1') {

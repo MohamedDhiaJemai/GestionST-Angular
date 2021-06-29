@@ -20,11 +20,11 @@
                         <ng-template pTemplate="right">
                             <p-button hidden (click)="downloadAsPDF('MyDIv')" label="Export To PDF" icon="pi pi-print">
                             </p-button>
-                            <p-button (click)="print('MyDIv')" [style]="{'margin-right': '5px'}" label="Print"
+                            <p-button (click)="print('MyDIv')" [style]="{'margin-right': '5px'}" label="Imprimer"
                                 icon="pi pi-print">
                             </p-button>
-                            <p-button label="Retour" routerLink="/transactions"
-                                styleClass="p-button p-button-secondary"></p-button>
+                            <button routerLink="/transactions" mat-raised-button class="btn btn-default pull-right"
+                                type="button">Retour</button>
                         </ng-template>
                     </p-toolbar>
 
@@ -43,7 +43,8 @@
                                     <p> Rue Marrakech<br>2000 Bardo, Tunis</p>
                                     <p>(+216) 71 505 900 / 71 517 800</p>
                                 </address>
-                                <span><img alt="" src="assets\\images\\logoST.png" width="16%" style="margin-right: 1cm;"></span>
+                                <span><img alt="" src="assets\\images\\logoST.png" width="16%"
+                                        style="margin-right: 1cm;"></span>
                             </header>
 
                             <article>

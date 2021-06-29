@@ -15,6 +15,11 @@ export class CategorieService {
   enCours(): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'categorie/encours');
   }
+
+  findByIdSaison(id): Observable<any> {
+    return this.httpClient.get(environment.apiUrl + 'categorie/saison/' + id);
+  }
+
   addCategorie(categorie: Categorie) {
     return this.httpClient.post(environment.apiUrl + 'categorie/add', categorie);
   }

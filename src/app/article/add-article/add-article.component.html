@@ -8,8 +8,7 @@
 
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Ajout Article</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -137,14 +136,48 @@
                                         </p-inputSwitch>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="price" style="margin-top: 5%;">Poste : </h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p-dropdown [options]="postes" [(ngModel)]="article.poste" name="poste"
+                                            [filter]="true" [showClear]="true" optionLabel="designation"
+                                            placeholder="Select a Post" filterPlaceholder="Recherche..."
+                                            filterBy="designation">
+                                            <ng-template pTemplate="selectedItem">
+                                                <div *ngIf="article.poste">
+                                                    <div> {{article.poste.designation}}</div>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template let-poste pTemplate="item">
+                                                <div>
+                                                    <div>{{poste.designation}}</div>
+                                                </div>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="price" style="margin-top: 5%;">Ordre:
+                                        </h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p-inputNumber name="ordre" [(ngModel)]="article.ordre" [showButtons]="true">
+                                        </p-inputNumber>
+                                    </div>
+                                </div>
                                 <br><br>
                                 <div class="row">
                                     <div class="col-md-11" style="margin-top: 5%;">
                                         <div class="action">
-                                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                            <button mat-raised-button type="submit" class="btn btn-success pull-right"
                                                 (click)="onAddArticle()">Valider</button>
                                             <button routerLink="/articles" mat-raised-button type="button"
-                                                class="btn btn-success pull-right"
+                                                class="btn btn-danger pull-right"
                                                 style="margin-right: 1%;">ANNULER</button>
                                             <div class="clearfix"></div>
                                         </div>

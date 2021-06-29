@@ -32,6 +32,7 @@
     "@angular/router": "11.2.0",
     "@auth0/angular-jwt": "^5.0.2",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
+    "@ngx-translate/core": "^13.0.0",
     "@types/html2canvas": "0.0.36",
     "@types/tus-js-client": "^2.1.0",
     "ajv": "7.1.1",

@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Bornes</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -70,8 +69,8 @@
                                         <button pButton style="margin-right: 5px;" icon="pi pi-cog"
                                             class="p-button-rounded p-button-info" (click)="showDialogMateriel(borne)">
                                         </button>
-                                        <button pButton style="margin-right: 5px;" icon="pi pi-dollar"
-                                            class="p-button-rounded p-button-secondary"
+                                        <button [disabled]="!consultationCaisse" pButton style="margin-right: 5px;"
+                                            icon="pi pi-dollar" class="p-button-rounded p-button-secondary"
                                             (click)="showBasicDialogCaisse(borne)">
                                         </button>
                                         <button pButton icon="pi pi-video" style="margin-right: 5px;"

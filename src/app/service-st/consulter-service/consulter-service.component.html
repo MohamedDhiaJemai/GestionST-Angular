@@ -72,10 +72,22 @@
                   </div>
                 </div>
                 <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Ordre:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{servicePrincipal.ordre}}
+                    </h5>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-md-12">
-                    <button [disabled]="!edition" class="add-to-cart btn btn-success" type="button"
+                    <button [disabled]="!edition" class="add-to-cart btn btn-success pull-right" type="button"
                       routerLink="/update-service/{{ servicePrincipal.id }}">Modifier</button>
-                    <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
+                    <button class="like btn btn-default pull-right" type="button" routerLink="/services">Retour</button>
+                    <button [disabled]="!edition" class="add-to-cart btn btn-danger pull-right" type="button"
+                      (click)="deletePrincipal(servicePrincipal.id)">Supprimer</button>
                   </div>
                 </div>
               </div>
@@ -133,9 +145,9 @@
                 </div> -->
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="add-to-cart btn btn-success" type="button"
+                    <button class="add-to-cart btn btn-success pull-right" type="button"
                       routerLink="/update-service/{{ serviceAutre.id }}">Modifier</button>
-                    <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
+                    <button class="like btn btn-default pull-right" type="button" routerLink="/services">Retour</button>
                   </div>
                 </div>
               </div>
@@ -226,12 +238,23 @@
                     </h5>
                   </div>
                 </div>
-
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="price">Ordre:
+                    </h5>
+                  </div>
+                  <div class="col-md-6" style="padding-left: 10%;">
+                    <h5 class="price">{{serviceComplementaire.ordre}}
+                    </h5>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="add-to-cart btn btn-success" type="button"
+                    <button class="add-to-cart btn btn-success pull-right" type="button"
                       routerLink="/update-service/{{ serviceComplementaire.id }}">Modifier</button>
-                    <button class="like btn btn-default" type="button" routerLink="/services">Retour</button>
+                    <button class="like btn btn-default pull-right" type="button" routerLink="/services">Retour</button>
+                    <button [disabled]="!edition" class="add-to-cart btn btn-danger pull-right" type="button"
+                      (click)="deleteComplementaire(serviceComplementaire.id)">Supprimer</button>
                   </div>
                 </div>
               </div>

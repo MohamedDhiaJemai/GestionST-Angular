@@ -27,6 +27,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/parents', title: 'Parents', icon: 'escalator_warning', class: '' },
   { path: '/transactions', title: 'Transactions', icon: 'multiple_stop', class: '' },
   { path: '/livraison', title: 'Livraison Achats', icon: 'shopping_cart', class: '' },
+  { path: '/historique-livraisons', title: 'Historique Livraisons', icon: 'history', class: '' },
   { path: '/retour-cash', title: 'Retour Cash', icon: 'paid', class: '' },
   { path: '/historique-retour', title: 'Historique Retours', icon: 'request_quote', class: '' },
   { path: '/donations', title: 'Donations', icon: 'money', class: '' },

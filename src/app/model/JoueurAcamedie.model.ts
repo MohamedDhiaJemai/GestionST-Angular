@@ -1,4 +1,5 @@
 import { Parent } from './Parent.model';
+import { Poste } from './Poste.model';
 export class JoueurAcamedie {
 
     public id: number;
@@ -15,6 +16,7 @@ export class JoueurAcamedie {
     public pin: string;
     public nomJoueur: string;
     public elite: boolean;
+    public poste: Poste;
 
     constructor() {
 

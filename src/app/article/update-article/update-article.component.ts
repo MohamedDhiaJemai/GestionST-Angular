@@ -5,6 +5,7 @@ import { Article } from 'app/model/Article.model';
 import { CategoryTaille, Genre } from 'app/model/Enums.model';
 import { ArticleService } from 'app/services/article/article.service';
 import { ImageProduitService } from 'app/services/image-produit/image-produit.service';
+import { PosteService } from 'app/services/poste/poste.service';
 import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageService, SelectItem } from 'primeng/api';
@@ -24,7 +25,7 @@ export class UpdateArticleComponent implements OnInit {
 
   sexes: SelectItem[];
   categorys: SelectItem[];
-
+  postes: SelectItem[];
   item: string;
 
   articleSubscription: Subscription;
@@ -42,7 +43,7 @@ export class UpdateArticleComponent implements OnInit {
   constructor(private articleService: ArticleService,
     private formBuilder: FormBuilder, private router: ActivatedRoute,
     private routerNav: Router, private modalService: BsModalService,
-    private messageService: MessageService, private imageProduitService: ImageProduitService) {
+    private posteService: PosteService, private imageProduitService: ImageProduitService) {
     this.sexes = Object.keys(Genre).map(key => ({ label: Genre[key], value: key }));
     this.categorys = Object.keys(CategoryTaille).map(key => ({ label: CategoryTaille[key], value: key }));
     this.file = null;
@@ -57,7 +58,7 @@ export class UpdateArticleComponent implements OnInit {
         this.article = data;
       }
     );
-
+    this.posteService.getAll().subscribe(data => this.postes = data);
     this.uploadForm = this.formBuilder.group({
       profile: ['']
     });

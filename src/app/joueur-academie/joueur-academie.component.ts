@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { JoueurAcamedie } from 'app/model/JoueurAcamedie.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
-import { JoueurAcademieService } from 'app/services/joueur-academie/joueur-academie.service';
-import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-joueur-academie',

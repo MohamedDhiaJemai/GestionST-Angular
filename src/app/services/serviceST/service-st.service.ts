@@ -49,4 +49,11 @@ export class ServiceSTService {
   addServiceAutre(serviceSt: ServiceAutre) {
     return this.httpClient.post(environment.apiUrl + 'autre/add', serviceSt);
   }
+
+  deletePrincipal(id: number) {
+    return this.httpClient.delete(environment.apiUrl + 'principal/' + id);
+  }
+  deleteComplementaire(id: number) {
+    return this.httpClient.delete(environment.apiUrl + 'complement/' + id);
+  }
 }

@@ -21,4 +21,10 @@ export class SessionTestService {
   getAll(): Observable<any> {
     return this.httpClient.get(environment.apiUrl + 'session/all');
   }
+  testEnCours() {
+    return this.httpClient.get<SessionTest>(environment.apiUrl + 'session/test');
+  }
+  inscriptionEnCours() {
+    return this.httpClient.get<SessionTest>(environment.apiUrl + 'session/inscription');
+  }
 }

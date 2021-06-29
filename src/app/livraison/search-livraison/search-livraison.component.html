@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Livraison Achats</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -65,7 +64,7 @@
                                                 <th pSortableColumn="quantite">Quantité <p-sortIcon field="quantite">
                                                     </p-sortIcon>
                                                 </th>
-                                                <th style="width:8rem">
+                                                <th>
                                                     <button *ngIf="tout" [disabled]="!edition" type="button"
                                                         (click)="validerTout()" pButton icon="pi pi-external-link"
                                                         label="Valider Tout" class="p-button-success"></button>
@@ -81,16 +80,24 @@
                                                 <td><span
                                                         class="p-column-title">Article</span>{{livraison.article.libelle}}
                                                 </td>
-                                                <td><span class="p-column-title">Taille</span>{{livraison.taille}}</td>
+                                                <td><span
+                                                        class="p-column-title">Taille</span>{{livraison.taille | taillepipe}}
+                                                </td>
                                                 <td><span class="p-column-title">Quantité</span>{{livraison.quantite}}
                                                 </td>
                                                 <td>
+                                                    <button [disabled]="!edition"
+                                                        *ngIf="!livraison.validation && livraison.article.categoryTaille!='UNIQUE'"
+                                                        type="button" style="margin-right: 5px;"
+                                                        (click)="showDialog(livraison.id,livraison.taille,livraison.quantite,livraison.article)"
+                                                        pButton icon="pi pi-replay" label="Changer"
+                                                        class="p-button-warning"></button>
                                                     <button [disabled]="!edition" *ngIf="!livraison.validation"
                                                         type="button" (click)="validerById(livraison.id)" pButton
                                                         icon="pi pi-external-link" label="Valider"
                                                         class="p-button-success"></button>
                                                     <div *ngIf="livraison.validation" class="text-center">
-                                                        Validé le <br>
+                                                        Validée le <br>
                                                         {{livraison.dateValidation | date:'dd-MM-yyyy HH:mm:ss'}}
                                                     </div>
                                                 </td>
@@ -106,3 +113,42 @@
         </div>
     </div>
 </div>
+<p-dialog [(visible)]="visibleDialog" [style]="{width: '80%'}" [resizable]="true" header="Changement taille"
+    [maximizable]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="name">Article</label>
+                <input type="text" pInputText id="article" [(ngModel)]="article.libelle" disabled />
+            </div>
+        </div>
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="name">Nouvelle Taille</label><br>
+                <p-dropdown *ngIf="article.categoryTaille=='HABITS'" #dd [options]="habits" required name="taille"
+                    [(ngModel)]="paramChangement.taille" placeholder="Taille" [showClear]="true">
+                </p-dropdown>
+                <p-dropdown *ngIf="article.categoryTaille=='POINTURE'" #dd [options]="pointures" required name="taille"
+                    [(ngModel)]="paramChangement.taille" placeholder="Taille" [showClear]="true">
+                </p-dropdown>
+                <p-dropdown *ngIf="article.categoryTaille=='GANT'" #dd [options]="gants" required name="taille"
+                    [(ngModel)]="paramChangement.taille" placeholder="Taille" [showClear]="true">
+                </p-dropdown>
+                <p-dropdown *ngIf="article.categoryTaille=='CHAUSSETTE'" #dd [options]="chaussettes" required
+                    name="taille" [(ngModel)]="paramChangement.taille" placeholder="Taille" [showClear]="true">
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col">
+                <label for="name">Quantité</label>
+                <input type="text" pInputText id="quantite" [(ngModel)]="paramChangement.quantite" required />
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="hideDialog()"></button>
+        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-text p-button-success"
+            (click)="validerChangement()"></button>
+    </ng-template>
+</p-dialog>

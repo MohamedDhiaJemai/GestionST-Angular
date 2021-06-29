@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AppelDTO } from 'app/model/AppelDTO.model';
 import { AppelParams } from 'app/model/AppelParams.model';
 import { Jour, Sexe, TypeEntrainement } from 'app/model/Enums.model';
+import { SessionTest } from 'app/model/SessionTest.model';
 import { AutorisationService } from 'app/services/autorisation/autorisation.service';
 import { CategorieService } from 'app/services/categorie/categorie.service';
 import { PresenceService } from 'app/services/presence/presence.service';
+import { SessionTestService } from 'app/services/session-test/session-test.service';
 import { UserService } from 'app/services/user/user.service';
 import { environment } from 'environments/environment';
 import { SelectItem } from 'primeng/api';
@@ -32,8 +34,9 @@ export class ListePresenceComponent implements OnInit {
   utilisateurs: SelectItem[];
   photoJoueurUrl = environment.apiUrl + 'photo/get/';
   photoTestUrl = environment.apiUrl + 'photo-test/get/';
+  sessionTest: SessionTest;
   constructor(private presenceService: PresenceService, private autorisationService: AutorisationService,
-    private categorieService: CategorieService, private userService: UserService) {
+    private categorieService: CategorieService, private userService: UserService, private sessionTestService: SessionTestService) {
     const now = new Date();
     const year = now.getFullYear();
     let i: number;
@@ -54,12 +57,26 @@ export class ListePresenceComponent implements OnInit {
     this.userService.hasPresence().subscribe(data => {
       this.utilisateurs = data;
     });
-    this.categorieService.enCours().subscribe(
-      data => {
-        this.categories = data;
+    this.sessionTestService.testEnCours().subscribe(data => {
+      if (data != null) {
+        this.sessionTest = data;
+      } else {
+        this.sessionTestService.inscriptionEnCours().subscribe(dataa => this.sessionTest = dataa)
       }
-    );
+    });
   }
+
+  findCategories() {
+    if (this.appelParams.typeEntrainement === 'TESTP1') {
+      console.log(this.sessionTest);
+      if (this.sessionTest != null) {
+        this.categorieService.findByIdSaison(this.sessionTest.saisonSportive.id).subscribe(datac => this.categories = datac);
+      } else {
+        this.categorieService.enCours().subscribe(datac => this.categories = datac);
+      }
+    }
+  }
+
   getListePresence() {
     this.submitted = true;
     if (this.appelParams.typeEntrainement === 'TESTP1') {

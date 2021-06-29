@@ -8,8 +8,7 @@
 
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Ajout Service</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -126,12 +125,24 @@
                                             </div>
                                             <br>
                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Ordre:
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p-inputNumber name="ordre" [(ngModel)]="servicePrincipal.ordre"
+                                                        [showButtons]="true">
+                                                    </p-inputNumber>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
                                                 <div class="col-md-12">
-                                                    <button mat-raised-button type="submit" class="btn btn-danger"
+                                                    <button mat-raised-button type="submit" class="btn btn-success pull-right"
                                                         (click)="onAddService()"
                                                         style="margin-right: 1%;">Valider</button>
                                                     <button routerLink="/services" mat-raised-button type="button"
-                                                        class="btn btn-success">ANNULER</button>
+                                                        class="btn btn-danger pull-right">ANNULER</button>
                                                 </div>
                                             </div>
                                             <br>
@@ -255,6 +266,17 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Elite :</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p-inputSwitch name="visible"
+                                                        [(ngModel)]="serviceComplementaire.elite">
+                                                    </p-inputSwitch>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
                                                     <h5 class="price" style="margin-top: 5%;">Jour :</h5>
                                                 </div>
 
@@ -274,12 +296,24 @@
                                             </div>
                                             <br>
                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5 class="price" style="margin-top: 5%;">Ordre:
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p-inputNumber name="ordre" [(ngModel)]="serviceComplementaire.ordre"
+                                                        [showButtons]="true">
+                                                    </p-inputNumber>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
                                                 <div class="col-md-12">
-                                                    <button mat-raised-button type="submit" class="btn btn-danger"
+                                                    <button mat-raised-button type="submit" class="btn btn-success pull-right"
                                                         (click)="onAddServiceComplementaire()"
                                                         style="margin-right: 1%;">Valider</button>
                                                     <button routerLink="/services" mat-raised-button type="button"
-                                                        class="btn btn-success">ANNULER</button>
+                                                        class="btn btn-danger pull-right">ANNULER</button>
                                                 </div>
                                             </div>
                                             <br>

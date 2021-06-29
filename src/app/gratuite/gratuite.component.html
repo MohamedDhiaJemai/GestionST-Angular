@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div style="float: left;">
-                            <img src="assets\\images\\logoST.png"
-                                style="width: 35px;float: left; margin-right: 10px;">
+                            <img src="assets\\images\\logoST.png" style="width: 35px;float: left; margin-right: 10px;">
                             <div style="float: left;">
                                 <h4 class="card-title">Gratuités Joueur</h4>
                                 <p class="card-category">STADE TUNISIEN</p>
@@ -138,8 +137,9 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text"
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text p-button-danger"
             (click)="hideDialog()"></button>
-        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-text p-button-success"
+            (click)="save()"></button>
     </ng-template>
 </p-dialog>

@@ -1,9 +1,115 @@
+<p-toolbar>
+    <ng-template pTemplate="left">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <input pInputText type="text" [(ngModel)]="searchParams.identifiant" placeholder="Identifiant" />
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <input pInputText type="text" [(ngModel)]="searchParams.nom" placeholder="Nom Joueur" />
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin-right: 5px;"><strong>Date naissance</strong></label>
+                    <p-calendar [(ngModel)]="dn" dateFormat="dd-mm-yy" name="dd" [showTime]="false"
+                        [yearNavigator]="true" [monthNavigator]="true" [yearRange]="anneesRange" showButtonBar="true" [touchUI]="true">
+                    </p-calendar>
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <p-dropdown [options]="sexes" name="sexe" [(ngModel)]="searchParams.sexe" placeholder="Sexe"
+                        [showClear]="true">
+                    </p-dropdown>
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <input pInputText type="text" [(ngModel)]="searchParams.nomParent" placeholder="Nom parent" />
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <input pInputText type="text" [(ngModel)]="searchParams.mobile" placeholder="Mobile" />
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <p-multiSelect [options]="annees" placeholder="Natifs" name="natifs"
+                        [(ngModel)]="searchParams.natifs" class="multiselect-custom">
+                    </p-multiSelect>
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin-right: 5px;"><strong>Mois abn.</strong></label>
+                    <p-calendar [(ngModel)]="dm" dateFormat="mm-yy" name="dm" [showTime]="false" [yearNavigator]="true"
+                         view="month" yearRange="2020:2120" showButtonBar="true" [touchUI]="true">
+                    </p-calendar>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin-right: 5px;"><strong>Elite</strong></label>
+                    <p-radioButton name="eg" value="true" inputId="e1" [(ngModel)]="eRadio"></p-radioButton>
+                    <label for="e1" style="margin-right: 5px;">Oui</label>
+                    <p-radioButton name="eg" value="false" inputId="e2" [(ngModel)]="eRadio"></p-radioButton>
+                    <label for="e2" style="margin-right: 20px;">Non</label>
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin-right: 5px;"><strong>Gratuité</strong></label>
+                    <p-radioButton name="gg" value="true" inputId="g1" [(ngModel)]="gRadio"></p-radioButton>
+                    <label for="g1" style="margin-right: 5px;">Oui</label>
+                    <p-radioButton name="gg" value="false" inputId="g2" [(ngModel)]="gRadio"></p-radioButton>
+                    <label for="g2">Non</label>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <input pInputText type="text" [(ngModel)]="searchParams.anneeObligation"
+                        placeholder="Année exigence" />
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin: 5px; float: left;"><strong>Tenu</strong></label>
+                    <p-radioButton name="tg" value="true" inputId="t1" [(ngModel)]="tRadio"></p-radioButton>
+                    <label for="t1" style="margin-right: 5px;">Oui</label>
+                    <p-radioButton name="tg" value="false" inputId="t2" [(ngModel)]="tRadio"></p-radioButton>
+                    <label for="t2" style="margin-right: 20px;">Non</label>
+                </div>
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin: 5px;"><strong>Inscription</strong></label>
+                    <p-radioButton name="ig" value="true" inputId="i1" [(ngModel)]="iRadio"></p-radioButton>
+                    <label for="i1" style="margin-right: 5px;">Oui</label>
+                    <p-radioButton name="ig" value="false" inputId="i2" [(ngModel)]="iRadio"></p-radioButton>
+                    <label for="i2">Non</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin-right: 5px;"><strong>Date inscription entre</strong></label>
+                    <p-calendar [(ngModel)]="dd" dateFormat="dd-mm-yy" name="dd" [showTime]="false"
+                        [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120" [touchUI]="true">
+                    </p-calendar>
+                </div>
+
+                <div class="p-ml-auto" style="float: left;margin: 5px;">
+                    <label style="margin-right: 5px;"><strong>et</strong></label>
+                    <p-calendar [(ngModel)]="df" dateFormat="dd-mm-yy" name="df" [showTime]="false"
+                        [yearNavigator]="true" [monthNavigator]="true" yearRange="2020:2120" [touchUI]="true">
+                    </p-calendar>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="right">
+        <button type="button" (click)="findJoueurs()" mat-raised-button icon="pi pi-external-link"
+            class="btn btn-success">Recherche</button>
+        <button type="button" (click)="reset()" mat-raised-button icon="pi pi-times"
+            class="btn btn-danger">Reset</button>
+    </ng-template>
+</p-toolbar>
+<br>
 <p-dataView #dv [value]="joueurAcads" [paginator]="true" [rows]="9" filterBy="nomJoueur,identifiant,mobile"
     [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
     <ng-template pTemplate="header">
         <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
             <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort..."
                 (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown> -->
+            <div class="p-mb-2 p-mb-md-0">
+                <button [disabled]="!edition" routerLink="/add-joueur-academie" pButton pRipple icon="pi pi-plus"
+                    label="Ajout Joueur" class="p-button-success"></button>
+            </div>
             <span class="p-input-icon-left p-mb-2 p-mb-md-0">
                 <i class="pi pi-search"></i>
                 <input type="search" pInputText placeholder="Recherche..." (input)="dv.filter($event.target.value)">
@@ -17,7 +123,7 @@
                 <img [src]="photoUrl + product.id" style="max-width: 151px;max-height: 184px;" />
                 <div class="product-list-detail">
                     <div class="product-name">{{product.nom}} {{product.prenom}}</div>
-                    <div class="product-description">{{product.identifiant}}</div>
+                    <div class="product-description">{{product.identifiant}} ({{product.pin}})</div>
                 </div>
 
                 <div class="product-list-action">
@@ -45,7 +151,7 @@
 
                 </div>
                 <div class="product-grid-item-bottom">
-                    <span class="product-price">{{ product.identifiant }}</span>
+                    <span class="product-price">{{ product.identifiant }} ({{product.pin}})</span>
                     <button routerLink="/consulter-joueur-academie/{{ product.id }}" pButton pRipple type="button"
                         icon="pi pi-search" class="p-button-rounded p-button-success"></button>
                 </div>
